@@ -9,11 +9,14 @@
         <title>Inversiones Garcia</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../dist/css/styles.css" rel="stylesheet" />
+        <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        
+
+      
+    
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-    
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -47,7 +50,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             
-                            <a class="nav-link" href="../src/nueva_venta.php">
+                            <a class="nav-link" href="index.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Nueva Venta
                             </a>
@@ -59,8 +62,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Factura</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Producto</a>
+                                <a class="nav-link" href="../src/factura.php">Factura</a>
+                                <a class="nav-link" href="../src/producto.php">Producto</a>
                                 </nav>
                             </div>
 
@@ -69,7 +72,7 @@
                                 Inventario
                             </a>
 
-                            <a class="nav-link" href="../src/clientes.php">
+                            <a class="nav-link" href="../src/cliente.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Cliente
                             </a>
@@ -123,132 +126,185 @@
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
+            <div id="layoutSidenav_content"> <br>
+
+            <!--Boton de nuevo cliente-->
+            <div class="container">
+            <div class="row">
+            <div class="col-lg-12">            
+            <a href="../src/nuevo_cliente.php" class="btn btn-primary">Nuevo<i ></i></a>    
+            </div>    
+            </div>    
+            </div><br>   
+            <!--colocacion de codigo-->
+                 
+         <div class="container" style="margin-top: 10px;padding: 5px">
+        <table id="tablax" class="table table-striped table-bordered" style="width:100%">
+        <thead class="thead-dark">
+            <th>Id Cliente</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Id usuario</th>
+            <th>Estado</th>
+            <th>Accion</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>idcliente</td>
+                <td>nombre</td>
+                <td>telefono</td>
+                <td>direccion</td>
+                <td>ususario id</td>
+                <td>Estado</td>
+                <td>
+                <a href="" class="btn btn-warning">Agregar<i class=' fas fa-key'></i></a><br><br>
+                <a href="../src/editar_cliente.php" class="btn btn-success">Editar<i class='fas fa-edit'></i></a><br><br>
+                <form action="" method="post" class="confirmar d-inline">
+                <button class="btn btn-danger" type="submit">Eliminar<i class='fas fa-trash-alt'></i> </button>
+                </form>
+                </td>
                 
-                <!--  aqui empieza lo de cliente  -->
-                <!--Boton de nuevo cliente-->
-                <center> <form action="" method="post" class="confirmar d-inline">
-                <a href="../src/nuevo_cliente.php" class="btn btn-primary">Nuevo<i ></i></a>
-                </form> </center>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
 
-        
-                <div id="nuevo_usuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-primary text-white">
-                                <h5 class="modal-title" id="my-modal-title">Nuevo Usuario</h5>
-                                <button class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" method="post" autocomplete="off">
-                                    <div class="form-group">
-                                        <label for="nombre">Nombre</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Nombre" name="nombre" id="nombre">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="correo">Correo</label>
-                                        <input type="email" class="form-control" placeholder="Ingrese Correo Electrónico" name="correo" id="correo">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="usuario">Usuario</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Usuario" name="usuario" id="usuario">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="clave">Contraseña</label>
-                                        <input type="password" class="form-control" placeholder="Ingrese Contraseña" name="clave" id="clave">
-                                    </div>
-                                    <input type="submit" value="Registrar" class="btn btn-primary">
-                                </form>
-                            </div>
-                        </div>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+    </script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                
+            });
+        });
+
+        </script>
+
+                <!--  fin de codigo  -->
+
+
+                <!--Creacion de Modal-->
+
+<!--Modal para CRUD-->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <form id="formUsuarios">    
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">User Name:</label>
+                    <input type="text" class="form-control" id="username">
                     </div>
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">First Name</label>
+                    <input type="text" class="form-control" id="first_name">
+                    </div> 
+                    </div>    
                 </div>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last_name">
+                    </div>               
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Gender</label>
+                    <input type="text" class="form-control" id="gender">
+                    </div>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                        <label for="" class="col-form-label">Password</label>
+                        <input type="text" class="form-control" id="password">
+                        </div>
+                    </div>    
+                    <div class="col-lg-3">    
+                        <div class="form-group">
+                        <label for="" class="col-form-label">Status</label>
+                        <input type="number" class="form-control" id="status">
+                        </div>            
+                    </div>    
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
+            </div>
+        </form>    
+        </div>
+    </div>
+</div>  
+      
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="src/assets/jquery/jquery-3.3.1.min.js"></script> 
+    <script src="src/assets/popper/popper.min.js"></script>   
+    <script src="src/assets/bootstrap/js/bootstrap.min.js"></script>
+      
+    <!-- datatables JS -->
+    <script type="text/javascript" src=" src/assets/datatables/datatables.min.js "></script>   
+   
+     
+    <script type="text/javascript" src="main.js"></script>  
+  
+    
+    
+  </body>
+</html>
 
-                <div class="table-responsive">
-                    <table id="tablax" class="table table-hover table-striped table-bordered mt-2" style="width:100%">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Id Cliente</th>
-                                <th>Nombre</th>
-                                <th>Telefono</th>
-                                <th>Direccion</th>
-                                <th>Id usuario</th>
-                                <th>Estado</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>idcliente</td>
-                                <td>nombre</td>
-                                <td>telefono</td>
-                                <td>direccion</td>
-                                <td>ususario id</td>
-                                <td>Estado</td>
-                                <td>
-                                    <a href="" class="btn btn-warning">Agregar<i class=''></i></a>
-                                    <a href="../src/editar_cliente.php" class="btn btn-success">Editar<i class=''></i></a>
-                                    <form action="" method="post" class="confirmar d-inline">
-                                        <button class="btn btn-danger" type="submit">Eliminar<i class=''></i> </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- JQUERY -->
-                <script src="https://code.jquery.com/jquery-3.4.1.js"
-                    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
-                    </script>
-                <!-- DATATABLES -->
-                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
-                </script>
-                <!-- BOOTSTRAP -->
-                <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
-                </script>
-                <script>
-                    $(document).ready(function () {
-                        $('#tablax').DataTable({
-                            language: {
-                                processing: "Tratamiento en curso...",
-                                search: "Buscar&nbsp;:",
-                                lengthMenu: "Agrupar de _MENU_ items",
-                                info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
-                                infoEmpty: "No existen datos.",
-                                infoFiltered: "(filtrado de _MAX_ elementos en total)",
-                                infoPostFix: "",
-                                loadingRecords: "Cargando...",
-                                zeroRecords: "No se encontraron datos con tu busqueda",
-                                emptyTable: "No hay datos disponibles en la tabla.",
-                                paginate: {
-                                    first: "Primero",
-                                    previous: "Anterior",
-                                    next: "Siguiente",
-                                    last: "Ultimo"
-                                },
-                                aria: {
-                                    sortAscending: ": active para ordenar la columna en orden ascendente",
-                                    sortDescending: ": active para ordenar la columna en orden descendente"
-                                }
-                            },
-                            scrollY: 400,
-                            lengthMenu: [ [10, 25, -1], [10, 25, "All"] ],
-                        });
-                    });
-                </script>
-                <!--  aqui termina lo de ususario  -->
+
+                <!--Final de Modal-->
 
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; UNAH 2022</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </footer>

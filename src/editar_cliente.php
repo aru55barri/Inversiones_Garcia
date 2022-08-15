@@ -9,16 +9,12 @@
         <title>Inversiones Garcia</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../dist/css/styles.css" rel="stylesheet" />
-        <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-        
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php">Inversiones Garcia</a>
+            <a class="navbar-brand ps-3" href="../dist/index.php">Inversiones Garcia</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -59,8 +55,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="../src/factura.php">Factura</a>
-                                <a class="nav-link" href="../src/producto.php">Producto</a>
+                                    <a class="nav-link" href="layout-static.html">Factura</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">Producto</a>
                                 </nav>
                             </div>
 
@@ -123,9 +119,9 @@
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content"> <br>
+            <div id="layoutSidenav_content">
 
-            <!-- Empieza lo de usuario-->
+            <!-- Empieza lo de cliente-->
             <div class="container-fluid">
 
                 <div class="row">
