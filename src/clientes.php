@@ -72,7 +72,7 @@
                                 Inventario
                             </a>
 
-                            <a class="nav-link" href="../src/cliente.php">
+                            <a class="nav-link" href="../src/clientes.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Cliente
                             </a>
