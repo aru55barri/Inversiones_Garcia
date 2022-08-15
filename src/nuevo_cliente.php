@@ -10,6 +10,10 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../dist/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -43,7 +47,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="../src/nueva_venta.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Nueva Venta
                             </a>
@@ -121,11 +125,10 @@
             </div>
             <div id="layoutSidenav_content">
                 
-                <!--  aqui empieza lo de ususario  -->
-                
-                        <div class="modal-content">
+                <!--  aqui empieza lo de cliente  -->
+                    <div class="modal-content">
                             <div class="modal-header bg-primary text-white">
-                                <h5 class="modal-title" id="my-modal-title">Nuevo Usuario</h5>
+                                <h5 class="modal-title" id="my-modal-title">Nuevo Cliente</h5>
                                 <button class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -134,28 +137,20 @@
                                 <form action="" method="post" autocomplete="off">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Nombre" name="nombre" id="nombre">
+                                        <input type="text" placeholder="Ingrese Nombre" name="nombre" id="nombre" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="correo">Correo</label>
-                                        <input type="email" class="form-control" placeholder="Ingrese Correo Electrónico" name="correo" id="correo">
+                                        <label for="telefono">Teléfono</label>
+                                        <input type="number" placeholder="Ingrese Teléfono" name="telefono" id="telefono" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="usuario">Usuario</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Usuario" name="usuario" id="usuario">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="clave">Contraseña</label>
-                                        <input type="password" class="form-control" placeholder="Ingrese Contraseña" name="clave" id="clave">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="usuario">Rol</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Usuario" name="usuario" id="usuario">
+                                        <label for="direccion">Dirección</label>
+                                        <input type="text" placeholder="Ingrese Direccion" name="direccion" id="direccion" class="form-control">
                                     </div>
                                     <input type="submit" value="Registrar" class="btn btn-primary">
                                 </form>
                             </div>
-                        </div>
+                    </div>
                 <!--  aqui termina lo de ususario  -->
 
                 <footer class="py-4 bg-light mt-auto">

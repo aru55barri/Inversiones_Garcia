@@ -10,11 +10,15 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../dist/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php">Inversiones Garcia</a>
+            <a class="navbar-brand ps-3" href="../dist/index.php">Inversiones Garcia</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -43,7 +47,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="../src/nueva_venta.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Nueva Venta
                             </a>
@@ -65,7 +69,7 @@
                                 Inventario
                             </a>
 
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="../src/clientes.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Cliente
                             </a>
@@ -122,7 +126,12 @@
             <div id="layoutSidenav_content">
                 
                 <!--  aqui empieza lo de ususario  -->
-                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#nuevo_usuario"><i class="fas fa-plus"></i></button>
+                <!--Boton de nuevo ususario-->
+                <center> <form action="" method="post" class="confirmar d-inline">
+                <a href="../src/nuevo_usuario.php" class="btn btn-primary">Nuevo<i ></i></a>
+                </form> </center>
+
+        
                 <div id="nuevo_usuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -156,8 +165,9 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="table-responsive">
-                    <table class="table table-hover table-striped table-bordered mt-2" id="tbl">
+                    <table id="tablax" class="table table-hover table-striped table-bordered mt-2" style="width:100%">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Id Usuario</th>
@@ -171,42 +181,79 @@
                                 <th>Primer Ingreso</th>
                                 <th>Fecha Vencimiento</th>
                                 <th>Estado</th>
-                                <th></th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php ?>
-                                    <tr>
-
-                                        <td>idusuario</td>
-                                        <td>nombre</td>
-                                        <td>correo</td>
-                                        <td>usuario</td>
-                                        <td>clave</td>
-                                        <td>idrol</td>
-                                        <td>Fecha utima conexión</td>
-                                        <td>Preguntas contestadas</td>
-                                        <td>Primer ingreso</td>
-                                        <td>Fecha vencimiento</td>
-                                        <td>Estado</td>
-                                        <td>
-                                            <a href="rol.php?id=<?php echo $data['idusuario']; ?>" class="btn btn-warning"><i class='fas fa-key'></i></a>
-                                            <a href="editar_usuario.php" class="btn btn-success"><i class='fas fa-edit'></i></a>
-                                            <form action="eliminar_usuario.php?id=<?php echo $data['idusuario']; ?>" method="post" class="confirmar d-inline">
-                                                <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                            <tr>
+                                <td>idusuario</td>
+                                <td>nombre</td>
+                                <td>correo</td>
+                                <td>usuario</td>
+                                <td>clave</td>
+                                <td>idrol</td>
+                                <td>Fecha utima conexión</td>
+                                <td>Preguntas contestadas</td>
+                                <td>Primer ingreso</td>
+                                <td>Fecha vencimiento</td>
+                                <td>Estado</td>
+                                <td>
+                                    <a href="" class="btn btn-warning">Agregar<i class=''></i></a>
+                                    <a href="../src/editar_usuario.php" class="btn btn-success">Editar<i class=''></i></a>
+                                    <form action="" method="post" class="confirmar d-inline">
+                                        <button class="btn btn-danger" type="submit">Eliminar<i class=''></i> </button>
+                                    </form>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-
+                <!-- JQUERY -->
+                <script src="https://code.jquery.com/jquery-3.4.1.js"
+                    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+                    </script>
+                <!-- DATATABLES -->
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+                </script>
+                <!-- BOOTSTRAP -->
+                <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $('#tablax').DataTable({
+                            language: {
+                                processing: "Tratamiento en curso...",
+                                search: "Buscar&nbsp;:",
+                                lengthMenu: "Agrupar de _MENU_ items",
+                                info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                                infoEmpty: "No existen datos.",
+                                infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                                infoPostFix: "",
+                                loadingRecords: "Cargando...",
+                                zeroRecords: "No se encontraron datos con tu busqueda",
+                                emptyTable: "No hay datos disponibles en la tabla.",
+                                paginate: {
+                                    first: "Primero",
+                                    previous: "Anterior",
+                                    next: "Siguiente",
+                                    last: "Ultimo"
+                                },
+                                aria: {
+                                    sortAscending: ": active para ordenar la columna en orden ascendente",
+                                    sortDescending: ": active para ordenar la columna en orden descendente"
+                                }
+                            },
+                            scrollY: 400,
+                            lengthMenu: [ [10, 25, -1], [10, 25, "All"] ],
+                        });
+                    });
+                </script>
                 <!--  aqui termina lo de ususario  -->
 
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div class="text-muted">Copyright &copy; UNAH 2022</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;

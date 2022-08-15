@@ -9,12 +9,16 @@
         <title>Inversiones Garcia</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../dist/css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+        
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="../dist/index.php">Inversiones Garcia</a>
+            <a class="navbar-brand ps-3" href="index.php">Inversiones Garcia</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -55,8 +59,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Factura</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Producto</a>
+                                <a class="nav-link" href="../src/factura.php">Factura</a>
+                                <a class="nav-link" href="../src/producto.php">Producto</a>
                                 </nav>
                             </div>
 
@@ -119,54 +123,48 @@
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
-                
-                <!--  aqui empieza lo de ususario  -->
-                
-                        <div class="modal-content">
-                            <div class="modal-header bg-primary text-white">
-                                <h5 class="modal-title" id="my-modal-title">Nuevo Usuario</h5>
-                                <button class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+            <div id="layoutSidenav_content"> <br>
+
+            <!-- Empieza lo de usuario-->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-6 m-auto">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                    Modificar Cliente
                             </div>
-                            <div class="modal-body">
-                                <form action="" method="post" autocomplete="off">
-                                    <div class="form-group">
-                                        <label for="nombre">Nombre</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Nombre" name="nombre" id="nombre">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="correo">Correo</label>
-                                        <input type="email" class="form-control" placeholder="Ingrese Correo Electrónico" name="correo" id="correo">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="usuario">Usuario</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Usuario" name="usuario" id="usuario">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="clave">Contraseña</label>
-                                        <input type="password" class="form-control" placeholder="Ingrese Contraseña" name="clave" id="clave">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="usuario">Rol</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Usuario" name="usuario" id="usuario">
-                                    </div>
-                                    <input type="submit" value="Registrar" class="btn btn-primary">
-                                </form>
+                            <div class="card-body">
+                                    <form class="" action="" method="post">
+                                        
+                                        <input type="hidden" name="id" value="<?php echo $idcliente; ?>">
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" placeholder="Ingrese Nombre" name="nombre" class="form-control" id="nombre" value="nombre">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="telefono">Teléfono</label>
+                                            <input type="number" placeholder="Ingrese Teléfono" name="telefono" class="form-control" id="telefono" value="telefono">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="direccion">Dirección</label>
+                                            <input type="text" placeholder="Ingrese Direccion" name="direccion" class="form-control" id="direccion" value="direccion">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-user-edit"></i> Editar Cliente</button>
+                                        <a href="clientes.php" class="btn btn-danger">Atras</a>
+                                    </form>
                             </div>
                         </div>
-                <!--  aqui termina lo de ususario  -->
+                    </div>
+                </div>
+            </div>
+                <!--  fin de codigo  -->
 
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; UNAH 2022</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            
                         </div>
                     </div>
                 </footer>

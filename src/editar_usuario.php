@@ -14,7 +14,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php">Inversiones Garcia</a>
+            <a class="navbar-brand ps-3" href="../dist/index.php">Inversiones Garcia</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -65,7 +65,7 @@
                                 Inventario
                             </a>
 
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="../src/cliente.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Cliente
                             </a>
@@ -159,7 +159,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div class="text-muted">Copyright &copy; UNAH 2022</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;

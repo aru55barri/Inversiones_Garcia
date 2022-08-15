@@ -10,6 +10,10 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../dist/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -43,7 +47,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="../src/nueva_venta.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Nueva Venta
                             </a>
@@ -121,8 +125,15 @@
             </div>
             <div id="layoutSidenav_content">
                 
-                <!--  aqui empieza lo de ususario  -->
-                
+                <!--  aqui empieza lo de cliente  -->
+                <!--Boton de nuevo cliente-->
+                <center> <form action="" method="post" class="confirmar d-inline">
+                <a href="../src/nuevo_cliente.php" class="btn btn-primary">Nuevo<i ></i></a>
+                </form> </center>
+
+        
+                <div id="nuevo_usuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header bg-primary text-white">
                                 <h5 class="modal-title" id="my-modal-title">Nuevo Usuario</h5>
@@ -148,14 +159,85 @@
                                         <label for="clave">Contraseña</label>
                                         <input type="password" class="form-control" placeholder="Ingrese Contraseña" name="clave" id="clave">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="usuario">Rol</label>
-                                        <input type="text" class="form-control" placeholder="Ingrese Usuario" name="usuario" id="usuario">
-                                    </div>
                                     <input type="submit" value="Registrar" class="btn btn-primary">
                                 </form>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="tablax" class="table table-hover table-striped table-bordered mt-2" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id Cliente</th>
+                                <th>Nombre</th>
+                                <th>Telefono</th>
+                                <th>Direccion</th>
+                                <th>Id usuario</th>
+                                <th>Estado</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>idcliente</td>
+                                <td>nombre</td>
+                                <td>telefono</td>
+                                <td>direccion</td>
+                                <td>ususario id</td>
+                                <td>Estado</td>
+                                <td>
+                                    <a href="" class="btn btn-warning">Agregar<i class=''></i></a>
+                                    <a href="../src/editar_cliente.php" class="btn btn-success">Editar<i class=''></i></a>
+                                    <form action="" method="post" class="confirmar d-inline">
+                                        <button class="btn btn-danger" type="submit">Eliminar<i class=''></i> </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- JQUERY -->
+                <script src="https://code.jquery.com/jquery-3.4.1.js"
+                    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+                    </script>
+                <!-- DATATABLES -->
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+                </script>
+                <!-- BOOTSTRAP -->
+                <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $('#tablax').DataTable({
+                            language: {
+                                processing: "Tratamiento en curso...",
+                                search: "Buscar&nbsp;:",
+                                lengthMenu: "Agrupar de _MENU_ items",
+                                info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                                infoEmpty: "No existen datos.",
+                                infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                                infoPostFix: "",
+                                loadingRecords: "Cargando...",
+                                zeroRecords: "No se encontraron datos con tu busqueda",
+                                emptyTable: "No hay datos disponibles en la tabla.",
+                                paginate: {
+                                    first: "Primero",
+                                    previous: "Anterior",
+                                    next: "Siguiente",
+                                    last: "Ultimo"
+                                },
+                                aria: {
+                                    sortAscending: ": active para ordenar la columna en orden ascendente",
+                                    sortDescending: ": active para ordenar la columna en orden descendente"
+                                }
+                            },
+                            scrollY: 400,
+                            lengthMenu: [ [10, 25, -1], [10, 25, "All"] ],
+                        });
+                    });
+                </script>
                 <!--  aqui termina lo de ususario  -->
 
                 <footer class="py-4 bg-light mt-auto">
