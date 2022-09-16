@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"><!-- ESTE-->
     <!------>
 
-    <!--Link para el modal-->
+      <!--Link para el modal-->
     <script src="assets/js/jquery-3.3.1.min.js"></script><!-- ESTE-->
     <script src="assets/js/popper.min.js"></script><!-- ESTE-->
     <script src="assets/js/bootstrap.min.js"></script><!-- ESTE-->
@@ -53,7 +53,6 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="../src/Mi_perfil.php">Mi perfil</a></li>
                         <li><a class="dropdown-item" href="../login.php">Cerrar Sesion</a></li>
                     </ul>
                 </li>
@@ -169,7 +168,7 @@
             </div>
             <div id="layoutSidenav_content"> <br>
 
-            <h1 class=" text-center" id="letra"> Usuarios  </h1>
+            <h1 class=" text-center" id="letra">Roles Objetos  </h1>
                        <style>
                         h1{
                             font-family: Vladimir Script;
@@ -186,6 +185,7 @@
                     <div class="col-lg-12">            
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
                         Nuevo <i class="fa fa-plus"></i>
+
                         </button>
                     </div>    
                 </div>    
@@ -198,7 +198,7 @@
           <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
               <div class="modal-header bg-primary text-white" >
-                <h5 class="modal-title"  id="exampleModalScrollableTitle">Nuevo Usuario</h5>
+                <h5 class="modal-title"  id="exampleModalScrollableTitle">Nuevo Rol</h5>
                 <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -207,46 +207,38 @@
 
                 <form>
                   <div class="form-group">
-                    <label class="control-label">Nombre </label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Correo</label>
+                    <label class="control-label">Rol </label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label">Usuario</label>
+                    <label class="control-label">Objeto</label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label">Clave</label>
+                    <label class="control-label">Permiso inserción</label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label">Confirmar clave</label>
+                    <label class="control-label">Permiso eliminación</label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label">Rol</label>
+                    <label class="control-label">Permiso actualización</label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label">Estado</label>
+                    <label class="control-label">Creado por</label>
+                    <input class="form-control" type="text" placeholder="">
+                  </div>
 
-                    <div class="form-group">
-
-                      <select class="form-control" id="exampleSelect1">
-
-                        <option>Activo</option>
-                        <option>inactivo</option>
-
-                      </select>
-                    </div>
+                  <div class="form-group">
+                    <label class="control-label">Permiso consultar</label>
+                    <input class="form-control" type="text" placeholder="">
                   </div>
                 
                 </form>
@@ -274,47 +266,47 @@
                 </div>
               </div>
             <!---Final de boton Exportar factura-->  
-                <table id="tablax" class="table table-striped table-bordered" style="width:100%">
+                <table id="tablax" class="table table-striped table-bordered" style="width:75%">
                     <thead class="thead-dark">
                         <th>Id </th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Usuario</th>
-                        <th>Clave</th>
                         <th>Rol</th>
-                        <th>fecha ultima conexión</th>
-                        <th>Preguntas contestadas</th>
-                        <th>primer ingreso</th>
-                        <th>fecha vencimiento</th>
-                        <th>Estado</th>
+                        <th>Objeto</th>
+                        <th>Permiso inserción</th>
+                        <th>Permiso Eliminación</th>
+                        <th>Permiso actualización</th>
+                        <th>Fecha creación</th>
+                        <th>Creado por</th>
+                        <th>Fecha modificación</th>
+                        <th>Modificado por</th>
+                        <th>Permiso consultar</th>
+            
                         <th>Accion</th>
                     </thead>
                     <tbody>
                         <tr>
                         <td>Id</td>
-                        <td>Nombre</td>
-                        <td>Correo</td>
-                        <td>Usuario</td>
-                        <td>Clave</td>
-                        <td>Rol</td>
-                        <td>fecha ultima conexión</td>
-                        <td>Preguntas contestadas</td>
-                        <td>primer ingreso</td>
-                        <td>fecha vencimiento</td>
-                        <td>Estado</td>
+                        <td>rol</td>
+                        <td>objero</td>
+                        <td>Permiso inserción</td>
+                        <td>Permiso Eliminación</td>
+                        <td>Permiso actualización</td>
+                        <td>Fecha creación</td>
+                        <td>Creado por</td>
+                        <td>Fecha modificación</td>
+                        <td>Modificado por</td>
+                        <td>Permiso consultar</td>
+
                         <td>
                         <!--Correcion de botones--->    
+                        <!--AQUI TERMINA CODIGO DE MODAL BOTON agregar-->
+                        <!--AQUI EMPIEZA CODIGO DE MODAL-->
                         <button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#exampleModalScrollables"> Agregar <i class='fas fa-edit'></i></button> <br><br>
-
-        <!---Comienzo de modal de boton agregar--->
-
-       <!--AQUI EMPIEZA CODIGO DE MODAL-->
         <!-- Modal para nuevo cliente  -->
         <div class="modal fade"  id="exampleModalScrollables" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
           <div class="modal-dialog " role="document">
             <div class="modal-content">
               <div class="modal-header bg-warning text-white" >
-                <h5 class="modal-title"  id="exampleModalScrollableTitle">Agregar Usuario</h5>
+                <h5 class="modal-title"  id="exampleModalScrollableTitle">Agregar</h5>
                 <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -324,25 +316,30 @@
                 <form>
                   
                   <div class="form-group">
-                    <label class="control-label">Nombre</label>
+                    <label class="control-label">Rol</label>
                     <input class="form-control" type="number" placeholder="">
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label">Correo</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Usuario</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Rol</label>
+                    <label class="control-label">Objeto</label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
                   
+                  <div class="form-group">
+                    <label class="control-label">Permiso inserción</label>
+                    <input class="form-control" type="text" placeholder="">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Permiso eliminación</label>
+                    <input class="form-control" type="text" placeholder="">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Permiso actualización</label>
+                    <input class="form-control" type="text" placeholder="">
+                  </div>
+
                   <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                   <button type="button" class="btn btn-primary">Agregar</button>
@@ -368,7 +365,7 @@
           <div class="modal-dialog " role="document">
             <div class="modal-content">
               <div class="modal-header bg-success text-white" >
-                <h5 class="modal-title"  id="exampleModalScrollableTitle">Editar Usuario</h5>
+                <h5 class="modal-title"  id="exampleModalScrollableTitle">Editar Rol</h5>
                 <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -377,41 +374,33 @@
 
                 <form>
                 <div class="form-group">
-                    <label class="control-label">nombre</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Correo</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Usuario</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                
-
-
-                  <div class="form-group">
                     <label class="control-label">Rol</label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
-
                   <div class="form-group">
-                    <label class="control-label">Estado</label>
-
-                    <div class="form-group">
-
-                      <select class="form-control" id="exampleSelect1">
-
-                        <option>Activo</option>
-                        <option>inactivo</option>
-
-                      </select>
-                    </div>
+                    <label class="control-label">Permiso inserción</label>
+                    <input class="form-control" type="text" placeholder="">
                   </div>
 
+                  <div class="form-group">
+                    <label class="control-label">Permiso eliminación</label>
+                    <input class="form-control" type="text" placeholder="">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Permiso actualización</label>
+                    <input class="form-control" type="text" placeholder="">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Modificado por</label>
+                    <input class="form-control" type="text" placeholder="">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Permiso consultar</label>
+                    <input class="form-control" type="text" placeholder="">
+                  </div>
 
                 </form>
               </div>
@@ -509,7 +498,7 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
 
-    
+   
 </body>
 
 </html>

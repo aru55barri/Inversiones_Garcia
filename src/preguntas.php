@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"><!-- ESTE-->
     <!------>
 
-    <!--Link para el modal-->
+ <!--Link para el modal-->
     <script src="assets/js/jquery-3.3.1.min.js"></script><!-- ESTE-->
     <script src="assets/js/popper.min.js"></script><!-- ESTE-->
     <script src="assets/js/bootstrap.min.js"></script><!-- ESTE-->
@@ -24,8 +24,6 @@
     
     <!-- The javascript plugin to display page loading on top (modal)--> 
     <script src="assets/js/plugins/pace.min.js"></script>
-
-
     <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
@@ -169,7 +167,7 @@
             </div>
             <div id="layoutSidenav_content"> <br>
 
-            <h1 class=" text-center" id="letra"> Usuarios  </h1>
+            <h1 class=" text-center" id="letra">Preguntas  </h1>
                        <style>
                         h1{
                             font-family: Vladimir Script;
@@ -181,24 +179,24 @@
         <div>
 
         <!-- Button trigger modal -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">            
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-                        Nuevo <i class="fa fa-plus"></i>
-                        </button>
-                    </div>    
-                </div>    
-        </div>  
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-12">            
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+           Nuevo <i class="fa fa-plus"></i>
+        </button>
+            </div>    
+            </div>    
+            </div><br>  
             <!--colocacion de codigo-->
 
             <!--AQUI EMPIEZA CODIGO DE MODAL-->
         <!-- Modal para nuevo producto  -->
         <div class="modal fade"  class="card-header bg-primary text-white"  id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-dialog " role="document">
             <div class="modal-content">
               <div class="modal-header bg-primary text-white" >
-                <h5 class="modal-title"  id="exampleModalScrollableTitle">Nuevo Usuario</h5>
+                <h5 class="modal-title"  id="exampleModalScrollableTitle">Nuevo Pregunta</h5>
                 <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -207,48 +205,10 @@
 
                 <form>
                   <div class="form-group">
-                    <label class="control-label">Nombre </label>
+                    <label class="control-label">Pregunta </label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
-                  <div class="form-group">
-                    <label class="control-label">Correo</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Usuario</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Clave</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Confirmar clave</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Rol</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Estado</label>
-
-                    <div class="form-group">
-
-                      <select class="form-control" id="exampleSelect1">
-
-                        <option>Activo</option>
-                        <option>inactivo</option>
-
-                      </select>
-                    </div>
-                  </div>
-                
+                 
                 </form>
               </div>
               <div class="modal-footer">
@@ -260,6 +220,9 @@
         </div>
 
     </div> <!--AQUI TERMINA CODIGO DE MODAL BOTON NUEVO-->
+
+
+    
 
             <!--colocacion de codigo-->
 
@@ -276,90 +239,18 @@
             <!---Final de boton Exportar factura-->  
                 <table id="tablax" class="table table-striped table-bordered" style="width:100%">
                     <thead class="thead-dark">
-                        <th>Id </th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Usuario</th>
-                        <th>Clave</th>
-                        <th>Rol</th>
-                        <th>fecha ultima conexión</th>
-                        <th>Preguntas contestadas</th>
-                        <th>primer ingreso</th>
-                        <th>fecha vencimiento</th>
-                        <th>Estado</th>
-                        <th>Accion</th>
+                        <th>Id</th>
+                        <th>Pregunta </th>
+                        
+                        <th></th>
                     </thead>
                     <tbody>
                         <tr>
-                        <td>Id</td>
-                        <td>Nombre</td>
-                        <td>Correo</td>
-                        <td>Usuario</td>
-                        <td>Clave</td>
-                        <td>Rol</td>
-                        <td>fecha ultima conexión</td>
-                        <td>Preguntas contestadas</td>
-                        <td>primer ingreso</td>
-                        <td>fecha vencimiento</td>
-                        <td>Estado</td>
-                        <td>
-                        <!--Correcion de botones--->    
-                        <button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#exampleModalScrollables"> Agregar <i class='fas fa-edit'></i></button> <br><br>
+                            <td>1</td>
+                            <td>¿Cual es su comida favorita?</td>
+                            <td>
 
-        <!---Comienzo de modal de boton agregar--->
-
-       <!--AQUI EMPIEZA CODIGO DE MODAL-->
-        <!-- Modal para nuevo cliente  -->
-        <div class="modal fade"  id="exampleModalScrollables" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-          <div class="modal-dialog " role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-warning text-white" >
-                <h5 class="modal-title"  id="exampleModalScrollableTitle">Agregar Usuario</h5>
-                <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <form>
-                  
-                  <div class="form-group">
-                    <label class="control-label">Nombre</label>
-                    <input class="form-control" type="number" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Correo</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Usuario</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Rol</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-                  
-                  <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary">Agregar</button>
-                  </div>
-                   
-                 
-                </form>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-
-   
-
-    </div> <!--AQUI TERMINA CODIGO DE MODAL BOTON agregar-->
-    <!--Final de modal editar-->
+    <!--Comienzo de modal editar-->
 
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalScrollablesl">Editar <i class='fas fa-edit'></i></button> <br><br>
 
@@ -368,7 +259,7 @@
           <div class="modal-dialog " role="document">
             <div class="modal-content">
               <div class="modal-header bg-success text-white" >
-                <h5 class="modal-title"  id="exampleModalScrollableTitle">Editar Usuario</h5>
+                <h5 class="modal-title"  id="exampleModalScrollableTitle">Editar Pregunta</h5>
                 <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -377,47 +268,14 @@
 
                 <form>
                 <div class="form-group">
-                    <label class="control-label">nombre</label>
+                    <label class="control-label">Pregunta </label>
                     <input class="form-control" type="text" placeholder="">
                   </div>
-                  <div class="form-group">
-                    <label class="control-label">Correo</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Usuario</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                
-
-
-                  <div class="form-group">
-                    <label class="control-label">Rol</label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label">Estado</label>
-
-                    <div class="form-group">
-
-                      <select class="form-control" id="exampleSelect1">
-
-                        <option>Activo</option>
-                        <option>inactivo</option>
-
-                      </select>
-                    </div>
-                  </div>
-
-
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Agregar</button>
+                <button type="button" class="btn btn-primary">Aceptar</button>
               </div>
             </div>
           </div>
@@ -435,6 +293,28 @@
                                 </form>
                             </td>
 
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>¿Cual es tu color favorito?</td>
+                            <td>
+                                <a href="" class="btn btn-success">Editar<i class='fas fa-edit'></i></a><br><br>
+                                <form action="" method="post" class="confirmar d-inline">
+                                    <button class="btn btn-danger" type="submit">Eliminar<i class='fas fa-trash-alt'></i> </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>¿Cual es el nombre de tu mascota?</td>
+                            <td>
+                                <a href="" class="btn btn-success">Editar<i class='fas fa-edit'></i></a><br><br>
+                                <form action="" method="post" class="confirmar d-inline">
+                                    <button class="btn btn-danger" type="submit">Eliminar<i class='fas fa-trash-alt'></i> </button>
+                                </form>
+                            </td>
                         </tr>
 
                     </tbody>
@@ -509,7 +389,7 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
 
-    
+   
 </body>
 
 </html>
