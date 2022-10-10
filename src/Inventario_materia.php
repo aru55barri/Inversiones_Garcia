@@ -323,7 +323,7 @@
 
             <tr>
                 <td>2</td>
-                <td>Vino</td>
+                <td>Botella</td>
                 <td>15</td>
                 <td>Esther</td>
                 <td>17/05/2022</td>

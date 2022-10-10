@@ -4,6 +4,7 @@ body {
    background: url(../../dist/assets/img/imagen.jpg); 
     background-size: cover;
     background-attachment: fixed;
+    position: relative;
 }
 * {
     box-sizing: border-box;
@@ -53,6 +54,8 @@ input[type="password"]{
     background: cadetblue;
 }
 
+
+
 #boton{
     border: none;
     width: 100%;
@@ -84,38 +87,13 @@ p{
     .formulario{
         margin: auto;
         width: 500px;
-        margin-top: 150px;
+        margin-top: 20px;
         border-radius: 2%;
     }
+    .footer-copyright{
+        margin-top: 90px;
+    }
 }
-
-h3{
-    font-family: Pristina;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

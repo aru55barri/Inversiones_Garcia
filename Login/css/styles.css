@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*!
-* Start Bootstrap - SB Admin v7.0.4 (https://startbootstrap.com/template/sb-admin)
-* Copyright 2013-2021 Start Bootstrap
+* Start Bootstrap - SB Admin v7.0.5 (https://startbootstrap.com/template/sb-admin)
+* Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
 */
 /*!
@@ -77,16 +77,11 @@
 }
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: url(../../dist/assets/img/imagen.jpg); 
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 hr {
@@ -133,6 +128,11 @@ h3, .h3 {
   h3, .h3 {
     font-size: 1.75rem;
   }
+}
+
+h3{
+  font-family: Vladimir Script;
+  font-size: 50px;
 }
 
 h4, .h4 {
@@ -2488,7 +2488,7 @@ textarea.form-control-lg {
      -moz-appearance: none;
           appearance: none;
   -webkit-print-color-adjust: exact;
-          color-adjust: exact;
+          print-color-adjust: exact;
 }
 .form-check-input[type=checkbox] {
   border-radius: 0.25em;
@@ -7823,7 +7823,11 @@ textarea.form-control-lg {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+  /*background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;*/
+  /*background: linear-gradient(0deg, #ebebe0 50%, #ffff99 50%);*/
+  background-color:#e2e8f3;
+
+  /*background-repeat:no-repeat;*/
 }
 
 .bg-secondary {
@@ -9340,6 +9344,7 @@ textarea.form-control-lg {
     display: inline-flex !important;
   }
 
+  
   .d-lg-none {
     display: none !important;
   }
@@ -11698,36 +11703,4 @@ body {
   width: 20px !important;
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
-}
-
-.button2{
-  border: none;
-  width: 160px;
-  color: white;
-  font-size: 20px;
-  background:  #1a2537;
-  padding: 15px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-}
-.button2:hover{
-  background: cadetblue;
-}
-
-.button3{
-  border: none;
-  width: 260px;
-  color: white;
-  font-size: 20px;
-  background:  #1a2537;
-  padding: 15px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-}
-.button2:hover{
-  background: cadetblue;
 }
