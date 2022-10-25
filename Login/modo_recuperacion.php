@@ -26,9 +26,9 @@ if (!empty($_POST)) {
             <strong>Error!</strong> El usuario no existe.
             </div>';
         } elseif ($metodo == 1) {
-            header('Location: ./password.php?user=' . $usuario);
+            header('Location: ./recuperacion_correo.php?user=' . $usuario);
         } elseif ($metodo == 2) {
-            header('Location: ./r.contraseña_preguntas.php?user=' . $usuario);
+            header('Location: ./c_preguntas_usuario.php?user=' . $usuario);
         }
     }
 }
@@ -44,7 +44,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Login - Servicio & Color</title>
+    <title>Login</title>
     <link href="./css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="../dist/css/styles.css">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>

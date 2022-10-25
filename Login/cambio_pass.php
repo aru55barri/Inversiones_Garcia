@@ -19,9 +19,9 @@ if(!isset($_SESSION['user'])){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Cambio contraseña - Servicio & Color</title>
+    <title>Cambio contraseña</title>
     <link href="css/styles.css" rel="stylesheet" />
-    
+    <link rel="stylesheet" href="../dist/css/styles.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -32,12 +32,12 @@ if(!isset($_SESSION['user'])){
         $contra_actu=$_POST['ante_contra'];
         $contra1 = $_POST['contra1'];
         $contra2 = $_POST['contra2'];
-        $user = $_SESSION['user']['USUARIO'];
-        $id = $_SESSION['user']['ID_USUARIO'];
-        $contra_actual= $_SESSION['user']['CONTRASEÑA'];
+        $user = $_SESSION['user']['usuario'];
+        $id = $_SESSION['user']['id_usuario'];
+        $contra_actual= $_SESSION['user']['clave'];
         if ($contra1 == $contra2 && $contra_actual == $contra_actu ) {
             unset($_SESSION['user']);
-            $prgu = mysqli_query($conn, "UPDATE tbl_usuarios SET PRIMER_INGRESO=1 WHERE ID_USUARIO='$id'");
+            $prgu = mysqli_query($conn, "UPDATE tbl_usuario SET primer_ingreso=1 WHERE id_usuario ='$id'");
             cambiarpass($user,$contra1);   
             echo "<script>
                 Swal.fire({
@@ -71,24 +71,29 @@ if(!isset($_SESSION['user'])){
     }
     ?>
 
-    <img src="../Imagenes/LOGO.PNG" style="width: 200px; height: 200px; padding: 20px;" />
-    <div id="layoutAuthentication" style="margin-top: -200px;">
+    <div id="layoutAuthentication" style="margin-top: -90px;">
         <div id="layoutAuthentication_content">
             <main>
                 <div class="container" style="margin-top: 100px;">
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-3 rounded-lg mt-5">
-                                <div class="card-header" style="background-color: rgb(171, 237, 230);">
-                                    <h3 class="text-center font-weight-light my-4"><img src="../Imagenes/pngwing.com.png" height="35px" padding="25px">Cambio contraseña</h3>
+                                <div class="card-header">
+                                    <h3 class="text-center font-weight-light my-4">Cambio contraseña</h3>
+                                    <style>
+                                        h3{
+                                            font-family: Vladimir Script;
+                                            font-size: 50px;
+                                        }
+                                    </style>
                                 </div>
                                 <div class="card-body">
                                     <form method="POST" class="needs-validation" novalidate>
 
                                         <div class="form-floating d-flex  align-items-center justify-content-between mt-4 mb-0">
-                                            <input class="form-control" style="width: 440px" id="inputPassword" name="ante_contra" type="password" onpaste="return false" placeholder="Contraseña Actual" maxlength="256" required />
-                                            <label for="inputpassword">Contraseña Actual</label>
-                                            <button class="btn btn-primary" type="button" onclick="mostrarPassword()"><span class="fa-solid fa-lock"></span></button>
+                                            <input class="form-control" style="width: 440px" id="clave" name="ante_contra" type="password" placeholder="Contraseña Actual" maxlength="256" required />
+                                            <label for="clave">Contraseña Actual</label>
+                                            <button class="btn btn-primary" type="button" onclick="mostrarPassword()"><span class="fa fa-eye"></span></button>
                                             <div class="valid-tooltip">
                                                 Campo Valido!
                                             </div>
@@ -99,17 +104,17 @@ if(!isset($_SESSION['user'])){
                                         </div>
 
                                         <div class="form-floating d-flex  align-items-center justify-content-between mt-4 mb-0">
-                                            <input class="form-control" style="width: 440px" id="ncontraseña" name="contra1" type="password" onpaste="return false" placeholder="Nueva Contraseña" maxlength="256" required />
-                                            <label for="ncontraseña">Nueva Contraseña</label>
-                                            <button class="btn btn-primary" type="button" onclick="mostrarPasswordN()"><span class="fa-solid fa-lock"></span></button>
+                                            <input class="form-control" style="width: 440px" id="ncontrasena" name="contra1" type="password" placeholder="Nueva Contraseña" maxlength="256" required />
+                                            <label for="ncontrasena">Nueva Contraseña</label>
+                                            <button class="btn btn-primary" type="button" onclick="mostrarPasswordN()"><span class="fa fa-eye"></span></button>
                                              
                                         </div>
                                         <span id="contramensaje"></span> 
                                            
                                         <div class="form-floating d-flex  align-items-center justify-content-between mt-4 mb-0">
-                                            <input class="form-control" style="width: 440px" id="cncontraseña" name="contra2" type="password" onpaste="return false" placeholder="Confirmar Nueva Contraseña" maxlength="256" required />
-                                            <label for="cncontraseña">Confirmar Nueva Contraseña </label>
-                                            <button class="btn btn-primary" type="button" onclick="mostrarPasswordC()"><span class="fa-solid fa-lock"></span></button>
+                                            <input class="form-control" style="width: 440px" id="cncontrasena" name="contra2" type="password" placeholder="Confirmar Nueva Contraseña" maxlength="256" required />
+                                            <label for="cncontrasena">Confirmar Nueva Contraseña </label>
+                                            <button class="btn btn-primary" type="button" onclick="mostrarPasswordC()"><span class="fa fa-eye"></span></button>
                                             <div class="valid-tooltip">
                                                 Campo Valido!
                                             </div>
@@ -129,7 +134,7 @@ if(!isset($_SESSION['user'])){
                                         </div>
 
                                         <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
-                                            <button class="btn btn-primary" id="button" type="submit" name="guardar">Guardar</button>
+                                            <button class="button3" id="button" type="submit" name="guardar">Guardar</button>
                                            
                                         </div>
                                     </form>

@@ -35,14 +35,14 @@ class Usuario
 
         foreach ($resultado as $resp) {
             $this->usuario[] = $resp;
-            // Inicio insertar en bitacora al iniciar sesion Joel Montoya
+            // Inicio insertar en bitacora al iniciar sesion 
             $fecha = date("Y-m-d-H:i:s");
             $IDUSUARIOB = "$resp[id_usuario]";
 
             $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
            VALUES(null,'$fecha','$IDUSUARIOB',1,'INGRESO','EL USUARIO INICIA SESION')";
             $this->db->query($sql1);
-            // FIN insertar en bitacora al iniciar sesion Joel Montoya
+            // FIN insertar en bitacora al iniciar sesion 
         }
 
         return $this->usuario;
@@ -204,7 +204,7 @@ class Usuario
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT valor FROM tbl_parametros WHERE parametro = 'HORAS_VIGENCIA_CORREO'";
+        $sql = "SELECT valor FROM tbl_parametros WHERE parametro = 'horas_vigencia_correo'";
         $resultado = $this->db->query($sql);
 
         foreach ($resultado as $resp) {
@@ -303,40 +303,42 @@ class Usuario
         return $resultado;
     }
 
-    // funcion editar usuario cesia
+    // funcion editar usuario 
     public function updateUsuario($id, $usuario, $correo, $rol, $empleado, $estado)
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tbl_usuarios WHERE CORREO = '$correo' and ID_USUARIO != '$id'";
+        $sql = "SELECT * FROM tbl_usuario WHERE CORREO = '$correo' and ID_USUARIO != '$id'";
         $correov = $this->db->query($sql);
         if ($correov->rowCount() > 0) {
             return 'correo';
         } else {
-            $sql = "UPDATE tbl_usuarios SET USUARIO = '$usuario', ID_ROL = '$rol',CORREO = '$correo', ID_ESTADO = '$estado', ID_EMPLEADO = '$empleado' where ID_USUARIO = '$id'";
+            $sql = "UPDATE tbl_usuario SET USUARIO = '$usuario', ID_ROL = '$rol',CORREO = '$correo', ID_ESTADO = '$estado', ID_EMPLEADO = '$empleado' where ID_USUARIO = '$id'";
             $this->db->query($sql);
             $this->db = null;
         }
     }
 
 
-    //funcion insertar, nuevo_usuario cesia
+    //funcion insertar, nuevo_usuario 
     public function insertarUsuario($username, $password, $idrol, $correo, $estado, $idEmpleado, $fecha)
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tbl_usuarios WHERE ID_EMPLEADO = '$idEmpleado'";
+        $sql = "SELECT * FROM tbl_usuario WHERE ID_EMPLEADO = '$idEmpleado'";
         $resultado = $this->db->query($sql);
-        $sql = "SELECT * FROM tbl_usuarios WHERE CORREO = '$correo'";
+        $sql = "SELECT * FROM tbl_usuario WHERE CORREO = '$correo'";
         $correov = $this->db->query($sql);
-        if ($resultado->rowCount() > 0) {
-            return 'empleado';
-        } else if ($correov->rowCount() > 0) {
+        $idEmpleado = $this->obtenerUltimoEmpleadoId();
+
+        if ($correov->rowCount() > 0) {
             return 'correo';
         } else {
-            $sql = "INSERT INTO tbl_usuarios (USUARIO, NOMBRE_USUARIO,CONTRASEÑA, ID_ROL, FECHA_ULTIMA_CONEXION, PRIMER_INGRESO, FECHA_VENCIMIENTO, CORREO, ID_ESTADO, ID_EMPLEADO)
-        VALUES('$username', '$username','$password','$idrol','0000-00-00',0, '$fecha', '$correo',$estado, $idEmpleado)";
+            
+            $sql = "INSERT INTO tbl_usuario (USUARIO, NOMBRE, CLAVE, ID_ROL, FECHA_ULTIMA_CONEXION, PRIMER_INGRESO, FECHA_VENCIMIENTO, CORREO, ID_ESTADO, ID_EMPLEADO, preguntas_contestadas)
+            VALUES('$username', '$username','$password','$idrol','0000-00-00',0, '$fecha', '$correo',$estado, $idEmpleado, 2)";
             $this->db->query($sql);
+
         }
     }
 
@@ -362,7 +364,7 @@ class Usuario
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tbl_usuarios WHERE CORREO = '$correo'";
+        $sql = "SELECT * FROM tbl_usuario WHERE correo = '$correo'";
         $resultado = $this->db->query($sql);
 
         foreach($resultado as $resp)
@@ -378,7 +380,7 @@ class Usuario
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT USUARIO FROM tbl_usuarios WHERE USUARIO = '$user'";
+        $sql = "SELECT usuario FROM tbl_usuario WHERE usuario = '$user'";
         $resultado = $this->db->query($sql);
 
         foreach($resultado as $resp)
@@ -430,7 +432,7 @@ class Usuario
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT *  from tbl_usuarios where ID_USUARIO = '$id'";
+        $sql = "SELECT *  from tbl_usuario where ID_USUARIO = '$id'";
         $resultado = $this->db->query($sql);
 
         foreach ($resultado as $resp) {
@@ -567,7 +569,7 @@ class Usuario
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT *  from tbl_estados";
+        $sql = "SELECT *  from tbl_estado";
         $estados = $this->db->query($sql);
         return $estados;
         $this->db = null;
@@ -598,12 +600,17 @@ class Usuario
         return $this->maxContra;
         $this->db = null;
     }
-    public function insertarPreguntas($pregunta, $respuesta, $usuario)
+    public function insertarPreguntas($pregunta, $respuesta, $usuario) ///////////////////////////////////////////////////////////
     {
         $this->db = getConexion();
         self::setNames();
         $sql = "INSERT INTO tbl_preguntas_usuario(id_pregunta, id_usuario, respuesta)VALUES('$pregunta','$usuario','$respuesta')";
         $this->db->query($sql);
+
+        $fecha = date("Y-m-d-H:i:s");
+        $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+        VALUES(null,'$fecha','$usuario',2,'INGRESAR PREGUNTAS','EL USUARIO INGRESA PREGUNTAS DE SEGURIDAD')";
+        $this->db->query($sql1);
     }
     public function cambiarContra($username, $contra)
     {
@@ -638,34 +645,32 @@ class Usuario
 
     /*********************************FIN FERNANDO******************************************/
 
-    /*********************************KEVIN******************************************/
+    /*********************************KEVIN********************************************************************************************/
     //INSERTAR EMPLEADOS Y USUARIOS register
-    public function insertarUsuarioEmpleado($nombre, $apellido, $correo, $identidad, $fechaNacimiento, $genero, $estadoCivil, $username, $password)
+    public function insertarUsuarioEmpleado($nombre, $apellido, $correo, $username, $password)
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "INSERT INTO tbl_empleados(NOMBRE_EMPLEADO,APELLIDO_EMPLEADO,FEC_NACIMIENTO,IDENTIDAD,ID_GENERO,ID_CARGO,ID_ESTADO_CIVIL)
-        VALUES('$nombre','$apellido','$fechaNacimiento','$identidad','$genero',8,'$estadoCivil')";
+        $sql = "INSERT INTO tbl_empleados(NOMBRE_EMPLEADO,APELLIDO_EMPLEADO,ID_CARGO)
+        VALUES('$nombre','$apellido',8)";
         $this->db->query($sql);
         $idEmpleado = $this->obtenerUltimoEmpleadoId();
         $fechaHoy = date("Y-m-d");
         $meses = $this->mesesVencimiento();
         $fechaVencimiento = date("Y-m-d", strtotime($fechaHoy . "+" . $meses[0]['VALOR']  . " month"));
-        $sql = "INSERT INTO tbl_usuarios (USUARIO, NOMBRE_USUARIO, CONTRASEÑA, ID_ROL, FECHA_ULTIMA_CONEXION, PRIMER_INGRESO, FECHA_VENCIMIENTO, CORREO, ID_ESTADO, ID_EMPLEADO)
-        VALUES('$username', '$nombre $apellido','$password', 3, '0000-00-00', 0, '$fechaVencimiento', '$correo', 5, '$idEmpleado')";
+        $sql = "INSERT INTO tbl_usuario (USUARIO, NOMBRE, clave, ID_ROL, FECHA_ULTIMA_CONEXION, PRIMER_INGRESO, FECHA_VENCIMIENTO, CORREO, ID_ESTADO, ID_EMPLEADO, PREGUNTAS_CONTESTADAS)
+        VALUES('$username', '$nombre','$password', 1, '0000-00-00', 0, '$fechaVencimiento', '$correo', 5, '$idEmpleado',2)";
         $this->db->query($sql);
         
         // Inicio insertar en bitacora al autoregistrarse Joel Montoya
         $fecha = date("Y-m-d-H:i:s");
         $IDUSUARIO = $this->obtenerUltimousuarioid();
-        $sql1 = "INSERT INTO tbl_bitacora(ID_BITACORA, FECHA, ACCION, DESCRIPCION_BITACORA, ID_USUARIO, ID_OBJETO)
-           VALUES(null,'$fecha','NUEVO','SE CREA UN NUEVO REGISTRO EN USUARIOS Y EMPLEADOS','$IDUSUARIO',2)";
+        $sql1 = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
+           VALUES(null,'$fecha','NUEVO','UN NUEVO USUARIO SE HA AUTOREGISTRADO','$IDUSUARIO',2)";
         $this->db->query($sql1);
         // FIN insertar en bitacora al autoregistrarse Joel Montoya
-      
+        
     }
-    
-
     public function mesesVencimiento()
     {
         $mesesVencimiento = [];
@@ -707,7 +712,7 @@ class Usuario
         $this->db = getConexion();
         self::setNames();
 
-        $stm = $this->db->query("SELECT * FROM tbl_usuarios WHERE CORREO = '$correo'");
+        $stm = $this->db->query("SELECT * FROM tbl_usuario WHERE correo = '$correo'");
         $rows = $stm->fetchAll(PDO::FETCH_NUM);
 
         return $rows;
@@ -718,7 +723,7 @@ class Usuario
         $this->db = getConexion();
         self::setNames();
 
-        $stm = $this->db->query("SELECT * FROM tbl_usuarios WHERE USUARIO = '$usuario'");
+        $stm = $this->db->query("SELECT * FROM tbl_usuario WHERE USUARIO = '$usuario'");
         $rows = $stm->fetchAll(PDO::FETCH_NUM);
 
         return $rows;
@@ -734,7 +739,7 @@ class Usuario
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT max(ID_USUARIO) AS ID_USUARIO from tbl_usuarios;";
+        $sql = "SELECT max(ID_USUARIO) AS ID_USUARIO from tbl_usuario;";
         $resultado = $this->db->query($sql);
 
         foreach ($resultado as $resp) {

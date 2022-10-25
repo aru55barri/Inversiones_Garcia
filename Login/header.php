@@ -82,7 +82,7 @@ include './../config/conn.php';
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="../src/Mi_perfil.php">Mi perfil</a></li>
-                        <li><a class="dropdown-item" href="../src/salir.php">Cerrar Sesion</a></li>
+                        <li><a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesion</a></li>
                     </ul>
                 </li>
             </ul>
@@ -148,7 +148,7 @@ include './../config/conn.php';
                             <div class="collapse" id="Cuarto" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="../src/bitacora.php">Bitacora</a>
-                                <a class="nav-link" href="../src/Usuarios.php">Usuarios</a>
+                                <a class="nav-link" href="../Login/vista_usuarios.php">Usuarios</a>
                                 <a class="nav-link" href="../src/Mantenimiento_Roles.php">Roles</a>
                                 <a class="nav-link" href="../src/Mantenimiento_Roles_objetos.php">Roles Objetos</a>
                                 <a class="nav-link" href="../src/parametro.php">Parametros</a>
@@ -196,3 +196,22 @@ include './../config/conn.php';
                 </nav>
             </div>
             <div id="layoutSidenav_content"> <br>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function cerrarSesion() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, cerrar sesión!'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = "../Login/header.php?cerrarSesion=true";
+            }
+        })
+    }
+</script>

@@ -18,7 +18,7 @@ if (!empty($_POST)) {
 
         $usuarios = verificarUsuariosPreguntas($usuario, $pregunta, $respuesta);
         if (sizeof($usuarios) > 0) {
-            header('Location: ./n.contraseña_preguntas.php?user=' . $usuario);
+            header('Location: ./nueva_contrasena_p.php?user=' . $usuario);
         } else {
             echo '<div class="alert alert-danger">
                 <strong>Error!</strong> Usuario NO verificado Intente de Nuevo.
@@ -39,7 +39,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Login - Servicio & Color</title>
+    <title>Login</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="../dist/css/styles.css">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>

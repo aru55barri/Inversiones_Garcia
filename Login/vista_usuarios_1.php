@@ -1,6 +1,8 @@
-<?php include_once "includes/header.php";
-    require("../config/conexion.php");
+<?php include_once "./header.php";
+include '../config/conn.php';
 
+
+  
 ?>
 
 <h1 class=" text-center" id="letra"> Usuarios </h1>
@@ -325,4 +327,4 @@
 
             <!--Final de Modal-->
 
-<?php include_once "includes/footer.php"; ?>
+<?php include_once "./footer.php"; ?>

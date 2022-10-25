@@ -1,5 +1,9 @@
 <?php
     require_once "../config/conexion.php";
+
+    require_once '../config/conex.php';
+    include_once('../controladores/controladorLogin.php');
+    include_once '../modelos/modelo_login.php';
     
     if (!empty($_POST["Registro"])){
         $alert = '';
@@ -8,30 +12,43 @@
                 uno de los campos esta vacío
                 </div>';
         } else if ($_POST['clave'] == $_POST['clave2'] ){
-            
+            /*
             $usuario=$_POST["usuario"];
             $nombre=$_POST["nombre"];
             $correo=$_POST["correo"];
            // $clave=md5($_POST["clave"]);
             $clave=($_POST["clave"]);
-            $query = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo = '$correo'");
+            */
+            
+            $nombre = $_POST['nombre'];
+            $apellido = $_POST['nombre'];
+            $correo = $_POST['correo'];
+            $usuario = $_POST['usuario'];
+            $password = $_POST['clave'];
+            $query = mysqli_query($conn, "SELECT * FROM tbl_usuario where correo = '$correo'");
             $result = mysqli_fetch_array($query);
             if ($result > 0) {
                 $alert = '<div class="alert alert-warning" role="alert">
                             El correo ya existe
                         </div>';
             } else {
-
+                /*
                 $sql=$conexion->query("insert into tbl_usuario(nombre, correo, usuario, clave, id_rol, fecha_ultima_conexion, preguntas_contestadas, primer_ingreso, fecha_vencimiento, id_estado)
                 values ('$nombre','$correo','$usuario','$clave', 1, CURRENT_TIMESTAMP, '0', '0', CURRENT_TIMESTAMP, 5)");
                 //recordar que se le asignara de rol id=4 ya que es el sin asignar
-                if($sql==1){
-                    $alert = '<div class="alert alert-primary" role="alert">
-                    Usuario registrado correctamente
-                    </div>';
-                } else {
+                $sql=$conexion->query("insert into tbl_emp(nombre, correo, usuario, clave, id_rol, fecha_ultima_conexion, preguntas_contestadas, primer_ingreso, fecha_vencimiento, id_estado)
+                values ('$nombre','$correo','$usuario','$clave', 1, CURRENT_TIMESTAMP, '0', '0', CURRENT_TIMESTAMP, 5)");
+                */
+                
+                $insertarUsuario=insertarUsuarioEmpleado($nombre, $apellido, $correo, $usuario, $password);
+
+                if($insertarUsuario > 0){
                     $alert = '<div class="alert alert-danger" role="alert">
                     Error al registrar
+                    </div>';
+                } else {
+                    $alert = '<div class="alert alert-primary" role="alert">
+                    Usuario registrado correctamente
                     </div>';
                 }
             }
@@ -42,7 +59,10 @@
                 </div>';
         
         }
+
     }
+
+    $usuario = new Usuario();
 ?>
 
 <!DOCTYPE html>
@@ -57,69 +77,120 @@
     <script src="./js/validar.js" type="text/javascript"></script>
 </head>  
 <body>
- <form class="formulario" action="Registro.php" method="post">
-    
-    <h1>Registrate</h1>
-    <style>
-       h1{
-         font-family: Vladimir Script;
-         font-size: 70px;
-         }
-    </style>
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container" style="margin-top: 10px;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <form class="formulario" action="Registro.php" method="post" id="form-register" class="needs-validation" novalidate>
+                                
+                                <h1>Regístrate</h1>
+                                <style>
+                                h1{
+                                    font-family: Vladimir Script;
+                                    font-size: 70px;
+                                    }
+                                </style>
 
-        <div class="contenedor">
-        
-            <div class="input-contenedor">
-                <i class="fas fa-user icon"></i>
-                <input name="usuario" id="txtUsuario" type="text" onpaste="return false" onkeypress="return sololetrasUsu(event)" placeholder="Usuario" autocomplete="nope" required/>
-                <span id="usuariomensaje"></span>
-            </div>
-            
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="text" name="nombre" placeholder="Nombre">
-            </div>
-            
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="text" name="correo" placeholder="Correo electronico">
-            </div>
+                                    <div class="contenedor">
+                                    
+                                        <div class="input-contenedor">
+                                            <i class="fas fa-user icon"></i>
+                                            <input name="usuario" id="usuario" name="usuario" type="text" placeholder="Usuario" autocomplete="nope" required/>
+                                            <div class="valid-tooltip">
+                                                Campo Valido!
+                                            </div>
+                                            <div class="invalid-tooltip">
+                                                Solo Debe Ingresar Letras Mayusculas en Usuario.
+                                            </div>
+                                        </div>
 
-            <div class="input-contenedor form-floating d-flex">
-                <i class="fas fa-key icon"></i>
-                <input type="password" id="ncontrasena" name="clave" placeholder="Contraseña">
-                <button class="btn btn-primary" type="button" onclick="mostrarPasswordN()"><span class="fa fa-eye"></span></button>
-            </div>
-            
-            <div class="input-contenedor form-floating d-flex">
-                <i class="fas fa-key icon"></i>
-                <input type="password" id="cncontrasena" name="clave2" placeholder="Confirmar contraseña">
-                <button class="btn btn-primary" type="button" onclick="mostrarPasswordC()"><span class="fa fa-eye"></span></button>
-            </div>
+                                        <div class="input-contenedor">
+                                            <i class="fas fa-user icon"></i>
+                                            <input type="text" name="nombre" placeholder="Nombre y Apellido">
+                                        </div>
+                                        
+                                        <div class="input-contenedor">
+                                            <i class="fas fa-envelope icon"></i>
+                                            <input type="text" name="correo" placeholder="Correo electronico">
+                                        </div>
 
-            <?php echo isset($alert) ? $alert : ''; ?>           
+                                        <div class="input-contenedor form-floating d-flex">
+                                            <i class="fas fa-key icon" style="margin-top: 20px"></i>
+                                            <input type="password" id="ncontrasena" name="clave" placeholder="Contraseña">
+                                            <button class="btn btn-primary" type="button" onclick="mostrarPasswordN()"><span class="fa fa-eye"></span></button>
+                                        </div>
+                                        
+                                        <div class="input-contenedor form-floating d-flex">
+                                            <i class="fas fa-key icon" style="margin-top: 20px"></i>
+                                            <input type="password" id="cncontrasena" name="clave2" placeholder="Confirmar contraseña">
+                                            <button class="btn btn-primary" type="button" onclick="mostrarPasswordC()"><span class="fa fa-eye"></span></button>
+                                        </div>
 
-            <input type="submit" name="Registro" id="Registro" value="Registrate" class="button">
+                                        <?php echo isset($alert) ? $alert : ''; ?>           
+
+                                        <input type="submit" name="Registro" id="Registro" value="Registrate" class="button">
+                                    </div>
+                                    <div>
+                                        <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
+                                        <p>¿Ya tienes una cuenta?<a class="link" href="../index.php">Iniciar Sesion</a></p>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>       
+    </div> <br>
+    <footer class="footer-copyright">
+        <div  class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted" style="margin-left: 620px;">Copyright &copy; Digital Solution - UNAH 2022</div>
+                </div>
+            </div>
         </div>
-        <div>
-    <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
-    <p>¿Ya tienes una cuenta?<a class="link" href="../index.php">Iniciar Sesion</a></p>
-</div>
-</form>
-<footer class="footer-copyright">
-    <div  class="py-4 bg-light mt-auto">
-        <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted" style="margin-left: 620px;">Copyright &copy; Digital Solution - UNAH 2022</div>
-            </div>
-        </div>
-    </div>
-</footer> 
+    </footer> 
 
 <script src="js/scripts.js"></script>
 <script src="./js/lock.js"></script>
 
+<!--VALIDACIONES EN TIEMPO REAL-->
+    <script>
+        var usuario = document.getElementById('usuario');
+        var contra = document.getElementById('inputPassword');
 
+        usuario.addEventListener('keypress', function(e) {
+            if (e.keyCode < 65 || e.keyCode > 90 || e.keyCode == 165) {
+                e.preventDefault();
+                //efecto de sombra color rojo en el borde
+                usuario.style.borderColor = "red";
+                usuario.style.boxShadow = "0 0 10px red";
+                usuario.classList.add("is-invalid");
+                usuario.classList.remove("is-valid");
+            } else {
+                //efecto de sombra color verde en el borde
+                usuario.style.borderColor = "green";
+                usuario.style.boxShadow = "0 0 10px green";
+                usuario.classList.add("is-valid");
+                usuario.classList.remove("is-invalid");
+            }
+        });
+
+        contra.addEventListener('keypress', function(e) {
+            if (e.keyCode == 32) {
+                e.preventDefault();
+                //efecto de sombra color rojo en el borde
+                contra.style.borderColor = "red";
+                contra.style.boxShadow = "0 0 10px red";
+            } else {
+                //efecto de sombra color verde en el borde
+                contra.style.borderColor = "green";
+                contra.style.boxShadow = "0 0 10px green";
+            }
+        });
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php include_once "../src/includes/header.php";
+<?php include_once "../Login/header.php";
 require "../config/conexion.php";
 ?>
 
@@ -61,7 +61,7 @@ require "../config/conexion.php";
                     <div class="card bg-danger text-white mb-4">
                         <div class="card-body" id="letra"> <strong> <i> Usuarios  </i></strong> <i id="icono" class="fa fa-users"></i></div>
                         <div class="card-footer card bg-white">
-                            <a class="small text-black stretched-link" href="../src/Usuarios.php">Visualizar Usuarios  <i class="fas fa-angle-right"></i></a>
+                            <a class="small text-black stretched-link" href="../Login/vista_usuarios.php">Visualizar Usuarios  <i class="fas fa-angle-right"></i></a>
                             
                         </div>
                     </div>
@@ -216,4 +216,4 @@ require "../config/conexion.php";
 
     </div>
 </main>
-<?php include_once "../src/includes/footer.php"; ?>
+<?php include_once "../Login/footer.php"; ?>

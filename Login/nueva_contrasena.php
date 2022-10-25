@@ -2,9 +2,6 @@
 
 require_once '../controladores/controladorLogin.php';
 
-if (!empty($_GET)) {
-    $username = $_GET['user'];
-}
 $mensajeError = "";
 $maximoContra = obtenerMaximoContra();
 
@@ -49,6 +46,31 @@ if (!empty($_POST) && empty($_POST['username'])) {
 
 ?>
 
+<?php 
+
+require_once '../controladores/controladorLogin.php';
+
+$token = $_GET["token"];
+$fechaActual = date('Y-m-d H:i:s');
+$datos = obtenerFechaFinalizacion($token);
+$fechaFinal = $datos[0]["FECHA_FINALIZACION"];
+$idusuario = $datos[0]["ID_USUARIO"];
+$username = obtenerNombreUser($idusuario);
+
+if($fechaActual < $fechaFinal)
+{
+    //redireccionamiento a Cambio de Contraseña
+    //header("Location: ./n.contraseña.php");
+    echo '';
+}
+else
+{
+    //Redireccionar a Pagina de Inicio de Sesion
+    header("Location: ./login.php?operacion=3");
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +81,7 @@ if (!empty($_POST) && empty($_POST['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Login - Servicio & Color</title>
+    <title>Login</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="../dist/css/styles.css">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -92,9 +114,6 @@ if (!empty($_POST) && empty($_POST['username'])) {
 
                                             <div class="valid-tooltip">
                                                 Campo Válido!
-                                            </div>
-                                            <div id="errorcontra" class="invalid-tooltip">
-                                                Por favor complete el campo,La contraseña debe tener entre 8 a 25 caracteres y al menos una letra mayuscula, una minuscula, un numero y un caracter especial y no puede contener espacios en blanco.
                                             </div>
                                         </div>
                                         <br>

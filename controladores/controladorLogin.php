@@ -158,7 +158,7 @@ function obtenerHorasVigencia()
     $usuarios = $modeloUsuario->obtenerHorasVigencia();
 
     if (count($usuarios) > 0) {
-        return $usuarios[0]['VALOR'];
+        return $usuarios[0]['valor'];
     } else {
         return 0;
     }
@@ -190,7 +190,7 @@ function obtenerNombreUser($id)
     $usuarios = $modeloUsuario->obtenerNombreUser($id);
 
     if (count($usuarios) > 0) {
-        return $usuarios[0]['USUARIO'];
+        return $usuarios[0]['usuario'];
     } else {
         return 0;
     }
@@ -257,7 +257,7 @@ function obtenerNombreUsuario($user)
 
     if(count($usuarios) > 0)
     {
-        return $usuarios[0]['USUARIO'];
+        return $usuarios[0]['usuario'];
     }
     else
     {
@@ -267,19 +267,19 @@ function obtenerNombreUsuario($user)
 
 
 //editar Usuarios cesia
-function InsertarUpdateUsuarios($id, $usuario, $correo, $rol, $empleado, $estado)
+function InsertarUpdateUsuarios($id, $usuario, $correo, $rol, $nombre, $estado) /////////////////////////////////////////////
 {
     $modeloUsuario = new Usuario();
-    $valor = $modeloUsuario->updateUsuario($id, $usuario, $correo, $rol, $empleado, $estado);
+    $valor = $modeloUsuario->updateUsuario($id, $usuario, $correo, $rol, $nombre, $estado);
     if ($valor == 'correo') {
         $_SESSION['correo'] = 'listo';
         echo "<script> 
-        location.href ='../Login/vista_usuario.php';
+        location.href ='../Login/vista_usuarios.php';
         </script>";
     } else {
         $_SESSION['edicion'] = 'listo';
         echo "<script> 
-        location.href ='../Login/vista_usuario.php';
+        location.href ='../Login/vista_usuarios.php';
         </script>";
     }
 }
@@ -296,40 +296,38 @@ function respuestaspreguntas($id)
 
 
 
-// funcion insertar empleados nelson
+// funcion insertar
 function InsertarUsuarioEmppleados(
     $nombres,
     $apellidos,
-    $fecha,
-    $identidad,
-    $cargo,
-    $genero,
-    $estado
+    $cargo
 ) {
     $modeloPrincipal = new ModeloPrincipal();
     $sql = "INSERT INTO tbl_empleados
-    (NOMBRE_EMPLEADO, APELLIDO_EMPLEADO, FEC_NACIMIENTO, IDENTIDAD, ID_CARGO, ID_GENERO, ID_ESTADO_CIVIL)
-    VALUES('$nombres', '$apellidos', '$fecha', '$identidad', '$cargo', $genero, '$estado')";
+    (NOMBRE_EMPLEADO, APELLIDO_EMPLEADO, ID_CARGO)
+    VALUES('$nombres', '$apellidos', '$cargo')";
     $modeloPrincipal->insertargeneral($sql);
  
-    // Inicio insertar en bitacora al Insertar un empleado Joel Montoya
+    // Inicio insertar en bitacora al Insertar un empleado 
     $fecha = date("Y-m-d-H:i:s");
-    $IDUS = $_SESSION['ID_USUARIO'];
+    $IDUS = $_SESSION['id_usuario'];
 
 
-    $sql = "INSERT INTO tbl_bitacora(ID_BITACORA, FECHA, ACCION, DESCRIPCION_BITACORA, ID_USUARIO, ID_OBJETO)
+    $sql = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
       VALUES(null,'$fecha','NUEVO','SE CREA NUEVO REGISTRO EN EMPLEADOS','$IDUS',3)";
     $modeloPrincipal->insertargeneral($sql);
-    // FIN insertar en bitacora al Insertar un empleado Joel Montoya
+    // FIN insertar en bitacora al Insertar un empleado 
     
+    /*
     $_SESSION['registro'] = 'ok';
     echo "<script> 
      location.href ='../vistas/vista_empleados.php';
      </script>";
+    */
 }
 
 
-// funcion update empleados nelson
+// funcion update empleados
 function InsertarUpdateEmppleados(
     $id,
     $nombres,
@@ -370,9 +368,9 @@ function cambiarpass($user, $pass)
     // Inicio actualizar contraseña en un nuevo usuario Joel Montoya
     $modeloPrincipal = new ModeloPrincipal();
     $fecha = date("Y-m-d-H:i:s");
-    $IDUS = $_SESSION['ID_USUARIO'];
+    $IDUS = $_SESSION['id_usuario'];
 
-    $sql = "INSERT INTO tbl_bitacora(ID_BITACORA, FECHA, ACCION, DESCRIPCION_BITACORA, ID_USUARIO, ID_OBJETO)
+    $sql = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
          VALUES(null,'$fecha','ACTUALIZAR','EL USUARIO ACTUALIZA LA CONTRASEÑA','$IDUS',2)";
     $modeloPrincipal->insertargeneral($sql);
     // FIN actualizar contraseña en un nuevo usuario Joel Montoya
@@ -382,10 +380,10 @@ function cambiarpass($user, $pass)
 
 /*********************************DENIA******************************************/
 //Insertar Usuarios register
-function InsertarUsuarioEmpleado($nombre, $apellido, $correo, $identidad, $fechaNacimiento, $genero, $estadoCivil, $username, $password)
+function InsertarUsuarioEmpleado($nombre, $apellido, $correo, $username, $password)
 {
     $modeloUsuario = new Usuario();
-    return $modeloUsuario->insertarUsuarioEmpleado($nombre, $apellido, $correo, $identidad, $fechaNacimiento, $genero, $estadoCivil, $username, $password);
+    return $modeloUsuario->insertarUsuarioEmpleado($nombre, $apellido, $correo, $username, $password);
     
 
 }

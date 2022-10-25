@@ -49,7 +49,7 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                 $_SESSION['Tipo_Usuario'] = obtenerTipoUsuario($usuario);
                 $_SESSION['id_usuario'] =  obtenerIdUsuario($usuario);
                 $_SESSION['rol'] = obtenerRol($usuario);
-                //condicion que identifica si es primer ingreso o no FERNANDO
+                //condicion que identifica si es primer ingreso 
                 var_dump($usuarios[0]['primer_ingreso']);
                 if ($usuarios[0]['primer_ingreso'] == 0) {
                     $_SESSION['user'] = $usuarios[0];
@@ -94,7 +94,7 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                     $_SESSION['id_usuario'] =  obtenerIdUsuario($usuario);
                     $_SESSION['Tipo_Usuario'] = obtenerTipoUsuario($usuario);
                     $_SESSION['rol'] = obtenerRol($usuario);
-                    //condicion que identifica si es primer ingreso o no FERNANDO
+                    //condicion que identifica si es primer ingreso
                     var_dump($usuarios[0]['primer_ingreso']);
                     if ($usuarios[0]['primer_ingreso'] == 0) {
 
@@ -122,82 +122,153 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Inicio de Sesión - Inversiones Garcia</title>
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
         <link rel="stylesheet" href="../dist/css/login.css">
-        <title>Inicio de Sesión</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        
     </head>
   
-    <body class="login-page" _c_t_common="1" >
-        <main>
-            <form action="" method="post" class="px-4 py-3">
-                <div class="container-fluid">
-                    <div class="row justify-content-center mt-5">
-                        <div class="col-md-3 d-lg-block col-md-5  col-sm-8  col-xl-3 " >
-                            <div  class="card card-outline card-primary">
-                                <div class="card-header bg-white ">
-                                    <h3 class=" text-center" id="letra"> Login  </h3>
-                                    <style>
-                                        h3{
-                                            font-family: Vladimir Script;
-                                            font-size: 70px;
-                                        }
-                                    </style>
-                                    </div>
-                                    <div class="card-body">
-                                    <!--Codigo comienzo-->
-                                    <div class="input-contenedor">                      
-                                        <i class="fas fa-user icon">
-                                            <input type="text" name="usuario" placeholder="usuario">
-                                        </i>
-                                    </div>
-                        
-                                    <div class="input-contenedor form-floating d-flex">
-                                        <i class="fas fa-key icon">
-                                            <input type="password" id="clave" name="clave" placeholder="Contraseña" >
-                                        </i>
-                                        <button class="btn btn-primary" type="button" onclick="mostrarPassword()"><span class="fa fa-eye"></span></button>
-                                    </div><br>
-                                    
-                                    <div class="alert alert-danger text-center d-none" id="alerta" role="alert">
+    <body class="bg-primary" >
+    <img src="../dist/assets/img/Logo.jpeg" style="width: 200px; height: 200px; padding: 20px; margin-left: 80%;" />
+        <div id="layoutAuthentication"  style="margin-top: -200px;">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container" style="margin-top: 10px;">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-3 rounded-lg mt-5">
+                                    <div class="row justify-content-center mt-15">
+                                        <div class="col-md-3 d-lg-block col-md-12 col-sm-10" >
+                                            <div  class="card card-outline card-primary">
+                                                <div class="card-header bg-white ">
+                                                    <h3 class=" text-center" id="letra"> Login  </h3>
+                                                    <style>
+                                                        h3{
+                                                            font-family: Vladimir Script;
+                                                            font-size: 70px;
+                                                        }
+                                                    </style>
+                                                    </div>
+                                                    <div class="card-body">
+                                                    <form method="POST" class="needs-validation" novalidate>
+                                                        <!--Codigo comienzo-->
+                                                        <div class="input-contenedor d-flex">                      
+                                                            <i class="fas fa-user icon" style="margin-top: 15px"></i>   
+                                                            <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Usuario" autocomplete="nope" maxlength="25" required pattern="[A-Z]{3,25}" />
+                                                            
+                                                            <div class="valid-tooltip">
+                                                                Campo Valido!
+                                                            </div>
+                                                            <div class="invalid-tooltip">
+                                                                Solo Debe Ingresar Letras Mayusculas en Usuario.
+                                                            </div>
+                                                        </div>
+                                            
+                                                        <div class="input-contenedor form-floating d-flex">
+                                                            <i class="fas fa-key icon" style="margin-top: 15px"></i>
+                                                            <input type="password" id="clave" name="clave" placeholder="Contraseña" style="width: 395px">
+                                                            
+                                                            <button class="btn btn-primary" type="button" onclick="mostrarPassword()"><span class="fa fa-eye"></span></button>
+                                                        </div>
+                                                        
+                                                        <div class="alert alert-danger text-center d-none" id="alerta" role="alert">
 
-                                    </div>
-                                    <?php echo isset($alert) ? $alert : ''; ?>
+                                                        </div>
+                                                        <?php echo isset($alert) ? $alert : ''; ?>
 
-                                    <center><button type="submit" class="button">Iniciar sesión</button></center> <br>
-                                    </div>
-                                        <p> <a href="modo_recuperacion.php" class="link" >¿Olvidaste tu usuario y/o contraseña?</a> </p>
-                                        <p>¿No tienes una cuenta? <a class="link" href="Registro.php">Registrate </a></p>
+                                                        <center><button type="submit" class="button">Iniciar sesión</button></center> <br>
+                                                        </div>
+                                                            <p> <a href="modo_recuperacion.php" class="link" >¿Olvidaste tu usuario y/o contraseña?</a> </p>
+                                                            <p>¿No tienes una cuenta? <a class="link" href="Registro.php">Regístrate </a></p>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-            
-        </main>
-        <footer class="footer-copyright">
-            <div  class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted" style="margin-left: 620px;">Copyright &copy; Digital Solution - UNAH 2022</div>
+                </main>
+            </div>
+            <footer class="footer-copyright" style="margin-top: -69px;">
+                <div  class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted" style="margin-left: 620px;">Copyright &copy; Digital Solution - UNAH 2022</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer> 
-       
+            </footer> 
+        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="./js/lock.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
-    
+        <script src="./js/function.js" type="text/javascript"></script>
+        <script src="./js/lock.js" type="text/javascript"></script>
+        <script src="./js/jquery.js" type="text/javascript"></script>
+        
+       <!--VALIDACIONES EN TIEMPO REAL-->
+         <script>
+            var usuario = document.getElementById('usuario');
+            var contra = document.getElementById('inputPassword');
+
+            usuario.addEventListener('keypress', function(e) {
+                if (e.keyCode < 65 || e.keyCode > 90 || e.keyCode == 165) {
+                    e.preventDefault();
+                    //efecto de sombra color rojo en el borde
+                    usuario.style.borderColor = "red";
+                    usuario.style.boxShadow = "0 0 10px red";
+                    usuario.classList.add("is-invalid");
+                    usuario.classList.remove("is-valid");
+                } else {
+                    //efecto de sombra color verde en el borde
+                    usuario.style.borderColor = "green";
+                    usuario.style.boxShadow = "0 0 10px green";
+                    usuario.classList.add("is-valid");
+                    usuario.classList.remove("is-invalid");
+                }
+            });
+
+            contra.addEventListener('keypress', function(e) {
+                if (e.keyCode == 32) {
+                    e.preventDefault();
+                    //efecto de sombra color rojo en el borde
+                    contra.style.borderColor = "red";
+                    contra.style.boxShadow = "0 0 10px red";
+                } else {
+                    //efecto de sombra color verde en el borde
+                    contra.style.borderColor = "green";
+                    contra.style.boxShadow = "0 0 10px green";
+                }
+            });
+        </script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <?php 
+        if(isset($_GET['loggeado']))
+        {
+            echo '<script> Swal.fire({
+                icon: "error",
+                title: "¡ERROR!",
+                text: "Debe Iniciar Sesion!",
+                showConfirmButton: true
+            })
+            .then (() => {
+                window.location.href = "../Login/login.php";
+            });
+            </script>';
+        }
+        ?>
         <?php
+
 
             if(isset($_GET['operacion']))
             {

@@ -57,7 +57,7 @@ class ModeloPrincipal
     //validacion para eliminar cesia
     public function mostrartipo($id)
     {
-        $consul = "select * from tbl_usuario where idusuario = '$id'";
+        $consul = "select * from tbl_usuario where id_usuario = '$id'";
         $resu = $this->db->query($consul);
         while ($filas = $resu->FETCHALL(PDO::FETCH_ASSOC)) {
             $this->datos[] = $filas;
