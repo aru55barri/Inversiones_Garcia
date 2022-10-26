@@ -39,6 +39,8 @@ if (!empty($_POST) && empty($_POST['username'])) {
         </div>';
     } else {
         cambiarContra($username, $_POST['txtContra']);
+        $ID = obtenerIdUsuario($_POST['user']);
+        desbloquearUsuario($ID);
         header('location: ./login.php?operacion=1');
     }
 }

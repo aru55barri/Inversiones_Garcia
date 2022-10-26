@@ -256,7 +256,17 @@ class Usuario
         $this->db->query($sql);
         $this->db = null;
     }
+    
+    public function desbloquearUsuario($id)
+    {
+        $this->db = getConexion();
+        self::setNames();
+        $sql = "UPDATE tbl_usuario SET ID_ESTADO = 1 WHERE ID_USUARIO='$id'";
 
+        $this->db->query($sql);
+        $this->db = null;
+    }
+    
     //Funcion para obtener el ID del usuario
     public function obtenerIdUsuario($nombreUsuario)
     {

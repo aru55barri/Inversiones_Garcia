@@ -203,6 +203,13 @@ function bloquearUsuario($id)
     $modeloUsuario->bloquearUsuario($id);
 }
 
+function desbloquearUsuario($id)
+{
+
+    $modeloUsuario = new Usuario();
+    $modeloUsuario->desbloquearUsuario($id);
+}
+
 //-----KEVIN
 function obtenerIdUsuario($nombreUsuario)
 {
