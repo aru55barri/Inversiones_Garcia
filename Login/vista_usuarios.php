@@ -169,11 +169,11 @@ $PDF = $row['pdf'];
           extend: 'copy',
           text: '<button class="btn btn-secondary" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Copiar <i class="fas fa-copy"></i></button>',
 
-        },
+        },*/
         {
           extend: 'excel',
           text: '<button class="btn btn-success" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Excel <i class="fas fa-file-excel"></i></button>',
-        }*/,
+        },
         {
           extend: 'pdfHtml5',
           text: '<button class="btn btn-danger" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Exportar a PDF <i class="fas fa-file-pdf"></i></button>',
@@ -245,10 +245,10 @@ $PDF = $row['pdf'];
             },
           }
         },
-        /*{
+        {
           extend: 'print',
           text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } */
+        } 
       ],
       "lengthMenu": [
         [10, 25, 50, -1],
