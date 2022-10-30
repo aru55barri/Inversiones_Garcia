@@ -93,18 +93,57 @@ class UsuariosContralador
             $fecha = date("Y-m-d-H:i:s");
             $IDUS = $_SESSION['id_usuario'];
 
-            $sql = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION_BITACORA, ID_USUARIO, ID_OBJETO)
-            VALUES(null,'$fecha','ELIMINAR','EL USUARIO ELIMINA DE LA TABLA USUARIOS','$IDUS',2)";
+            $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+            VALUES(null,'$fecha','$IDUS', 4, 'ELIMINAR','USUARIO ELIMINADO DE LA TABLA USUARIOS')";
             $modeloPrincipal->insertargeneral($sql);
             // FIN eliminar usuario Joel Montoya 
             echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'EXCELENTE!',
+                text: 'USUARIO ELIMINADO CON EXITO',
+                confirmButtonText: 'Aceptar',
+                position:'center',
+                allowOutsideClick:false,
+                padding:'1rem'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href ='../Login/vista_usuarios.php';
+                 }
+            })    
+         </script>";
+         
+          /*  echo "<script>
             location.href ='../Login/vista_usuarios.php';
-            </script>";
+            </script>";*/
         } else {
             $_SESSION['erroruser'] = true;
+            $modeloPrincipal = new ModeloPrincipal();
+            $fecha = date("Y-m-d-H:i:s");
+
+            $IDUS = $_SESSION['id_usuario'];
             echo "<script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'AVISO',
+                text: 'ESTE USUARIO NO PUEDE SER ELIMINADO',
+                confirmButtonText: 'Aceptar',
+                position:'center',
+                allowOutsideClick:false,
+                padding:'1rem'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href ='../Login/vista_usuarios.php';
+                 }
+            })    
+         </script>";
+            /*echo "<script>
             location.href ='../Login/vista_usuarios.php';
-            </script>";
+            </script>";*/
+            $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+            VALUES(null,'$fecha','$IDUS', 5, 'INACTIVO','USUARIO NO SE PUEDE ELIMINAR PASA A QUEDAR INACTIVO')";
+            $modeloPrincipal->insertargeneral($sql1);
+         
         }
     }
     //MOSTRAR USUARIO MANTENIMIENTO AUTOREGISTR0

@@ -280,14 +280,31 @@ function InsertarUpdateUsuarios($id, $usuario, $correo, $rol, $nombre, $estado) 
     $valor = $modeloUsuario->updateUsuario($id, $usuario, $correo, $rol, $nombre, $estado);
     if ($valor == 'correo') {
         $_SESSION['correo'] = 'listo';
-        echo "<script> 
+       
+       echo "<script> 
         location.href ='../Login/vista_usuarios.php';
         </script>";
     } else {
         $_SESSION['edicion'] = 'listo';
-        echo "<script> 
+        echo "<script>
+        Swal.fire({
+            icon: 'success',
+            title: 'EXCELENTE!',
+            text: 'USUARIO EDITADO CON EXITO',
+            confirmButtonText: 'Aceptar',
+            position:'center',
+            allowOutsideClick:false,
+            padding:'1rem'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href ='../Login/vista_usuarios.php';
+             }
+        })    
+     </script>";
+       /* echo "<script> 
         location.href ='../Login/vista_usuarios.php';
-        </script>";
+        </script>";*/
+        
     }
 }
 
