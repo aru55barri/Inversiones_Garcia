@@ -437,7 +437,21 @@ class Usuario
 
 
 
-    //funcion obtener usuarios, editar_usuario cesia
+    //funcion obtener usuarios, editar_usuario
+    public function obtenerNombreUsuarios($id)
+    {
+        $this->db = getConexion();
+        self::setNames();
+        $sql = "SELECT *  from tbl_usuario where ID_USUARIO = '$id'";
+        $resultado = $this->db->query($sql);
+
+        foreach ($resultado as $resp) {
+            $this->usuario[] = $resp;
+        }
+
+        return $this->usuario;
+        $this->db = null;
+    }
     public function obtenerUsuarios($id)
     {
         $this->db = getConexion();

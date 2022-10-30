@@ -35,7 +35,7 @@ if (!empty($_POST)) {
                     </div>
                     <div class="card-body">
 
-                        <form class="needs-validation" method="POST">
+                    <form class="needs-validation" method="POST">
                             <div class="row mb-3">
                                 <input name="id" hidden type="text" value="<?= $row[0]['id_usuario']  ?>">
                                 <div class="col-md-6">
@@ -51,7 +51,6 @@ if (!empty($_POST)) {
                                     </div>
                                 </div>
                             </div>
-
                            
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="correo" id="inputEmail" type="email" value="<?= $row[0]['correo'] ?>" placeholder="name@example.com" required pattern="[a-zA-Z0-9!#$%&'_+-]([\.]?[a-zA-Z0-9!#$%&'_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" />
@@ -78,13 +77,19 @@ if (!empty($_POST)) {
 
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
                                         
+
+
+
+
+
                                         <select name="empleado" class="form-control" required="true">
                                             <option value="" selected disabled>-- Seleccione un nombre --</option>
                                             <?php while ($rowt = $empleados->fetch()) { ?>
-                                                <option value="<?php echo $rowt['ID_EMPLEADO']; ?>" <?= $row[0]['id_empleado'] == $rowt['ID_EMPLEADO'] ? 'selected' : '' ?>><?php echo $rowt['NOMBRE_EMPLEADO']; ?></option>
+                                                <option  value="<?php echo $rowt['ID_EMPLEADO']; ?>"  <?= $row[0]['id_empleado'] == $rowt['ID_EMPLEADO'] ? 'selected' : '' ?>><?php echo $rowt['NOMBRE_EMPLEADO']; ?></option>
                                             <?php } ?>
                                         </select>
 
@@ -93,6 +98,8 @@ if (!empty($_POST)) {
                                 </div>
                             </div>
 
+
+                            
                             <div class="form-floating mb-3 mb-md-0">
                                 <select name="estado" class="form-control" required="true">
                                     <option value="" selected disabled>-- Seleccione un estado --</option>

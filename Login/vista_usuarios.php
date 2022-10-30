@@ -173,6 +173,7 @@ $PDF = $row['pdf'];
         {
           extend: 'excel',
           text: '<button class="btn btn-success" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Excel <i class="fas fa-file-excel"></i></button>',
+          
         },
         {
           extend: 'pdfHtml5',

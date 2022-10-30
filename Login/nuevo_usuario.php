@@ -59,7 +59,7 @@ if (!empty($_POST)) {
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
             $mail->Host = 'mail.tusarticulosdemadera.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'inversionesg@tusarticulosdemadera.com';
+            $mail->Username = 'inverionesgc@tusarticulosdemadera.com';
             $mail->Password = 'inversionesgarcia';
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
@@ -71,12 +71,12 @@ if (!empty($_POST)) {
                 )
             );
 
-            $mail->setFrom('inversionesg@tusarticulosdemadera.com');
+            $mail->setFrom('inverionesgc@tusarticulosdemadera.com');
             $mail->addAddress($correo);
             //$mail->addCC('inversionesg@tusarticulosdemadera.com');
             $mail->ContentType = 'text/html';
             $mail->CharSet = 'UTF-8';
-            $mail->isHTML(true);
+            $mail->isHTML(true); 
             $mail->Subject = 'Credenciales';
             $mail->Body    = '<div style="width: 100%; height: 50px; background-color: cyan; flex: 1"><center><h1>Servicio y Color</h1></center></div>';
             // $mail->Body    .= '<br><h1>Inicia sesion con las siguientes credenciales</h1>';
@@ -217,7 +217,7 @@ if (!empty($_POST)) {
                 border-width: 4px 4px 4px 4px;
                 display: inline-block;
                 border-radius: 10px;
-                width: auto;"><a href="http://localhost/Inversiones_Garcia-v7/" class="es-button" target="_blank" style="font-weight: normal; border-style: solid;
+                width: auto;"><a href="http://localhost/Inversiones_Garcia/" class="es-button" target="_blank" style="font-weight: normal; border-style: solid;
                 border-color: #053238;
                 border-width: 10px 25px 10px 30px;
                 display: inline-block;
@@ -259,9 +259,24 @@ if (!empty($_POST)) {
             </html>';
                 $mail->send();
                 $_SESSION['registro'] = true;
-                echo "<script> 
+                echo "<script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'EXCELENTE!',
+                    text: 'USUARIO CREADO CON EXITO',
+                    confirmButtonText: 'Aceptar',
+                    position:'center',
+                    allowOutsideClick:false,
+                    padding:'1rem'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href ='../Login/vista_usuarios.php';
+                     }
+                })    
+             </script>";
+              /*  echo "<script> 
               location.href ='../Login/vista_usuarios.php';
-            </script>";
+            </script>";*/
             }
         }
         

@@ -49,7 +49,7 @@ if (!empty($_POST)) {
                 //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->Host = 'mail.tusarticulosdemadera.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'inversionesg@tusarticulosdemadera.com';
+                    $mail->Username = 'inverionesgc@tusarticulosdemadera.com';
                 $mail->Password = 'inversionesgarcia';
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
@@ -61,7 +61,7 @@ if (!empty($_POST)) {
                     )
                 );
 
-                $mail->setFrom('inversionesg@tusarticulosdemadera.com');
+                $mail->setFrom('inverionesgc@tusarticulosdemadera.com');
                 $mail->addAddress($correoVerificado);
                 //$mail->addCC('inversionesgarcia@tusarticulosdemadera.com');
                 $mail->ContentType = 'text/html';
