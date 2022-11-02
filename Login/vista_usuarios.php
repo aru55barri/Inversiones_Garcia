@@ -26,6 +26,7 @@ $PDF = $row['pdf'];
         
         <div class="title_right">
             <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
+
             <?php if ($insertar == 1) { ?>
                 <button onclick="window.location.href='nuevo_usuario.php';" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Nuevo Usuario <i class="fa fa-plus"></i></button>
                 <?php } ?>
