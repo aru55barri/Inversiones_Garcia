@@ -2,7 +2,7 @@
     $host = "localhost";
     $user = "root";
     $clave = "X3p0-x";
-    $bd = "bd_inversiones_garcia";
+    $bd = "bd_inversiones_garcia-v1";
     $conexion = mysqli_connect($host,$user,$clave,$bd);
     if (mysqli_connect_errno()){
         echo "No se pudo conectar a la base de datos";
