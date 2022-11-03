@@ -272,12 +272,19 @@ function obtenerNombreUsuario($user)
     }
 }
 
+function InsertarUpdateCliente($id1, $DNI1, $nombre1,  $telefono1, $RTN1, $direccion1){
+    
+    $this->db = getConexion();
+    $sql = "UPDATE tbl_cliente SET DNI = '$DNI1',nombre = '$nombre1', telefono = '$telefono1', RTN = '$RTN1', direccion = '$direccion1' where idcliente = '$id'";
+    $this->db->query($sql);
+    $this->db = null;
+}
 
 //editar Usuarios cesia
-function InsertarUpdateUsuarios($id, $usuario, $correo, $rol, $nombre, $estado) /////////////////////////////////////////////
+function InsertarUpdateUsuarios($id, $correo, $rol,  $estado) /////////////////////////////////////////////////////////
 {
     $modeloUsuario = new Usuario();
-    $valor = $modeloUsuario->updateUsuario($id, $usuario, $correo, $rol, $nombre, $estado);
+    $valor = $modeloUsuario->updateUsuario($id, $correo, $rol, $estado);
     if ($valor == 'correo') {
         $_SESSION['correo'] = 'listo';
        

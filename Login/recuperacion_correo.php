@@ -49,7 +49,7 @@ if (!empty($_POST)) {
                 //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->Host = 'mail.tusarticulosdemadera.com';
                 $mail->SMTPAuth = true;
-                    $mail->Username = 'inverionesgc@tusarticulosdemadera.com';
+                $mail->Username = 'inverionesgc@tusarticulosdemadera.com';
                 $mail->Password = 'inversionesgarcia';
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
@@ -138,7 +138,7 @@ if (!empty($_POST)) {
                                                                                                     border-width: 4px 4px 4px 4px;
                                                                                                     display: inline-block;
                                                                                                     border-radius: 10px;
-                                                                                                    width: auto;"><a href="http://localhost/Inversiones_Garcia-v7/Login/nueva_contrasena.php?token=' . $token . '" class="es-button" target="_blank" style="font-weight: normal; border-style: solid;
+                                                                                                    width: auto;"><a href="http://localhost:90/Inversiones_Garcia-main/Login/nueva_contrasena.php?token=' . $token . '" class="es-button" target="_blank" style="font-weight: normal; border-style: solid;
                                                                                                     border-color: #053238;
                                                                                                     border-width: 10px 25px 10px 30px;
                                                                                                     display: inline-block;

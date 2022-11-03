@@ -246,6 +246,7 @@ class Usuario
     }
 
     //Funcion para cambiar el estado del usuario a bloqueado
+ 
     public function bloquearUsuario($id)
     {
 
@@ -256,7 +257,7 @@ class Usuario
         $this->db->query($sql);
         $this->db = null;
     }
-    
+   
     public function desbloquearUsuario($id)
     {
         $this->db = getConexion();
@@ -266,7 +267,7 @@ class Usuario
         $this->db->query($sql);
         $this->db = null;
     }
-    
+  
     //Funcion para obtener el ID del usuario
     public function obtenerIdUsuario($nombreUsuario)
     {
@@ -314,7 +315,7 @@ class Usuario
     }
 
     // funcion editar usuario 
-    public function updateUsuario($id, $usuario, $correo, $rol, $empleado, $estado)
+    public function updateUsuario($id, $correo, $rol, $estado) 
     {
         $this->db = getConexion();
         self::setNames();
@@ -323,7 +324,7 @@ class Usuario
         if ($correov->rowCount() > 0) {
             return 'correo';
         } else {
-            $sql = "UPDATE tbl_usuario SET USUARIO = '$usuario', ID_ROL = '$rol',CORREO = '$correo', ID_ESTADO = '$estado', ID_EMPLEADO = '$empleado' where ID_USUARIO = '$id'";
+            $sql = "UPDATE tbl_usuario SET ID_ROL = '$rol',CORREO = '$correo', ID_ESTADO = '$estado' where ID_USUARIO = '$id'";
             $this->db->query($sql);
             $this->db = null;
         }
@@ -437,7 +438,7 @@ class Usuario
 
 
 
-    //funcion obtener usuarios, editar_usuario
+    //funcion obtener usuarios, editar_usuario cesia
     public function obtenerNombreUsuarios($id)
     {
         $this->db = getConexion();
@@ -451,7 +452,25 @@ class Usuario
 
         return $this->usuario;
         $this->db = null;
+
+
     }
+    
+    public function obtenerClientes($id)
+    {
+        $this->db = getConexion();
+        self::setNames();
+        $sql = "SELECT *  from tbl_cliente where idcliente  = '$id'";
+        $resultado = $this->db->query($sql);
+
+        foreach ($resultado as $resp) {
+            $this->usuario[] = $resp;
+        }
+
+        return $this->usuario;
+        $this->db = null;
+    }
+
     public function obtenerUsuarios($id)
     {
         $this->db = getConexion();
@@ -466,6 +485,7 @@ class Usuario
         return $this->usuario;
         $this->db = null;
     }
+
 
     //funcion obtener roles, nuevo_usuario cesia
     public function obtenerRoles()

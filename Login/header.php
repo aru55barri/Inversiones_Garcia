@@ -133,7 +133,7 @@ include './../config/conn.php';
                                 </nav>
                             </div>
 
-                            <a class="nav-link" href="../src/clientes.php">
+                            <a class="nav-link" href="../Login/vista_cliente.php">
                                 <div class="sb-nav-link-icon"><i class="fa fa-user-plus"></i></div>
                                 Cliente
                             </a>
@@ -147,7 +147,7 @@ include './../config/conn.php';
                             </a>
                             <div class="collapse" id="Cuarto" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="../src/bitacora.php">Bitacora</a>
+                                <a class="nav-link" href="../Login/bitacora.php">Bitacora</a>
                                 <a class="nav-link" href="../Login/vista_usuarios.php">Usuarios</a>
                                 <a class="nav-link" href="../src/Mantenimiento_Roles.php">Roles</a>
                                 <a class="nav-link" href="../src/Mantenimiento_Roles_objetos.php">Roles Objetos</a>

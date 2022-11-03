@@ -37,8 +37,7 @@ class UsuariosContralador
     {
 
         $usuarios = new ModeloPrincipal();
-        $matrizUsuario = $usuarios->mostrargeneral("select u.*,r.ROL,te.NOMBRE_EMPLEADO,te2.NOMBRE_ESTADO  from tbl_usuario u inner join tbl_roles r on u.ID_ROL = r.ID_ROL inner join tbl_empleados te ON u.ID_EMPLEADO = te.ID_EMPLEADO
-            inner join tbl_estado te2 on u.ID_ESTADO = te2.ID_ESTADO", "1");
+        $matrizUsuario = $usuarios->mostrargeneral("select * from tbl_cliente");
         foreach ($matrizUsuario as $key => $value) {
             foreach ($value as $registro) {
 
@@ -46,21 +45,19 @@ class UsuariosContralador
                 global $eliminar;
 
                 echo "<tr>";
-                echo "<td>" . $registro['id_usuario'] . "</td>";
-                echo "<td>" . $registro['usuario'] . "</td>";
+                echo "<td>" . $registro['idcliente'] . "</td>";
+                echo "<td>" . $registro['DNI'] . "</td>";
              // echo "<td>" . $registro['NOMBRE_USUARIO'] . "</td>";
-                echo "<td>" . $registro['ROL'] . "</td>";
-                echo "<td>" . $registro['fecha_ultima_conexion'] . "</td>";
-                echo "<td>" . $registro['primer_ingreso'] . "</td>";
-                echo "<td>" . $registro['fecha_vencimiento'] . "</td>";
-                echo "<td>" . $registro['correo'] . "</td>";
-                echo "<td>" . $registro['NOMBRE_ESTADO'] . "</td>";
-                echo "<td>" . $registro['NOMBRE_EMPLEADO'] . "</td>";
+                echo "<td>" . $registro['nombre'] . "</td>";
+                echo "<td>" . $registro['telefono'] . "</td>";
+                echo "<td>" . $registro['RTN'] . "</td>";
+                echo "<td>" . $registro['direccion'] . "</td>";
+    
                 if ($modificar == 1){
-                echo "<th><a href=../Login/modificar_usuario.php?id=" . $registro['id_usuario'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
+                echo "<th><a href=../Login/modificar_cliente.php?id=" . $registro['idcliente'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
                 }
                 if ($eliminar == 1) {
-                echo "<th><a href=../controladores/controlador_usuario.php?idusuario=" . $registro['id_usuario'] . "&idempleado=" . $registro['id_empleado'] . "  class='btn btn-round btn-danger' type='submit'><i class='fas fa-trash-alt'></i></a></th>";
+                echo "<th><a href=../controladores/controlador_cliente.php?idusuario=" . $registro['idcliente'] . "&idempleado=" . "  class='btn btn-round btn-danger' type='submit'><i class='fas fa-trash-alt'></i></a></th>";
                 }
                 echo "</tr>";
             }
@@ -70,7 +67,7 @@ class UsuariosContralador
             $IDUS = $_SESSION['id_usuario'];
 
             $sql = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
-            VALUES(null,'$fecha','INGRESO','EL USUARIO INGRESA A TABLA USUARIOS','$IDUS',2)";
+            VALUES(null,'$fecha','INGRESO','EL USUARIO INGRESA A TABLA CLIENTES','$IDUS',2)";
             $modeloPrincipal->insertargeneral($sql);
             // FIN vista en bitacora al mostrar usuarios Joel Montoya
         }
@@ -94,24 +91,21 @@ class UsuariosContralador
             $IDUS = $_SESSION['id_usuario'];
 
             $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-            VALUES(null,'$fecha','$IDUS', 4, 'ELIMINAR','USUARIO ELIMINADO DE LA TABLA USUARIOS')";
+            VALUES(null,'$fecha','$IDUS', 4, 'ELIMINAR','CLIENTE ELIMINADO DE LA TABLA CLIENTE')";
             $modeloPrincipal->insertargeneral($sql);
-
-            
             // FIN eliminar usuario Joel Montoya 
             echo "<script>
-            
             Swal.fire({
                 icon: 'success',
                 title: 'EXCELENTE!',
-                text: 'USUARIO ELIMINADO CON EXITO',
+                text: 'CLIENTE ELIMINADO CON EXITO',
                 confirmButtonText: 'Aceptar',
                 position:'center',
                 allowOutsideClick:false,
                 padding:'1rem'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href ='../Login/vista_usuarios.php';
+                    location.href ='../Login/vista_cliente.php';
                  }
             })    
          </script>";
@@ -129,38 +123,35 @@ class UsuariosContralador
             Swal.fire({
                 icon: 'warning',
                 title: 'AVISO',
-                text: 'ESTE USUARIO NO PUEDE SER ELIMINADO',
+                text: 'ESTE CLIENTE NO PUEDE SER ELIMINADO',
                 confirmButtonText: 'Aceptar',
                 position:'center',
                 allowOutsideClick:false,
                 padding:'1rem'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href ='../Login/vista_usuarios.php';
+                    location.href ='../Login/vista_cliente.php';
                  }
             })    
          </script>";
             /*echo "<script>
             location.href ='../Login/vista_usuarios.php';
-            </script>";
-             */
-           // inacUsuario($idusuario);
-           $sql5 = "UPDATE tbl_usuario SET ID_ESTADO = 2 WHERE ID_USUARIO='$idusuario'";
-           $modeloPrincipal->insertargeneral($sql5);
-           
-            $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+            </script>";*/
+
+          /* $sql5 = "UPDATE tbl_usuario SET ID_ESTADO = 2 WHERE ID_USUARIO='$idusuario'";
+           $modeloPrincipal->insertargeneral($sql5);*/
+
+           /* $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
             VALUES(null,'$fecha','$IDUS', 5, 'INACTIVO','USUARIO NO SE PUEDE ELIMINAR PASA A QUEDAR INACTIVO')";
-            $modeloPrincipal->insertargeneral($sql1);
-            
-
-
+            $modeloPrincipal->insertargeneral($sql1);*/
+         
         }
     }
     //MOSTRAR USUARIO MANTENIMIENTO AUTOREGISTR0
     static public function mostrarUsuarioMantenimiento()
     {
         $usuarios = new ModeloPrincipal();
-        $matrizUsuario = $usuarios->mostrargeneral("select u.*,r.ROL,te.NOMBRE_EMPLEADO,te2.NOMBRE_ESTADO from tbl_usuarios u inner join tbl_roles r on u.ID_ROL = r.ID_ROL inner join tbl_empleados te ON u.ID_EMPLEADO = te.ID_EMPLEADO
+        $matrizUsuario = $usuarios->mostrargeneral("select u.*,r.ROL,te.NOMBRE_EMPLEADO,te2.NOMBRE_ESTADO from tbl_usuario u inner join tbl_roles r on u.ID_ROL = r.ID_ROL inner join tbl_empleados te ON u.ID_EMPLEADO = te.ID_EMPLEADO
             inner join tbl_estado te2 on u.ID_ESTADO = te2.ID_ESTADO", "5");
         foreach ($matrizUsuario as $key => $value) {
             foreach ($value as $registro) {
