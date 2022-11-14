@@ -1,7 +1,7 @@
 <?php include_once "../Login/header.php";
 require "../config/conexion.php";
 ?>
-            <h1 class=" text-center" id="letra">Clientes </h1>
+            <h1 class=" text-center" id="letra">Promociones</h1>
                        <style>
                         h1{
                             font-family: Vladimir Script;
@@ -102,25 +102,22 @@ require "../config/conexion.php";
               </div>
             <!---Final de boton Exportar factura--> 
             <thead class="thead-dark">
-                <th>Id Cliente</th>
+                <th>#</th>
                 <th>Nombre</th>
-                <th>Telefono</th>
-                <th>Direccion</th>
-                <th>Id usuario</th>
-                <th>Estado</th>
-                <th>Accion</th>
+                <th>Precio</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Final</th>
+                <th>Acciones</th>
             </thead>
             <tbody>
                 <tr>
-                <td>idcliente</td>
-                <td>nombre</td>
-                <td>telefono</td>
-                <td>direccion</td>
-                <td>ususario id</td>
-                <td>Estado</td>
+                <td>1</td>
+                <td>Nombre</td>
+                <td>Precio</td>
+                <td>Fecha Inicio</td>
+                <td>Fecha Final</td>
                 <td>
                 <!--Correcion de botones--->    
-                <button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#exampleModalScrollables"> Agregar <i class='fas fa-edit'></i></button> <br><br>
 
 <!---Comienzo de modal de boton agregar--->
 
@@ -130,7 +127,7 @@ require "../config/conexion.php";
   <div class="modal-dialog " role="document">
     <div class="modal-content">
       <div class="modal-header bg-warning text-white" >
-        <h5 class="modal-title"  id="exampleModalScrollableTitle">Agregar Cliente</h5>
+        <h5 class="modal-title"  id="exampleModalScrollableTitle">Agregar Promocion</h5>
         <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -174,7 +171,7 @@ require "../config/conexion.php";
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header bg-success text-white" >
-        <h5 class="modal-title"  id="exampleModalScrollableTitle">Editar Cliente</h5>
+        <h5 class="modal-title"  id="exampleModalScrollableTitle">Editar Promocion</h5>
         <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -183,7 +180,7 @@ require "../config/conexion.php";
 
         <form>
         <div class="form-group">
-            <label class="control-label">Nombre Cliente</label>
+            <label class="control-label">Nombre Promocion</label>
             <input class="form-control" type="text" placeholder="">
           </div>
           <div class="form-group">

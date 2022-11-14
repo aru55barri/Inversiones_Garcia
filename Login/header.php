@@ -102,7 +102,7 @@ include './../config/conn.php';
                                 <a class="nav-link" href="../src/factura.php">Factura    </a>
                                 <a class="nav-link" href="../src/detalle_factura.php">Detalle Factura</a>
                                 <a class="nav-link" href="../src/estado_factura.php">Estado Factura</a>
-                                <a class="nav-link" href="../src/CAI.php">CAI</a>
+                                <a class="nav-link" href="../src/Promociones.php">Promociones</a>
                                 </nav>
                             </div>
 
@@ -114,9 +114,6 @@ include './../config/conn.php';
                             <div class="collapse" id="Secundario" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="../src/producto.php">Producto</a>
-                                <a class="nav-link" href="../src/tipo_producto.php">Tipos de Producto</a>
-                                <a class="nav-link" href="../src/categoria.php">Categoria</a>
-                                <a class="nav-link" href="../src/tipo_categoria.php">Tipo de Categoria</a>
                                 </nav>
                             </div>
 
@@ -128,7 +125,7 @@ include './../config/conn.php';
                             <div class="collapse" id="Tercero" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="../src/Inventario.php">Inventario</a>
-                                <a class="nav-link" href="../src/Inventario_materia.php">Materia prima</a>
+                                <a class="nav-link" href="../src/Inventario_materia.php">Compra de Materia prima</a>
                                 </nav>
                             </div>
 
@@ -162,6 +159,10 @@ include './../config/conn.php';
                             </a>
                             <div class="collapse" id="Quinto" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="../src/CAI.php">CAI</a>
+                                <a class="nav-link" href="../src/tipo_producto.php">Tipos de Producto</a>
+                                <a class="nav-link" href="../src/categoria.php">Categoria</a>
+                                <a class="nav-link" href="../src/tipo_categoria.php">Tipo de Categoria</a>    
                                 <a class="nav-link" href="../src/objetos.php">Objetos</a>
                                 <a class="nav-link" href="../src/preguntas.php">Preguntas</a>
                                 <a class="nav-link" href="../src/preguntas_usuarios.php">Preguntas Usuario</a>
