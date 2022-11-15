@@ -129,7 +129,7 @@ include './../config/conn.php';
                                 </nav>
                             </div>
 
-                            <a class="nav-link" href="../Login/vista_cliente.php">
+                            <a class="nav-link" href="../src/vista_cliente.php">
                                 <div class="sb-nav-link-icon"><i class="fa fa-user-plus"></i></div>
                                 Cliente
                             </a>
