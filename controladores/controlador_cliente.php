@@ -1,4 +1,67 @@
 <?php
+    require_once '../modelos/modelo_cliente.php';
+
+
+    function ListarCliente(){
+        $modeloCliente = new Cliente();
+        $resultado = $modeloCliente->ListarCliente();
+        return $resultado;
+
+    }
+
+    //FUNCION INSERTAR PROVEEDORES---KEVIN
+    function InsertarCliente($nombre,$DNI,$telefono,$rtn,$direccion){
+
+        $modeloCliente = new Cliente();
+        $resultado = $modeloCliente->InsertarCliente($nombre,$DNI,$telefono,$rtn,$direccion);
+        return $resultado;
+    }
+
+    //FUNCION EDITAR PROVEEDORES---KEVIN
+    function EditarCliente($id,$nombre,$DNI,$telefono,$rtn,$direccion)
+    {
+        $modeloCliente = new Cliente();
+        $resultado = $modeloCliente->EditarCliente($id,$nombre,$DNI,$telefono,$rtn,$direccion);
+        return $resultado;
+    }
+
+    //FUNCION ELIMINAR PROVEEDORES--KEVIN
+    function eliminarCliente($id)
+    {
+        $modeloCliente = new Cliente();
+        $resultado = $modeloCliente->eliminarCliente($id);
+        return $resultado;
+    }
+
+    //FUNCION PARA OBTENER UN PROVEEDOR
+    function obtenerUnCliente($id)
+    {
+        $modeloCliente = new Cliente();
+        $resultado = $modeloCliente->obtenerUnCliente($id);
+        return $resultado;
+    }
+
+    //FUNCION QUE DEVUELVE SI YA EXISTE UN PROVEEDOR EXISTENTE
+    function obtenerProveedorExistente($proveedor)
+    {
+        $modeloCliente = new Proveedor();
+        $resultado = $modeloCliente->obtenerProveedorExistente($proveedor);
+        return $resultado;
+    }
+
+    //FUNCION QUE DEVUELVE SI YA EXISTE UN CORREO EXISTENTE
+     function obtenerCorreoExistente($correo)
+    {
+        $modeloCorreo = new Cliente();
+        $resultado = $modeloCorreo->obtenerCorreoExistente($correo);
+        return $resultado;
+    }
+?>
+
+
+
+
+<?php
 include_once('../Login/header.php');
 include_once '../modelos/modelo_principal.php';
 include '../config/conn.php';

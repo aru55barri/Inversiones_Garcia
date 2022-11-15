@@ -1,5 +1,6 @@
 <?php include_once "./header.php";
 include '../config/conn.php';
+include_once '../controladores/controlador_cliente.php';
 
 $id = $_SESSION['rol'];
 $sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 2 and ID_ROL = '$id'");
@@ -28,7 +29,7 @@ $PDF = $row['pdf'];
             <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
 
             <?php if ($insertar == 1) { ?>
-                <button onclick="window.location.href='nuevo_usuario.php';" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Nuevo Cliente <i class="fa fa-plus"></i></button>
+                <button onclick="window.location.href='nuevo_cliente.php';" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Nuevo Cliente <i class="fa fa-plus"></i></button>
                 <?php } ?>
                 <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
             </div>
@@ -89,10 +90,31 @@ $PDF = $row['pdf'];
                     </thead>
                     <tbody>
                         <?php
-                        include_once '../controladores/controlador_cliente.php';
+                            //  include_once '../controladores/controlador_cliente.php';
+                            // UsuariosContralador::mostrarUsuario();
+                            $resultado = ListarCliente();
+                            global $modificar;
+                            global $eliminar;
 
-                        UsuariosContralador::mostrarUsuario();
-
+                            
+                            foreach ($resultado as $registro){
+                              echo "<tr>";
+                              echo "<td>" . $registro['idcliente'] . "</td>";
+                              echo "<td>" . $registro['DNI'] . "</td>";
+                           // echo "<td>" . $registro['NOMBRE_USUARIO'] . "</td>";
+                              echo "<td>" . $registro['nombre'] . "</td>";
+                              echo "<td>" . $registro['telefono'] . "</td>";
+                              echo "<td>" . $registro['RTN'] . "</td>";
+                              echo "<td>" . $registro['direccion'] . "</td>";
+                  
+                              if ($modificar == 1){
+                              echo "<th><a href=../Login/modificar_cliente.php?id=" . $registro['idcliente'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
+                              }
+                              if ($eliminar == 1) {
+                                echo "<th><button class ='btn btn-round btn-danger' onclick='eliminar(".$registro['idcliente'].")'> <i class='fas fa-trash-alt'></i></a></th>";
+                                }
+                                echo "</tr>";                      
+                              }
                         ?>
 
 
@@ -103,7 +125,27 @@ $PDF = $row['pdf'];
         </div>
     </div>
 </div>
+<!--LIBRERIA DE SWEET ALERT-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!--FUNCION DE ELIMINAR REGISTRO CON JAVASCRIPT-->
+<script>
+    function eliminar(id){
+        Swal.fire({
+            title: '¿Está seguro?',
+            text: "¡No podrá revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Sí, eliminarlo!'
+        }).then((result)=> {
+            if(result.value){
+                window.location.href = '../Login/eliminarAuxiliar.php?id=' + id + '&tabla=clientes';
+            }
+        } )
+    }
+</script>
 <!--PARA EL REGISTRO DE REPORTES-->
 <script src="../Login/js/jquery.dataTables.min.js"></script>
 <script src="../Login/js/dataTables.bootstrap4.min.js"></script>

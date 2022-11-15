@@ -1,13 +1,45 @@
 <?php
-include_once('./header.php');
-require_once '../config/conexion.php';
-include_once '../modelos/modelo_login.php';
-include_once('../controladores/controladorLogin.php');
-$id = $_GET['id'];
-$consulta = "select * from tbl_cliente where idcliente = $id";
-$resultado = mysqli_query($conexion, $consulta);
-$row = mysqli_fetch_assoc($resultado);
 
+require_once '../controladores/controlador_cliente.php';
+$id = $_GET['id'];
+if (!empty($_GET)) {
+
+    //$id = base64_decode($_GET['id']);
+    $row = obtenerUnCliente($id);
+}
+
+if (!empty($_POST)) {
+    $nombre = $_POST['txtnombre'];
+    $DNI = $_POST['txtdni'];
+    $telefono = $_POST['txttelefono'];
+    $rtn = $_POST['txtrtn'];
+    $direccion = $_POST['txtdireccion']; 
+
+    $resultado = EditarCliente($id, $nombre,$DNI,$telefono,$rtn,$direccion);
+
+    if ($resultado == true) {
+        //REDIRIGIR A LA PAGINA PRINCIPAL CON JAVASCRIPT
+        echo "<script>
+        Swal.fire({
+            icon: 'success',
+            title: 'EXCELENTE!',
+            text: 'Editado con Exito!',
+            confirmButtonText: 'Aceptar',
+            position:'center',
+            allowOutsideClick:false,
+            padding:'1rem'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href ='../Login/vista_cliente.php';
+            }
+        })    
+    </script>";
+
+        //Guardar en una SESSION de que se edito correctamente
+        $_SESSION['EditarProveedor'] = 'Editado';
+    } else {
+    }
+}
 
 ?>
 <br><br><br><br><br><br><br>
@@ -26,7 +58,7 @@ $row = mysqli_fetch_assoc($resultado);
                                 <input name="id" hidden type="text" value="<?= $row['idcliente']  ?>">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" value="<?= $row['DNI'] ?>"  name="dni" id="inputFirstName" type="text" placeholder="Enter your first name" autocomplete="nope" size="25" required />
+                                        <input class="form-control" value="<?= $row['DNI'] ?>"  name="txtdni" id="txtdni" type="text" placeholder="Enter your first name" autocomplete="nope" size="25" required />
                                         <label for="inputFirstName"><i class=""></i>&nbsp;DNI</label>
                                         <div class="valid-feedback">
                                             Campo Válido!
@@ -39,20 +71,20 @@ $row = mysqli_fetch_assoc($resultado);
                             </div>
                            
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="nombre" id="inputFirstName" type="text" value="<?= $row['nombre'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="50" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required/>
+                                <input class="form-control" name="txtnombre" id="txtnombre" type="text" value="<?= $row['nombre'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="50" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required/>
                                 <label for="inputFirstName"><i class=""></i>&nbsp;Nombre</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
                                 </div>
-                                <div class="invalid-feedback">
-                                Por favor complete el campo, solo puede ingresar letras.
-                              </div>
+                                <div class="invalid-tooltip">
+                                                Solo Debe Ingresar Letras Mayusculas 
+                                            </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                <input class="form-control" name="telefono" id="inputFirstName" type="number" value="<?= $row['telefono'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="25" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
+                                <input class="form-control" name="txttelefono" id="txttelefono" type="number" value="<?= $row['telefono'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="25" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
                                 <label for="inputFirstName"><i class=""></i>&nbsp;Numero celular</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -65,7 +97,7 @@ $row = mysqli_fetch_assoc($resultado);
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" value="<?= $row['RTN'] ?>"  name="nombre" id="inputFirstName" type="text" placeholder="Enter your first name" autocomplete="nope" size="15" required  />
+                                        <input class="form-control" value="<?= $row['RTN'] ?>"  name="txtrtn" id="txtrtn" type="text" placeholder="Enter your first name" autocomplete="nope" size="15" required  />
                                         <label for="inputFirstName"><i class="fas fa-user icon"></i>&nbsp;RTN</label>
                                         <div class="valid-feedback">
                                             Campo Válido!
@@ -78,14 +110,14 @@ $row = mysqli_fetch_assoc($resultado);
 
                             
                                 <div class="form-floating mb-3">
-                                <input class="form-control" name="nombre" id="inputFirstName" type="text" value="<?= $row['direccion'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="150" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required/>
+                                <input class="form-control" name="txtdireccion" id="txtdireccion" type="text" value="<?= $row['direccion'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="150" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required/>
                                 <label for="inputFirstName"><i class=""></i>&nbsp;Dirección</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
                                 </div>
-                                <div class="invalid-feedback">
-                                Por favor complete el campo, solo puede ingresar letras.
-                              </div>
+                                <div class="invalid-tooltip">
+                                                Solo Debe Ingresar Letras Mayusculas 
+                                            </div>
                             </div>
 
                             
@@ -107,7 +139,54 @@ $row = mysqli_fetch_assoc($resultado);
             </div>
         </div>
 </main>
+<script src="js/scripts.js"></script>
+<script src="./js/lock.js"></script>
 
+<!--VALIDACIONES EN TIEMPO REAL-->
+    <script>
+        var nombre = document.getElementById('txtnombre');
+        var dni = document.getElementById('txtdni');
+        var telefono = document.getElementById('txttelefono');
+        var rtn = document.getElementById('txtrtn');
+        var direccion = document.getElementById('txtdireccion');
+
+        nombre.addEventListener('keypress', function(e) {
+            if (e.keyCode > 90 ) {
+                e.preventDefault();
+                //efecto de sombra color rojo en el borde
+                nombre.style.borderColor = "red";
+                nombre.style.boxShadow = "0 0 10px red";
+                nombre.classList.add("is-invalid");
+                nombre.classList.remove("is-valid");
+            } else {
+                //efecto de sombra color verde en el borde
+                nombre.style.borderColor = "green";
+                nombre.style.boxShadow = "0 0 10px green";
+                nombre.classList.add("is-valid");
+                nombre.classList.remove("is-invalid");
+            }
+        });
+        direccion.addEventListener('keypress', function(e) {
+            if ( e.keyCode > 90 ) {
+                e.preventDefault();
+                //efecto de sombra color rojo en el borde
+                direccion.style.borderColor = "red";
+                direccion.style.boxShadow = "0 0 10px red";
+                direccion.classList.add("is-invalid");
+                direccion.classList.remove("is-valid");
+            } else {
+                //efecto de sombra color verde en el borde
+                direccion.style.borderColor = "green";
+                direccion.style.boxShadow = "0 0 10px green";
+                direccion.classList.add("is-valid");
+                direccion.classList.remove("is-invalid");
+            }
+        });
+   
+        
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</script>
 <?php
-include_once('Footer.php');
+include_once('./footer.php');
 ?>
