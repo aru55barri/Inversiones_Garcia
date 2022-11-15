@@ -92,6 +92,33 @@ include './../config/conn.php';
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Modulos</div>
+
+                            <?php
+                     
+                            $rol = $_SESSION['rol'];
+                            
+                            $result = mysqli_query($conn, "select * from tbl_modulos tm inner join tbl_permisos tp ON tm.ID_OBJETO = tp.ID_OBJETO where tm.ID_PADRE = 0 and tp.permiso_consultar = 1 and tp.ID_ROL = '$rol'"); ?>
+                            <?php foreach ($result as $i) : ?>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapsePersonas<?= $i['id_objeto'] ?>" aria-expanded="false" aria-controls="pagesCollapseError">
+                                    &nbsp;&nbsp;<?= $i['Objeto'] ?>
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <?php
+                                $id = $i['id_objeto'];
+                                $res = mysqli_query($conn, "select * from tbl_modulos tm inner join tbl_permisos tp ON tm.ID_OBJETO = tp.ID_OBJETO where tm.ID_PADRE = '$id' and tp.permiso_consultar = 1 and tp.ID_ROL = '$rol'");
+                                ?>
+                                <div class="collapse" id="pagesCollapsePersonas<?= $i['id_objeto'] ?>" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                    <?php foreach($res as $j): ?> 
+                                        <a class="nav-link" href="<?=$j['URL'] ?>"><?= $j['Objeto'] ?></a>
+                                    <?php endforeach; ?>
+                                        <!-- <a class="nav-link" href="../vistas/vista_empleados.php">Empleados</a>
+                                        <a class="nav-link" href="500.html">Clientes</a> -->
+                                    </nav>
+                                </div>
+                            <?php endforeach; ?>
+
+                            <!--
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-cart-plus"></i></div>
                                 Gestion venta
@@ -188,6 +215,7 @@ include './../config/conn.php';
                             </a>
 
                         </div>
+                    -->
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Realizado por:</div>
