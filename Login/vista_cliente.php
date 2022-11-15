@@ -71,7 +71,7 @@ $PDF = $row['pdf'];
                 <table class="table table-striped table-bordered" id="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>DNI</th>
                              <!-- <th>NOMBRE</th>  -->
                             <th>NOMBRE</th>

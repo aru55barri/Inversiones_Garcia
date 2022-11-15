@@ -33,7 +33,7 @@
             <!---Final de boton Exportar factura--> 
                 <table id="tablax" class="table table-striped table-bordered" style="width:100%">
                     <thead class="thead-dark">
-                        <th>Id </th>
+                        <th>#</th>
                         <th>Fecha</th>
                         <th>Usuario</th>
                         <th>Objeto</th>
