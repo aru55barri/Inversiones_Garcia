@@ -16,8 +16,8 @@ include_once '../controladores/controlador_trabajos.php';
 include_once '../controladores/controlador_pregunta.php';
 //**********************denia****************************/
 include_once '../controladores/controlador_cliente.php';
+include_once '../controladores/controlador_producto.php';
 
-//include_once '../controladores/controlador_productos.php';
 if(!empty($_GET))
     {
         $id = $_GET['id'];
@@ -31,13 +31,13 @@ if(!empty($_GET))
             if($resultado == true)
             {
                 echo "<script>
-                window.location.href= '../vistas/vista_productos.php';
+                window.location.href= '../src/producto.php';
                 </script>";
                 $_SESSION['eliminarproducto'] = 'Si';
             }
             else{
                 echo "<script>
-                window.location.href= '../vistas/vista_productos.php';
+                window.location.href= '../src/producto.php';
                 </script>";
                 $_SESSION['eliminarproducto'] = 'No';
             }
