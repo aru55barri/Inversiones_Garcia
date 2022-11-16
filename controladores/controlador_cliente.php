@@ -117,7 +117,7 @@ class UsuariosContralador
                 echo "<td>" . $registro['direccion'] . "</td>";
     
                 if ($modificar == 1){
-                echo "<th><a href=../Login/modificar_cliente.php?id=" . $registro['idcliente'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
+                echo "<th><a href=../src/modificar_cliente.php?id=" . $registro['idcliente'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
                 }
                 if ($eliminar == 1) {
                 echo "<th><a href=../controladores/controlador_cliente.php?idusuario=" . $registro['idcliente'] . "&idempleado=" . "  class='btn btn-round btn-danger' type='submit'><i class='fas fa-trash-alt'></i></a></th>";
@@ -168,7 +168,7 @@ class UsuariosContralador
                 padding:'1rem'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href ='../Login/vista_cliente.php';
+                    location.href ='../src/vista_cliente.php';
                  }
             })    
          </script>";
@@ -193,7 +193,7 @@ class UsuariosContralador
                 padding:'1rem'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href ='../Login/vista_cliente.php';
+                    location.href ='../src/vista_cliente.php';
                  }
             })    
          </script>";

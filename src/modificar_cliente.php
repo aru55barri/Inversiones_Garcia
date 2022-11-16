@@ -30,7 +30,7 @@ if (!empty($_POST)) {
             padding:'1rem'
         }).then((result) => {
             if (result.isConfirmed) {
-                location.href ='../Login/vista_cliente.php';
+                location.href ='../src/vista_cliente.php';
             }
         })    
     </script>";
@@ -127,7 +127,7 @@ if (!empty($_POST)) {
                              
                                 </div>
                                 <div class="mt-4 mb-0">
-                                    <div class="d-grid"><input type="button" onclick="window.location.href='../Login/vista_cliente.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
+                                    <div class="d-grid"><input type="button" onclick="window.location.href='../src/vista_cliente.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
 
                                 </div>
                             </div>

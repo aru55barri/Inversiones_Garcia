@@ -1,4 +1,4 @@
-<?php include_once "./header.php";
+<?php include_once "../Login/header.php";
 include '../config/conn.php';
 include_once '../controladores/controlador_cliente.php';
 
@@ -108,7 +108,7 @@ $PDF = $row['pdf'];
                               echo "<td>" . $registro['direccion'] . "</td>";
                   
                               if ($modificar == 1){
-                              echo "<th><a href=../Login/modificar_cliente.php?id=" . $registro['idcliente'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
+                              echo "<th><a href=../src/modificar_cliente.php?id=" . $registro['idcliente'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
                               }
                               if ($eliminar == 1) {
                                 echo "<th><button class ='btn btn-round btn-danger' onclick='eliminar(".$registro['idcliente'].")'> <i class='fas fa-trash-alt'></i></a></th>";
@@ -298,4 +298,4 @@ $PDF = $row['pdf'];
   });
 }
 </script>
-<?php include_once "./footer.php"; ?>
+<?php include_once "../Login/footer.php"; ?>

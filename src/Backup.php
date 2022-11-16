@@ -2,98 +2,237 @@
 require "../config/conexion.php";
 ?>
  
-            <h1 class=" text-center" id="letra">Backup </h1>
-                       <style>
-                        h1{
-                            font-family: Vladimir Script;
-                            font-size: 80px;
-                        }
-                       </style>
-            <div class="container" style="margin-top: 10px;padding: 5px">
-        <table id="tablax" class="table table-striped table-bordered" style="width:100%">
-        <thead class="thead-dark">
-        <th>#</th>
-        <th>Fecha De Respaldo</th>
-            <th>Hora De Respaldo</th>
-            <th>Accion</th>
-        </thead>
-        <tbody>
-            <td>1</td>
-            <td>Fecha De Respaldo</td>
-            <td>Hora De Respaldo</td>
-                <td>
-                <a href="#" class="btn btn-success">Restaurar <i class='fas fa-edit'></i></a><br><br>
-                <form action="" method="post" class="confirmar d-inline">
-                <button class="btn btn-danger" type="submit">Eliminar <i class='fas fa-trash-alt'></i> </button>
-                </form>
-                </td>
-                
-            </tr>
-            
-        </tbody>
-    </table>
-</div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<?php
 
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
-        </script>
-    <!-- DATATABLES -->
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
-    </script>
-    <!-- BOOTSTRAP -->
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#tablax').DataTable({
-                language: {
-                    processing: "Tratamiento en curso...",
-                    search: "Buscar&nbsp;:",
-                    lengthMenu: "Agrupar de _MENU_ items",
-                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
-                    infoEmpty: "No existen datos.",
-                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
-                    infoPostFix: "",
-                    loadingRecords: "Cargando...",
-                    zeroRecords: "No se encontraron datos con tu busqueda",
-                    emptyTable: "No hay datos disponibles en la tabla.",
-                    paginate: {
-                        first: "Primero",
-                        previous: "Anterior",
-                        next: "Siguiente",
-                        last: "Ultimo"
-                    },
-                    aria: {
-                        sortAscending: ": active para ordenar la columna en orden ascendente",
-                        sortDescending: ": active para ordenar la columna en orden descendente"
-                    }
-                },
-                
-            });
-        });
+require_once '../controladores/controlador_ajustes.php';
 
-        </script>
+if (isset($_POST['btnBackup'])) {
+  crearRespaldoBD();
+  echo "<script>
+         Swal.fire({
+             icon: 'success',
+             title: 'EXCELENTE!',
+             text: 'Su respaldo fue realizado con Éxito, este sera alojado en la carpeta, config/Respaldos!',
+             confirmButtonText: 'Aceptar',
+             position:'center',
+             allowOutsideClick:false,
+             padding:'1rem'
+         }).then((result) => {
+             if (result.isConfirmed) {
+                 location.href ='../src/backup.php';
+             }
+         })    
+     </script>";
+}
 
+if (isset($_POST['btnRestaurar'])) {
+  $nombreArchivo = $_POST['cmbArchivos'];
+  restaurarBD($nombreArchivo);
+  $_SESSION['mensaje'] = 'Se ha restaurada la Base de Datos con Éxito!';
+}
 
+?>
 
-            <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; UNAH 2022</div>
-                            
+<main>
+  <!-- Content Wrapper. Contains page content -- Div Principal -->
+  <div class="content-wrapper">
+    <!-- Content Header (Sección de Encabezado) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <!-- Div Container-Fluid -->
+        <div class="row mb-2">
+          <!-- Div row y margen abajo de 2-->
+          <div class="col-sm-6 d-flex">
+            <!-- Div 6 columnas derecha-->
+            <!--Titulo-->
+            <h1><i class="fa-solid fa-database"></i> Respaldo Y Recuperación </h1>
+
+          </div><!-- / termina Div 6 columnas derecha-->
+          <div class="col-sm-6">
+            <!-- Div 6 columnas Izquierda-->
+            <ol class="breadcrumb float-sm-right">
+              <!--Icono Casa-->
+
+            </ol>
+          </div><!-- Termina Div 6 columnas Izquierda-->
+        </div><!-- termina Div row y margen abajo de 2-->
+      </div><!-- /. Termina container-fluid -->
+    </section><!-- / Content Header (/. Sección de Encabezado) -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- div 12 -->
+            <div class="card">
+              <!-- div card -->
+              <!-- Encabezado -->
+              <div class="card-header">
+                <h2 class="card-title">Mantenimiento de la base de datos</h2>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3>Respaldo Manual de la BD</h3>
+                      </div>
+                      <div class="card-body">
+                        <div>
+                          <p>Los respaldos son de suma importancia en el sistema. Es por ello que se recomienda realizar respaldo periódicamente, dependiedo de tus necesidades.</p>
                         </div>
+                        <hr>
+                        <div class="text-right">
+                          <form action="" method="POST">
+                            <div class="d-grid"> <input type="submit" class="btn btn-success" name="btnBackup" id="idUtilidad" value="Respaldar"></input>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                </footer>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3>Restauración Manual de la BD</h3>
+                      </div>
+                      <div class="card-body">
+
+                        <label>Selecciona un punto de restauración</label><br>
+                        <hr>
+                        <div class="custom-file">
+                          <form id="formBD" method="POST" name="formBD" class="form-horizontal">
+                            <div class="mb-2">
+                              <!-- <label>Selecciona un punto de restauración</label><br> -->
+                              <select name="cmbArchivos" id="fileBD" onchange="cambio()" class="form-control selectpicker" data-live-search="true">
+                                <option value="" disabled="" selected="">Selecciona un punto de restauración</option>
+                                <?php
+                                $nombresArchivos = obtenerNombresdeArchivosRespaldo();
+                                foreach ($nombresArchivos as $nombreArchivo) {
+                                  echo "<option value='$nombreArchivo'>$nombreArchivo</option>";
+                                }
+                                ?>
+                              </select>
+                            </div>
+
+                            <div class="text-right">
+                              <input type="submit" class="btn btn-success" name="btnRestaurar" id="btnrespaldo" value="Restaurar"></input>&nbsp;&nbsp;&nbsp;
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- termina Tabla -->
+                </div>
+                <!-- /.termina card-body -->
+              </div>
+              <!-- /.termina card -->
             </div>
+            <!-- /.termina col -->
+          </div>
+          <!-- /. termina ow -->
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
-    </body>
-</html>
+        <!-- /. termina container-fluid -->
+    </section>
+    <!-- /. termina content -->
+  </div>
+  <!-- /.content-wrapper / Div Principal -->
+
+</main>
+
+<!-- <form action="" method="POST">
+<div class="d-grid"> <input type="submit" class="btn btn-success" name="btnBackup" id="idUtilidad" value="Respaldar"></input>
+</div>
+</form> -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php 
+
+if(isset($_SESSION['mensaje']))
+{
+  echo "<script>
+  Swal.fire({
+      title: 'EXCELENTE!',
+      text: '$_SESSION[mensaje]',
+      confirmButtonText: 'Aceptar',
+      position:'center',
+      icon: 'success',
+      allowOutsideClick:false,
+      padding:'1rem'
+  });
+  </script>";
+  unset($_SESSION['mensaje']);
+}
+
+?>
+
+<script>
+  /*let fileValue;
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+            if (document.querySelector("#formBD")) {
+                let formData = document.querySelector("#formBD");
+                formData.onsubmit = function(e) {
+                    e.preventDefault();
+                    console.log(formData)
+                    fileValue = document.querySelector("#fileBD").value;
+
+                    if (fileValue == "") {
+                        swal.fire(
+                            "Atención",
+                            "Selecciona un archivo para la restauración",
+                            "error"
+                        );
+                        return false;
+                    }
+                    swal.fire({
+                            title: "¿Restaurar Base de datos?",
+                            text: "¿Realmente quiere Restaurar la Base de datos?",
+                            icon: "warning",
+                            showClass: {
+                                popup: "animate_animated animate_fadeInDown",
+                            },
+                            hideClass: {
+                                popup: "animate_animated animate_fadeOutUp",
+                            },
+                            showCancelButton: true,
+                            confirmButtonText: "Si, Restaurar!",
+                            cancelButtonText: "No, Cancelar!",
+                            closeOnConfirm: false,
+                            closeOnCancel: true,
+                        })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                formData.submit();
+                            }
+                        });
+
+                };
+            }
+        },
+        false
+    );*/
+
+  var form = document.getElementById('formBD');
+  var backup = document.getElementById('fileBD');
+
+  form.addEventListener('submit', event => {
+    if (backup.value == "") {
+      event.preventDefault()
+      event.stopPropagation()
+      Swal.fire("Atención",
+        "Selecciona un archivo para la restauración",
+        "error");
+    }
+  });
+</script>
+<?php include_once "../login/footer.php"; ?>

@@ -98,13 +98,13 @@ if(!empty($_GET))
             if($resultado == true)
             {
                 echo "<script>
-                window.location.href= '../Login/vista_cliente.php';
+                window.location.href= '../src/vista_cliente.php';
                 </script>";
                 $_SESSION['eliminarcliente'] = 'Si';
             }
             else{
                 echo "<script>
-                window.location.href= '../Login/vista_cliente.php';
+                window.location.href= '../src/vista_cliente.php';
                 </script>";
                 $_SESSION['eliminarcliente'] = 'No';
             }
