@@ -39,6 +39,8 @@ include './../config/conn.php';
         <link href="../dist/css/styles.css" rel="stylesheet" />
         <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../Login/vendors/x/dist/notiflix-3.2.5.min.css" />
+        <script src="../Login/vendors/notiflix/dist/notiflix-3.2.5.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 

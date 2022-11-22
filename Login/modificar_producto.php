@@ -20,14 +20,14 @@ if ($_POST) {
     $descripcion = $_POST['descripcion'];
     $categ = $_POST['combo_categoria'];
     $tipo = $_POST['combo_tipo'];
-    $existencia = $_POST['existencia'];
+   // $existencia = $_POST['existencia'];
     $cant_minima = $_POST['cant_minima'];
     $cant_maxima = $_POST['cant_maxima'];
     $precio = $_POST['precio'];
     $estado = 1;
 
 
-    ProductoContralador::InsertarUpdateProducto($id, $descripcion, $categ, $tipo, $existencia, $precio, $cant_minima, $cant_maxima, $estado);
+    ProductoContralador::InsertarUpdateProducto($id, $descripcion, $categ, $tipo, $precio, $cant_minima, $cant_maxima, $estado);
 
 }
 ?>
@@ -103,7 +103,7 @@ if ($_POST) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" value="<?= $producto[0]['existencia'] ?>" name="existencia" id="inputEmail" type="imagen" placeholder="name@example.com" />
+                                <input class="form-control" value="<?= $producto[0]['existencia'] ?>" disabled name="existencia" id="inputEmail" type="imagen" placeholder="name@example.com" />
 
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;<IMG>EXISTENCIA</IMG></label>
                                 <div class="valid-feedback">
@@ -140,7 +140,7 @@ if ($_POST) {
                                 <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(46, 182, 210, 0.8)" value="Actualizar" />
                                 </div>
                                 <div class="mt-4 mb-0">
-                                    <div class="d-grid"><input type="button" onclick="window.location.href='../vistas/vista_productos.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
+                                    <div class="d-grid"><input type="button" onclick="window.location.href='../src/producto.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
                                     </div>
                                 </div>
                             </div>

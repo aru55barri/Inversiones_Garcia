@@ -25,12 +25,12 @@ class ProductoContralador
         $this->productos = new ModeloProducto();
     }
 
-     static function InsertarProducto($descripcion, $precio, $categ, $existencia, $cant_minima, $cant_maxima, $tipo, $estado)
+     static function InsertarProducto($descripcion, $precio, $categ, $cant_minima, $cant_maxima, $tipo, $estado)
     {
 
         $modelo = new ModeloProducto();
         $sql = "INSERT INTO tbl_producto (codproducto, id_categoria, id_tipo_producto, descripcion, precio_venta, existencia, cantidad_minima, cantidad_maxima, estado) 
-        VALUES (null,'$categ', '$tipo', '$descripcion', '$precio', '$existencia', '$cant_minima', '$cant_maxima', '$estado')";
+        VALUES (null,'$categ', '$tipo', '$descripcion', '$precio', 0, '$cant_minima', '$cant_maxima', '$estado')";
         $modelo->insertargeneral($sql);
         $_SESSION['registro'] = 'ok';
         echo "<script> 
@@ -117,11 +117,11 @@ class ProductoContralador
     }
 
 
-    static function InsertarUpdateProducto($id, $descripcion, $categ, $tipo, $existencia, $precio, $cant_minima, $cant_maxima, $estado)
+    static function InsertarUpdateProducto($id, $descripcion, $categ, $tipo, $precio, $cant_minima, $cant_maxima, $estado)
     {
         $modeloCompras = new ModeloProducto();
 
-        $modeloCompras->UpdateProducto($id, $descripcion, $categ, $tipo, $existencia, $precio, $cant_minima, $cant_maxima, $estado);
+        $modeloCompras->UpdateProducto($id, $descripcion, $categ, $tipo, $precio, $cant_minima, $cant_maxima, $estado);
         $_SESSION['Editarproducto'] = 'edicion';
         echo "<script>
             location.href ='../src/producto.php';

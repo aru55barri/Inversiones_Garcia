@@ -95,11 +95,13 @@ $PDF = $row['pdf'];
                             $resultado = ListarCliente();
                             global $modificar;
                             global $eliminar;
+                             $ii = 0;
 
-                            
                             foreach ($resultado as $registro){
+                              $ii = $ii + 1;
+
                               echo "<tr>";
-                              echo "<td>" . $registro['idcliente'] . "</td>";
+                              echo "<td>" . $ii . "</td>";
                               echo "<td>" . $registro['DNI'] . "</td>";
                            // echo "<td>" . $registro['NOMBRE_USUARIO'] . "</td>";
                               echo "<td>" . $registro['nombre'] . "</td>";

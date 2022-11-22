@@ -106,8 +106,10 @@ class UsuariosContralador
 
                 global $modificar;
                 global $eliminar;
-
+                
                 echo "<tr>";
+                
+                
                 echo "<td>" . $registro['idcliente'] . "</td>";
                 echo "<td>" . $registro['DNI'] . "</td>";
              // echo "<td>" . $registro['NOMBRE_USUARIO'] . "</td>";

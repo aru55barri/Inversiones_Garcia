@@ -17,14 +17,14 @@ $db = getConexion();
 if ($_POST) {
     $descripcion = $_POST['descripcion'];
     $categ = $_POST['categ'];
-    $existencia = $_POST['existencia'];
+    //$existencia = $_POST['existencia'];
     $cant_minima = $_POST['cant_minima'];
     $cant_maxima = $_POST['cant_maxima'];
     $precio = $_POST['precio'];
     $tipo = $_POST['combo_tipo'];
     $estado = 1;
 
-    $resultado = ProductoContralador::InsertarProducto($descripcion, $precio, $categ, $existencia, $cant_minima, $cant_maxima, $tipo, $estado);
+    $resultado = ProductoContralador::InsertarProducto($descripcion, $precio, $categ, $cant_minima, $cant_maxima, $tipo, $estado);
   
 }
 ?>
@@ -90,7 +90,7 @@ if ($_POST) {
 
 
 
-                            <div class="form-floating">
+                         <!--   <div class="form-floating">
                                 <input class="form-control" name="existencia" id="texprecio" type="text" onkeypress="return solonumeros(event)" onpaste="return false" required  />
                                 <label for="texprecio"><i class="fa-solid fa-user-group"></i>&nbsp;EXISTENCIA</label>
                                 <div class="valid-feedback">
@@ -98,7 +98,7 @@ if ($_POST) {
                                 </div>
                                 <span id="2mensaje"></span>
                             </div>
-                            <br>
+                            <br>-->
 
                             <div class="form-floating">
                                 <input class="form-control" name="cant_minima" id="texprecio" type="text" onkeypress="return solonumeros(event)" onpaste="return false" required  />

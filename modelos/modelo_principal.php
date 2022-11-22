@@ -193,12 +193,12 @@ class ModeloPrincipal
     public function UpdateVenta($id,$sql,$can,$inventario)
     {
         $this->db = getConexion();
-        $sq = "UPDATE tbl_ventas SET ESTADO= 'Cancelado' WHERE ID_VENTA = '$id'";
+        $sq = "UPDATE tbl_factura SET estado= 'Cancelado' WHERE id_factura = '$id'";
         $this->db->query($sq);
         $this->db = null;
 
         $this->db = getConexion();
-        $sqt = "UPDATE tbl_inventario SET CAN_EXISTENCIA='$can' WHERE ID_INVENTARIO='$inventario'";
+        $sqt = "UPDATE tbl_inventario SET cantidad='$can' WHERE id='$inventario'";
         $this->db->query($sqt);
         $this->db = null;
 
