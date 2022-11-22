@@ -35,6 +35,7 @@ include './../config/conn.php';
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Inversiones Garcia</title>
+        <link rel="icon" href="../dist/assets/img-2/Logo-IG.ico">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../dist/css/styles.css" rel="stylesheet" />
         <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">

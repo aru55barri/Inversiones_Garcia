@@ -1,110 +1,57 @@
-<?php 
-include_once('../Login/header.php');   
-include '../config/conn.php';
+<?php
 
-$id = $_SESSION['rol'];
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 9 and ID_ROL = '$id'");
-$row = mysqli_fetch_array($sql);
-
-$insertar = $row['permiso_insercion'];
-$modificar = $row['permiso_modificar'];
-$consultar = $row['permiso_consultar'];
-$eliminar = $row['permiso_eliminacion'];
-$PDF = $row['pdf'];
+include_once('../Login/header.php');
+$id = $_GET['id'];
 
 ?>
- <div class="container-fluid">
-     
-     <div class="page-title">
-         <div class="title_left">
-             <h3>Inventario</h3>
-             <style>
-              h3{
-                  font-family: Vladimir Script;
-                  font-size: 80px;
-              }
-              </style>
-         </div>                      
-            
-            <div class="title_right">
-            <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
-                <!-- <button onclick="window.location.href='nuevo_inventario.php';" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> inventario</button> -->
-                <!-- <a target="black" href="../reportes/reporte_inventario_productos.php" class="btn btn-round btn-info"><i class="fa-solid fa-file-pdf"></i>PDF</a>-->
+<div class="container-fluid">
 
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Movimientos</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
+                <button onclick="window.location.href='inventario.php';" class="btn  btn-round btn-success"></i> Regresar</button>
+                <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
             </div>
         </div>
     </div>
-    <?php
-    if(isset($_SESSION['registro'])){
-        echo "<script>Notiflix.Notify.success('Registrado correctamente');</script>";
-        unset($_SESSION['registro']);
-    }
 
-    if(isset($_SESSION['edicion'])){
-         echo "<script>Notiflix.Notify.warning('Editado correctamente');</script>";
-        unset($_SESSION['edicion']);
-    }
-    if(isset($_SESSION['eliminacion'])){
-        echo "<script>Notiflix.Notify.failure('Eliminado correctamente');</script>";
-       unset($_SESSION['eliminacion']);
-   }
-    ?>
-  
-    
-        <div class="row">
-            <div class="col-lg-12">
+
+
+    <div class="row">
+        <div class="col-lg-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="table">
                     <thead class="thead-dark">
                         <tr>
-                        <th>ID</th>
-                                <th>CANTIDAD EXISTENCIA</th>  
-                                <th>DESCRIPCION INVENTARIO</th>
-                                <!-- <th>PRODUCCION</th> -->
-                                <th>PRODUCTO</th>
-                                <th>DETALLE</th>
-                            
-                        
-                            
+                            <th>ID</th>
+                            <th>TIPO MOVIMIENTO</th>
+                            <th>CANTIDAD</th>
+                            <th>PRODUCTO</th>
+                            <th>USUARIO</th>
+                            <th>FECHA MOVIENTO</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                    include_once '../controladores/controlador_inventario.php';
-                    
-                    InventarioContralador::mostrarInventario();
-                 ?> 
-                     
+                        include_once '../controladores/controlador_movimientos_productos.php';
 
-                        
+                        Contralador::mostrar($id);
+
+                        ?>
+
 
                     </tbody>
 
                 </table>
             </div>
-            </div>
         </div>
-  
-
- </div>
-
- <script>
-    function eliminar(id){
-        
-        console.log(id);
-        Notiflix.Confirm.show(
-        'Confirmar',
-        'Desea eliminar?',
-        'Si',
-        'No',
-        () => {
-            window.location.href = "../controladores/controlador_inventario.php?id="+id;
-        },
-        () => {
-            Notiflix.Report.warning('Cancelado','Hiciste clic en el botón "No"');
-        },{});
-    }
-</script>
+    </div>
+</div>
 
 <!--PARA EL REGISTRO DE REPORTES-->
 <script src="../Login/js/jquery.dataTables.min.js"></script>
@@ -122,35 +69,9 @@ $PDF = $row['pdf'];
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <script type="text/javascript">
-   let PDF = '<?= $PDF ?>';
-  console.log(PDF)
-  if (PDF == 0) {
-    console.log("entro")
-
   jQuery(document).ready(function() {
     jQuery('#table').DataTable({
       rowReorder: {
-        selector: 'td:nth-child(2)'
-      },
-      responsive: true,
-      "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-      },
-      "paging": true,
-      "processing": true,
-      //dom: 'lBfrtip',
-
-      "lengthMenu": [
-          [10, 25, 50, -1],
-          [10, 25, 50, "All"]
-        ]
-
-      });
-    });
-  } else {
-    jQuery(document).ready(function() {
-      jQuery('#table').DataTable({
-        rowReorder: {
           selector: 'td:nth-child(2)'
         },
         responsive: true,
@@ -160,6 +81,8 @@ $PDF = $row['pdf'];
         "paging": true,
         "processing": true,
         dom: 'lBfrtip',
+
+
       buttons: [
         /*{
           extend: 'copy',
@@ -192,7 +115,7 @@ $PDF = $row['pdf'];
             },{
               margin: [0, 0, 0, 0],
               alignment: 'center',
-              text: 'Reporte de Inventario Productos',
+              text: 'Reporte de Movimientos',
               fontSize: 20,
               bold: true
             },
@@ -220,12 +143,16 @@ $PDF = $row['pdf'];
                     text: [
                       {
                         text:
+                          "--------------------------------------------------------------------------" +
+                          "\n",
+                        margin: [0, 20],
+                      },
+                      {
+                        text:
                           "Página " +
                           currentPage.toString() +
                           " de " +
                           pageCount,
-                        alignment: "center",
-                        bold: true
                       },
                     ],
                     alignment: "center",
@@ -235,13 +162,12 @@ $PDF = $row['pdf'];
             };
           },
           exportOptions: {
-            columns: [0, 1, 2, 3],
+            columns: [0, 1,2,3,4,5],
             modifier: {
               page: 'current'
-            },
+            }
           }
-        }, 
-        {
+        },{
           extend: 'print',
           text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
         } 
@@ -252,9 +178,8 @@ $PDF = $row['pdf'];
       ]
     });
   });
-}
 </script>
-<?php
-include_once('../Login/Footer.php');  
 
-?>  
+<?php
+include_once('../Login/Footer.php');
+?>
