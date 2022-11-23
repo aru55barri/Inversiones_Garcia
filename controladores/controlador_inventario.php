@@ -42,7 +42,6 @@ class InventarioContralador
                     <tr>
                     <th><?=$registro['id']?></th>
                     <th><span class="<?= $registro['cantidad'] >= 10 ? 'badge badge-primary' : 'badge badge-danger'?>"> <?=$registro['cantidad']?></span></th>
-                    <th><?= $registro['DESCRIPCION_INVENTARIO']?></th>
                     <th><?=$registro['descripcion']?></th>
                     <th><a href="../src/vista_movimientos_producto.php?id=<?=$registro['cod_producto']?>" class='btn btn-round btn-info btn-block'><i class='fa-solid fa-plus'></i></a></th>
     

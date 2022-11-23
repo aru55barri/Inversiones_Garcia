@@ -85,7 +85,7 @@ if (isset($_GET['buscar'])) {
     ]);
 }
 
-class ClientesContralador
+class UsuariosContralador
 {
     public $usuarios;
     public  $matrizUsuario;
@@ -96,21 +96,21 @@ class ClientesContralador
     }
 
     //funcion para mostrar
-    static public function mostrarClientes()
+    static public function mostrarUsuario()
     {
 
         $usuarios = new ModeloPrincipal();
         $matrizUsuario = $usuarios->mostrargeneral("select * from tbl_cliente");
-        global $modificar;
-        global $eliminar;
-         $ii = 0;
         foreach ($matrizUsuario as $key => $value) {
             foreach ($value as $registro) {
 
-                $ii = $ii + 1;
-
+                global $modificar;
+                global $eliminar;
+                
                 echo "<tr>";
-                echo "<td>" . $ii . "</td>";
+                
+                
+                echo "<td>" . $registro['idcliente'] . "</td>";
                 echo "<td>" . $registro['DNI'] . "</td>";
              // echo "<td>" . $registro['NOMBRE_USUARIO'] . "</td>";
                 echo "<td>" . $registro['nombre'] . "</td>";
@@ -122,18 +122,17 @@ class ClientesContralador
                 echo "<th><a href=../src/modificar_cliente.php?id=" . $registro['idcliente'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
                 }
                 if ($eliminar == 1) {
-                  echo "<th><button class ='btn btn-round btn-danger' onclick='eliminar(".$registro['idcliente'].")'> <i class='fas fa-trash-alt'></i></a></th>";
-                  }
-                  echo "</tr>";                      
-                
+                echo "<th><a href=../controladores/controlador_cliente.php?idusuario=" . $registro['idcliente'] . "&idempleado=" . "  class='btn btn-round btn-danger' type='submit'><i class='fas fa-trash-alt'></i></a></th>";
+                }
+                echo "</tr>";
             }
             // Inicio vista en bitacora al mostrar usuarios Joel Montoya
             $modeloPrincipal = new ModeloPrincipal();
             $fecha = date("Y-m-d-H:i:s");
             $IDUS = $_SESSION['id_usuario'];
 
-            $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-            VALUES(null,'$fecha','$IDUS',2 ,'INGRESO', 'EL USUARIO INGRESA A TABLA CLIENTES')";
+            $sql = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
+            VALUES(null,'$fecha','INGRESO','EL USUARIO INGRESA A TABLA CLIENTES','$IDUS',2)";
             $modeloPrincipal->insertargeneral($sql);
             // FIN vista en bitacora al mostrar usuarios Joel Montoya
         }
