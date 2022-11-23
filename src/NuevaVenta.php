@@ -9,6 +9,12 @@ $pago = $clientes->mostrarPago();
 $productos = $clientes->mostrarProductos();
 $clientes = $clientes->mostrarClientes();
 
+//$cambio = $_POST['cambio'];
+//$recibido = $_POST['recibido'];
+//$apagar = $_POST['apagar'];
+$cambio = 0;
+$recibido = 12;
+$apagar = 4;
 $IDUS=$_SESSION['id_usuario'];
 if (isset($_POST['registrar'])) {
     $total = 0;
@@ -19,6 +25,7 @@ if (isset($_POST['registrar'])) {
     $subtotal = 0;
     $impuesto = 0;
     $totalfinal = 0;
+  
     // disminuir en la tabla existencia
     foreach ($items as $i) {
         $existencia = mysqli_query($conn, "SELECT * from tbl_inventario where cod_producto = '" . $i['producto'] . "'");
@@ -48,7 +55,7 @@ if (isset($_POST['registrar'])) {
     $sql = "INSERT INTO tbl_detalle_factura (id_detalleFac, id_factura,codproducto,cantidad,precio) VALUES";
     foreach ($items as $i) {
         $sql  .= "(null, '$id','" . $i['producto'] . "','" . $i['cantidad'] .  "','" . $i['costo'] . "'),";
-        mysqli_query($conn, "INSERT INTO tbl_kardex(id_movimiento,id_producto,fecha,id_usuario,cantidad)VALUES(1,'" . $i['producto'] . "',now(), '$IDUS','" . $i['cantidad'] . "')");
+        mysqli_query($conn, "INSERT INTO tbl_kardex(id_movimiento,id_producto,fecha,id_usuario,cantidad)VALUES(2,'" . $i['producto'] . "',now(), '$IDUS','" . $i['cantidad'] . "')");
     }
 
     $sql = rtrim($sql, ",");
@@ -141,7 +148,6 @@ if (isset($_POST['agregar'])) {
         $totalfinal = $_POST['totalfinal'];
         $productoo = $_POST['producto'];
         $pago = $_POST['pago'];
-
 
         function get_items()
         {
@@ -242,7 +248,7 @@ if (isset($_POST['agregar'])) {
                     </script>
                 <?php
                 }
-            } else {
+           } else {
                 //creamos 
 
 
@@ -271,8 +277,9 @@ if (isset($_POST['agregar'])) {
                 <script>
                     Notiflix.Notify.successs('Agregado correctamente');
                 </script>
-<?php
+             <?php
             }
+            
         }
         hook_add_to_quote();
     }
@@ -422,6 +429,7 @@ if (isset($_POST['agregar'])) {
                                 </thead>
                                 <tbody>
                                     <?php
+                                  
                                     $ii = 0;
                                     $total = 0;
                                     foreach ($_SESSION['new_venta']['items'] as $i) {
@@ -434,12 +442,11 @@ if (isset($_POST['agregar'])) {
                                             <th><?php echo $i['totalfinal'] ?></th>
                                             <th><button class="btn btn-danger" onclick="eliminar(<?= $i['id'] ?>)" name="eliminar" type="submit"><i class='fas fa-trash-alt'></i></button></th>
                                         </tr>
-                                    <?php
-                                   $total = $total + $i['totalfinal'];
-
+                                    <?php       
+                                    $total = $total + $i['totalfinal'];                  
                                     }
+                     
                                     ?>
-
                                     <tr>
                                         <td colspan="4" align="right">
                                             <h3>Total</h3>
@@ -463,10 +470,9 @@ if (isset($_POST['agregar'])) {
 
                     <div class="row">
                         <div class="col-lg-2">
-                            <form action="" method="post">
-                                <button class="btn btn-success" name="registrar" id="terminar" type="submit">Terminar
-                                    venta</button>
-                            </form>
+
+                         <button type="button" id="cobrar" name="cobrar" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Cobrar</button>
+ 
                         </div>
 
                         <div class="col-lg-8"></div>
@@ -476,6 +482,7 @@ if (isset($_POST['agregar'])) {
                             <button class="btn btn-danger" onclick="limpiar()" id="limpiar" name="limpiar" type="submit">Cancelar venta</button>
 
                         </div>
+                       
                     </div>
 
                 </div>
@@ -486,6 +493,84 @@ if (isset($_POST['agregar'])) {
         </div>
     </div>
 
+</div>
+<script>
+  function pierdeFocos(e) {
+        var valor = e.value.replace(/^0*/, '');
+        e.value = valor;
+    }
+    recibido.oninput = function() {
+        if (parseInt(cantidad.value) < 0) {
+            Notiflix.Notify.failure('La cantidad no puede ser mayor a la existencia');
+            recibido.value = '';
+        } else {
+            $cambio.value =  $recibido.value-$apagar.value;
+
+        }
+    };
+
+</script>
+<?php
+   
+   
+  if (isset($_POST['cobrar'])) {
+    $alert = "";
+
+}  
+        if (isset($_POST['calcular'])) {
+            $alert = "";       
+            
+            $cambio =  $recibido-$apagar;
+
+    }
+
+  
+        ?>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Facturar venta </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">A pagar:</label>
+            <input type="text" class="form-control"  value="<?php echo number_format($total, 2); ?>" id="apagar"  name= "apagar">
+          </div>
+        
+          <div class="form-group">
+            <label for="recipient-name" onKeyUp="pierdeFocos(this)" class="col-form-label">Recibido:</label>
+            <input type="text" class="form-control" id="recibido" name ="recibido">
+          </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Cambio:</label>
+            <input type="text" class="form-control"  value ="<?php echo number_format($cambio, 2); ?>" id="cambio" name ="cambio">
+          </div>
+       
+        </form>
+      </div>
+      
+   
+              
+      <div class="modal-footer">
+        <button type="button" name = "close" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        
+        <form action="" method="post">
+         <button type="submit" id="calcular" name = "calcular" class="btn btn-secondary" >Calcular</button>
+         </form>      
+
+        <form action="" method="post">
+        <button class="btn btn-success" name="registrar" id="terminar" type="submit" >Terminar venta <i class='far fa-file-alt' style="color: white;"></i></button>
+        </form>      
+        </div>
+    </div>
+  </div>
 </div>
 <?php include_once('../Login/footer.php');
 ?>
@@ -556,7 +641,6 @@ if (isset($_POST['agregar'])) {
             })
     }
 
-
     cantidad.oninput = function() {
         if (parseInt(cantidad.value) > stck) {
             Notiflix.Notify.failure('La cantidad no puede ser mayor a la existencia');
@@ -565,8 +649,9 @@ if (isset($_POST['agregar'])) {
             totalbruto.value = costo.value * cantidad.value;
             let subtotal = totalbruto.value * isv.value;
             totalfinal.value = subtotal + parseInt(totalbruto.value);
+            $cambio =  $recibido-$apagar;
+
         }
-
-
     };
+
 </script>

@@ -93,7 +93,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtrtn" id="txtrtn" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" required maxlength="50" />
+                                <input class="form-control" name="txtrtn" id="txtrtn" autocomplete="nope" placeholder="Ingrese el nombre del proveedor"  maxlength="50" />
                                 <label for="inputEmail"><i class=""></i>&nbsp;RTN</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -119,7 +119,7 @@ if (!empty($_POST)) {
 
                             <div class="mt-4 mb-0">
                                 <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
-
+<!-- V -->
                                 </div>
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid"><input type="button" onclick="window.location.href='../src/vista_cliente.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />

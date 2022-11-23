@@ -13,11 +13,11 @@ include_once '../controladores/controlador_rol.php';
 include_once '../controladores/controlador_tipo_pago.php';
 include_once '../controladores/controlador_tipo_producto.php';
 include_once '../controladores/controlador_trabajos.php';
-include_once '../controladores/controlador_pregunta.php';
+
 //**********************denia****************************/
 include_once '../controladores/controlador_cliente.php';
 include_once '../controladores/controlador_producto.php';
-
+include_once '../controladores/controlador_pregunta.php';
 if(!empty($_GET))
     {
         $id = $_GET['id'];

@@ -97,7 +97,7 @@ if (!empty($_POST)) {
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" value="<?= $row['RTN'] ?>"  name="txtrtn" id="txtrtn" type="text" placeholder="Enter your first name" autocomplete="nope" size="15" required  />
+                                        <input class="form-control" value="<?= $row['RTN'] ?>"  name="txtrtn" id="txtrtn" type="text" placeholder="Enter your first name" autocomplete="nope" size="15" />
                                         <label for="inputFirstName"><i class="fas fa-user icon"></i>&nbsp;RTN</label>
                                         <div class="valid-feedback">
                                             Campo Válido!
