@@ -208,6 +208,7 @@ if (!empty($_POST)) {
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Restablecer contraseña</title>
+    <link rel="icon" href="../dist/assets/img-2/Logo-IG.ico">
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="../dist/css/styles.css">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>

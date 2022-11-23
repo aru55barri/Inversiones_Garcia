@@ -74,6 +74,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
     <link href="../dist/css/login.css" rel="stylesheet" /> 
     <title>Registro</title>
+    <link rel="icon" href="../dist/assets/img-2/Logo-IG.ico">
     <script src="./js/validar.js" type="text/javascript"></script>
 </head>  
 <body>

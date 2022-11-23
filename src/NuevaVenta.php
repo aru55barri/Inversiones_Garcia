@@ -301,7 +301,7 @@ if (isset($_POST['agregar'])) {
 
         <div class="title_right">
             <div class="col-md-4 col-sm-4 form-group row pull-right top_search">
-                <button onclick="window.location.href='factura.php';" class="btn  btn-round btn-success">Todas las facturas</button>
+                <button onclick="window.location.href='factura.php';" class="btn  btn-round btn-success">Ventas realizadas</button>
             </div>
         </div>
     </div>

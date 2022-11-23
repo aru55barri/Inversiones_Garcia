@@ -90,9 +90,33 @@ $PDF = $row['pdf'];
                     </thead>
                     <tbody>
                         <?php
-                             include_once '../controladores/controlador_cliente.php';
-                             ClientesContralador::mostrarClientes();
-                           
+                            //  include_once '../controladores/controlador_cliente.php';
+                            // UsuariosContralador::mostrarUsuario();
+                            $resultado = ListarCliente();
+                            global $modificar;
+                            global $eliminar;
+                             $ii = 0;
+
+                            foreach ($resultado as $registro){
+                              $ii = $ii + 1;
+
+                              echo "<tr>";
+                              echo "<td>" . $ii . "</td>";
+                              echo "<td>" . $registro['DNI'] . "</td>";
+                           // echo "<td>" . $registro['NOMBRE_USUARIO'] . "</td>";
+                              echo "<td>" . $registro['nombre'] . "</td>";
+                              echo "<td>" . $registro['telefono'] . "</td>";
+                              echo "<td>" . $registro['RTN'] . "</td>";
+                              echo "<td>" . $registro['direccion'] . "</td>";
+                  
+                              if ($modificar == 1){
+                              echo "<th><a href=../src/modificar_cliente.php?id=" . $registro['idcliente'] . " class='btn btn-round btn-info'><i class='fas fa-pen-square' style='color: white'></i></a></th>";
+                              }
+                              if ($eliminar == 1) {
+                                echo "<th><button class ='btn btn-round btn-danger' onclick='eliminar(".$registro['idcliente'].")'> <i class='fas fa-trash-alt'></i></a></th>";
+                                }
+                                echo "</tr>";                      
+                              }
                         ?>
 
 
