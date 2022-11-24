@@ -32,7 +32,7 @@ class InventarioContralador
     {
 
          $inventario = new ModeloInventario();
-        $matrizInventario =  $inventario->mostrargeneral("select i.*,tp.descripcion from tbl_inventario i inner join tbl_producto tp on i.COD_PRODUCTO = tp.CODPRODUCTO where tp.id_tipo_producto = 1");
+        $matrizInventario =  $inventario->mostrargeneral("select i.*,tp.descripcion from tbl_inventario i inner join tbl_producto tp on i.COD_PRODUCTO = tp.CODPRODUCTO;");
         $ii = 0;
 
         if($matrizInventario != null)
