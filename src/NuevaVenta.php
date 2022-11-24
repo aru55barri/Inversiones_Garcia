@@ -337,7 +337,7 @@ if (isset($_POST['agregar'])) {
                                     </select>
                                 </div>
                             </div>
-
+                            
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="utienda">Tipo Pago</label>
@@ -349,7 +349,9 @@ if (isset($_POST['agregar'])) {
                                     </select>
                                 </div>
                             </div>
+
                         <?php } ?>
+
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Costo unitario</label>
