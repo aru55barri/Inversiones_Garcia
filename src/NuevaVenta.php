@@ -110,10 +110,8 @@ if (isset($_GET['eliminar'])) {
 ////////////////////////////////////////// INICIA LIMPIAR  //////////////////////////////////////////
 if (isset($_POST['limpiar'])) {
 
-    //$items = $_SESSION['new_venta']['items'];
-
     unset($_SESSION['new_venta']['items']);
-    //unset($_SESSION['proveedorcompra']);
+    unset($_SESSION['proveedorcompra']);
 }
 ////////////////////////////////////////// TERMINA LIMPIAR //////////////////////////////////////////
 
@@ -242,11 +240,11 @@ if (isset($_POST['agregar'])) {
                     }
 
                     get_item($item['id']);
-                ?>
+                    ?>
                     <script>
                         Notiflix.Notify.successs('Agregado correctamente');
                     </script>
-                <?php
+    <?php
                 }
            } else {
                 //creamos 
@@ -277,7 +275,7 @@ if (isset($_POST['agregar'])) {
                 <script>
                     Notiflix.Notify.successs('Agregado correctamente');
                 </script>
-             <?php
+           <?php
             }
             
         }
@@ -301,7 +299,7 @@ if (isset($_POST['agregar'])) {
 
         <div class="title_right">
             <div class="col-md-4 col-sm-4 form-group row pull-right top_search">
-                <button onclick="window.location.href='factura.php';" class="btn  btn-round btn-success">Ventas realizadas</button>
+                <button onclick="window.location.href='factura.php';" class="btn  btn-round btn-success">Todas las facturas</button>
             </div>
         </div>
     </div>
@@ -555,9 +553,7 @@ if (isset($_POST['agregar'])) {
        
         </form>
       </div>
-      
-   
-              
+             
       <div class="modal-footer">
         <button type="button" name = "close" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         
