@@ -171,12 +171,12 @@ class ModeloPrincipal
     public function UpdateCompra($id,$sql,$can,$inventario)
     {
         $this->db = getConexion();
-        $sq = "UPDATE tbl_compras SET ESTADO='Cancelado' WHERE ID_COMPRA='$id'";
+        $sq = "UPDATE tbl_ingreso_producto SET estado='Cancelado' WHERE id='$id'";
         $this->db->query($sq);
         $this->db = null;
 
         $this->db = getConexion();
-        $sqt = "UPDATE tbl_inventario SET CAN_EXISTENCIA='$can' WHERE ID_INVENTARIO='$inventario'";
+        $sqt = "UPDATE tbl_inventario SET cantidad='$can' WHERE id='$inventario'";
         $this->db->query($sqt);
         $this->db = null;
 

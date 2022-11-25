@@ -3,15 +3,17 @@
 include_once '../modelos/modelo_productos.php';
 include '../Config/conn.php';
 
+
 $id = $_SESSION['rol'];
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 7 and ID_ROL = '$id'");
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where id_objeto = 7 and id_rol = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
 $modificar = $row['permiso_modificar'];
 $consultar = $row['permiso_consultar'];
 $eliminar = $row['permiso_eliminacion'];
- 
+
+
 
 class ProductoContralador
 {
@@ -27,11 +29,21 @@ class ProductoContralador
 
      static function InsertarProducto($descripcion, $precio, $categ, $cant_minima, $cant_maxima, $tipo, $estado)
     {
+        include '../Config/conn.php';
 
         $modelo = new ModeloProducto();
         $sql = "INSERT INTO tbl_producto (codproducto, id_categoria, id_tipo_producto, descripcion, precio_venta, existencia, cantidad_minima, cantidad_maxima, estado) 
         VALUES (null,'$categ', '$tipo', '$descripcion', '$precio', 0, '$cant_minima', '$cant_maxima', '$estado')";
         $modelo->insertargeneral($sql);
+
+        $rs = mysqli_query($conn, "SELECT MAX(codproducto) as id FROM tbl_producto");
+        $raw = mysqli_fetch_array($rs);
+        $id = $raw['id'];
+
+        $sql1 = "INSERT INTO tbl_inventario (id, cod_producto, cantidad) 
+        VALUES (null,'$id', 0 )";
+        $modelo->insertargeneral($sql1);
+
         $_SESSION['registro'] = 'ok';
         echo "<script> 
         location.href ='../src/producto.php';
@@ -50,6 +62,7 @@ class ProductoContralador
 
         $productos = new ModeloProducto();
         $matrizproductos = $productos->mostrargeneral("select u.*,r.DESCRIPCION as TIPO_PRODUC, s.descripcion as CATEGORIA from tbl_producto u inner join tipo_producto r on u.id_tipo_producto = r.id inner join tbl_categoria s on u.id_categoria = s.id");
+        $ii = 0;
 
         if($matrizproductos != null)
         {
@@ -57,8 +70,8 @@ class ProductoContralador
                 foreach ($value as $registro) { ?>
     
     
-                    <tr>
-                        <td> <?= $registro['codproducto'] ?></td>
+              <tr>
+                    <td><?=$ii = $ii + 1?></td>
                         <td> <?= $registro['CATEGORIA'] ?></td>
                         <td><?= $registro['TIPO_PRODUC'] ?></td>
                         <td><?= $registro['descripcion'] ?></td>

@@ -33,6 +33,7 @@ class InventarioContralador
 
          $inventario = new ModeloInventario();
         $matrizInventario =  $inventario->mostrargeneral("select i.*,tp.descripcion from tbl_inventario i inner join tbl_producto tp on i.COD_PRODUCTO = tp.CODPRODUCTO where tp.id_tipo_producto = 1");
+        $ii = 0;
 
         if($matrizInventario != null)
         {
@@ -40,7 +41,7 @@ class InventarioContralador
                 foreach ($value as $registro) {?>
                 
                     <tr>
-                    <th><?=$registro['id']?></th>
+                    <td><?=$ii = $ii + 1?></td>
                     <th><span class="<?= $registro['cantidad'] >= 10 ? 'badge badge-primary' : 'badge badge-danger'?>"> <?=$registro['cantidad']?></span></th>
                     <th><?=$registro['descripcion']?></th>
                     <th><a href="../src/vista_movimientos_producto.php?id=<?=$registro['cod_producto']?>" class='btn btn-round btn-info btn-block'><i class='fa-solid fa-plus'></i></a></th>
@@ -53,10 +54,12 @@ class InventarioContralador
             $fecha=date("Y-m-d-H:i:s");
             $IDUS=$_SESSION['id_usuario'];
             
-            $sql="INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
-            VALUES(null,'$fecha','INGRESO','EL USUARIO INGRESA A TABLA INVETARIO','$IDUS',3)";
-            $modeloPrincipal->insertargeneral($sql);
-            // FIN vista en bitacora al mostrar empleados Joel Montoya
+
+            $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+            VALUES(null,'$fecha','$IDUS',3, 'INGRESO','EL USUARIO INGRESA A TABLA INVENTARIO')";
+                $modeloPrincipal->insertargeneral($sql);
+
+
             
             }
         }

@@ -17,7 +17,7 @@ include_once '../controladores/controlador_trabajos.php';
 //**********************denia****************************/
 include_once '../controladores/controlador_cliente.php';
 include_once '../controladores/controlador_producto.php';
-include_once '../controladores/controlador_pregunta.php';
+//include_once '../controladores/controlador_pregunta.php';
 if(!empty($_GET))
     {
         $id = $_GET['id'];

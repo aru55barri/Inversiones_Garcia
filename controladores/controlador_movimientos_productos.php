@@ -28,10 +28,12 @@ class Contralador
 
         $data = new ModeloPrincipal();
         $matriz = $data->mostrargeneral("select tk.*,ttk.nombre_movimiento,tp.descripcion,tu.nombre  from tbl_kardex tk inner join tbl_movimiento ttk on tk.id_movimiento = ttk.id inner join tbl_producto tp on tk.id_producto = tp.codproducto inner join tbl_usuario tu on tk.ID_USUARIO = tu.ID_USUARIO where tk.ID_PRODUCTO = '$id'" , "1");
+        $ii = 0;
+
         foreach ($matriz as $key => $value) {
             foreach ($value as $registro) {  ?>
                 <tr>
-                <td><?= $registro['id'] ?></td>
+                <td><?=$ii = $ii + 1?></td>
                 <td><span class="<?=$registro['nombre_movimiento'] == 'ENTRADAS' ? 'badge badge-primary' : 'badge badge-warning'?> badge badge-primary"><?=$registro['nombre_movimiento']?></span></td>
                 <td><?=$registro['cantidad']?></td>
                 <td><?=$registro['descripcion']?></td>

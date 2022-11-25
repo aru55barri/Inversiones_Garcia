@@ -72,8 +72,6 @@ class Contralador
 
             foreach ($matriz as $key => $value)   {
                 foreach ($value as $registro) {?>
-              
-              
     
                     <tr>
                     <td><?=$ii = $ii + 1?></td>
@@ -149,6 +147,9 @@ class Contralador
 
         $can=($existencia+$cantidad);
         $sql = "INSERT INTO tbl_kardex(id_movimiento, id_producto, fecha, id_usuario, cantidad) VALUES(1,'$producto',now(),'$usua','$cantidad')";
+
+        $sql1 = "UPDATE tbl_producto SET existencia = '$can' WHERE codproducto = '$producto' ";
+        mysqli_query($conn, $sql1);
 
         $modelo = new ModeloPrincipal();
         $modelo->UpdateVenta($id, $sql,$can,$inventario);
