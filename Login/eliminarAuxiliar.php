@@ -17,6 +17,7 @@ include_once '../controladores/controlador_trabajos.php';
 //**********************denia****************************/
 include_once '../controladores/controlador_cliente.php';
 include_once '../controladores/controlador_producto.php';
+include_once '../controladores/controlador_parametro.php';
 //include_once '../controladores/controlador_pregunta.php';
 if(!empty($_GET))
     {
@@ -301,6 +302,7 @@ if(!empty($_GET))
 
 
     //****************************************************/
+
     if ($tabla == 'parametros'){
 
         $resultado = delete_parametro($id);
@@ -309,7 +311,7 @@ if(!empty($_GET))
 
             //se ejecuta el eliminar
             echo "<script>
-                window.location.href='../Paginas/vista_parametros.php';
+                window.location.href='../src/parametro.php';
                 </script>";
 
             $_SESSION['eliminarParametros'] = 'ok';

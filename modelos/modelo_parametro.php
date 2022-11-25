@@ -49,7 +49,7 @@ class parametros
        $fecha = date("Y-m-d-H:i:s");
       
        $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-          VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN CLIENTES')";
+          VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN PARAMETROS')";
        $this->db->query($sql1);
        //ALTERAR BITACORA______________________
 
@@ -81,17 +81,20 @@ class parametros
     public function delete_parametro($id){
 
         $this->db = getConexion();
-        self::setNames();
-        $sql="DELETE FROM tbl_parametros WHERE id = $id";
+        $this->setNames();
+       // $sql = "DELETE FROM tbl_contacto_proveedor WHERE ID_PROVEEDOR = '$id'";
+       // $resultado = $this->db->query($sql);
+        $sql = "DELETE FROM tbl_parametros WHERE id = '$id'";
         $resultado = $this->db->query($sql);
-
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
-        $IDUSUARIO = $_SESSION['ID_USUARIO'];
-        $sql1 = "INSERT INTO tbl_bitacora(ID_BITACORA, FECHA, ACCION, DESCRIPCION_BITACORA, ID_USUARIO, ID_OBJETO)
-           VALUES(null,'$fecha','ELIMINAR','ELIMINO UN PARAMETRO ','$IDUSUARIO',27)";
+        $IDUSUARIO = $_SESSION['id_usuario'];
+
+     $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
+     VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE ELIMINO UN PARAMETRO')";
         $this->db->query($sql1);
         //ALTERAR BITACORA______________________
+
 
         if ($resultado) {
             return true;
