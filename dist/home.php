@@ -32,10 +32,13 @@ require "../config/conexion.php";
                             }
                         </style>
                         <div class="card-footer card bg-white  ">
-                            <a class="small text-black stretched-link" href="../src/NuevaVenta.php">Realizar Nueva Venta <i class="fas fa-angle-right small text-black"  id="flecha"></i></a>
                             
+                        <?php
+                            if($_SESSION['Tipo_Usuario']=="administrador" || $_SESSION['Tipo_Usuario'] == "Ventas"){
+                                echo '<a class="small text-black stretched-link" href="../src/NuevaVenta.php">Realizar Nueva Venta <i class="fas fa-angle-right small text-black"  id="flecha"></i></a>';
+                            }
+                        ?>
 
-                            
                         </div>
                     </div>
                 </div>
@@ -43,8 +46,13 @@ require "../config/conexion.php";
                     <div class="card bg-warning text-white mb-4">
                         <div class="card-body" id="letra"><strong> <i> Factura   </i></strong> <i id="icono" class="fa fa-calculator"></i></div>
                         <div class="card-footer card-footer card bg-white ">
-                            <a class="small text-black stretched-link" href="../src/Factura.php">Visaulizar facturas   <i class="fas fa-angle-right"></i></a>
-                            
+
+                            <?php
+                                if($_SESSION['Tipo_Usuario']=="administrador" || $_SESSION['Tipo_Usuario'] == "Ventas"){
+                                    echo '<a class="small text-black stretched-link" href="../src/Factura.php">Visaulizar facturas   <i class="fas fa-angle-right"></i></a>';
+                                }
+                            ?>
+
                         </div>
                     </div>
                 </div>
@@ -52,8 +60,13 @@ require "../config/conexion.php";
                     <div class="card bg-success text-white mb-4">
                         <div class="card-body" id="letra"> <strong> <i> Inventario  </i></strong> <i id="icono" class="fa fa-book"></i></div>
                         <div class="card-footer card bg-white">
-                            <a class="small text-black stretched-link" href="../src/inventario.php">Visualizacion del inventario  <i class="fas fa-angle-right"></i></a>
                             
+                            <?php
+                                if($_SESSION['Tipo_Usuario']=="administrador"){
+                                    echo '<a class="small text-black stretched-link" href="../src/inventario.php">Visualizacion del inventario  <i class="fas fa-angle-right"></i></a>';
+                                }
+                            ?>
+                           
                         </div>
                     </div>
                 </div>
@@ -61,8 +74,12 @@ require "../config/conexion.php";
                     <div class="card bg-danger text-white mb-4">
                         <div class="card-body" id="letra"> <strong> <i> Usuarios  </i></strong> <i id="icono" class="fa fa-users"></i></div>
                         <div class="card-footer card bg-white">
-                            <a class="small text-black stretched-link" href="../Login/vista_usuarios.php">Visualizar Usuarios  <i class="fas fa-angle-right"></i></a>
                             
+                            <?php
+                                if($_SESSION['Tipo_Usuario']=="administrador"){
+                                    echo '<a class="small text-black stretched-link" href="../Login/vista_usuarios.php">Visualizar Usuarios  <i class="fas fa-angle-right"></i></a>';
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
