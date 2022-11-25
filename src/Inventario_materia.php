@@ -28,7 +28,7 @@ $PDF = $row['pdf'];
          <div class="title_right">
              <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
              <?php if ($insertar == 1) { ?>
-                 <button  onclick="window.location.href='nueva_compra.php';" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo produto</button>
+                 <button  onclick="window.location.href='nuevo_ingreso_prod.php';" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo produto</button>
              <?php } ?>
                  <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> 
                  <a target="black" href="../reportes/reporte_compra.php" class="btn btn-round btn-info"><i class="fa-solid fa-file-pdf"></i>PDF</a>-->
@@ -52,13 +52,14 @@ $PDF = $row['pdf'];
                 <table class="table table-striped table-bordered" id="table">
                     <thead class="thead-dark">
                         <tr>
-                        <th>ID</th>
+                        <th>#</th>
                             <th>FECHA INGRESO</th>
                             <th>SUBTOTAL</th>
                             <th>ISV</th>
                             <th>TOTAL</th>
-                            <th>DESCRIPCION PRODUCTO</th>
+                            <th>LOTE</th>
                             <th>USUARIO</th>
+                            <th>ESTADO</th>
                             <th>DETALLE</th>
                         <?php if ($eliminar == 1) { ?>
                             <th>ELIMINAR</th>
@@ -68,8 +69,8 @@ $PDF = $row['pdf'];
                     <tbody>
                         <?php
                     
-                    include_once '../controladores/controlador_compra.php'; 
-                     CompraContralador::mostrarCompra();
+                    include_once '../controladores/controlador_ingreso_Prod.php'; 
+                    CompraContralador::mostrarIngproducto();
 
                      
                  ?>    
@@ -83,8 +84,6 @@ $PDF = $row['pdf'];
         </div>
  </div>
 
-
-
  <script>
     function eliminar(id){
         
@@ -95,7 +94,7 @@ $PDF = $row['pdf'];
         'Si',
         'No',
         () => {
-            window.location.href = "../controladores/controlador_compra.php?cancelar="+id;
+            window.location.href = "../controladores/controlador_ingreso_Prod.php?cancelar="+id;
         },
         () => {
             Notiflix.Report.warning('Cancelado','Hiciste clic en el botón "No"');

@@ -2,83 +2,87 @@
 include_once('../Login/header.php');
 require_once '../Config/conexion.php';
 include '../Config/conn.php';
-include_once('../controladores/controlador_ventas.php');
-$clientes = new Contralador();
+include_once('../controladores/controlador_ingreso_Prod.php');
+$compra = new CompraContralador();
 // $sql = consultas("SELECT * FROM tbl_objetos");
-$pago = $clientes->mostrarPago();
-$productos = $clientes->mostrarProductos();
-$clientes = $clientes->mostrarClientes();
-
-//$cambio = $_POST['cambio'];
-//$recibido = $_POST['recibido'];
-//$apagar = $_POST['apagar'];
-$cambio = 0;
-$recibido = 12;
-$apagar = 4;
-$IDUS=$_SESSION['id_usuario'];
+$productos = $compra->mostrarProductos();
+$proveedores = $compra->mostrarLotes();
+//$pago = $compra->mostrartipoPago();
+$IDUS = $_SESSION['id_usuario'];
 if (isset($_POST['registrar'])) {
+
+
     $total = 0;
-    $items = $_SESSION['new_venta']['items'];
+    $items = $_SESSION['new_compra']['items'];
     $tienda;
     $transaccion;
-    $cliente;
+    $proveedor;
     $subtotal = 0;
     $impuesto = 0;
     $totalfinal = 0;
-  
     // disminuir en la tabla existencia
     foreach ($items as $i) {
         $existencia = mysqli_query($conn, "SELECT * from tbl_inventario where cod_producto = '" . $i['producto'] . "'");
         if (mysqli_num_rows($existencia) > 0) {
             $row = mysqli_fetch_array($existencia);
             $cantidad = $row['cantidad'];
-            $cantidad = ($cantidad - $i['cantidad']);
+            $cantidad = ($cantidad + $i['cantidad']);
             $sql = "UPDATE tbl_inventario SET cantidad = '$cantidad' WHERE cod_producto = '" . $i['producto'] . "'";
             mysqli_query($conn, $sql);
-            
+
             $sql1 = "UPDATE tbl_producto SET existencia = '$cantidad' WHERE codproducto = '" . $i['producto'] . "'";
             mysqli_query($conn, $sql1);
+        } else {
+            $sql = "INSERT INTO tbl_inventario (cantidad, cod_producto ) VALUES ('" . $i['cantidad'] . ',' . $i['producto'] . "')";
+            mysqli_query($conn, $sql);
         }
+
+        // $row = mysqli_fetch_array($existencia);
+        // $stok = $row['CANTIDAD_UNITARIA'];
+        // $total = ($stok + $i['cantidad']);
+        // $updateexistencia = mysqli_query($conn, "UPDATE tbl_productos set CANTIDAD_UNITARIA = '$total' where COD_PRODUCTO = '" . $i['producto'] . "'");
         $totalfinal = ($totalfinal + $i['totalfinal']); //sustituir total por totalfinal y cambiarlo en la consulta
-        $cliente = $i['cliente'];
+        $proveedor = $i['proveedor'];
         $subtotal = ($subtotal + $i['totalbruto']);
-    }
+    } 
+  
 
-    mysqli_query($conn, "INSERT INTO tbl_factura
-    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario, id_Tpago)
-    VALUES(null,now(),'$subtotal', 0.15, '$totalfinal', '$cliente', '$IDUS','" . $i['pago'] . "')");
-
-    $rs = mysqli_query($conn, "SELECT MAX(id_factura) as id FROM tbl_factura");
+    mysqli_query($conn, "INSERT INTO tbl_ingreso_producto
+    (fecha, sub_total, isv, total, 	id_lote, id_usuario)
+    VALUES(now(), '$subtotal', 0.15, '$totalfinal', '$proveedor', '$IDUS')");
+    $rs = mysqli_query($conn, "SELECT MAX(id) as id FROM tbl_ingreso_producto");
     $row = mysqli_fetch_array($rs);
     $id = $row['id'];
 
-    $sql = "INSERT INTO tbl_detalle_factura (id_detalleFac, id_factura,codproducto,cantidad,precio) VALUES";
+    $sql = "INSERT INTO tbl_detalle_ingreso_producto (id_ingreso,codproducto,precio,cantidad) VALUES ";
     foreach ($items as $i) {
-        $sql  .= "(null, '$id','" . $i['producto'] . "','" . $i['cantidad'] .  "','" . $i['costo'] . "'),";
-        mysqli_query($conn, "INSERT INTO tbl_kardex(id_movimiento,id_producto,fecha,id_usuario,cantidad)VALUES(2,'" . $i['producto'] . "',now(), '$IDUS','" . $i['cantidad'] . "')");
+        $sql  .= "('$id','" . $i['producto'] . "','" . $i['costo'] . "','" . $i['cantidad'] . "'),";
+        mysqli_query($conn, "INSERT INTO tbl_kardex(id_movimiento,id_producto,fecha,id_usuario,cantidad)VALUES(1,'" . $i['producto'] . "',now(), '$IDUS','" . $i['cantidad'] . "')");
+
+        // mysqli_query($conn, "INSERT into tbl_movimientos(TIPO_MOVIMIENTO,CANTIDAD,PRODUCTO,FECHA_HORA) values ('Entradas','" . $i['cantidad'] . "','" . $i['producto'] . "',now())");
     }
 
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
 
-    unset($_SESSION['new_venta']['items']);
+    unset($_SESSION['new_compra']['items']);
     unset($_SESSION['tiendacompra']);
-    unset($_SESSION['clientecompra']);
+    unset($_SESSION['proveedorcompra']);
     unset($_SESSION['transaccioncompra']);
 
     $_SESSION['registro'] = 'ok';
-    echo "<script> 
-        location.href ='../src/factura.php';
+        echo "<script> 
+        location.href ='../src/Inventario_materia.php';
         </script>";
 
-        echo "<script> 
-        location.href ='../src/factura.php';
-        </script>";
+    echo "<script> 
+    location.href ='../src/Inventario_materia.php';
+    </script>";
 }
 
 if (isset($_GET['eliminar'])) {
     $id = $_GET['eliminar'];
-    $items = $_SESSION['new_venta']['items'];
+    $items = $_SESSION['new_compra']['items'];
     // Si no hay items
     if (empty($items)) {
         return false;
@@ -88,37 +92,23 @@ if (isset($_GET['eliminar'])) {
     foreach ($items as $i => $item) {
         // Validar si existe con el mismo id pasado
         if ($item['id'] == $id) {
-            unset($_SESSION['new_venta']['items'][$i]);
-            
+            unset($_SESSION['new_compra']['items'][$i]);
 ?>
-       <?php  echo "<script>
-        Swal.fire({
-            icon: 'success',
-            title: 'EXCELENTE!',
-            text: 'Eliminado con Exito!',
-            confirmButtonText: 'Aceptar',
-            position:'center',
-            allowOutsideClick:false,
-            padding:'1rem'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                location.href ='NuevaVenta.php';
-            }
-        })    
-    </script>";?>
+            <script>
+                Notiflix.Notify.failure('Eliminado correctamente');
+            </script>
         <?php
         }
     }
 }
 
 ////////////////////////////////////////// INICIA LIMPIAR  //////////////////////////////////////////
-if (isset($_POST['limpiar'])) {
+if (isset($_GET['limpiar'])) {
 
-    unset($_SESSION['new_venta']['items']);
-    unset($_SESSION['clientecompra']);
-    
+    unset($_SESSION['new_compra']['items']);
+    unset($_SESSION['proveedorcompra']);
     echo "<script> 
-    location.href ='../src/factura.php';
+    location.href ='../src/Inventario_materia.php';
     </script>";
 }
 ////////////////////////////////////////// TERMINA LIMPIAR //////////////////////////////////////////
@@ -130,24 +120,22 @@ if (isset($_POST['agregar'])) {
         empty($_POST['cantidad']) ||
         empty($_POST['totalbruto']) ||
         empty($_POST['totalfinal']) ||
-        empty($_POST['pago']) ||
         empty($_POST['producto'])
+
     ) {
         ?>
         <script>
-            Notiflix.Notify.failure('Registrado correctamente');
+            Notiflix.Notify.failure('Registrado incorrectamente');
         </script>
         <?php
 
     } else {
 
-        if (isset($_SESSION['clientecompra'])) {
-            $cliente = $_SESSION['clientecompra'];
+        if (isset($_SESSION['proveedorcompra'])) {
+            $proveedor = $_SESSION['proveedorcompra'];
         } else {
-            $_SESSION['clientecompra'] = $_POST['cliente'];
-            $cliente = $_POST['cliente'];
-            $pago = $_POST['pago'];
-
+            $_SESSION['proveedorcompra'] = $_POST['proveedor'];
+            $proveedor = $_POST['proveedor'];
         }
 
         $costo = $_POST['costo'];
@@ -155,19 +143,19 @@ if (isset($_POST['agregar'])) {
         $totalbruto = $_POST['totalbruto'];
         $totalfinal = $_POST['totalfinal'];
         $productoo = $_POST['producto'];
-        $pago = $_POST['pago'];
+ 
 
         function get_items()
         {
             $items = [];
 
             // Si no existe la cotización y obviamente está vacio el array
-            if (!isset($_SESSION['new_venta']['items'])) {
+            if (!isset($_SESSION['new_compra']['items'])) {
                 return $items;
             }
 
             // La cotización existe, se asigna el valor
-            $items = $_SESSION['new_venta']['items'];
+            $items = $_SESSION['new_compra']['items'];
             return $items;
         }
 
@@ -195,12 +183,12 @@ if (isset($_POST['agregar'])) {
             if (get_item($item['id']) !== false) {
                 foreach ($items as $i => $e_item) {
                     if ($item['id'] === $e_item['id']) {
-                        $_SESSION['new_venta']['items'][$i] = $item;
+                        $_SESSION['new_compra']['items'][$i] = $item;
                         return true;
                     }
                 }
             }
-            $_SESSION['new_venta']['items'][] = $item;
+            $_SESSION['new_compra']['items'][] = $item;
             return true;
         }
 
@@ -215,12 +203,11 @@ if (isset($_POST['agregar'])) {
             global $cantidad;
             global $totalbruto;
             global $totalfinal;
-            global $productoo;
-            global $cliente;
-            global $pago;
-            //si existe la sesion buscamos en la session	
-            if (isset($_SESSION['new_venta']['items'])) {
-                $idproducto = array_column($_SESSION['new_venta']['items'], 'producto');
+            global  $productoo;
+            global $proveedor;
+             //si existe la sesion buscamos en la session	
+            if (isset($_SESSION['new_compra']['items'])) {
+                $idproducto = array_column($_SESSION['new_compra']['items'], 'producto');
                 //validamms que el producto no este registrado
 
                 if (in_array($productoo, $idproducto)) { ?>
@@ -230,7 +217,7 @@ if (isset($_POST['agregar'])) {
                 <?php
                 } else {
 
-                    $productos = mysqli_query($conn, "SELECT * FROM tbl_producto where codproducto = '$productoo'");
+                    $productos = mysqli_query($conn, "SELECT * FROM tbl_producto where codproducto  = '$productoo'");
                     $p = mysqli_fetch_array($productos);
 
                     $item =
@@ -242,21 +229,20 @@ if (isset($_POST['agregar'])) {
                             'totalbruto' => $totalbruto,
                             'totalfinal' => $totalfinal,
                             'producto' => $productoo,
-                            'cliente' => $cliente,
-                            'pago' => $pago
-                        ];
+                            'proveedor' => $proveedor,
+                         ];
 
                     if (!add_item($item)) {
                     }
 
                     get_item($item['id']);
-                    ?>
+                ?>
                     <script>
                         Notiflix.Notify.successs('Agregado correctamente');
                     </script>
-    <?php
+                <?php
                 }
-           } else {
+            } else {
                 //creamos 
 
 
@@ -273,8 +259,8 @@ if (isset($_POST['agregar'])) {
                         'totalbruto' => $totalbruto,
                         'totalfinal' => $totalfinal,
                         'producto' => $productoo,
-                        'cliente' => $cliente,
-                        'pago' => $pago
+                        'proveedor' => $proveedor,
+ 
                     ];
 
                 if (!add_item($item)) {
@@ -285,9 +271,8 @@ if (isset($_POST['agregar'])) {
                 <script>
                     Notiflix.Notify.successs('Agregado correctamente');
                 </script>
-           <?php
+<?php
             }
-            
         }
         hook_add_to_quote();
     }
@@ -304,12 +289,12 @@ if (isset($_POST['agregar'])) {
 
     <div class="page-title">
         <div class="title_left">
-            <h3>Ventas</h3>
+            <h3>Compras</h3>
         </div>
 
         <div class="title_right">
             <div class="col-md-4 col-sm-4 form-group row pull-right top_search">
-                <button onclick="window.location.href='factura.php';" class="btn  btn-round btn-success">Todas las facturas</button>
+                <button onclick="window.location.href='Inventario_materia.php';" class="btn  btn-round btn-success">Compras realizadas</button>
             </div>
         </div>
     </div>
@@ -319,48 +304,38 @@ if (isset($_POST['agregar'])) {
     <div class="row">
         <div class="col-lg-12">
             <div class="card-header bg-primary text-white">
-                Datos de ventas
+                Datos de compra
             </div>
             <div class="card p-2">
-                <form action="" method="post" class="needs-validation" autocomplete="off" >
+                <form action="" method="post" autocomplete="off">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="utienda">Productos</label>
-                                <select name="producto" id="producto" class="form-control" required="true" onchange="products()">
+                                <select name="producto" id="producto" class="form-control" required="required" onchange="products()">
                                     <option value="">Seleccione un producto</option>
                                     <?php while ($row = $productos->fetch()) { ?>
                                         <option value="<?php echo $row['codproducto'] ?>"><?php echo $row['descripcion'] ?></option>
+
                                     <?php } ?>
                                 </select>
                             </div>
                         </div>
-                    <?php if (!isset($_SESSION['clientecompra'])) { ?>
+                        <?php if (!isset($_SESSION['proveedorcompra'])) { ?>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="utienda">Cliente</label>
-                                    <select name="cliente" id="cliente" class="form-control" required="true">
-                                        <option value="">Seleccione un cliente</option>
-                                        <?php while ($row = $clientes->fetch()) { ?>
-                                            <option value="<?php echo $row['idcliente'] ?>"><?php echo $row['nombre'] ?></option>
+                                    <label for="utienda">Lote</label>
+                                    <select name="proveedor" id="proveedor" class="form-control" required="required">
+                                        <option value="">Seleccione un lote</option>
+                                        <?php while ($row = $proveedores->fetch()) { ?>
+                                            <option value="<?php echo $row['id'] ?>"><?php echo $row['descripcion'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
+                            
 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="utienda">Tipo Pago</label>
-                                    <select name="pago" id="pago" class="form-control" >
-                                         <?php while ($row = $pago->fetch()) { ?>
-                                            <option value="<?php echo $row['id_Tpago'] ?>"><?php echo $row['descripcion'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-
- <?php } ?>
-
+                        <?php } ?>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Costo unitario</label>
@@ -373,16 +348,10 @@ if (isset($_POST['agregar'])) {
                                 <input type="text" placeholder="" required name="cantidad" id="cantidad" onKeyUp="pierdeFoco(this)" class="form-control">
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label for="dni">Stock</label>
-                                <input type="text" placeholder="" disabled name="stok" id="stock" class="form-control">
-                            </div>
-                        </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="dni">Isv</label>
-                                <input type="text" value="0.15" class="form-control" id="isv" readonly>
+                                <input type="text" value="0.20" class="form-control" id="isv" readonly>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -399,19 +368,18 @@ if (isset($_POST['agregar'])) {
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-
-                               <button type="submit" name="agregar" class="btn btn-success">Agregar producto</button>
+                                <button type="submit" name="agregar" class="btn btn-success">Agregar producto</button>
                                 <div id="div_registro_cliente" style="display: none;">
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </form>
+
+
             </div>
         </div>
     </div>
-
     <br>
     <div class="row">
         <div class="col-lg-12">
@@ -421,7 +389,7 @@ if (isset($_POST['agregar'])) {
             </div>
             <div class="card">
                 <div class="card-body">
-                    <?php if (isset($_SESSION['new_venta']['items'])) { ?>
+                    <?php if (isset($_SESSION['new_compra']['items'])) { ?>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered">
 
@@ -438,10 +406,9 @@ if (isset($_POST['agregar'])) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                  
                                     $ii = 0;
                                     $total = 0;
-                                    foreach ($_SESSION['new_venta']['items'] as $i) {
+                                    foreach ($_SESSION['new_compra']['items'] as $i) {
                                     ?>
                                         <tr>
                                             <th><?php echo $ii = $ii + 1 ?></th>
@@ -449,13 +416,16 @@ if (isset($_POST['agregar'])) {
                                             <th><?php echo $i['costo'] ?></th>
                                             <th><?php echo $i['cantidad'] ?></th>
                                             <th><?php echo $i['totalfinal'] ?></th>
-                                            <th><button class="btn btn-danger" onclick="eliminar(<?= $i['id'] ?>)" name="eliminar" type="submit"><i class='fas fa-trash-alt'></i></button></th>
+                                            <th>
+                                                <button class="btn btn-danger" onclick="eliminar(<?= $i['id']; ?>)" name="eliminar"><i class='fas fa-trash-alt'></i></button>
+                                            </th>
+
                                         </tr>
-                                    <?php       
-                                    $total = $total + $i['totalfinal'];                  
+                                    <?php
+                                        $total = $total + $i['totalfinal'];
                                     }
-                     
                                     ?>
+
                                     <tr>
                                         <td colspan="4" align="right">
                                             <h3>Total</h3>
@@ -479,19 +449,19 @@ if (isset($_POST['agregar'])) {
 
                     <div class="row">
                         <div class="col-lg-2">
-
-                         <button type="button" id="cobrar" name="cobrar" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Cobrar</button>
- 
+                            <form action="" method="post">
+                                <button class="btn btn-success" name="registrar" type="submit">Terminar
+                                    compra</button>
+                            </form>
                         </div>
 
                         <div class="col-lg-8"></div>
                         <div class="col-lg-2">
 
-
-                            <button class="btn btn-danger" onclick="limpiar()" id="limpiar" name="limpiar" type="submit">Cancelar venta</button>
-
+          
+                                <button class="btn btn-danger" submu onclick="limpiar()" name="limpiar" type="submit">Cancelar compra</button>
+                        
                         </div>
-                       
                     </div>
 
                 </div>
@@ -503,117 +473,38 @@ if (isset($_POST['agregar'])) {
     </div>
 
 </div>
-<script>
-  function pierdeFocos(e) {
-        var valor = e.value.replace(/^0*/, '');
-        e.value = valor;
-    }
-    recibido.oninput = function() {
-        if (parseInt(cantidad.value) < 0) {
-            Notiflix.Notify.failure('La cantidad no puede ser mayor a la existencia');
-            recibido.value = '';
-        } else {
-            $cambio.value =  $recibido.value-$apagar.value;
-
-        }
-    };
-
-</script>
-<?php
-   
-   
-  if (isset($_POST['cobrar'])) {
-    $alert = "";
-
-}  
-        if (isset($_POST['calcular'])) {
-            $alert = "";       
-            
-            $cambio =  $recibido-$apagar;
-
-    }
-
-  
-        ?>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Facturar venta </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-            
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">A pagar:</label>
-            <input type="text" class="form-control"  value="<?php echo number_format($total, 2); ?>" id="apagar"  name= "apagar">
-          </div>
-        
-          <div class="form-group">
-            <label for="recipient-name" onKeyUp="pierdeFocos(this)" class="col-form-label">Recibido:</label>
-            <input type="text" class="form-control" id="recibido" name ="recibido">
-          </div>
-
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Cambio:</label>
-            <input type="text" class="form-control"  value ="<?php echo number_format($cambio, 2); ?>" id="cambio" name ="cambio">
-          </div>
-       
-        </form>
-      </div>
-             
-      <div class="modal-footer">
-        <button type="button" name = "close" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        
-        <form action="" method="post">
-         <button type="submit" id="calcular" name = "calcular" class="btn btn-secondary" >Calcular</button>
-         </form>      
-
-        <form action="" method="post">
-        <button class="btn btn-success" name="registrar" id="terminar" type="submit" >Terminar venta <i class='far fa-file-alt' style="color: white;"></i></button>
-        </form>      
-        </div>
-    </div>
-  </div>
-</div>
-<?php include_once('../Login/footer.php');
+<?php include_once('../Login/Footer.php');
 ?>
+
+
 <script>
-    function eliminar(id){
-        Swal.fire({
-            title: '¿Está seguro?',
-            text: "¿Desea eliminar el producto de la lista?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Sí, eliminar!'
-        }).then((result)=> {
-            if(result.value){
-                window.location.href = "NuevaVenta.php?eliminar=" + id;
-          }
-        } )
+    function eliminar(id) {
+        Notiflix.Confirm.show(
+            'Confirmar',
+            'Desea eliminar?',
+            'Si',
+            'No',
+            () => {
+                window.location.href = "nuevo_ingreso_prod.php?eliminar=" + id;
+            },
+            () => {
+                Notiflix.Report.warning('Cancelado', 'Hiciste clic en el botón "No"');
+            }, {});
     }
 
     function limpiar() {
-        Swal.fire({
-            title: '¿Está seguro?',
-            text: "¿Desea cancelar la venta?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Sí, cancelar!'
-        }).then((result)=> {
-            if(result.value){
-                window.location.href = "factura.php";
-          }
-        } )
+        Notiflix.Confirm.show(
+            'Confirmar',
+            'Desea Cancelar la compra?',
+            'Si',
+            'No',
+            () => {
+                window.location.href = "nuevo_ingreso_prod.php?limpiar";
+            },
+            () => {
+                Notiflix.Report.warning('Cancelado', 'Hiciste clic en el botón "No"');
+            }, {});
     }
-       
 </script>
 
 
@@ -631,34 +522,37 @@ if (isset($_POST['agregar'])) {
     function products() {
         let idproducto = document.getElementById('producto').value;
         console.log(idproducto);
-        fetch('../controladores/ventas.php?id=' + idproducto)
+        fetch('../controladores/Inventario_materia.php?id=' + idproducto)
             .then(response => response.json())
             .then((data) => {
                 console.log(data);
                 costo.value = data[0].PRECIO;
                 cantidad.value = '';
-
-                fetch('../controladores/ventas.php?stock=' + idproducto)
-                    .then(response => response.json())
-                    .then((data) => {
-                        stck = data[0].stock;
-                        stock.value = data[0].stock;
-                    })
-                    
+                console.log(data[0].PRECIO);
+                console.log(data[0]);
+                stck = data[0].CANTIDAD_UNITARIA;
             })
     }
 
+    function myFunctionpp() {
+
+
+        // fetch('http://localhost/icv/sistema/obtenerprecio.php?producto=' + productotext + '&talla=' + tallas)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         costo.value = data[0].PRECIO_COMPRA;
+        //     })
+    }
     cantidad.oninput = function() {
-        if (parseInt(cantidad.value) > stck) {
-            Notiflix.Notify.failure('La cantidad no puede ser mayor a la existencia');
-            cantidad.value = '';
-        } else {
-            totalbruto.value = costo.value * cantidad.value;
-            let subtotal = totalbruto.value * isv.value;
-            totalfinal.value = subtotal + parseInt(totalbruto.value);
-            $cambio =  $recibido-$apagar;
+        // if (parseInt(cantidad.value) > stck) {
+        //     Notiflix.Notify.failure('La cantidad no puede ser mayor a la existencia');
+        //     cantidad.value = '';
+        // } else {
+        totalbruto.value = costo.value * cantidad.value;
+        let subtotal = totalbruto.value * isv.value;
+        totalfinal.value = subtotal + parseInt(totalbruto.value);
+        // }
 
-        }
+
     };
-
 </script>
