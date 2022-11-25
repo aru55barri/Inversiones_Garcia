@@ -289,12 +289,12 @@ if (isset($_POST['agregar'])) {
 
     <div class="page-title">
         <div class="title_left">
-            <h3>Compras</h3>
+            <h3>Ingreso de productos</h3>
         </div>
 
         <div class="title_right">
             <div class="col-md-4 col-sm-4 form-group row pull-right top_search">
-                <button onclick="window.location.href='Inventario_materia.php';" class="btn  btn-round btn-success">Compras realizadas</button>
+                <button onclick="window.location.href='Inventario_materia.php';" class="btn  btn-round btn-success">Ingresos realizados</button>
             </div>
         </div>
     </div>
@@ -304,7 +304,7 @@ if (isset($_POST['agregar'])) {
     <div class="row">
         <div class="col-lg-12">
             <div class="card-header bg-primary text-white">
-                Datos de compra
+                Datos de Ingreso de Productos
             </div>
             <div class="card p-2">
                 <form action="" method="post" autocomplete="off">
@@ -451,7 +451,7 @@ if (isset($_POST['agregar'])) {
                         <div class="col-lg-2">
                             <form action="" method="post">
                                 <button class="btn btn-success" name="registrar" type="submit">Terminar
-                                    compra</button>
+                                    Ingreso</button>
                             </form>
                         </div>
 
@@ -459,7 +459,7 @@ if (isset($_POST['agregar'])) {
                         <div class="col-lg-2">
 
           
-                                <button class="btn btn-danger" submu onclick="limpiar()" name="limpiar" type="submit">Cancelar compra</button>
+                                <button class="btn btn-danger" submu onclick="limpiar()" name="limpiar" type="submit">Cancelar</button>
                         
                         </div>
                     </div>
@@ -495,7 +495,7 @@ if (isset($_POST['agregar'])) {
     function limpiar() {
         Notiflix.Confirm.show(
             'Confirmar',
-            'Desea Cancelar la compra?',
+            'Desea Cancelar el ingreso?',
             'Si',
             'No',
             () => {

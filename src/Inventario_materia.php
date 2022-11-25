@@ -28,7 +28,7 @@ $PDF = $row['pdf'];
          <div class="title_right">
              <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
              <?php if ($insertar == 1) { ?>
-                 <button  onclick="window.location.href='nuevo_ingreso_prod.php';" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo produto</button>
+                 <button  onclick="window.location.href='nuevo_ingreso_prod.php';" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo Ingreso Produto</button>
              <?php } ?>
                  <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> 
                  <a target="black" href="../reportes/reporte_compra.php" class="btn btn-round btn-info"><i class="fa-solid fa-file-pdf"></i>PDF</a>-->
