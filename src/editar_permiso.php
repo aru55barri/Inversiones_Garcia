@@ -1,11 +1,14 @@
 <?php
 include_once('../Login/header.php');
 include_once('../controladores/controlador_permisos.php');
-
+include_once('../modelos/modelo_principal.php');
+$id = $_GET['id'];
+$model = new ModeloPrincipal();
 $permisos = new Contralador();
-
-$roles = $permisos->obtenerRoles();
+$roles = $permisos->obtenerRoles(); 
 $objeto = $permisos->obtenerObjetos();
+
+$sql = $permisos->mostrarid($id);
 
 
 if ($_POST) {
@@ -13,13 +16,15 @@ if ($_POST) {
     $modificar = $row['permiso_modificar'];
     $consultar = $row['permiso_consultar'];
     $eliminar = $row['permiso_eliminacion'];
-    $PDF = $row['pdf'];    
+    $PDF = $row['pdf'];
     $rol = $_POST['rol'];
     $objeto = $_POST['objeto'];
-    $permisos->Insertar($insertar, $eliminar, $modificar, $consultar, $PDF, $rol, $objeto);
+    $model->UpdatePermisos($insertar, $eliminar, $modificar, $consultar, $PDF, $rol, $objeto, $id);
+    echo "<script> 
+    location.href ='../src/permisos.php';
+    </script>";
 }
 ?>
-
 
 
 <br><br><br><br><br><br><br><br>
@@ -119,7 +124,7 @@ if ($_POST) {
                             <div class="mt-4 mb-0">
                                 <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
                                     <div class="mt-4 mb-0">
-                                        <div class="d-grid"><input type="button" onclick="window.location.href='../vistas/vista_permisos.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
+                                        <div class="d-grid"><input type="button" onclick="window.location.href='../src/permisos.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
                                     </div>
                                 </div>
                             </div>
@@ -132,78 +137,77 @@ if ($_POST) {
                 <script src="./js/jquery.js" type="text/javascript"></script>
 
                 <script>
-                    (() => {
-                        'use strict'
 
-                        const forms = document.querySelectorAll('.needs-validation')
+            (() => {
+                'use strict'
 
-                        Array.from(forms).forEach(form => {
-                            form.addEventListener('submit', event => {
-                                if (!form.checkValidity()) {
-                                    event.preventDefault()
-                                    event.stopPropagation()
-                                }
+                const forms = document.querySelectorAll('.needs-validation')
 
-                                form.classList.add('was-validated')
-                            }, false)
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                /**AGREGADO POR DENIA */
+                //validar DNI
+                document.getElementById("txtID").addEventListener("change", validarDNI);
+
+                function validarDNI() {
+                    const formData = new FormData(document.getElementById('form-register'));
+                    formData.append('_action', 'validarDNI');
+                    fetch('../controladores/controladorLogin.php', {
+                            method: 'POST',
+                            body: formData
                         })
-
-                        /**AGREGADO POR DENIA */
-                        //validar DNI
-                        document.getElementById("txtID").addEventListener("change", validarDNI);
-
-                        function validarDNI() {
-                            const formData = new FormData(document.getElementById('form-register'));
-                            formData.append('_action', 'validarDNI');
-                            fetch('../controladores/controladorLogin.php', {
-                                    method: 'POST',
-                                    body: formData
-                                })
-                                .then(response => response.json())
-                                .then(result => {
-                                    console.log(result.error);
-                                    if (result.error != '') {
-                                        document.querySelector('#button').disabled = true;
-                                        $("#2mensaje").text("Identidad ya a sido Registrada Anteriormente").css("color", "red");
-                                    } else {
-                                        //  eliminar el ensaje de error del DOM
-                                        $("#2mensaje").text("").css("color", "red");
-                                        document.querySelector('#button').disabled = false;
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    alert('Ha ocurrido un error');
-                                });
-                        }
-
-                        //validar Fecha
-                        document.getElementById("naci").addEventListener("change", validarFecha);
-
-                        function validarFecha() {
-                            var nacimiento = moment(document.getElementById("naci").value);
-                            var hoy = moment();
-                            var anios = hoy.diff(nacimiento, "years");
-                            var fecha = document.getElementById("dtpfechaNacimiento");
-
-                            //ANIOS PERMITIDO
-                            if (anios < 18) {
+                        .then(response => response.json())
+                        .then(result => {
+                            console.log(result.error);
+                            if (result.error != '') {
                                 document.querySelector('#button').disabled = true;
-                                $("#fechamensaje").text("La persona debe tener al menos 18 años").css("color", "red");
-                                fecha.style.borderColor = "red";
-                                fecha.style.boxShadow = "0 0 10px red";
+                                $("#2mensaje").text("Identidad ya a sido Registrada Anteriormente").css("color", "red");
                             } else {
-                                $("#fechamensaje").text("").css("color", "red");
+                                //  eliminar el ensaje de error del DOM
+                                $("#2mensaje").text("").css("color", "red");
                                 document.querySelector('#button').disabled = false;
-                                fecha.style.borderColor = "green";
-                                fecha.style.boxShadow = "0 0 10px green";
                             }
-                        }
-                    })()
-                </script>
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Ha ocurrido un error');
+                        });
+                }
 
+                //validar Fecha
+                document.getElementById("naci").addEventListener("change", validarFecha);
 
-            </div>
+                function validarFecha() {
+                    var nacimiento = moment(document.getElementById("naci").value);
+                    var hoy = moment();
+                    var anios = hoy.diff(nacimiento, "years");
+                    var fecha = document.getElementById("dtpfechaNacimiento");
+
+                    //ANIOS PERMITIDO
+                    if (anios < 18) {
+                        document.querySelector('#button').disabled = true;
+                        $("#fechamensaje").text("La persona debe tener al menos 18 años").css("color", "red");
+                        fecha.style.borderColor = "red";
+                        fecha.style.boxShadow = "0 0 10px red";
+                    } else {
+                        $("#fechamensaje").text("").css("color", "red");
+                        document.querySelector('#button').disabled = false;
+                        fecha.style.borderColor = "green";
+                        fecha.style.boxShadow = "0 0 10px green";
+                    }
+                }
+            })()
+        </script>
+    </div>
 </main>
 
 

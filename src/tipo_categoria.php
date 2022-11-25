@@ -1,232 +1,275 @@
 <?php include_once "../Login/header.php";
-require "../config/conexion.php";
+include '../config/conn.php';
+include_once '../controladores/controlador_tipo_categoria.php';
+
+$id = $_SESSION['rol'];
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 2 and ID_ROL = '$id'");
+$row = mysqli_fetch_array($sql);
+
+$insertar = $row['permiso_insercion'];
+$modificar = $row['permiso_modificar'];
+$consultar = $row['permiso_consultar'];
+$eliminar = $row['permiso_eliminacion'];
+$PDF = $row['pdf'];
+  
 ?>
-            <h1 class=" text-center" id="letra"> Tipo Categoria  </h1>
-                       <style>
-                        h1{
-                            font-family: Vladimir Script;
-                            font-size: 80px;
-                        }
-                       </style>
 
-       
-        <!--Comienzo de modal (Boton Nuevo)-->
-        <div>
+<h1 class=" text-center" id="letra"> Tipo Categoria </h1>
+<style>
+  h1{
+  font-family: Vladimir Script;
+  font-size: 80px;
+  }
+</style>
+<div class="container-fluid">
 
-        <!-- Button trigger modal -->
-        <div class="container">
-            <div class="row">
-            <div class="col-lg-12">            
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-           Nuevo <i class="fa fa-plus"></i>
-        </button>
-            </div>    
-            </div>    
-            </div><br>  
-            <!--colocacion de codigo-->
+    <div class="page-title"> 
+        
+        <div class="title_right">
+            <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
 
-            <!--AQUI EMPIEZA CODIGO DE MODAL-->
-        <!-- Modal para nuevo producto  -->
-        <div class="modal fade"  class="card-header bg-primary text-white"  id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-          <div class="modal-dialog " role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-primary text-white" >
-                <h5 class="modal-title"  id="exampleModalScrollableTitle">Nuevo Tipo de Categoria</h5>
-                <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <form>
-                  <div class="form-group">
-                    <label class="control-label">Tipo categoria </label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-                  
-
-                     
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Aceptar</button>
-              </div>
+            <?php if ($insertar == 1) { ?>
+                <button onclick="window.location.href='nuevo_tipo_categoria.php';" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Nuevo Tipo de Categoria <i class="fa fa-plus"></i></button>
+                <?php } ?>
+                <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
             </div>
-          </div>
         </div>
+    </div>
+    <?php
+    if (isset($_SESSION['registro'])) {
+        echo "<script>Notiflix.Notify.success('Registrado correctamente');</script>";
+        unset($_SESSION['registro']);
+    }
 
-    </div> <!--AQUI TERMINA CODIGO DE MODAL BOTON NUEVO-->
-
-
+    if (isset($_SESSION['edicion'])) {
+        echo "<script>Notiflix.Notify.success('Editado correctamente');</script>";
+        unset($_SESSION['edicion']);
+    }
+    if (isset($_SESSION['eliminacion'])) {
+        echo "<script>Notiflix.Notify.failure('Eliminado correctamente');</script>";
+        unset($_SESSION['eliminacion']);
+    }
+    if (isset($_SESSION['empleado'])) {
+        echo "<script>Notiflix.Notify.failure('El empleado ya cuenta con un usuario');</script>";
+        unset($_SESSION['empleado']);
+    }
+    if (isset($_SESSION['correo'])) {
+        echo "<script>Notiflix.Notify.failure('El correo ya existe');</script>";
+        unset($_SESSION['correo']);
+    }
+    if(isset($_SESSION['erroruser'])){
+        echo "<script>Notiflix.Notify.failure('El usuario no puede eliminarse');</script>";
+       unset($_SESSION['erroruser']);
     
+ }
+    ?>
 
-            <!--colocacion de codigo-->
 
-            <div class="container" style="margin-top: 10px;padding: 5px">
-                <table id="tablax" class="table table-striped table-bordered" style="width:100%">
-                 <!--boton Exportar factura--->
-            
-            <div class="row">
-                <div style="width: 150px;">
-                  <div class="dataTables_length" id="sampleTable_length"><label><button class="btn btn-danger" type="button">Exportar a PDF  <i class="fa fa-file-pdf" ></i> </button>
-                      </select> </label>
-                  </div><br>
-                </div>
-              </div>
-            <!---Final de boton Exportar factura-->  
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" id="table">
                     <thead class="thead-dark">
-                        <th>#</th>
-                        <th>Tipo categoria</th>
-                        <th></th>
+                        <tr>
+                            <th>#</th>
+                            <th>TIPO CATEGORIA</th>
+
+                          
+                            <?php if ($modificar == 1) { ?>
+                            <th>EDITAR</th>
+                            <?php } ?>
+                            <?php if ($eliminar == 1) { ?>
+                            <th>ELIMINAR</th>
+                            <?php } ?>
+
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Bebidas</td>
-                            <td>
+                        <?php
+                             include_once '../controladores/controlador_tipo_categoria.php';
+                             ClientesContralador::mostrarTipocategoria();
+                           
+                        ?>
 
-    <!--Comienzo de modal editar-->
-
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalScrollablesl">Editar <i class='fas fa-edit'></i></button> <br><br>
-
-          <!--- Creacion de modal de boton editar -->
-          <div class="modal fade"  id="exampleModalScrollablesl" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-          <div class="modal-dialog " role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-success text-white" >
-                <h5 class="modal-title"  id="exampleModalScrollableTitle">Editar Tipo Categoaria</h5>
-                <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-
-                <form>
-                <div class="form-group">
-                    <label class="control-label">Tipo de categoria </label>
-                    <input class="form-control" type="text" placeholder="">
-                  </div>
-                  
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Aceptar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-   
-
-    </div>
-                          
-    <!--Final de modal de editar-->
-
-                                
-                                <form action="" method="post" class="confirmar d-inline">
-                                    <button class="btn btn-danger" type="submit">Eliminar <i class='fas fa-trash-alt'></i> </button>
-                                </form>
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td>Bebidas</td>
-                            <td>
-                                <a href="" class="btn btn-success">Editar<i class='fas fa-edit'></i></a><br><br>
-                                <form action="" method="post" class="confirmar d-inline">
-                                    <button class="btn btn-danger" type="submit">Eliminar<i class='fas fa-trash-alt'></i> </button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>3</td>
-                            <td>Bebidas</td>
-                            <td>
-                                <a href="" class="btn btn-success">Editar<i class='fas fa-edit'></i></a><br><br>
-                                <form action="" method="post" class="confirmar d-inline">
-                                    <button class="btn btn-danger" type="submit">Eliminar<i class='fas fa-trash-alt'></i> </button>
-                                </form>
-                            </td>
-                        </tr>
 
                     </tbody>
+
                 </table>
             </div>
-
-
-            <!-- JQUERY -->
-            <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
-            </script>
-            <!-- DATATABLES -->
-            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
-            </script>
-            <!-- BOOTSTRAP -->
-            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
-            </script>
-            <script>
-                $(document).ready(function() {
-                    $('#tablax').DataTable({
-                        language: {
-                            processing: "Tratamiento en curso...",
-                            search: "Buscar&nbsp;:",
-                            lengthMenu: "Agrupar de _MENU_ items",
-                            info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
-                            infoEmpty: "No existen datos.",
-                            infoFiltered: "(filtrado de _MAX_ elementos en total)",
-                            infoPostFix: "",
-                            loadingRecords: "Cargando...",
-                            zeroRecords: "No se encontraron datos con tu busqueda",
-                            emptyTable: "No hay datos disponibles en la tabla.",
-                            paginate: {
-                                first: "Primero",
-                                previous: "Anterior",
-                                next: "Siguiente",
-                                last: "Ultimo"
-                            },
-                            aria: {
-                                sortAscending: ": active para ordenar la columna en orden ascendente",
-                                sortDescending: ": active para ordenar la columna en orden descendente"
-                            }
-                        },
-
-                    });
-                });
-            </script>
-
-            <!--  fin de codigo  -->
-
-
-            <!--Creacion de Modal-->
-
-
-
-
-            <!--Final de Modal-->
-
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; UNAH 2022</div>
-
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="js/datatables-simple-demo.js"></script>
+</div>
+<!--LIBRERIA DE SWEET ALERT-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-   
-</body>
+<!--FUNCION DE ELIMINAR REGISTRO CON JAVASCRIPT-->
+<script>
+    function eliminar(id){
+        Swal.fire({
+            title: '¿Está seguro?',
+            text: "¡No podrá revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Sí, eliminarlo!'
+        }).then((result)=> {
+            if(result.value){
+                window.location.href = '../Login/eliminarAuxiliar.php?id=' + id + '&tabla=clientes';
+            }
+        } )
+    }
+</script>
+<!--PARA EL REGISTRO DE REPORTES-->
+<script src="../Login/js/jquery.dataTables.min.js"></script>
+<script src="../Login/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+<script type="text/javascript">
+  
+  let PDF = '<?= $PDF ?>';
+  console.log(PDF)
+  if (PDF == 0) {
+    console.log("entro")
 
-</html>
+    jQuery(document).ready(function() {
+      jQuery('#table').DataTable({
+        rowReorder: {
+          selector: 'td:nth-child(2)'
+        },
+        responsive: true,
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        },
+        "paging": true,
+        "processing": true,
+        //dom: 'lBfrtip',
+  
+        "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+          ]
+  
+        });
+      });
+  } else {
+    jQuery(document).ready(function() {
+      jQuery('#table').DataTable({
+        rowReorder: {
+          selector: 'td:nth-child(2)'
+        },
+        responsive: true,
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        },
+        "paging": true,
+        "processing": true,
+        dom: 'lBfrtip',
+
+
+      buttons: [
+        /*{
+          extend: 'copy',
+          text: '<button class="btn btn-secondary" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Copiar <i class="fas fa-copy"></i></button>',
+
+        },*/
+        {
+          extend: 'excel',
+          text: '<button class="btn btn-success" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Excel <i class="fas fa-file-excel"></i></button>',
+          
+        },
+        {
+          extend: 'pdfHtml5',
+          text: '<button class="btn btn-danger" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Exportar a PDF <i class="fas fa-file-pdf"></i></button>',
+          orientation: 'landscape',
+          pageSize: 'LETTER',
+          customize: function(doc) {
+            doc.content.splice(0, 1);
+            var now = new Date();
+            var date = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
+            var horas = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+            //colocar encabezado del documento
+            doc.content.unshift({
+              margin: [0, 0, 0, 0],
+              alignment: 'center',
+              text: 'Inversiones Garcia',
+              fontSize: 20,
+              bold: true,
+              color: '#063970',
+              margin: [0, 0, 0, 20]
+            },{
+              margin: [0, 0, 0, 0],
+              alignment: 'center',
+              text: 'Reporte de Usuarios',
+              fontSize: 20,
+              bold: true
+            },
+            {
+              margin: [0, -20, 0, 20],
+              alignment: 'left',
+              text: 'Fecha: ' + date + '\nHora: ' + horas,
+              fontSize: 10,
+              bold: true
+            },
+           /* {
+              margin: [0, -60, 0, 20],
+              alignment: 'right',
+              width: 70,
+              height: 70,
+            } */
+            );
+            doc["footer"] = function (currentPage, pageCount) {
+              return {
+                margin: 10,
+                columns: [
+                  {
+                    fontSize: 10,
+                    text: [
+                      {
+                        text:
+                          "Página " +
+                          currentPage.toString() +
+                          " de " +
+                          pageCount,
+                        alignment: "center",
+                        bold: true
+                      },
+                    ],
+                    alignment: "center",
+                  },
+                ],
+              };
+            };
+          },
+          exportOptions: {
+            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,],
+            modifier: {
+              page: 'current'
+            },
+          }
+        },
+        {
+          extend: 'print',
+          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
+        } 
+      ],
+      "lengthMenu": [
+        [10, 25, 50, -1],
+        [10, 25, 50, "All"]
+      ]
+
+    });
+  });
+}
+</script>
+<?php include_once "../Login/footer.php"; ?>
