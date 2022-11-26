@@ -21,5 +21,11 @@ function restaurarBD($nombreArchivo)
     $modeloAjustes->restaurarBD($nombreArchivo);
 }
 
+function obtenerNombresdeArchivosRespaldoUltimo()
+{
+    $modeloAjustes = new ajustes();
+    $nombresArchivos = $modeloAjustes->obtenerNombresArchivosRespaldoUltimo();
+    return $nombresArchivos;
+}
 
 ?>

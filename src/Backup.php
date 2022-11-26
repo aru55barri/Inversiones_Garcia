@@ -75,6 +75,28 @@ if (isset($_POST['btnRestaurar'])) {
               </div>
               <!-- /.card-body -->
               <div class="card-body">
+
+                <div class="card">
+                  <div class="card-header">
+                    <h3>Último punto de restauración</h3>
+                  </div>
+                  <div class="card-body">
+
+                    <label>NombreRespaldo__Fecha__Hora</label><br>
+                      <div class="mb-2">
+                        <!-- <label>Selecciona un punto de restauración</label><br> -->
+                        <select name="cmbArchivos" disabled name="cmbArchivos" id="fileBD" onchange="cambio()" class="form-control selectpicker" data-live-search="true">
+                          <?php
+                          $nombresArchivos = obtenerNombresdeArchivosRespaldoUltimo();
+                          foreach ($nombresArchivos as $nombreArchivo) {
+                            echo "<option value='$nombreArchivo'>$nombreArchivo</option>";
+                          }
+                          ?>
+                        </select>
+                      </div>
+                  </div>
+                </div><br>
+                
                 <div class="row">
                   <div class="col-md-6 ">
                     <div class="card">
