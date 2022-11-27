@@ -57,7 +57,6 @@ $PDF = $row['pdf'];
                             <th>ISV</th>
                             <th>TOTAL</th>
                             <th>CLIENTE</th>
-                            <th>TIPO PAGO</th>
                             <th>USUARIO</th>
                             <th>ESTADO</th>
                             <th>DETALLE</th>

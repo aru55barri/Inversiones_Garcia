@@ -5,7 +5,7 @@ include '../Config/conn.php';
 include_once('../controladores/controlador_ventas.php');
 $clientes = new Contralador();
 // $sql = consultas("SELECT * FROM tbl_objetos");
-$pago = $clientes->mostrarPago();
+//$pago = $clientes->mostrarPago();
 $productos = $clientes->mostrarProductos();
 $clientes = $clientes->mostrarClientes();
 
@@ -45,8 +45,8 @@ if (isset($_POST['registrar'])) {
     }
 
     mysqli_query($conn, "INSERT INTO tbl_factura
-    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario, id_Tpago)
-    VALUES(null,now(),'$subtotal', 0.15, '$totalfinal', '$cliente', '$IDUS','" . $i['pago'] . "')");
+    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario)
+    VALUES(null,now(),'$subtotal', 0.15, '$totalfinal', '$cliente', '$IDUS')");
 
     $rs = mysqli_query($conn, "SELECT MAX(id_factura) as id FROM tbl_factura");
     $row = mysqli_fetch_array($rs);
@@ -130,8 +130,7 @@ if (isset($_POST['agregar'])) {
         empty($_POST['cantidad']) ||
         empty($_POST['totalbruto']) ||
         empty($_POST['totalfinal']) ||
-        empty($_POST['pago']) ||
-        empty($_POST['producto'])
+         empty($_POST['producto'])
     ) {
         ?>
         <script>
@@ -143,11 +142,10 @@ if (isset($_POST['agregar'])) {
 
         if (isset($_SESSION['clientecompra'])) {
             $cliente = $_SESSION['clientecompra'];
+
         } else {
             $_SESSION['clientecompra'] = $_POST['cliente'];
             $cliente = $_POST['cliente'];
-            $pago = $_POST['pago'];
-
         }
 
         $costo = $_POST['costo'];
@@ -155,8 +153,7 @@ if (isset($_POST['agregar'])) {
         $totalbruto = $_POST['totalbruto'];
         $totalfinal = $_POST['totalfinal'];
         $productoo = $_POST['producto'];
-        $pago = $_POST['pago'];
-
+ 
         function get_items()
         {
             $items = [];
@@ -217,8 +214,7 @@ if (isset($_POST['agregar'])) {
             global $totalfinal;
             global $productoo;
             global $cliente;
-            global $pago;
-            //si existe la sesion buscamos en la session	
+             //si existe la sesion buscamos en la session	
             if (isset($_SESSION['new_venta']['items'])) {
                 $idproducto = array_column($_SESSION['new_venta']['items'], 'producto');
                 //validamms que el producto no este registrado
@@ -243,8 +239,7 @@ if (isset($_POST['agregar'])) {
                             'totalfinal' => $totalfinal,
                             'producto' => $productoo,
                             'cliente' => $cliente,
-                            'pago' => $pago
-                        ];
+                         ];
 
                     if (!add_item($item)) {
                     }
@@ -274,8 +269,7 @@ if (isset($_POST['agregar'])) {
                         'totalfinal' => $totalfinal,
                         'producto' => $productoo,
                         'cliente' => $cliente,
-                        'pago' => $pago
-                    ];
+                     ];
 
                 if (!add_item($item)) {
                 }
@@ -348,18 +342,8 @@ if (isset($_POST['agregar'])) {
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="utienda">Tipo Pago</label>
-                                    <select name="pago" id="pago" class="form-control" >
-                                         <?php while ($row = $pago->fetch()) { ?>
-                                            <option value="<?php echo $row['id_Tpago'] ?>"><?php echo $row['descripcion'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
+                            <?php } ?>
 
- <?php } ?>
 
                         <div class="col-lg-3">
                             <div class="form-group">

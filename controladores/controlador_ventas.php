@@ -62,9 +62,9 @@ class Contralador
     {
         global $eliminar;
         global $modificar;
-
+        //$matriz = $ventas->mostrargeneral("select tc.*,tp.nombre as nombre_cliente,ttp.descripcion as tipo_pago, aa.nombre as usuario from tbl_factura tc inner join tbl_cliente tp ON tc.idcliente = tp.idcliente inner join tbl_tipo_pago ttp on tc.id_Tpago = ttp.id_Tpago inner join tbl_usuario aa on tc.id_usuario = aa.id_usuario;");
         $ventas = new ModeloPrincipal();
-        $matriz = $ventas->mostrargeneral("select tc.*,tp.nombre as nombre_cliente,ttp.descripcion as tipo_pago, aa.nombre as usuario from tbl_factura tc inner join tbl_cliente tp ON tc.idcliente = tp.idcliente inner join tbl_tipo_pago ttp on tc.id_Tpago = ttp.id_Tpago inner join tbl_usuario aa on tc.id_usuario = aa.id_usuario;");
+        $matriz = $ventas->mostrargeneral("select tc.*,tp.nombre as nombre_cliente, aa.nombre as usuario from tbl_factura tc inner join tbl_cliente tp ON tc.idcliente = tp.idcliente inner join tbl_usuario aa on tc.id_usuario = aa.id_usuario");
         $ii = 0;
         if($matriz != null)
         {
@@ -80,7 +80,6 @@ class Contralador
                     <td><?=$registro['ISV']?></td>
                     <td><?=$registro['Total']?></td>
                     <td><?=$registro['nombre_cliente']?></td>
-                    <td><?=$registro['tipo_pago']?></td>
                     <td><?=$registro['usuario']?></td>
                     <td><?=$registro['estado'] == '' ? 'ACTIVO' : 'CANCELADO'?></th>
                     <th> <a href="../src/vista_detalle_factura.php?id=<?=$registro['id_factura']?>" class='btn btn-round btn-info btn-block'><i class='fa fa-eye' style='color: white'></i></a></th>
