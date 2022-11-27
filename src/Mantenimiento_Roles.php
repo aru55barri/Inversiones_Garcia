@@ -1,61 +1,56 @@
-<?php
-
-include_once "../Login/header.php";
+<?php include_once "../Login/header.php";
 include '../config/conn.php';
-include_once '../controladores/controlador_roles.php';
+include_once '../controladores/controlador_parametro.php';
 
 $id = $_SESSION['rol'];
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 3 and ID_ROL = '$id'");
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 2 and ID_ROL = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
 $modificar = $row['permiso_modificar'];
 $consultar = $row['permiso_consultar'];
 $eliminar = $row['permiso_eliminacion'];
-
+$PDF = $row['pdf'];
+  
 ?>
+
+<h1 class=" text-center" id="letra"> Roles </h1>
+<style>
+  h1{
+  font-family: Vladimir Script;
+  font-size: 80px;
+  }
+</style>
 <div class="container-fluid">
-
-<div class="page-title">
-    <div class="title_left">
-        <h3>Roles</h3>
-    </div>
-
-    <div class="title_right">
-        <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
+        <div class="title_right">
+            <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
             <?php
             if ($insertar == 1) { ?>
-                <button onclick="window.location.href='../src/nuevo_roles.php';" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo Rol</button>
-            <?php } ?>
-            <!--<a target="black" href="../reportes/reporte_roles.php" class="btn btn-round btn-info"><i class="fa-solid fa-file-pdf"></i>PDF</a>-->
-
+                <button onclick="window.location.href='../src/nuevo_roles.php'" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo Rol</button>
+                <?php } ?>
+                <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
+            </div>
         </div>
     </div>
-</div>
-<?php 
-if (isset($_SESSION['registro'])) {
+    <?php
+    if (isset($_SESSION['registro'])) {
     echo "<script>Notiflix.Notify.success('Registrado correctamente');</script>";
     unset($_SESSION['registro']);
-}
-
-if (isset($_SESSION['edicion'])) {
+    }
+    if (isset($_SESSION['edicion'])) {
     echo "<script>Notiflix.Notify.warning('Editado correctamente');</script>";
     unset($_SESSION['edicion']);
-}
-if (isset($_SESSION['eliminacion'])) {
+    }
+    if (isset($_SESSION['eliminacion'])) {
     echo "<script>Notiflix.Notify.failure('Eliminado correctamente');</script>";
     unset($_SESSION['eliminacion']);
-}
-
-if (isset($_SESSION['existe'])) {
+    }
+    if (isset($_SESSION['existe'])) {
     echo "<script>Notiflix.Notify.failure('El rol ya existe');</script>";
     unset($_SESSION['existe']);
-}
-
-
+    }
     ?>
-
-
+    <center>
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
@@ -66,10 +61,10 @@ if (isset($_SESSION['existe'])) {
                             <th>ROL</th>
                             <th>DESCRIPCION</th>
                             <?php if ($modificar == 1) { ?>
-                                <th>EDITAR</th>
+                            <th>EDITAR</th>
                             <?php } ?>
                             <?php if ($eliminar == 1) { ?>
-                                <th>ELIMINAR</th>
+                            <th>ELIMINAR</th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -77,35 +72,35 @@ if (isset($_SESSION['existe'])) {
                         <?php
                         include_once '../controladores/controlador_roles.php';
                         Contralador::mostrar();
-
                         ?>
-
-
                     </tbody>
-
                 </table>
             </div>
         </div>
+        </center>
     </div>
 </div>
+<!--LIBRERIA DE SWEET ALERT-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!--FUNCION DE ELIMINAR REGISTRO CON JAVASCRIPT-->
 <script>
     function eliminar(id) {
 
-        Notiflix.Confirm.show(
-            'Confirmar',
-            'Desea eliminar?',
-            'Si',
-            'No',
-            () => {
-                window.location.href = "../controladores/controlador_roles.php?eliminar=" + id;
-            },
-            () => {
-                Notiflix.Report.warning('Cancelado', 'Hiciste clic en el botón "No"');
-            }, {});
-    }
+Notiflix.Confirm.show(
+    'Confirmar',
+    'Desea eliminar?',
+    'Si',
+    'No',
+    () => {
+        window.location.href = "../controladores/controlador_roles.php?eliminar=" + id;
+    },
+    () => {
+        Notiflix.Report.warning('Cancelado', 'Hiciste clic en el botón "No"');
+    }, {});
+}
 </script>
-
+<!--PARA EL REGISTRO DE REPORTES-->
 <script src="../Login/js/jquery.dataTables.min.js"></script>
 <script src="../Login/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -160,12 +155,11 @@ if (isset($_SESSION['existe'])) {
         "processing": true,
         dom: 'lBfrtip',
       buttons: [
-        /*
-        {
+        /*{
           extend: 'copy',
-          text: '<button class="btn btn-secondary" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Copiar <i class="fas fa-copy"></i></button>',/
-        }
-        */
+          text: '<button class="btn btn-secondary" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Copiar <i class="fas fa-copy"></i></button>',
+
+        },*/
         {
           extend: 'excel',
           text: '<button class="btn btn-success" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Excel <i class="fas fa-file-excel"></i></button>',
@@ -192,7 +186,7 @@ if (isset($_SESSION['existe'])) {
             },{
               margin: [0, 0, 0, 0],
               alignment: 'center',
-              text: 'Reporte de Inventario Productos',
+              text: 'Reporte de Parametros',
               fontSize: 20,
               bold: true
             },
@@ -235,7 +229,7 @@ if (isset($_SESSION['existe'])) {
             };
           },
           exportOptions: {
-            columns: [0, 1, 2, 3],
+            columns: [0, 1, 2],
             modifier: {
               page: 'current'
             },
@@ -247,14 +241,11 @@ if (isset($_SESSION['existe'])) {
         } 
       ],
       "lengthMenu": [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"]
+        [50, 25, 50, -1],
+        [50, 25, 50, "All"]
       ]
     });
   });
 }
 </script>
-<?php
-include_once('../Login/Footer.php');  
-
-?>  
+<?php include_once "../Login/footer.php"; ?>

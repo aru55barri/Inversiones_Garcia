@@ -20,7 +20,7 @@ if (isset($_GET['eliminar'])) {
 class Contralador
 {
     public $data;
-    public  $matriz;
+    public $matriz;
 
     public function __construct()
     {
@@ -56,8 +56,8 @@ class Contralador
 
         $data = new ModeloPrincipal();
         $matriz = $data->mostrargeneral("SELECT * FROM tbl_roles", "1");
-        foreach ($matriz as $key => $value) {
-            foreach ($value as $registro) { ?>
+        foreach ($matriz as $key => $VALUE) {
+            foreach ($VALUE as $registro) { ?>
                 <tr>
                     <td><?= $registro['id_rol'] ?></td>
                     <td><?= $registro['rol'] ?></td>
