@@ -26,7 +26,7 @@ class ajustes
             $tablasRespaldar[] = $tabla[0];
         }
 
-        $nombreRespaldo = "InversionesGarcia_" . date("Y-m-d_H-i-s") .".sql";
+        $nombreRespaldo = "BackupInversionesGarcia__" . date("Y-m-d__H-i-s") .".sql";
         $contenido = "";
         $contenido .= "-- Respaldo de la base de datos Inversiones Garcia\n";
         $contenido .= "-- Fecha: " . date("Y-m-d H:i:s") . "\n";
@@ -132,7 +132,20 @@ class ajustes
         return $nombresArchivos;
     }
 
-
+    public function obtenerNombresArchivosRespaldoUltimo()
+    {
+        $this->db = getConexion();
+        self::setNames();
+        $nombresArchivos = [];
+        $directorio = opendir("../config/Respaldos/");
+        while ($archivo = readdir($directorio)) {
+            if ($archivo != "." && $archivo != "..") {
+                $nombresArchivos[0] = $archivo;
+            }
+        }
+        closedir($directorio);
+        return $nombresArchivos;
+    }
     
 }
 

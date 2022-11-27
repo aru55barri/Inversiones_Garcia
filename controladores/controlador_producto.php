@@ -64,27 +64,31 @@ class ProductoContralador
         $matrizproductos = $productos->mostrargeneral("select u.*,r.DESCRIPCION as TIPO_PRODUC, s.descripcion as CATEGORIA from tbl_producto u inner join tipo_producto r on u.id_tipo_producto = r.id inner join tbl_categoria s on u.id_categoria = s.id");
         $ii = 0;
 
+
+
+
+        
         if($matrizproductos != null)
         {
             foreach ($matrizproductos as $key => $value) {
                 foreach ($value as $registro) { ?>
-    
-    
               <tr>
                     <td><?=$ii = $ii + 1?></td>
                         <td> <?= $registro['CATEGORIA'] ?></td>
                         <td><?= $registro['TIPO_PRODUC'] ?></td>
                         <td><?= $registro['descripcion'] ?></td>
                         <td><?= $registro['precio_venta'] ?></td>
-                        <td><?= $registro['existencia'] ?></td>
-                        <td><?= $registro['cantidad_minima'] ?></td>
-                        <td><?= $registro['cantidad_maxima'] ?></td>
+                         
+                        <td><span class="<?= $registro['existencia'] <= $registro['cantidad_minima']  ? 'badge badge-danger'  : 'badge badge-success'?>"> <?=$registro['existencia']?></span></td>
 
+                        <td><?= $registro['cantidad_minima'] ?></td>
+                        <td><?= $registro['cantidad_maxima'] ?></td> 
+                  
                         <?php
                         
                         if ($modificar == 1) { ?>
                             <th><a href="../Login/modificar_producto.php?id=<?= $registro['codproducto'] ?>" class='btn btn-round btn-info'><i class='fas fa-pen-square'style='color: white'></i></a></th>
-                       <?php }
+                                             <?php }
                         
                         if ($eliminar == 1) { ?>
                             <th><a onclick="eliminar(<?= $registro['codproducto'] ?>)"  class='btn btn-round btn-danger' type='submit'><i class='fas fa-trash-alt' style="color: white;"></i></a></th>
