@@ -71,6 +71,7 @@ $PDF = $row['pdf'];
                             <th>USUARIO</th>
                             <th>ESTADO</th>
                             <th>DETALLE</th>
+                            <th>PDF</th>
                             <?php if ($eliminar == 1) { ?>
                              <th>ELIMINAR</th>
                             <?php } ?>

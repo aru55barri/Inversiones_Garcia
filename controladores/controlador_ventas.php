@@ -83,8 +83,12 @@ class Contralador
                     <td><?=$registro['tipo_pago']?></td>
                     <td><?=$registro['usuario']?></td>
                     <td><?=$registro['estado'] == '' ? 'ACTIVO' : 'CANCELADO'?></th>
+
                     <th> <a href="../src/vista_detalle_factura.php?id=<?=$registro['id_factura']?>" class='btn btn-round btn-info btn-block'><i class='fa fa-eye' style='color: white'></i></a></th>
-                    <?php
+                    <th> <a href="../pdf/Regenerar.php?id=<?=$registro['id_factura']?>" class="btn btn-round btn-danger" style="color: white">PDF <i class="fas fa-file-pdf"></i></a></th>
+
+                   <?php
+                    
                     if ($eliminar == 1) { ?>
                       <th><a onclick="eliminar(<?= $registro['id_factura'] ?>)"  class='btn btn-round btn-danger' type='submit'><i class='fas fa-trash-alt' style="color: white;"></i></a></th>
                     <?php } ?>

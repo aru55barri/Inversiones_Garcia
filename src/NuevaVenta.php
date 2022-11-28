@@ -9,9 +9,7 @@ $pago = $clientes->mostrarPago();
 $productos = $clientes->mostrarProductos();
 $clientes = $clientes->mostrarClientes();
 
-//$cambio = $_POST['cambio'];
-//$recibido = $_POST['recibido'];
-//$apagar = $_POST['apagar'];
+
 $cambio = 0;
 $recibido = 12;
 $apagar = 4;
@@ -476,7 +474,7 @@ if (isset($_POST['agregar'])) {
                     <div class="row">
                         <div class="col-lg-2">
 
-                         <button type="button" id="cobrar" name="cobrar" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Cobrar</button>
+                          <button type="button" id="cobrar" name="cobrar" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Cobrar</button>
  
                         </div>
 
@@ -516,7 +514,9 @@ if (isset($_POST['agregar'])) {
 
 </script>
 <?php
-   
+   /*$cambio = $_POST['cambio'];
+   $recibido = $_POST['recibido'];
+   $apagar = $_POST['apagar'];*/
    
   if (isset($_POST['cobrar'])) {
     $alert = "";
@@ -549,7 +549,7 @@ if (isset($_POST['agregar'])) {
           </div>
         
           <div class="form-group">
-            <label for="recipient-name" onKeyUp="pierdeFocos(this)" class="col-form-label">Recibido:</label>
+            <label for="recipient-name"  class="col-form-label">Recibido:</label>
             <input type="text" class="form-control" id="recibido" name ="recibido">
           </div>
 
@@ -564,10 +564,8 @@ if (isset($_POST['agregar'])) {
       <div class="modal-footer">
         <button type="button" name = "close" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         
-        <form action="" method="post">
-         <button type="submit" id="calcular" name = "calcular" class="btn btn-secondary" >Calcular</button>
-         </form>      
-
+           <button type="submit" id="calcular" name = "calcular" class="btn btn-secondary" >Calcular</button>
+ 
         <form action="" method="post">
         <button class="btn btn-success" name="registrar" id="terminar" type="submit" >Terminar venta <i class='far fa-file-alt' style="color: white;"></i></button>
         </form>      

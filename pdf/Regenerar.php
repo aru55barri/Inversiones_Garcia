@@ -7,12 +7,18 @@ $pdf->SetMargins(10, 10, 10);
 $pdf->SetTitle("Ventas");
 $pdf->SetFont('Arial', 'B', 12);
 $id = $_GET['id'];
-$idcliente = $_GET['cliente'];
-date_default_timezone_set('America/Mexico_City');
-$fechaActual = date('d/m/y h:i:s');
+
+$client = mysqli_query($conexion, "SELECT idcliente from tbl_factura WHERE id_factura = $id");
+$raw = mysqli_fetch_array($client);
+$cliente = $raw['idcliente'];
+
+$fec = mysqli_query($conexion, "SELECT Fecha_fac from tbl_factura WHERE id_factura = $id");
+$raw = mysqli_fetch_array($fec);
+$fechaActual = $raw['Fecha_fac'];
+
 //$config = mysqli_query($conexion, "SELECT * FROM configuracion"); -------- DATOS DE CONFIGURACION DEL PDF
 //$datos = mysqli_fetch_assoc($config);
-$clientes = mysqli_query($conexion, "SELECT * FROM tbl_cliente WHERE idcliente = $idcliente");
+$clientes = mysqli_query($conexion, "SELECT * FROM tbl_cliente WHERE idcliente = $cliente");
 $datosC = mysqli_fetch_assoc($clientes);
 $ventas = mysqli_query($conexion, "SELECT d.*, p.codproducto, p.descripcion FROM tbl_detalle_factura d INNER JOIN tbl_producto p ON d.codproducto = p.codproducto WHERE d.id_factura = $id");
 $Apagar = mysqli_query($conexion, "SELECT * from tbl_factura WHERE id_factura = $id");
