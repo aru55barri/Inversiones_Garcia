@@ -56,9 +56,7 @@ $PDF = $row['pdf'];
                                 <!-- <th>PRODUCCION</th> -->
                                 <th>PRODUCTO</th>
                                 <th>DETALLE</th>
-                            
-                        
-                            
+                               
                         </tr>
                     </thead>
                     <tbody>

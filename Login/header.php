@@ -1,4 +1,6 @@
 <?php
+include '../Config/conn.php';
+
 session_start();
 
 if (!empty($_SESSION)) {
@@ -236,6 +238,11 @@ include './../config/conn.php';
                 </nav>
             </div>
             <div id="layoutSidenav_content"> <br>
+            <?php
+
+
+
+?>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -254,4 +261,21 @@ include './../config/conn.php';
             }
         })
     }
+    function imprimir(id, cliente) {
+        Swal.fire({
+            title: 'FACTURA',
+            text: "¿Desea imprimir la factura?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Sí, Imprimir!'
+        }).then((result)=> {
+            if(result.value){
+                window.location.href = "../pdf/generar.php?id=" + id +"&cliente=" + cliente;
+              
+          }
+        } )
+    }
+ 
 </script>

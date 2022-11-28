@@ -9,7 +9,7 @@ if (isset($_GET['cancelar'])) {
 }
 
 $id = $_SESSION['rol'];   
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 2 and ID_ROL = '$id'");
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 16 and ID_ROL = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
@@ -62,9 +62,9 @@ class Contralador
     {
         global $eliminar;
         global $modificar;
-        //$matriz = $ventas->mostrargeneral("select tc.*,tp.nombre as nombre_cliente,ttp.descripcion as tipo_pago, aa.nombre as usuario from tbl_factura tc inner join tbl_cliente tp ON tc.idcliente = tp.idcliente inner join tbl_tipo_pago ttp on tc.id_Tpago = ttp.id_Tpago inner join tbl_usuario aa on tc.id_usuario = aa.id_usuario;");
+
         $ventas = new ModeloPrincipal();
-        $matriz = $ventas->mostrargeneral("select tc.*,tp.nombre as nombre_cliente, aa.nombre as usuario from tbl_factura tc inner join tbl_cliente tp ON tc.idcliente = tp.idcliente inner join tbl_usuario aa on tc.id_usuario = aa.id_usuario");
+        $matriz = $ventas->mostrargeneral("select tc.*,tp.nombre as nombre_cliente, tk.descripcion as tipo_pago, aa.nombre as usuario from tbl_factura tc inner join tbl_cliente tp ON tc.idcliente = tp.idcliente inner join tbl_tipo_pago tk on tc.id_Tpago = tk.id_Tpago inner join tbl_usuario aa on tc.id_usuario = aa.id_usuario");
         $ii = 0;
         if($matriz != null)
         {
@@ -80,6 +80,7 @@ class Contralador
                     <td><?=$registro['ISV']?></td>
                     <td><?=$registro['Total']?></td>
                     <td><?=$registro['nombre_cliente']?></td>
+                    <td><?=$registro['tipo_pago']?></td>
                     <td><?=$registro['usuario']?></td>
                     <td><?=$registro['estado'] == '' ? 'ACTIVO' : 'CANCELADO'?></th>
                     <th> <a href="../src/vista_detalle_factura.php?id=<?=$registro['id_factura']?>" class='btn btn-round btn-info btn-block'><i class='fa fa-eye' style='color: white'></i></a></th>

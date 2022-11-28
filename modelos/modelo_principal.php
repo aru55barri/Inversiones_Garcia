@@ -134,7 +134,6 @@ class ModeloPrincipal
         $this->db = null;
     }
 
-    
     //eliminar datos de una tabla cesia Nelson
     public function eliminar($tabla, $condicion)
     {

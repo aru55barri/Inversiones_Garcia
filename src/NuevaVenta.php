@@ -5,7 +5,7 @@ include '../Config/conn.php';
 include_once('../controladores/controlador_ventas.php');
 $clientes = new Contralador();
 // $sql = consultas("SELECT * FROM tbl_objetos");
-//$pago = $clientes->mostrarPago();
+$pago = $clientes->mostrarPago();
 $productos = $clientes->mostrarProductos();
 $clientes = $clientes->mostrarClientes();
 
@@ -45,8 +45,8 @@ if (isset($_POST['registrar'])) {
     }
 
     mysqli_query($conn, "INSERT INTO tbl_factura
-    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario)
-    VALUES(null,now(),'$subtotal', 0.15, '$totalfinal', '$cliente', '$IDUS')");
+    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario, id_Tpago)
+    VALUES(null,now(),'$subtotal', 0.15, '$totalfinal', '$cliente', '$IDUS','" . $i['pago'] . "')");
 
     $rs = mysqli_query($conn, "SELECT MAX(id_factura) as id FROM tbl_factura");
     $row = mysqli_fetch_array($rs);
@@ -64,6 +64,7 @@ if (isset($_POST['registrar'])) {
     unset($_SESSION['new_venta']['items']);
     unset($_SESSION['tiendacompra']);
     unset($_SESSION['clientecompra']);
+    unset($_SESSION['pagocompra']);
     unset($_SESSION['transaccioncompra']);
 
     $_SESSION['registro'] = 'ok';
@@ -91,35 +92,21 @@ if (isset($_GET['eliminar'])) {
             unset($_SESSION['new_venta']['items'][$i]);
             
 ?>
-       <?php  echo "<script>
-        Swal.fire({
-            icon: 'success',
-            title: 'EXCELENTE!',
-            text: 'Eliminado con Exito!',
-            confirmButtonText: 'Aceptar',
-            position:'center',
-            allowOutsideClick:false,
-            padding:'1rem'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                location.href ='NuevaVenta.php';
-            }
-        })    
-    </script>";?>
+      
+            <script>
+                Notiflix.Notify.failure('Eliminado correctamente');
+            </script>
         <?php
         }
     }
 }
 
 ////////////////////////////////////////// INICIA LIMPIAR  //////////////////////////////////////////
-if (isset($_POST['limpiar'])) {
+if (isset($_GET['limpiar'])) {
 
     unset($_SESSION['new_venta']['items']);
     unset($_SESSION['clientecompra']);
-    
-    echo "<script> 
-    location.href ='../src/factura.php';
-    </script>";
+    unset($_SESSION['pagocompra']);
 }
 ////////////////////////////////////////// TERMINA LIMPIAR //////////////////////////////////////////
 
@@ -130,7 +117,7 @@ if (isset($_POST['agregar'])) {
         empty($_POST['cantidad']) ||
         empty($_POST['totalbruto']) ||
         empty($_POST['totalfinal']) ||
-         empty($_POST['producto'])
+        empty($_POST['producto'])
     ) {
         ?>
         <script>
@@ -142,18 +129,25 @@ if (isset($_POST['agregar'])) {
 
         if (isset($_SESSION['clientecompra'])) {
             $cliente = $_SESSION['clientecompra'];
-
         } else {
             $_SESSION['clientecompra'] = $_POST['cliente'];
             $cliente = $_POST['cliente'];
-        }
 
+        }
+        if (isset($_SESSION['pagocompra'])) {
+            $pago = $_SESSION['pagocompra'];
+             
+        } else {
+            $_SESSION['pagocompra'] = $_POST['pago'];
+            $pago = $_POST['pago'];
+        }
         $costo = $_POST['costo'];
         $cantidad = $_POST['cantidad'];
         $totalbruto = $_POST['totalbruto'];
         $totalfinal = $_POST['totalfinal'];
         $productoo = $_POST['producto'];
- 
+        
+
         function get_items()
         {
             $items = [];
@@ -214,7 +208,8 @@ if (isset($_POST['agregar'])) {
             global $totalfinal;
             global $productoo;
             global $cliente;
-             //si existe la sesion buscamos en la session	
+            global $pago;
+            //si existe la sesion buscamos en la session	
             if (isset($_SESSION['new_venta']['items'])) {
                 $idproducto = array_column($_SESSION['new_venta']['items'], 'producto');
                 //validamms que el producto no este registrado
@@ -239,7 +234,8 @@ if (isset($_POST['agregar'])) {
                             'totalfinal' => $totalfinal,
                             'producto' => $productoo,
                             'cliente' => $cliente,
-                         ];
+                            'pago' => $pago
+                        ];
 
                     if (!add_item($item)) {
                     }
@@ -269,7 +265,8 @@ if (isset($_POST['agregar'])) {
                         'totalfinal' => $totalfinal,
                         'producto' => $productoo,
                         'cliente' => $cliente,
-                     ];
+                        'pago' => $pago
+                    ];
 
                 if (!add_item($item)) {
                 }
@@ -341,9 +338,21 @@ if (isset($_POST['agregar'])) {
                                     </select>
                                 </div>
                             </div>
-
                             <?php } ?>
+                            <?php if (!isset($_SESSION['pagocompra'])) { ?>
 
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="utienda">Tipo Pago</label>
+                                    <select name="pago" id="pago" class="form-control" >
+                                         <?php while ($row = $pago->fetch()) { ?>
+                                            <option value="<?php echo $row['id_Tpago'] ?>"><?php echo $row['descripcion'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                          <?php } ?>
 
                         <div class="col-lg-3">
                             <div class="form-group">
@@ -436,13 +445,16 @@ if (isset($_POST['agregar'])) {
                                             <th><button class="btn btn-danger" onclick="eliminar(<?= $i['id'] ?>)" name="eliminar" type="submit"><i class='fas fa-trash-alt'></i></button></th>
                                         </tr>
                                     <?php       
-                                    $total = $total + $i['totalfinal'];                  
+                                    $total = $total + $i['totalfinal'];  
+                                    //$impu = $total * 0.15; 
+                                    //$total = $total + $impu;                 
                                     }
                      
                                     ?>
-                                    <tr>
+                                   
+                                     
                                         <td colspan="4" align="right">
-                                            <h3>Total</h3>
+                                            <h3>Total a pagar</h3>
                                         </td>
                                         <td align="right">
                                             <h3><?php echo number_format($total, 2); ?></h3>
@@ -472,7 +484,7 @@ if (isset($_POST['agregar'])) {
                         <div class="col-lg-2">
 
 
-                            <button class="btn btn-danger" onclick="limpiar()" id="limpiar" name="limpiar" type="submit">Cancelar venta</button>
+                            <button class="btn btn-danger" onclick="limpiar()" name="limpiar" type="submit">Cancelar venta</button>
 
                         </div>
                        
@@ -582,6 +594,8 @@ if (isset($_POST['agregar'])) {
         } )
     }
 
+
+    
     function limpiar() {
         Swal.fire({
             title: '¿Está seguro?',
@@ -593,7 +607,7 @@ if (isset($_POST['agregar'])) {
             confirmButtonText: '¡Sí, cancelar!'
         }).then((result)=> {
             if(result.value){
-                window.location.href = "factura.php";
+                window.location.href = "factura.php?limpiar";
           }
         } )
     }

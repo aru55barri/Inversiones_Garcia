@@ -4,8 +4,9 @@ include_once('../Login/header.php');
 
 include '../Config/conn.php';
 
+
 $id = $_SESSION['rol'];
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where id_objeto = 2 and id_rol = '$id'");
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 16 and ID_ROL = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
@@ -40,9 +41,18 @@ $PDF = $row['pdf'];
     }
     if(isset($_SESSION['registro']))
     {
-        echo "<script>Notiflix.Notify.success('Venta Registrada correctamente');</script>";
+      $rs = mysqli_query($conn, "SELECT MAX(id_factura) as id FROM tbl_factura");
+      $row = mysqli_fetch_array($rs);
+      $id = $row['id'];
+      
+      $client = mysqli_query($conn, "SELECT idcliente from tbl_factura WHERE id_factura = $id");
+      $raw = mysqli_fetch_array($client);
+      $cliente = $raw['idcliente'];
+
+        echo "<script> imprimir($id, $cliente);</script>";
         unset($_SESSION['registro']);
     }
+   
     ?>
     
         <div class="row">
@@ -57,6 +67,7 @@ $PDF = $row['pdf'];
                             <th>ISV</th>
                             <th>TOTAL</th>
                             <th>CLIENTE</th>
+                            <th>TIPO PAGO</th>
                             <th>USUARIO</th>
                             <th>ESTADO</th>
                             <th>DETALLE</th>
