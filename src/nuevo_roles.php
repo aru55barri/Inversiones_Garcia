@@ -26,7 +26,7 @@ if ($_POST) {
                         <form class="needs-validation" id="form-register" method="POST" novalidate>
 
                             <div class="form-floating">
-                                <input class="form-control" name="rol" id="inputLastName" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" placeholder="Rol" autocomplete="nope" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
+                                <input class="form-control" name="rol" id="inputLastName" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" placeholder="rol" autocomplete="nope" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
                                 <label for="inputLastName"><i class="fa-solid fa-user-group"></i>&nbsp;Rol</label>
                                 <div class="valid-feedback">
                                     Campo Válido.
@@ -36,7 +36,7 @@ if ($_POST) {
                             <br>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="descripcion" id="inputEmail" type="text" onpaste="return false" onkeypress="return sololetrasAp(event)" placeholder="Descripcion" required />
+                                <input class="form-control" name="descripcion" id="inputEmail" type="text" onpaste="return false" onkeypress="return sololetrasAp(event)" placeholder="descripcion" required />
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Descripcion</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

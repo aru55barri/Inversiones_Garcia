@@ -59,10 +59,8 @@ $PDF = $row['pdf'];
         <div class="col-lg-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="table">
-
                     <thead class="thead-dark">
                         <tr>
-
                             <th>#</th>
                             <th>PARAMETRO</th>
                             <th>VALOR</th>
@@ -272,8 +270,8 @@ $PDF = $row['pdf'];
         } 
       ],
       "lengthMenu": [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"]
+        [50, 25, 50, -1],
+        [50, 25, 50, "All"]
       ]
     });
   });
