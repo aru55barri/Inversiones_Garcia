@@ -1,5 +1,6 @@
 <?php
     require_once '../modelos/modelo_preguntas_usuario.php';
+    include '../Config/conn.php';
 
     function ListarPregunta(){
         $modeloPregunta = new Pregunta();

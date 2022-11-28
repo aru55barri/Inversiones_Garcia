@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/conex.php';
+require_once '../config/conexion.php';
 
 class Pregunta
 {
