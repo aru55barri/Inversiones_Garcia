@@ -12,7 +12,7 @@ if (!empty($_POST)) {
     $id_tip_producto = $_POST['txtIDtipoproducto'];
     $desctipo_tip_producto = $_POST['txtDesctipoproducto'];
 
-    $resultado = editar_tipo_producto($id, $descripcion);
+    $resultado = editar_tipo_producto($id_tip_producto, $desctipo_tip_producto);
 
     if ($resultado == true) {
 
@@ -25,6 +25,7 @@ if (!empty($_POST)) {
     } else {
     }
 }
+
 
 ?>
 
@@ -59,16 +60,16 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="mt-4 mb-0">
-                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(46, 182, 210, 0.8)" value="Actualizar" />
+                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info " style="background-color:rgba(46, 182, 210, 0.8);" value="Actualizar" />
                                 </div>
-                                <div class="mt-4 mb-0">
-                                    <div class="d-grid"><input type="button" onclick="window.location.href='../src/tipo_producto.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
-                                    </div>
+                                <br>
+                                <div class="d-grid"><input type="button" onclick="window.location.href='../src/tipo_producto.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
+
                                 </div>
                             </div>
                         </form>
                     </div>
-                
+
                 </div>
             </div>
         </div>
