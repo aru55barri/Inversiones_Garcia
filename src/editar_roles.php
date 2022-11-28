@@ -1,143 +1,279 @@
 <?php
-include_once('../login/header.php');
-include_once('../controladores/controlador_roles.php');
-include_once('../modelos/modelo_principal.php');
+include_once "../Login/header.php";
+require_once '../controladores/controlador_roles.php';
 
+if (!empty($_GET)) {
 
-$id = $_GET['id'];
-$model = new ModeloPrincipal();
+    $id = base64_decode($_GET["id"]);
+    $DatosRol = get_rol_ID($id);
+}
 
-$roles = new Contralador();
-$row = $roles->mostrarid($id);
+if (!empty($_POST)) {
+    $id_rol = $_POST['txtIDrol'];
+    $rol = $_POST['txtrol'];
+    $descRol = $_POST['txtDescRol'];
 
-if ($_POST) {
-    $id = $_POST['id'];
-    $rol = $_POST['rol'];
-    $descripcion = $_POST['descripcion'];
-    $model->UpdateRoles($id, $rol, $descripcion);
-    echo "<script> 
-    location.href ='../src/Mantenimiento_roles.php';
-    </script>"; 
+    $resultado = editar_rol($id_rol, $rol, $descRol);
+
+    if ($resultado == true) {
+
+        //redirigir a la pagina principal con javascript
+        echo "<script>
+      window.location.href='../src/Mantenimiento_Roles.php';
+      </script>";
+        //guardar en session que se edita correctamente
+        $_SESSION['EditarRol'] = "Listo";
+    } else {
+    }
 }
 
 ?>
 
-<div class="row justify-content-center">
-    <div class="col-lg-7">
-        <div class="card shadow-lg border-0 rounded-lg mt-5">
-            <div class="card-header" style="background-color: rgb(171, 237, 230);">
-                <h3 class="text-center font-weight-light my-4">Actualizar rol</h3>
-            </div>
-            <div class="card-body">
-                <form class="needs-validation" id="form-register" method="POST">
-                    <input name="id" hidden type="text" value="<?= $row[0][0]['id_rol'] ?>">
-                    <div class="form-floating">
-                        <input class="form-control" value="<?= $row[0][0]['rol'] ?>" name="rol" id="inputLastName" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" placeholder="Rol" autocomplete="nope" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
-                        <label for="inputLastName"><i class="fa-solid fa-user-group"></i>&nbsp;Rol</label>
-                        <div class="valid-feedback">
-                            Campo Válido.
-                        </div>
-                        <span id="mensaje"></span>
+<br><br><br><br><br><br><br><br><br><br><br>
+<main>
+    <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header" style="background-color: rgb(171, 237, 230);">
+                        <h3 class="text-center font-weight-light my-4">Editar Rol #<?php echo $DatosRol['id_rol'] ?></h3>
                     </div>
-                    <br>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" value="<?= $row[0][0]['descripcion'] ?>" name="descripcion" id="inputEmail" type="text" onpaste="return false" onkeypress="return sololetrasAp(event)" placeholder="Descripcion" required />
-                        <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Descripcion</label>
-                        <div class="valid-feedback">
-                            Campo Válido!
-                        </div>
-                        <span id="1mensaje"></span>
+                    <div class="card-body">
+
+
+                        <form id="form-register" class="needs-validation" method="POST" novalidate>
+
+                            <div class="form-floating mb-3 mb-md-3">
+                                <input class="form-control " name="txtIDrol" id="inputIDrol" type="text" value="<?php if (!empty($_GET)) {
+                                                                                                                    echo base64_decode($_GET['id']);
+                                                                                                                } ?>" readonly required />
+                                <label for="inputIDrol"><i class="fas fa-user icon"></i>&nbsp;ID Rol </label>
+                            </div>
+
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="txtrol" id="inputrol" onblur="validarRol(this)" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosRol['rol']; } ?>" required />
+                                <label for="inputrol"><i class="fas fa-user icon"></i>&nbsp;Rol</label>
+                                <div class="valid-feedback">
+                                    Campo Válido!
+                                </div>
+                                <div id="mensaje"></div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="txtDescRol" id="inputDescRol" type="text" onpaste="return false" onkeypress="return sololetrasDesc(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosRol['descripcion']; } ?>" required />
+                                <label for="inputDescRol"><i class="fas fa-user icon"></i>&nbsp;Descripción</label>
+                                <div class="valid-feedback">
+                                    Campo Válido!
+                                </div>
+                                <span id="Descmensaje"></span>
+                            </div>
+
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info " style="background-color:rgba(46, 182, 210, 0.8);" value="Actualizar" />
+                                </div>
+                                <br>
+                                <div class="d-grid"><input type="button" onclick="window.location.href='../src/Mantenimiento_Roles.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
+
+                                </div>
+                            </div>
+                        </form>
                     </div>
-            </div>
-            <div class="mt-4 mb-0">
-                <div class="d-grid"><input type="submit" id="button" class="btn btn-primary btn-block" value="Actualizar" />
+
                 </div>
             </div>
-            </form>
         </div>
-    </div>
-    <script src="./js/validar.js" type="text/javascript"></script>
-    <script src="./js/moment.js"></script>
-    <script src="./js/jquery.js" type="text/javascript"></script>
 
-    <script>
-        (() => {
-            'use strict'
+        <!-- VALIDACIONES DE SOLO INGRESO DE LETRAS MAYUSCULAS-->
+        <script>
+            var bandera = false;
 
-            const forms = document.querySelectorAll('.needs-validation')
+            function validarRol(NombreRol) {
+                ajax = new XMLHttpRequest();
 
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+                if (NombreRol.value.trim() != '') {
+                    //ajax = new XMLHttpRequest(); //PARA HACER UNA PETICION DE DIRECCION DE UNA API
+                    ajax.open("GET", "../src/verefica_roles.php?rol=" + NombreRol.value, true); //DIRECCION DE LA PETICION
+                    ajax.send();
+                    ajax.onreadystatechange = function() {
+                        if (ajax.readyState == 4 && ajax.status == 200) {
+                            respuesta = ajax.responseText;
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
+                            if (respuesta == 'Rol Disponible') {
+                                if (document.getElementById('inputrol').value != '') {
+                                    document.getElementById('inputrol').style.borderColor = "green";
+                                    document.getElementById('mensaje').style.color = "green";
+                                    document.getElementById('inputrol').style.boxShadow = "0 0 10px green";
+                                    document.getElementById('mensaje').innerHTML = "<i class='fas fa-check-circle'></i>Rol Disponible";
+                                    document.getElementById('button').disabled = false;
+                                    bandera = true;
+                                }
 
-            /**AGREGADO POR DENIA */
-            //validar DNI
-            document.getElementById("txtID").addEventListener("change", validarDNI);
+                            } else {
+                                document.getElementById('inputrol').style.borderColor = "red";
+                                document.getElementById('mensaje').style.color = "red";
+                                document.getElementById('inputrol').style.boxShadow = "0 0 10px red";
+                                document.getElementById('mensaje').innerHTML = "<i class='fas fa-times-circle'></i>Rol No Disponible";
+                                document.getElementById('button').disabled = true;
+                                bandera = false;
+                            }
 
-            function validarDNI() {
-                const formData = new FormData(document.getElementById('form-register'));
-                formData.append('_action', 'validarDNI');
-                fetch('../controladores/controladorLogin.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log(result.error);
-                        if (result.error != '') {
-                            document.querySelector('#button').disabled = true;
-                            $("#2mensaje").text("Identidad ya a sido Registrada Anteriormente").css("color", "red");
-                        } else {
-                            //  eliminar el ensaje de error del DOM
-                            $("#2mensaje").text("").css("color", "red");
-                            document.querySelector('#button').disabled = false;
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Ha ocurrido un error');
-                    });
-            }
-
-            //validar Fecha
-            document.getElementById("naci").addEventListener("change", validarFecha);
-
-            function validarFecha() {
-                var nacimiento = moment(document.getElementById("naci").value);
-                var hoy = moment();
-                var anios = hoy.diff(nacimiento, "years");
-                var fecha = document.getElementById("dtpfechaNacimiento");
-
-                //ANIOS PERMITIDO
-                if (anios < 18) {
-                    document.querySelector('#button').disabled = true;
-                    $("#fechamensaje").text("La persona debe tener al menos 18 años").css("color", "red");
-                    fecha.style.borderColor = "red";
-                    fecha.style.boxShadow = "0 0 10px red";
-                } else {
-                    $("#fechamensaje").text("").css("color", "red");
-                    document.querySelector('#button').disabled = false;
-                    fecha.style.borderColor = "green";
-                    fecha.style.boxShadow = "0 0 10px green";
+                    }
                 }
             }
-        })()
-    </script>
 
+            function sololetrasMa(e) {
+                var rol = document.getElementById('inputrol');
+                key = e.keyCode || e.which;
+                teclado = String.fromCharCode(key);
+                /*letras="abcdefghijklmnopqrstuvwxyz";.toLowerCase()*/
+                letras = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                especiales = "8-37-38-46-164";
+                teclado_especial = false;
 
-</div>
+                for (var i in especiales) {
+                    if (key == especiales[i]) {
 
+                        teclado_especial = true;
+                        break;
 
+                    }
+                }
+                if (letras.indexOf(teclado) == -1 && !teclado_especial) {
+                    document.querySelector('#button').disabled = true;
+                    $("#mensaje").text("Por favor solo ingrese letras Mayusculas").css("color", "red");
+                    rol.style.borderColor = "red";
+                    rol.style.boxShadow = "0 0 10px red";
+                    return false;
+                } else {
+                    $("#mensaje").text("").css("color", "green");
+                    document.querySelector('#button').disabled = false;
+                    rol.style.borderColor = "green";
+                    rol.style.boxShadow = "0 0 10px green";
 
+                }
+            }
 
+            function sololetrasDesc(e) {
+                var descripcion = document.getElementById('inputDescRol');
+                key = e.keyCode || e.which;
+                teclado = String.fromCharCode(key);
+                /*letras="abcdefghijklmnopqrstuvwxyz";.toLowerCase()*/
+                letras = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                especiales = "8-37-38-46-164";
+                teclado_especial = false;
 
-<?php
-include_once('../login/Footer.php');
-?>
+                for (var i in especiales) {
+                    if (key == especiales[i]) {
+
+                        teclado_especial = true;
+                        break;
+
+                    }
+                }
+                if (letras.indexOf(teclado) == -1 && !teclado_especial) {
+                    document.querySelector('#button').disabled = true;
+                    $("#Descmensaje").text("Por favor solo ingrese letras Mayusculas").css("color", "red");
+                    descripcion.style.borderColor = "red";
+                    descripcion.style.boxShadow = "0 0 10px red";
+                    return false;
+                } else {
+                    $("#Descmensaje").text("").css("color", "green");
+                    if (bandera == true) {
+                        document.querySelector('#button').disabled = false;
+                    }
+                    descripcion.style.borderColor = "green";
+                    descripcion.style.boxShadow = "0 0 10px green";
+
+                }
+            }
+        </script>
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        <script>
+            //validar que no se envie el formulario si lleva un campo con espacios en blanco
+            (() => {
+                'use strict'
+
+                const forms = document.querySelectorAll('.needs-validation')
+                var rol = document.getElementById('inputrol');
+                var Descripcionrol = document.getElementById('inputDescRol');
+
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (rol.value.trim() === '') {
+                            event.preventDefault()
+                            event.stopPropagation()
+
+                            swal.fire({
+                                    title: 'Error',
+                                    text: "No puede dejar el campo rol en blanco",
+                                    type: 'error',
+                                    icon: 'error',
+                                    confirmButtonText: '¡ok!',
+                                }).then((result) => {
+                                    if (result.value) {
+                                        rol.focus();
+                                        rol.value = "";
+                                        rol.style.borderColor = "red";
+                                        rol.style.boxShadow = "0 0 10px red";
+                                    }
+                                })
+                                .catch((err) => {
+
+                                });
+                        } else if (Descripcionrol.value.trim() === '') {
+                            event.preventDefault()
+                            event.stopPropagation()
+
+                            swal.fire({
+                                    title: 'Error',
+                                    text: "No puede dejar el campo Descripcion rol en blanco",
+                                    type: 'error',
+                                    icon: 'error',
+                                    confirmButtonText: '¡ok!',
+                                }).then((result) => {
+                                    if (result.value) {
+                                        Descripcionrol.focus();
+                                        Descripcionrol.value = "";
+                                        Descripcionrol.style.borderColor = "red";
+                                        Descripcionrol.style.boxShadow = "0 0 10px red";
+                                    }
+                                })
+                                .catch((err) => {
+
+                                });
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+        </script>
+
+        <script>
+            //Funcion que al iniciar el boton aparezca bloqueado
+            document.getElementById("button").disabled = true;
+
+            var rol = document.getElementById("inputrol");
+            var Descripcion = document.getElementById("inputDescRol");
+
+            //al detectar un cambio en el imput se habilita el boton  EVENTO CHANGE
+            rol.addEventListener("change", function() {
+                if (rol.value != "") {
+                    document.getElementById("button").disabled = false;
+                }
+            });
+
+            Descripcion.addEventListener("change", function() {
+                if (Descripcion.value != "") {
+                    document.getElementById("button").disabled = false;
+                }
+            });
+        </script>
+
+        <!--_______________________________________________________________________________________________________-->
+    </div>
+</main>

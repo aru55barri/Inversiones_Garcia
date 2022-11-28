@@ -62,7 +62,7 @@ if (!empty($_POST)) {
                                 <div class="d-grid"><input type="submit" id="button" class="btn btn-info " style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
                                 </div>
                                 <br>
-                                <div class="d-grid"><input type="button" onclick="window.location.href='../Paginas/vista_pregunta.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
+                                <div class="d-grid"><input type="button" onclick="window.location.href='../src/preguntas.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
 
                                 </div>
                             </div>

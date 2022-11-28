@@ -18,7 +18,8 @@ include_once '../controladores/controlador_trabajos.php';
 include_once '../controladores/controlador_cliente.php';
 include_once '../controladores/controlador_producto.php';
 include_once '../controladores/controlador_parametro.php';
-//include_once '../controladores/controlador_pregunta.php';
+include_once '../controladores/controlador_roles.php';
+include_once '../controladores/controlador_preguntas.php';
 if(!empty($_GET))
     {
         $id = $_GET['id'];
@@ -325,7 +326,7 @@ if(!empty($_GET))
 
             //se ejecuta el eliminar
             echo "<script>
-                window.location.href='../Paginas/vista_rol.php';
+                window.location.href='../src/Mantenimiento_roles.php';
                 </script>";
 
             $_SESSION['eliminarRol'] = 'Si';
@@ -333,7 +334,7 @@ if(!empty($_GET))
         else
         {
             echo "<script>
-                window.location.href='../Paginas/vista_rol.php';
+                window.location.href='../src/Mantenimiento_roles.php';
                 </script>";
 
             $_SESSION['eliminarRol'] = 'No';
@@ -409,7 +410,7 @@ if(!empty($_GET))
 
             //se ejecuta el eliminar
             echo "<script>
-                window.location.href='../Paginas/vista_pregunta.php';
+                window.location.href='../src/preguntas.php';
                 </script>";
 
             $_SESSION['eliminarPregunta'] = 'Si';
@@ -417,7 +418,7 @@ if(!empty($_GET))
         else
         {
             echo "<script>
-            window.location.href='../Paginas/vista_pregunta.php';
+            window.location.href='../src/preguntas.php';
             </script>";
 
         $_SESSION['eliminarPregunta'] = 'No'; 
