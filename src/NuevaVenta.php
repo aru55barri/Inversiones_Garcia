@@ -43,8 +43,8 @@ if (isset($_POST['registrar'])) {
     }
 
     mysqli_query($conn, "INSERT INTO tbl_factura
-    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario, id_Tpago)
-    VALUES(null,now(),'$subtotal', 0.15, '$totalfinal', '$cliente', '$IDUS','" . $i['pago'] . "')");
+    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario, id_Tpago, id_CAI)
+    VALUES(null,now(),'$subtotal', 0.15, '$totalfinal', '$cliente', '$IDUS','" . $i['pago'] . "', '1')");
 
     $rs = mysqli_query($conn, "SELECT MAX(id_factura) as id FROM tbl_factura");
     $row = mysqli_fetch_array($rs);
