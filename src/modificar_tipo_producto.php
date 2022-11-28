@@ -1,6 +1,5 @@
 <?php
 include_once "../Login/header.php";
-include '../config/conn.php';
 require_once '../controladores/controlador_tipo_producto.php';
 
 if (!empty($_GET)) {
@@ -51,7 +50,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtDesctipoproducto" id="inputDesctipoproducto" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosTipoProducto['DESCRIPCION_TIP_PRODUCTO']; } ?>" required />
+                                <input class="form-control" name="txtDesctipoproducto" id="inputDesctipoproducto" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosTipoProducto['descripcion']; } ?>" required />
                                 <label for="inputDesctipoproducto"><i class="fas fa-user icon"></i>&nbsp;Descripcion Tipo Producto</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -60,16 +59,16 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="mt-4 mb-0">
-                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info " style="background-color:rgba(46, 182, 210, 0.8);" value="Actualizar" />
+                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(46, 182, 210, 0.8)" value="Actualizar" />
                                 </div>
-                                <br>
-                                <div class="d-grid"><input type="button" onclick="window.location.href='../src/tipo_producto.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
-
+                                <div class="mt-4 mb-0">
+                                    <div class="d-grid"><input type="button" onclick="window.location.href='../src/tipo_producto.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-
+                
                 </div>
             </div>
         </div>

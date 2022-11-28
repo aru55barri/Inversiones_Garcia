@@ -11,7 +11,7 @@ include_once '../controladores/controlador_modulo.php';
 /*include_once '../controladores/controlador_parametros.php';
 include_once '../controladores/controlador_rol.php';
 include_once '../controladores/controlador_tipo_pago.php';
-include_once '../controladores/controlador_tipo_producto.php';
+
 include_once '../controladores/controlador_trabajos.php';
 
 //**********************denia****************************/
@@ -20,6 +20,7 @@ include_once '../controladores/controlador_producto.php';
 include_once '../controladores/controlador_parametro.php';
 include_once '../controladores/controlador_roles.php';
 include_once '../controladores/controlador_preguntas.php';
+include_once '../controladores/controlador_tipo_producto.php';
 if(!empty($_GET))
     {
         $id = $_GET['id'];
@@ -372,7 +373,7 @@ if(!empty($_GET))
 
             //se ejecuta el eliminar
             echo "<script>
-                window.location.href='../Paginas/vista_tipo_producto.php';
+                window.location.href='../src/tipo_producto.php';
                 </script>";
 
             $_SESSION['tipoProducto'] = 'Si';
@@ -380,12 +381,13 @@ if(!empty($_GET))
         else 
         {
             echo "<script>
-                window.location.href='../Paginas/vista_tipo_producto.php';
+                window.location.href='../src/tipo_producto.php';
                 </script>";
 
             $_SESSION['tipoProducto'] = 'No'; 
         }
     }
+
 
     elseif ($tabla == 'trabajos'){
 

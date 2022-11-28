@@ -132,7 +132,7 @@ class tipo_producto
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tipo_producto WHERE ID_TIP_PRODUCTO = $id";
+        $sql = "SELECT * FROM tipo_producto WHERE id = $id";
         $resultado = $this->db->query($sql);
         $fila = $resultado->fetch(PDO::FETCH_ASSOC);
         return $fila;
