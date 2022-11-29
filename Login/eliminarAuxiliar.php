@@ -22,6 +22,7 @@ include_once '../controladores/controlador_roles.php';
 include_once '../controladores/controlador_preguntas.php';
 include_once '../controladores/controlador_tipo_producto.php';
 include_once '../controladores/controlador_tipo_categoria.php';
+include_once '../controladores/controlador_categoria.php';
 if(!empty($_GET))
     {
         $id = $_GET['id'];
@@ -444,6 +445,28 @@ if(!empty($_GET))
         {
             echo "<script>
             window.location.href='../src/tipo_categoria.php';
+            </script>";
+
+        $_SESSION['eliminartipoca'] = 'No'; 
+        }
+    }
+    elseif ($tabla == 'categoria'){
+
+        $resultado = delete_categoria($id);
+
+        if ($resultado == true) {
+
+            //se ejecuta el eliminar
+            echo "<script>
+                window.location.href='../src/categoria.php';
+                </script>";
+
+            $_SESSION['eliminartipoca'] = 'Si';
+        } 
+        else
+        {
+            echo "<script>
+            window.location.href='../src/categoria.php';
             </script>";
 
         $_SESSION['eliminartipoca'] = 'No'; 
