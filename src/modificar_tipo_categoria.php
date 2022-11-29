@@ -5,14 +5,14 @@ require_once '../controladores/controlador_tipo_categoria.php';
 if (!empty($_GET)) {
 
     $id = base64_decode($_GET["id"]);
-    $DatosPregunta = get_pregunta_ID($id);
+    $DatosPregunta = get_tipoca($id);
 }
 
 if (!empty($_POST)) {
     $id_pregunta = $_POST['txtIDpregunta'];
     $pregunta = $_POST['txtpregunta'];
 
-    $resultado = editar_pregunta($id_pregunta, $pregunta);
+    $resultado = editar_tipoca($id_pregunta, $pregunta);
 
     if ($resultado == true) {
 

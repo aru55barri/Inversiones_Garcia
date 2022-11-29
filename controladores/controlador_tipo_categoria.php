@@ -3,46 +3,46 @@
 include_once '../modelos/modelo_tipo_categoria.php';
 include '../Config/conn.php';
 
-function mostrarPreguntas()
+function mostrarTipoca()
 {
 
-    $modeloPregunta = new Pregunta();
+    $modeloPregunta = new tipocat();
     $resultado = $modeloPregunta->get_pregunta();
     return $resultado;
 }
 
-function insert_pregunta($PREGUNTA)
+function insert_tipoca($PREGUNTA)
 {
 
-    $modeloPregunta = new Pregunta();
-    $resultado = $modeloPregunta->insert_pregunta($PREGUNTA);
+    $modeloPregunta = new tipocat();
+    $resultado = $modeloPregunta->insert_tipoca($PREGUNTA);
     return $resultado;
 }
 
-function editar_pregunta($ID_PREGUNTA,$Pregunta)
+function editar_tipoca($ID_PREGUNTA,$Pregunta)
 {
-    $modeloPregunta = new Pregunta();
-    $resultado = $modeloPregunta->editar_pregunta($ID_PREGUNTA,$Pregunta);
+    $modeloPregunta = new tipocat();
+    $resultado = $modeloPregunta->editar_tipoca($ID_PREGUNTA,$Pregunta);
     return $resultado;
 }
 
 function delete_tipoca($ID_PREGUNTA)
 {
-    $modeloPregunta = new Pregunta();
+    $modeloPregunta = new tipocat();
     $resultado = $modeloPregunta->delete_tipoca($ID_PREGUNTA);
     return $resultado;
 }
 
-function get_pregunta_ID($ID_PREGUNTA)
+function get_tipoca($ID_PREGUNTA)
 {
-    $modeloPregunta = new Pregunta();
-    $resultado = $modeloPregunta->get_pregunta_ID($ID_PREGUNTA);
+    $modeloPregunta = new tipocat();
+    $resultado = $modeloPregunta->get_tipoca($ID_PREGUNTA);
     return $resultado;
 }
 
-function obtenerPreguntaExistente($pregunta)
+function obtenertipocaExistente($pregunta)
 {
-    $modeloPregunta = new Pregunta();
-    $resultado = $modeloPregunta->obtenerPreguntaExistente($pregunta);
+    $modeloPregunta = new tipocat();
+    $resultado = $modeloPregunta->obtenertipocaExistente($pregunta);
     return $resultado;
 }

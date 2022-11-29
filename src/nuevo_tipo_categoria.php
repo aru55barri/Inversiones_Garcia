@@ -7,7 +7,7 @@ require_once '../controladores/controlador_tipo_categoria.php';
 if (!empty($_POST)) {
 
     $PREGUNTA = $_POST['txtPregunta'];
-    $resultado = insert_pregunta($PREGUNTA);
+    $resultado = insert_tipoca($PREGUNTA);
 
     if ($resultado == true) {
 

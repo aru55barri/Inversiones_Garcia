@@ -42,9 +42,9 @@ $PDF = $row['pdf'];
     }
     if (isset($_SESSION['eliminartipoca'])) {
       if ($_SESSION['eliminartipoca'] == 'Si') {
-        echo "<script>Notiflix.Notify.failure('Pregunta Eliminada Correctamente');</script>";
+        echo "<script>Notiflix.Notify.failure('Tipo Categoria Eliminada Correctamente');</script>";
       } else {
-        echo "<script>Notiflix.Notify.warning('No se pudo eliminar Una pregunta porque esta asociado a un usuario');</script>";
+        echo "<script>Notiflix.Notify.warning('No se pudo eliminar porque esta asociado a un usuario');</script>";
       }
   
       unset($_SESSION['eliminartipoca']);
@@ -75,7 +75,7 @@ $PDF = $row['pdf'];
                     <tbody>
                         <?php
 
-                        $resultado = mostrarPreguntas();
+                        $resultado = mostrarTipoca();
 
                         foreach ($resultado as $Pregunta) {
                             echo "<tr>";
@@ -122,7 +122,7 @@ $PDF = $row['pdf'];
 
         }).then((result) => {
             if (result.value) {
-                window.location.href = '../Login/eliminarAuxiliar.php?id=' + id + '&tabla=tipocategoria';
+                window.location.href = '../Login/eliminarAuxiliar.php?id=' + id + '&tabla=tabla';
             }
         })
 

@@ -2,7 +2,7 @@
 
 require_once '../config/conexion.php';
 
-class Pregunta
+class tipocat
 {
     private $db;
     private $Pregunta;
@@ -36,7 +36,7 @@ class Pregunta
     }
 
 
-    public function insert_pregunta($PREGUNTA){
+    public function insert_tipoca($PREGUNTA){
 
         $this->db = getConexion();
         self::setNames();
@@ -63,7 +63,7 @@ class Pregunta
 
     }
 
-    public function editar_pregunta($ID_PREGUNTA,$Pregunta)
+    public function editar_tipoca($ID_PREGUNTA,$Pregunta)
     {
         $this->db = getConexion();
         self::setNames();
@@ -128,7 +128,7 @@ class Pregunta
         }
     }
 
-    public function get_pregunta_ID($ID_PREGUNTA)
+    public function get_tipoca($ID_PREGUNTA)
     {
 
         $this->db = getConexion();
@@ -140,7 +140,7 @@ class Pregunta
         $this->db = null;
     }
  
-    public function obtenerPreguntaExistente($pregunta)
+    public function obtenertipocaExistente($pregunta)
     {
 
         $this->db = getConexion();
