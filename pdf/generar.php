@@ -14,6 +14,8 @@ $fechaActual = date('d/m/y h:i:s');
 //$datos = mysqli_fetch_assoc($config);
 $clientes = mysqli_query($conexion, "SELECT * FROM tbl_cliente WHERE idcliente = $idcliente");
 $datosC = mysqli_fetch_assoc($clientes);
+
+
 $ventas = mysqli_query($conexion, "SELECT d.*, p.codproducto, p.descripcion FROM tbl_detalle_factura d INNER JOIN tbl_producto p ON d.codproducto = p.codproducto WHERE d.id_factura = $id");
 $Apagar = mysqli_query($conexion, "SELECT * from tbl_factura WHERE id_factura = $id");
 $pdf->Cell(195, 5, 'INVERSIONES GARCIA', 0, 1, 'C');
@@ -57,9 +59,10 @@ $pdf->Cell(196, 5, "Detalle de Producto", 1, 1, 'C', 1);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Cell(14, 5, utf8_decode('N°'), 0, 0, 'L');
 $pdf->Cell(90, 5, utf8_decode('Descripción'), 0, 0, 'L');
-$pdf->Cell(25, 5, 'Cantidad', 0, 0, 'L');
-$pdf->Cell(32, 5, 'Precio', 0, 0, 'L');
-$pdf->Cell(35, 5, 'Sub Total.', 0, 1, 'L');
+$pdf->Cell(22, 5, 'Cantidad', 0, 0, 'L');
+$pdf->Cell(25, 5, 'Precio', 0, 0, 'L');
+$pdf->Cell(27, 5, 'Isv', 0, 0, 'L');
+$pdf->Cell(32, 5, 'Sub Total', 0, 1, 'L');
 $pdf->SetFont('Arial', '', 10);
 $contador = 1;
 
@@ -67,9 +70,10 @@ $contador = 1;
 while ($row = mysqli_fetch_assoc($ventas)) {
     $pdf->Cell(14, 5, $contador, 0, 0, 'L');
     $pdf->Cell(90, 5, $row['descripcion'], 0, 0, 'L');
-    $pdf->Cell(25, 5, $row['cantidad'], 0, 0, 'L');
-    $pdf->Cell(32, 5, $row['precio'], 0, 0, 'L');
-    $pdf->Cell(35, 5, number_format($row['cantidad'] * $row['precio'], 2, '.', ','), 0, 1, 'L');
+    $pdf->Cell(22, 5, $row['cantidad'], 0, 0, 'L');
+    $pdf->Cell(25, 5, $row['precio'], 0, 0, 'L');
+    $pdf->Cell(27, 5, $row['isv'], 0, 0, 'L');
+    $pdf->Cell(32, 5, number_format($row['cantidad'] * $row['precio'], 2, '.', ','), 0, 1, 'L');
     $contador++;
 }
 
@@ -77,15 +81,15 @@ $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(14, 5, utf8_decode(''), 0, 0, 'L');
 $pdf->Cell(90, 5, utf8_decode(''), 0, 0, 'L');
 $pdf->Cell(25, 5, 'Sub total', 0, 0, 'L');
-$pdf->Cell(32, 5, 'Impuesto', 0, 0, 'L');
-$pdf->Cell(40, 5, 'Total a pagar', 0, 1, 'L');
+$pdf->Cell(27, 5, 'Impuesto', 0, 0, 'L');
+$pdf->Cell(32, 5, 'Total a pagar', 0, 1, 'L');
 $pdf->SetFont('Arial', '', 10);
 while ($raw = mysqli_fetch_assoc($Apagar)) {
     $pdf->Cell(14, 5, utf8_decode(''), 0, 0, 'L');
 $pdf->Cell(90, 5, utf8_decode(''), 0, 0, 'L');
     $pdf->Cell(25, 5, $raw['Sub_Total'], 0, 0, 'L');
-    $pdf->Cell(32, 5, '15%', 0, 0, 'L');
-    $pdf->Cell(35, 5, $raw['Total'], 0, 0, 'L');
+    $pdf->Cell(27, 5, $raw['ISV'], 0, 0, 'L');
+    $pdf->Cell(32, 5, $raw['Total'], 0, 0, 'L');
 }
 
 

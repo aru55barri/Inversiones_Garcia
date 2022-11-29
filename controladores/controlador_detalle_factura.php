@@ -35,6 +35,8 @@ $i=1;
                 echo "<th>" . $registro['descripcion'] . "</th>";
                 echo "<th>" . $registro['cantidad'] . "</th>";
                 echo "<th>" . $registro['precio'] . "</th>";
+                echo "<th>" . $registro['isv'] . "</th>";
+
                 echo "</tr>";
              $i++;   
             }

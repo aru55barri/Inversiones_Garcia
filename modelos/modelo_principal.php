@@ -214,6 +214,20 @@ class ModeloPrincipal
 
     }
 
+    public function obtenerimpuesto()
+    {
+        $this->db = getConexion();
+        $sql = "SELECT valor FROM tbl_parametros WHERE parametro = 'Impuesto sobre venta'";
+        $resultado = $this->db->query($sql);
+
+        foreach ($resultado as $resp) {
+            $this->impuesto[] = $resp;
+        }
+
+        return $this->impuesto;
+        $this->db = null;
+    }
+
     
 
 

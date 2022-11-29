@@ -25,6 +25,12 @@ class Contralador
     public  $matriz;
 
 
+    static public function obtenerimpuesto()
+    {
+    $modeloCompras = new ModeloPrincipal();
+    return $modeloCompras->obtenerimpuesto();
+    }
+
 
     public function __construct()
     {

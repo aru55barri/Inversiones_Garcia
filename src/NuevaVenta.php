@@ -7,8 +7,8 @@ $clientes = new Contralador();
 // $sql = consultas("SELECT * FROM tbl_objetos");
 $pago = $clientes->mostrarPago();
 $productos = $clientes->mostrarProductos();
+$isvparametro = $clientes->obtenerimpuesto();
 $clientes = $clientes->mostrarClientes();
-
 
 $cambio = 0;
 $recibido = 12;
@@ -21,7 +21,7 @@ if (isset($_POST['registrar'])) {
     $transaccion;
     $cliente;
     $subtotal = 0;
-    $impuesto = 0;
+    $impuest = 0;
     $totalfinal = 0;
   
     // disminuir en la tabla existencia
@@ -38,21 +38,23 @@ if (isset($_POST['registrar'])) {
             mysqli_query($conn, $sql1);
         }
         $totalfinal = ($totalfinal + $i['totalfinal']); //sustituir total por totalfinal y cambiarlo en la consulta
+       // $pago = $i['pago'];
         $cliente = $i['cliente'];
+        $impuest = ($impuest + $i['valorimpuesto']);
         $subtotal = ($subtotal + $i['totalbruto']);
     }
 
     mysqli_query($conn, "INSERT INTO tbl_factura
     (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario, id_Tpago)
-    VALUES(null,now(),'$subtotal', 0.15, '$totalfinal', '$cliente', '$IDUS','" . $i['pago'] . "')");
+    VALUES(null,now(),'$subtotal', '$impuest', '$totalfinal', '$cliente', '$IDUS', '" . $i['pago'] . "')");
 
     $rs = mysqli_query($conn, "SELECT MAX(id_factura) as id FROM tbl_factura");
     $row = mysqli_fetch_array($rs);
     $id = $row['id'];
 
-    $sql = "INSERT INTO tbl_detalle_factura (id_detalleFac, id_factura,codproducto,cantidad,precio) VALUES";
+    $sql = "INSERT INTO tbl_detalle_factura (id_factura,codproducto,cantidad,precio,isv) VALUES";
     foreach ($items as $i) {
-        $sql  .= "(null, '$id','" . $i['producto'] . "','" . $i['cantidad'] .  "','" . $i['costo'] . "'),";
+        $sql  .= "('$id','" . $i['producto'] . "','" . $i['cantidad'] .  "','" . $i['costo'] . "','" . $i['valorimpuesto'] ."'),";
         mysqli_query($conn, "INSERT INTO tbl_kardex(id_movimiento,id_producto,fecha,id_usuario,cantidad)VALUES(2,'" . $i['producto'] . "',now(), '$IDUS','" . $i['cantidad'] . "')");
     }
 
@@ -143,6 +145,7 @@ if (isset($_POST['agregar'])) {
         $cantidad = $_POST['cantidad'];
         $totalbruto = $_POST['totalbruto'];
         $totalfinal = $_POST['totalfinal'];
+        $impuesto = $_POST['valorimpuesto'];
         $productoo = $_POST['producto'];
         
 
@@ -207,6 +210,8 @@ if (isset($_POST['agregar'])) {
             global $productoo;
             global $cliente;
             global $pago;
+            global  $impuesto;
+
             //si existe la sesion buscamos en la session	
             if (isset($_SESSION['new_venta']['items'])) {
                 $idproducto = array_column($_SESSION['new_venta']['items'], 'producto');
@@ -231,6 +236,8 @@ if (isset($_POST['agregar'])) {
                             'totalbruto' => $totalbruto,
                             'totalfinal' => $totalfinal,
                             'producto' => $productoo,
+                            'valorimpuesto' => $impuesto,
+
                             'cliente' => $cliente,
                             'pago' => $pago
                         ];
@@ -262,6 +269,8 @@ if (isset($_POST['agregar'])) {
                         'totalbruto' => $totalbruto,
                         'totalfinal' => $totalfinal,
                         'producto' => $productoo,
+                        'valorimpuesto' => $impuesto,
+
                         'cliente' => $cliente,
                         'pago' => $pago
                     ];
@@ -354,7 +363,7 @@ if (isset($_POST['agregar'])) {
 
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label for="dni">Costo unitario</label>
+                                <label for="dni">Precio de venta</label>
                                 <input type="text" placeholder="" name="costo" id="costo" class="form-control">
                             </div>
                         </div>
@@ -370,12 +379,21 @@ if (isset($_POST['agregar'])) {
                                 <input type="text" placeholder="" disabled name="stok" id="stock" class="form-control">
                             </div>
                         </div>
+
                         <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="dni">Isv</label>
-                                <input type="text" value="0.15" class="form-control" id="isv" readonly>
+                        <div class="form-group">
+                                <label for="dni">ISV</label>
+                                <input type="text" value="<?= $isvparametro[0]['valor']  ?>" name="isv" class="form-control" id="isv" readonly>
                             </div>
                         </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="dni">Valor del Impuesto</label>
+                                <input type="text" name="valorimpuesto" class="form-control" id="valorimpuesto" readonly>
+                            </div>
+                        </div>
+
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="dni">Total bruto</label>
@@ -422,6 +440,7 @@ if (isset($_POST['agregar'])) {
                                         <th>Producto</th>
                                         <th>Precio</th>
                                         <th>Cantidad</th>
+                                        <th>Isv</th>
                                         <th>Total</th>
                                         <th>Eliminar</th>
 
@@ -439,6 +458,7 @@ if (isset($_POST['agregar'])) {
                                             <th><?php echo $i['productotext'] ?></th>
                                             <th><?php echo $i['costo'] ?></th>
                                             <th><?php echo $i['cantidad'] ?></th>
+                                            <th><?php echo $i['valorimpuesto'] ?></th>
                                             <th><?php echo $i['totalfinal'] ?></th>
                                             <th><button class="btn btn-danger" onclick="eliminar(<?= $i['id'] ?>)" name="eliminar" type="submit"><i class='fas fa-trash-alt'></i></button></th>
                                         </tr>
@@ -592,8 +612,13 @@ if (isset($_POST['agregar'])) {
         } )
     }
 
+    function limpiarcantidad() {
+                 document.getElementById("cantidad").value="";
+                 document.getElementById("totalbruto").value="";
+                 document.getElementById("totalfinal").value="";
+                 document.getElementById("valorimpuesto").value="";
+            }
 
-    
     function limpiar() {
         Swal.fire({
             title: '¿Está seguro?',
@@ -605,7 +630,7 @@ if (isset($_POST['agregar'])) {
             confirmButtonText: '¡Sí, cancelar!'
         }).then((result)=> {
             if(result.value){
-                window.location.href = "factura.php?limpiar";
+                window.location.href = "NuevaVenta.php?limpiar";
           }
         } )
     }
@@ -620,6 +645,20 @@ if (isset($_POST['agregar'])) {
         var valor = e.value.replace(/^0*/, '');
         e.value = valor;
     }
+    function clientes(idc) {
+        let idclientes = idc;
+        console.log(idclientes);
+        fetch('../controladores/clientesV.php?idclientes=' + idclientes)
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data);
+                
+                cliente.value = data[0].ID_CLIENTE;
+                Ncliente.value = data[0].NOMBRE_CLIENTE;
+                console.log(data[0]);
+              
+            })
+    }
 
     let producto;
     let productotext;
@@ -633,6 +672,7 @@ if (isset($_POST['agregar'])) {
                 console.log(data);
                 costo.value = data[0].PRECIO;
                 cantidad.value = '';
+
 
                 fetch('../controladores/ventas.php?stock=' + idproducto)
                     .then(response => response.json())
@@ -652,7 +692,7 @@ if (isset($_POST['agregar'])) {
             totalbruto.value = costo.value * cantidad.value;
             let subtotal = totalbruto.value * isv.value;
             totalfinal.value = subtotal + parseInt(totalbruto.value);
-            $cambio =  $recibido-$apagar;
+            valorimpuesto.value = totalbruto.value * isv.value;
 
         }
     };

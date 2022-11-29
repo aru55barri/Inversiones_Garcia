@@ -6,6 +6,7 @@ include_once('../controladores/controlador_ingreso_Prod.php');
 $compra = new CompraContralador();
 // $sql = consultas("SELECT * FROM tbl_objetos");
 $productos = $compra->mostrarProductos();
+$isvparametro = $compra->obtenerimpuesto();
 $proveedores = $compra->mostrarLotes();
 //$pago = $compra->mostrartipoPago();
 $IDUS = $_SESSION['id_usuario'];
@@ -348,12 +349,14 @@ if (isset($_POST['agregar'])) {
                                 <input type="text" placeholder="" required name="cantidad" id="cantidad" onKeyUp="pierdeFoco(this)" class="form-control">
                             </div>
                         </div>
+
                         <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="dni">Isv</label>
-                                <input type="text" value="0.20" class="form-control" id="isv" readonly>
+                        <div class="form-group">
+                                <label for="dni">ISV</label>
+                                <input type="text" value="<?= $isvparametro[0]['valor']  ?>" name="isv" class="form-control" id="isv" readonly>
                             </div>
                         </div>
+                        
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="dni">Total bruto</label>

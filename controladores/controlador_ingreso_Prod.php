@@ -39,6 +39,11 @@ class CompraContralador
     public $compras;
     public  $matrizCompras;
 
+    static public function obtenerimpuesto()
+    {
+    $modeloCompras = new ModeloPrincipal();
+    return $modeloCompras->obtenerimpuesto();
+    }
 
 
     public function __construct()

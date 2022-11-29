@@ -52,7 +52,11 @@ $PDF = $row['pdf'];
         echo "<script> imprimir($id, $cliente);</script>";
         unset($_SESSION['registro']);
     }
-   
+    if(isset($_SESSION['limpiar']))
+    {
+        echo "<script>Notiflix.Notify.success('Venta Registrada correctamente');</script>";
+        unset($_SESSION['cancelado']);
+    }
     ?>
     
         <div class="row">
@@ -193,7 +197,7 @@ $PDF = $row['pdf'];
             doc.content.unshift({
               margin: [0, 0, 0, 0],
               alignment: 'center',
-              text: 'Servicio & Color',
+              text: 'Inversiones Garcia',
               fontSize: 20,
               bold: true,
               color: '#063970',

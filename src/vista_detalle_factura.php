@@ -33,6 +33,7 @@ $ID_VENTA = $_GET['id'];
                             <th>PRODUCTO</th>
                             <th>CANTIDAD</th>
                             <th>PRECIO</th>
+                            <th>ISV</th>
                         </tr>
                     </thead>
                     <tbody>

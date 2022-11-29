@@ -61,8 +61,8 @@ $PDF = $row['pdf'];
                         <tr>
                             <th>ID</th>
                             <th>CATEGORIA</th>
-                            <th>PRODUCTO</th>
-                            <th>DESCRIPCION</th>
+                            <th>TIPO PRODUCTO</th>
+                            <th>NOMBRE</th>
                             <th>PRECIO VENTA</th>
                             <th>EXISTENCIA</th>
                             <th>CANTIDAD MINIMA</th>
