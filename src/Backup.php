@@ -131,7 +131,7 @@ if (isset($_POST['btnRestaurar'])) {
                           <form id="formBD" method="POST" name="formBD" class="form-horizontal">
                             <div class="mb-2">
                               <!-- <label>Selecciona un punto de restauración</label><br> -->
-                              <select name="cmbArchivos" id="fileBD" onchange="cambio()" class="form-control selectpicker" data-live-search="true">
+                              <select name="cmbArchivos" id="fileBD" onchange="cambio()" class="form-control selectpicker" data-live-search="true" required>
                                 <option value="" disabled="" selected="">Selecciona un punto de restauración</option>
                                 <?php
                                 $nombresArchivos = obtenerNombresdeArchivosRespaldo();

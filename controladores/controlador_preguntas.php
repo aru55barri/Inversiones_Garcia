@@ -1,6 +1,7 @@
 <?php
 
 include_once '../modelos/modelo_preguntas.php';
+include '../Config/conn.php';
 
 function mostrarPreguntas()
 {

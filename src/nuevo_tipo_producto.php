@@ -23,7 +23,7 @@ if (!empty($_POST)) {
             padding:'1rem'
         }).then((result) => {
             if (result.isConfirmed) {
-                location.href ='../Paginas/vista_tipo_producto.php';
+                location.href ='../src/tipo_producto.php';
             }
         })    
     </script>";
@@ -51,7 +51,7 @@ if (!empty($_POST)) {
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtDescripciontipoProducto" id="inputDescripciontipoProdcto" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Descripcion tipo producto" required="true" />
+                                <input class="form-control" name="txtDescripciontipoProducto" id="inputDescripciontipoProdcto" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="descripcion" required="true" />
                                 <label for="inputDescripciontipoProducto">Descripcion tipo producto</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

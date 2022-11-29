@@ -1,6 +1,5 @@
 <?php
 include_once "../Login/header.php";
-include '../config/conn.php';
 require_once '../controladores/controlador_tipo_producto.php';
 
 if (!empty($_GET)) {
@@ -13,7 +12,7 @@ if (!empty($_POST)) {
     $id_tip_producto = $_POST['txtIDtipoproducto'];
     $desctipo_tip_producto = $_POST['txtDesctipoproducto'];
 
-    $resultado = editar_tipo_producto($id, $descripcion);
+    $resultado = editar_tipo_producto($id_tip_producto, $desctipo_tip_producto);
 
     if ($resultado == true) {
 
@@ -26,6 +25,7 @@ if (!empty($_POST)) {
     } else {
     }
 }
+
 
 ?>
 
@@ -51,7 +51,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtDesctipoproducto" id="inputDesctipoproducto" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosTipoProducto['DESCRIPCION_TIP_PRODUCTO']; } ?>" required />
+                                <input class="form-control" name="txtDesctipoproducto" id="inputDesctipoproducto" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosTipoProducto['descripcion']; } ?>" required />
                                 <label for="inputDesctipoproducto"><i class="fas fa-user icon"></i>&nbsp;Descripcion Tipo Producto</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
