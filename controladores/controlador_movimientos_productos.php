@@ -34,7 +34,7 @@ class Contralador
             foreach ($value as $registro) {  ?>
                 <tr>
                 <td><?=$ii = $ii + 1?></td>
-                <td><span class="<?=$registro['nombre_movimiento'] == 'ENTRADAS' ? 'badge badge-primary' : 'badge badge-warning'?> badge badge-primary"><?=$registro['nombre_movimiento']?></span></td>
+                <td><span class="<?=$registro['nombre_movimiento'] == 'ENTRADA' ? 'badge badge-primary' : 'badge badge-warning'?> badge badge-primary"><?=$registro['nombre_movimiento']?></span></td>
                 <td><?=$registro['cantidad']?></td>
                 <td><?=$registro['descripcion']?></td>
                 <td><?=$registro['nombre']?></td>
