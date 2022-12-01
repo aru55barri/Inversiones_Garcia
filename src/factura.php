@@ -49,8 +49,43 @@ $PDF = $row['pdf'];
       $raw = mysqli_fetch_array($client);
       $cliente = $raw['idcliente'];
 
-        echo "<script> imprimir($id, $cliente);</script>";
-        unset($_SESSION['registro']);
+
+      $consulta = "SELECT * FROM tbl_cai WHERE fecha_vencimiento > NOW()";
+      $resultado = mysqli_query($conn, $consulta);
+      $cai = mysqli_fetch_assoc($resultado);
+
+      $CAI = $cai['id'];  
+
+      $consulta = "SELECT * FROM tbl_cai WHERE id = $CAI";
+      $resultado = mysqli_query($conn, $consulta);
+      $MCAI = mysqli_fetch_assoc($resultado);
+
+$Rinicial = $MCAI ['rango_inicial'];  
+$Rfinal = $MCAI ['rango_final'];  
+$Ractual = $MCAI ['rango_actual'];  
+$NumCAI = $MCAI ['numero_CAI'];  
+$fecha = $MCAI ['fecha_vencimiento'];  
+
+
+if ($Ractual+1 >= $Rinicial+1 && $Ractual+1 <= $Rfinal) {
+    $sql1 = "UPDATE tbl_cai SET rango_actual = '$Ractual'+1 WHERE id = '$CAI' ";
+    mysqli_query($conn, $sql1);
+
+        if ($fecha = 0) {
+  echo "<script>Notiflix.Notify.failure('Error la fecha no es valida');</script>";
+}
+    try {
+        if ($Ractual+1 >= $Rfinal) {
+          echo "<script>Notiflix.Notify.failure('Favor verificar la configuracion CAI. No se encuentran numeros vigentes');</script>";
+        }
+    } catch (Exception $e) {
+        return false;
+    }
+
+}
+
+      echo "<script> imprimir($id, $cliente, $CAI);</script>";
+      unset($_SESSION['registro']);
     }
     if(isset($_SESSION['limpiar']))
     {

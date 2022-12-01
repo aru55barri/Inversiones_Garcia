@@ -261,7 +261,7 @@ include './../config/conn.php';
             }
         })
     }
-    function imprimir(id, cliente) {
+    function imprimir(id, cliente, cai) {
         Swal.fire({
             title: 'FACTURA',
             text: "¿Desea imprimir la factura?",
@@ -272,7 +272,7 @@ include './../config/conn.php';
             confirmButtonText: '¡Sí, Imprimir!'
         }).then((result)=> {
             if(result.value){
-                window.location.href = "../pdf/generar.php?id=" + id +"&cliente=" + cliente;
+                window.location.href = "../pdf/generar.php?id=" + id +"&cliente=" + cliente +"&CAI="+ cai;
               
           }
         } )

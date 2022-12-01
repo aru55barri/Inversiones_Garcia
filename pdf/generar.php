@@ -8,6 +8,8 @@ $pdf->SetTitle("Ventas");
 $pdf->SetFont('Arial', 'B', 12);
 $id = $_GET['id'];
 $idcliente = $_GET['cliente'];
+$CAI = $_GET['CAI'];
+
 date_default_timezone_set('America/Mexico_City');
 $fechaActual = date('d/m/y h:i:s');
 //$config = mysqli_query($conexion, "SELECT * FROM configuracion"); -------- DATOS DE CONFIGURACION DEL PDF
@@ -15,6 +17,19 @@ $fechaActual = date('d/m/y h:i:s');
 $clientes = mysqli_query($conexion, "SELECT * FROM tbl_cliente WHERE idcliente = $idcliente");
 $datosC = mysqli_fetch_assoc($clientes);
 
+$consulta = "SELECT * FROM tbl_cai WHERE id = $CAI";
+$resultado = mysqli_query($conexion, $consulta);
+$MCAI = mysqli_fetch_assoc($resultado);
+
+$Rinicial = $MCAI ['rango_inicial'];  
+$Rfinal = $MCAI ['rango_final'];  
+$Ractual = $MCAI ['rango_actual'];  
+$NumCAI = $MCAI ['numero_CAI'];  
+$fecha = $MCAI ['fecha_vencimiento'];  
+
+if ($Ractual+1 > $Rfinal) {
+    $Ractual = 00000000000;
+  }
 
 $ventas = mysqli_query($conexion, "SELECT d.*, p.codproducto, p.descripcion FROM tbl_detalle_factura d INNER JOIN tbl_producto p ON d.codproducto = p.codproducto WHERE d.id_factura = $id");
 $Apagar = mysqli_query($conexion, "SELECT * from tbl_factura WHERE id_factura = $id");
@@ -38,6 +53,15 @@ $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(195, 5, 'Fecha emision de factura', 0, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(195, 5, $fechaActual , 0, 1, 'C');
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->Cell(195, 5, 'Numero CAI', 0, 1, 'C');
+$pdf->SetFont('Arial', '', 10);
+$pdf->Cell(195, 5, $NumCAI , 0, 1, 'C');
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->Cell(195, 5, 'Numero de factura', 0, 1, 'C');
+$pdf->SetFont('Arial', '', 10);
+$pdf->Cell(195, 5, $Ractual , 0, 1, 'C');
+
 
 $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 10);
