@@ -1,6 +1,9 @@
 <?php
     require_once '../modelos/modelo_CAI.php';
 
+    include_once '../modelos/modelo_principal.php';
+    include_once('../Login/header.php');
+
     $id = $_SESSION['rol'];
     $sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 22 and ID_ROL = '$id'");
     $row = mysqli_fetch_array($sql);
@@ -75,9 +78,31 @@
             location.href ='../src/CAI.php';
             </script>";
         }
+
+        static function eliminarCAI($id)
+        {
+            $modeloCAI = new CAI();
+            $resultado = $modeloCAI->eliminarCAI($id);
+            return $resultado;
+        }
+
         
     }
 
-    
+    function obtenerCAI($id)
+    {
+        $modeloCAI = new CAI();
+        $resultado = $modeloCAI->obtenerCAI($id);
+        return $resultado;
+    }
+
+    function EditarCAI($id, $rango_inicial,$rango_final,$rango_actual,$numero_CAI,$fecha_vencimiento)
+    {
+        $modeloCAI = new CAI();
+        $resultado = $modeloCAI->EditarCAI($id, $rango_inicial,$rango_final,$rango_actual,$numero_CAI,$fecha_vencimiento);
+        return $resultado;
+    }
+
+
 ?>
 

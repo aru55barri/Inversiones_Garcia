@@ -12,7 +12,7 @@ $db = getConexion();
 if ($_POST) {
     $rango_inicial = $_POST['rango_inicial'];
     $rango_final = $_POST['rango_final'];
-    $rango_actual = 50;
+    $rango_actual = $rango_inicial;
     $numero_CAI = $_POST['numero_CAI'];
     $fecha_vencimiento = $_POST['fecha_vencimiento'];
     $usuario = 1;

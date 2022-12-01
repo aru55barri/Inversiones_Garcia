@@ -92,15 +92,15 @@ $PDF = $row['pdf'];
    function eliminar(id){
        Swal.fire({
            title: '¿Está seguro?',
-           text: "¿Desea cancelar la factura?",
+           text: "¿Desea Eliminar el Registro CAI?",
            icon: 'warning',
            showCancelButton: true,
            confirmButtonColor: '#3085d6',
            cancelButtonColor: '#d33',
-           confirmButtonText: '¡Sí, Cancelar!'
+           confirmButtonText: '¡Sí, Eliminar!'
        }).then((result)=> {
            if(result.value){
-               window.location.href = "../controladores/controlador_ventas.php?cancelar="+id;            }
+               window.location.href = "../controladores/controlador_cai.php?eliminar="+id;            }
        } )
    }
 </script>
