@@ -61,9 +61,9 @@ $PDF = $row['pdf'];
                     <thead class="thead-dark">
                         <tr>
 
-                            <th>ID</th>
-                            <th>ID TPO CATEGORIA</th>
-                            <th>CATEGORIA</th>
+                            <th>#</th>
+                            <th>TIPO DE CATEGORIA</th>
+                            <th>DESCRIPCION</th>
                             <?php if ($modificar == 1) { ?>
                             <th>EDITAR</th>
                             <?php } ?>
@@ -78,15 +78,17 @@ $PDF = $row['pdf'];
                         <?php
 
                         $resultado = mostrarcategoria();
-
+                        $ii=1;
                         foreach ($resultado as $Pregunta) {
+
                             echo "<tr>";
-                            echo "<td>" . $Pregunta['id'] . "</td>";
-                            echo "<td>" . $Pregunta['id_tipo_categ'] . "</td>";
+                            echo "<td>" . $ii ."</td>";
+                            echo "<td>" . $Pregunta['TIPO_CATEG'] . "</td>";
                             echo "<td>" . $Pregunta['descripcion'] . "</td>";
+                            $ii++;  
                             //CAMBIOS
                             if ($modificar == 1) { 
-                              echo "<th><a href='../src/modificar_categoria.php?id=" . base64_encode($Pregunta['id']) . "'> <i class='btn btn-round btn-info'><i class='fa-solid fa-pen-to-square'></i></a></th>";
+                              echo "<th><a href='../src/modificar_categoria.php?id=" . $Pregunta['id'] . "'> <i class='btn btn-round btn-info'><i class='fa-solid fa-pen-to-square'></i></a></th>";
                             }
 
                             //CAMBIOS
@@ -190,11 +192,7 @@ $PDF = $row['pdf'];
 
 
       buttons: [
-        {
-          extend: 'copy',
-          text: '<button class="btn btn-secondary" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Copiar <i class="fas fa-copy"></i></button>',
-
-        },
+        
         {
           extend: 'excel',
           text: '<button class="btn btn-success" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Excel <i class="fas fa-file-excel"></i></button>',

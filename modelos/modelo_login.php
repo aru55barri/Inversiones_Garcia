@@ -284,6 +284,7 @@ class Usuario
         return $this->id;
         $this->db = null;
     }
+    
 
     //obtener preguntas
     public function obtenerPreguntas()
@@ -486,6 +487,21 @@ class Usuario
         $this->db = null;
     }
 
+    public function obtenerCategorias($id)
+    {
+        $this->db = getConexion();
+        self::setNames();
+        $sql = "SELECT *  from tbl_categoria where id = '$id'";
+        $resultado = $this->db->query($sql);
+
+        foreach ($resultado as $resp) {
+            $this->usuario[] = $resp;
+        }
+
+        return $this->usuario;
+        $this->db = null;
+    }
+
 
     //funcion obtener roles, nuevo_usuario cesia
     public function obtenerRoles()
@@ -493,6 +509,18 @@ class Usuario
         $this->db = getConexion();
         self::setNames();
         $sql = "SELECT *  from tbl_roles";
+        $roles = $this->db->query($sql);
+        return $roles;
+        $this->db = null;
+    }
+
+    
+    //funcion obtener roles, nuevo_usuario cesia
+    public function obtenerTipoCategoria()
+    {
+        $this->db = getConexion();
+        self::setNames();
+        $sql = "SELECT *  from tipo_categoria";
         $roles = $this->db->query($sql);
         return $roles;
         $this->db = null;
@@ -644,6 +672,7 @@ class Usuario
         return $this->maxContra;
         $this->db = null;
     }
+    
     public function insertarPreguntas($pregunta, $respuesta, $usuario) ///////////////////////////////////////////////////////////
     {
         $this->db = getConexion();
@@ -656,6 +685,17 @@ class Usuario
         VALUES(null,'$fecha','$usuario',2,'INGRESAR PREGUNTAS','EL USUARIO INGRESA PREGUNTAS DE SEGURIDAD')";
         $this->db->query($sql1);
     }
+
+    public function insertarTcategoria($categoria, $categoriaT) ///////////////////////////////////////////////////////////
+    {
+        $this->db = getConexion();
+        self::setNames();
+        $sql = "INSERT INTO tbl_categoria (descripcion, id_tipo_categ )VALUES('$categoria','$categoriaT')";
+        $this->db->query($sql);
+
+
+    }
+
     public function cambiarContra($username, $contra)
     {
         $this->db = getConexion();

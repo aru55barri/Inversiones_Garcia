@@ -27,8 +27,15 @@ $Ractual = $MCAI ['rango_actual'];
 $NumCAI = $MCAI ['numero_CAI'];  
 $fecha = $MCAI ['fecha_vencimiento'];  
 
+mysqli_query($conexion, "UPDATE tbl_factura SET Num_CAI = '$NumCAI', Num_Factura = '$Ractual' WHERE id_factura = '$id'");
+
+
+
 if ($Ractual+1 > $Rfinal) {
     $Ractual = 00000000000;
+
+    mysqli_query($conn, "UPDATE tbl_factura SET Num_CAI = '$NumCAI', Num_Factura = '$Ractual' WHERE id_factura = '$id'");
+
   }
 
 $ventas = mysqli_query($conexion, "SELECT d.*, p.codproducto, p.descripcion FROM tbl_detalle_factura d INNER JOIN tbl_producto p ON d.codproducto = p.codproducto WHERE d.id_factura = $id");

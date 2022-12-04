@@ -111,6 +111,14 @@ class ModeloPrincipal
         $this->db = null;
     } 
 
+   /* public function UpdateCategoria($id, $Tcategoria, $descripcion)
+    {
+        $sql = "UPDATE tbl_categoria SET id_tipo_categ ='$Tcategoria', descripcion='$descripcion' WHERE id='$id'";
+        $this->db->query($sql);
+        $this->db = null;
+    } */
+
+
     public function UpdateObjetos($objeto,$descripcion,$idpadre,$url,$icono,$id)
     {
         $sql = "UPDATE tbl_modulos SET OBJETO='$objeto', DESCRIPCION_OBJETO='$descripcion',ID_PADRE='$idpadre', URL='$url', ICONO='$icono' WHERE ID_OBJETO='$id'";

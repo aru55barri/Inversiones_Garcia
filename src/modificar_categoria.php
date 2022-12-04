@@ -1,29 +1,31 @@
 <?php
 include_once "../Login/header.php";
 require_once '../controladores/controlador_categoria.php';
+include_once('../controladores/controladorLogin.php');
 
-if (!empty($_GET)) {
 
-    $id = base64_decode($_GET["id"]);
-    $DatosPregunta = get_categoria_id($id);
-}
+include_once '../modelos/modelo_categoria.php';
+
+include_once '../modelos/modelo_principal.php';
+
+include_once '../modelos/modelo_login.php';
+include_once('../controladores/controladorLogin.php');
+
+$id = $_GET['id'];
+$usuario = new Usuario();
+
+$Row = $usuario->obtenerCategorias($id);
+$Tcateg = $usuario->obtenerTipoCategoria();
+
+
 
 if (!empty($_POST)) {
-    $id_pregunta = $_POST['txtIDpregunta'];
-    $pregunta = $_POST['txtpregunta'];
+    //$id = $_POST['id'];
+    $Tcategoria = $_POST['categoriaT'];
+    $descripcion = $_POST['txtpregunta'];
 
-    $resultado =  editar_categoria($id_pregunta, $pregunta);
+    InsertarUpdateCategoria($id, $Tcategoria, $descripcion);
 
-    if ($resultado == true) {
-
-        //redirigir a la pagina principal con javascript
-        echo "<script>
-      window.location.href='../src/categoria.php';
-      </script>";
-        //guardar en session que se edita correctamente
-        $_SESSION['EditarPregunta'] = "Listo";
-    } else {
-    }
 }
 
 ?>
@@ -35,25 +37,16 @@ if (!empty($_POST)) {
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header" style="background-color: rgb(171, 237, 230);">
-                        <h3 class="text-center font-weight-light my-4">Editar Categoria <?php echo $DatosPregunta['id'] ?></h3>
+                        <h3 class="text-center font-weight-light my-4">Editar Categoria <?= $Row[0]['id'] ?></h3>
                     </div>
                     <div class="card-body">
 
 
-                        <form id="form-register" class="needs-validation" method="POST" novalidate>
-
-
-
-                            <div class="form-floating mb-3 mb-md-3">
-                                <input class="form-control " name="txtIDpregunta" id="inputIDpregunta" type="text" value="<?php if (!empty($_GET)) {
-                                                                                                                                echo base64_decode($_GET['id']);
-                                                                                                                            } ?>" readonly required />
-                                <label for="inputIDpregunta"><i class="fas fa-user icon"></i>&nbsp;ID Pregunta</label>
-                            </div>
+                        <form id="form-register" class="needs-validation" method="POST">
 
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtpregunta" onblur="validarPregunta(this)" id="inputpregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" maxlength="60" value="<?php if (!empty($_GET)) {echo $DatosPregunta['descripcion'];} ?>" required />
+                            <input class="form-control" value="<?= $Row[0]['descripcion'] ?>" name="txtpregunta" id="inputFirstName" type="text" placeholder="Enter your first name" autocomplete="nope" size="25" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
                                 <label for="inputpregunta"><i class="fas fa-user icon"></i>&nbsp;Pregunta</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -61,6 +54,21 @@ if (!empty($_POST)) {
                                 <div id="mensaje"></div>
                             </div>
 
+
+                            
+                            <div class="form-floating mb-3">
+                            <select name="categoriaT" required="true" class="form-control">
+                                    <option value="" selected disabled>-- Seleccione un Tipo de categoria --</option>
+                                    <?php while ($rowt = $Tcateg->fetch()) { ?>
+                                    <option value="<?php echo $rowt['id']; ?>" <?= $Row[0]['id_tipo_categ'] == $rowt['id'] ? 'selected' : '' ?>><?php echo $rowt['descripcion']; ?></option>
+                                    <?php } ?>
+                                    </select>
+
+                                <label for="txtID"><i class=""></i>&nbsp;Tipo de Categoria</label>
+                            </div>
+
+
+                            
                             <div class="mt-4 mb-0">
                                 <div class="d-grid"><input type="submit" id="button" class="btn btn-info " style="background-color:rgba(46, 182, 210, 0.8);" value="Actualizar" />
                                 </div>
@@ -73,6 +81,7 @@ if (!empty($_POST)) {
                     </div>
 
                 </div>
+            </div>
             </div>
             <!-- VALIDACIONES DE SOLO INGRESO DE LETRAS MAYUSCULAS-->
             <script>
@@ -152,17 +161,7 @@ if (!empty($_POST)) {
             </script>
 
             <script>
-                //Funcion que al iniciar el boton aparezca bloqueado
-                document.getElementById("button").disabled = true;
-
-                var Pregunta = document.getElementById("inputpregunta");
-
-                //al detectar un cambio en el imput se habilita el boton  EVENTO CHANGE
-                Pregunta.addEventListener("change", function() {
-                    if (Pregunta.value != "") {
-                        document.getElementById("button").disabled = false;
-                    }
-                });
+         
             </script>
             <script type="text/javascript">
                 //VALIDAR QUE EL PARAMETRO NO SE REPITA
@@ -203,3 +202,6 @@ if (!empty($_POST)) {
             <!--_______________________________________________________________________________________________________-->
         </div>
 </main>
+<?php
+include_once('../Login/footer.php');
+?>

@@ -3,6 +3,8 @@
 include_once '../modelos/modelo_categoria.php';
 include '../Config/conn.php';
 
+
+
 function mostrarcategoria()
 {
 
@@ -46,3 +48,27 @@ function obtenerCategoriaExistente($pregunta)
     $resultado = $modeloPregunta->obtenerCategoriaExistente($pregunta);
     return $resultado;
 }
+
+//////////////////////////
+ function InsertarUpdateCategoria($id, $Tcategoria, $descripcion)
+    {
+        $modeloPregunta = new categoria();
+
+        $modeloPregunta->UpdateCategoria($id, $Tcategoria, $descripcion);
+        $_SESSION['edicion'] = 'listo';
+        echo "<script>
+        Swal.fire({
+            icon: 'success',
+            title: 'EXCELENTE!',
+            text: 'CATEGORIA EDITADA CON EXITO',
+            confirmButtonText: 'Aceptar',
+            position:'center',
+            allowOutsideClick:false,
+            padding:'1rem'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href ='../src/categoria.php';
+             }
+        })    
+     </script>";
+    }

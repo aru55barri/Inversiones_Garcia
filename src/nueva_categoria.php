@@ -2,15 +2,29 @@
 <?php
 include_once "../Login/header.php";
 include '../config/conn.php';
-require_once '../controladores/controlador_categoria.php';
+include_once '../modelos/modelo_login.php';
+include_once('../controladores/controladorLogin.php');
+
+$usuario = new Usuario();
+
+$Tcategoria = $usuario->obtenerTipoCategoria();
+
 
 if (!empty($_POST)) {
 
-    $PREGUNTA = $_POST['txtPregunta'];
-    $resultado = insert_categoria($PREGUNTA);
+    $categoria = $_POST['txtcategoria'];
+    $categoriaT = $_POST['txtcategoriaT'];
+
+    $resultado = insertarTcategoria($categoria, $categoriaT);
 
     if ($resultado == true) {
 
+        echo "<script>Notiflix.Notify.failure('Error al registrar la Categoria');</script>";
+
+
+
+     } else {
+        
         echo "<script>
         Swal.fire({
             icon: 'success',
@@ -26,12 +40,8 @@ if (!empty($_POST)) {
             }
         })    
     </script>";
-    $_SESSION['registrarPregunta'] = 'Registra';
-    } else {
-        echo "<script>Notiflix.Notify.failure('Error al registrar la Categoria');</script>";
     }
 }
-
 ?>
 
 
@@ -48,21 +58,25 @@ if (!empty($_POST)) {
 
 
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
+                       
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtPregunta" onblur=" validarPregunta(this)" id="inputPregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="id_tipo_categ" required />
-                                <label for="inputDescripcionPago">Id Tipo Categoria</label>
-                                <div class="valid-feedback">
-                                    Campo Válido!
-                                </div>
-                                <div id="mensaje"></div>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input class="form-control" name="txtPregunta" onblur=" validarPregunta(this)" id="inputPregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Categoria" required />
+                                <input class="form-control" name="txtcategoria" onblur=" validarPregunta(this)" id="inputPregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Categoria" required />
                                 <label for="inputDescripcionPago">Categoria</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
                                 </div>
                                 <div id="mensaje"></div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <select name="txtcategoriaT" id="cmbestadocargos" class="form-control">
+                                    <option value="" selected disabled>--Seleccione una opción--</option>
+                                    <?php while ($rowt = $Tcategoria->fetch()) { ?>
+                                        <option value="<?php echo $rowt['id']; ?>"><?php echo $rowt['descripcion']; ?></option>
+                                    <?php } ?>
+                                </select>
+
+                                <label for="txtID"><i class=""></i>&nbsp;Tipo de Categoria</label>
                             </div>
 
                             <div class="mt-4 mb-0">
@@ -196,3 +210,6 @@ if (!empty($_POST)) {
         <!--_______________________________________________________________________________________________________-->
     </div>
 </main>
+<?php
+include_once('../Login/footer.php');
+?>

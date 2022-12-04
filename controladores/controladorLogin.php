@@ -315,7 +315,6 @@ function InsertarUpdateUsuarios($id, $correo, $rol,  $estado) //////////////////
     }
 }
 
-
 function respuestaspreguntas($id)
 {
     $modeloUsuario = new Usuario();
@@ -392,6 +391,13 @@ function InsertarPreguntas($ipregunta, $respuesta, $usuario)
 
     $modeloUsuario->insertarPreguntas($ipregunta, $respuesta, $usuario);
 }
+function insertarTcategoria($categoria, $categoriaT)
+{
+    $modeloUsuario = new Usuario();
+
+    $modeloUsuario->insertarTcategoria($categoria, $categoriaT);
+}
+
 function cambiarpass($user, $pass)
 {
     $modeloUsuario = new Usuario();

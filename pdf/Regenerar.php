@@ -16,6 +16,14 @@ $fec = mysqli_query($conexion, "SELECT Fecha_fac from tbl_factura WHERE id_factu
 $raw = mysqli_fetch_array($fec);
 $fechaActual = $raw['Fecha_fac'];
 
+$NumCAI = mysqli_query($conexion, "SELECT Num_CAI from tbl_factura WHERE id_factura = $id");
+$raw = mysqli_fetch_array($NumCAI);
+$CAInum = $raw['Num_CAI'];
+
+$NumFac = mysqli_query($conexion, "SELECT Num_Factura from tbl_factura WHERE id_factura = $id");
+$raw = mysqli_fetch_array($NumFac);
+$FacNum = $raw['Num_Factura'];
+
 //$config = mysqli_query($conexion, "SELECT * FROM configuracion"); -------- DATOS DE CONFIGURACION DEL PDF
 //$datos = mysqli_fetch_assoc($config);
 $clientes = mysqli_query($conexion, "SELECT * FROM tbl_cliente WHERE idcliente = $cliente");
@@ -42,6 +50,14 @@ $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(195, 5, 'Fecha emision de factura', 0, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(195, 5, $fechaActual , 0, 1, 'C');
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->Cell(195, 5, 'Numero CAI', 0, 1, 'C');
+$pdf->SetFont('Arial', '', 10);
+$pdf->Cell(195, 5, $CAInum , 0, 1, 'C');
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->Cell(195, 5, 'Numero de factura', 0, 1, 'C');
+$pdf->SetFont('Arial', '', 10);
+$pdf->Cell(195, 5, $FacNum , 0, 1, 'C');
 
 $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 10);

@@ -24,7 +24,7 @@ class categoria
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tbl_categoria";
+        $sql = "select u.*,r.descripcion as TIPO_CATEG from tbl_categoria u inner join tipo_categoria r on u.id_tipo_categ = r.id";
         $resultado = $this->db->query($sql);
 
         foreach ($resultado as $resp) {
@@ -151,6 +151,13 @@ class categoria
         $fila = $resultado->fetch(PDO::FETCH_ASSOC);
         return $fila;
         $this->db = null;
+    }
+
+    public function UpdateCategoria($id, $Tcategoria, $descripcion){
+        $this->db = getConexion();
+        $sql = "UPDATE tbl_categoria SET id_tipo_categ ='$Tcategoria', descripcion='$descripcion' WHERE id='$id'";
+        $this->db->query($sql);
+        $this->db=null;
     }
 
 
