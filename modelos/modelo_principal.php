@@ -127,9 +127,9 @@ class ModeloPrincipal
     }
 
 
-    public function UpdatePermisos($insert,$eliminar,$editar,$consulta,$PDF,$rol,$objeto,$id)
+    public function UpdatePermisos($insertar,$eliminar,$modificar,$consultar,$PDF,$rol,$objeto,$id)
     {
-        $sql = "UPDATE tbl_permisos SET INSERTAR='$insert', ELIMINAR='$eliminar', MODIFICAR='$editar', CONSULTAR='$consulta',ID_ROL = '$rol', ID_OBJETO = '$objeto', PDF = '$PDF' WHERE ID_PERMISO='$id'";
+        $sql = "UPDATE tbl_permisos SET permiso_insercion='$insertar', permiso_eliminacion='$eliminar', permiso_modificar='$modificar', permiso_consultar='$consultar', id_rol = '$rol', id_objeto = '$objeto', pdf = '$PDF' WHERE ID_PERMISO='$id'";
         $this->db->query($sql);
         $this->db = null;
     }
