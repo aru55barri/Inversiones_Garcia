@@ -6,7 +6,7 @@ include '../Config/conn.php';
 
 
 $id = $_SESSION['rol'];
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 16 and ID_ROL = '$id'");
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 2 and ID_ROL = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
