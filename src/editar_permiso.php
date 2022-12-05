@@ -16,7 +16,7 @@ if ($_POST) {
     $eliminar = $_POST['eliminar'];
     $modificar = $_POST['modificar'];
     $consultar = $_POST['consultar'];
-    $PDF = $row['pdf'];
+    $PDF = $_POST['pdf'];
     $rol = $_POST['rol'];
     $objeto = $_POST['objeto'];
     $model->UpdatePermisos($insertar, $eliminar, $modificar, $consultar, $PDF, $rol, $objeto, $id);
