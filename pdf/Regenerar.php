@@ -44,7 +44,7 @@ $pdf->Cell(20, 5, 'Tela, Atlantida', 0, 1, 'L');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(20, 5, "Correo: ", 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(20, 5, 'inversionesgarcia@gmail.com', 0, 1, 'L');
+$pdf->Cell(20, 5, 'garciainversiones.ig2022@gmail.com', 0, 1, 'L');
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(195, 5, 'Fecha emision de factura', 0, 1, 'C');

@@ -57,12 +57,12 @@ if (!empty($_POST)) {
             $mail = new PHPMailer(true);
             $mail->isSMTP();
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
-            $mail->Host = 'mail.tusarticulosdemadera.com';
+            $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'inverionesgc@tusarticulosdemadera.com';
-            $mail->Password = 'inversionesgarcia';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
+            $mail->Username = 'garciainversiones.ig2022@gmail.com';
+            $mail->Password = 'blfpmkfghwyllucw';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
             $mail->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
@@ -71,9 +71,9 @@ if (!empty($_POST)) {
                 )
             );
 
-            $mail->setFrom('inverionesgc@tusarticulosdemadera.com');
+            $mail->setFrom('garciainversiones.ig2022@gmail.com');
             $mail->addAddress($correo);
-            //$mail->addCC('inversionesg@tusarticulosdemadera.com');
+            $mail->addCC('garciainversiones.ig2022@gmail.com');
             $mail->ContentType = 'text/html';
             $mail->CharSet = 'UTF-8';
             $mail->isHTML(true); 
