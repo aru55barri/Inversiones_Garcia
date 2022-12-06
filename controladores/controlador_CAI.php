@@ -66,7 +66,7 @@
 
         static function InsertarCAI($rango_inicial, $rango_final, $rango_actual, $numero_CAI, $fecha_vencimiento, $usuario)
         {
-            include '../Config/conn.php';
+            include '../config/conn.php';
     
             $modelo = new CAI();
             $sql = "INSERT INTO tbl_cai (id, rango_inicial, rango_final, rango_actual, numero_CAI, fecha_vencimiento, id_usuario) 

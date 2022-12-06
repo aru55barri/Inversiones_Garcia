@@ -3,7 +3,7 @@
 include_once '../modelos/modelo_principal.php';
 
 
-include '../Config/conn.php';
+include '../config/conn.php';
 if (isset($_GET['cancelar'])) {
     Contralador::UpdateVenta($_GET['cancelar']);
 }

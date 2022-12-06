@@ -2,7 +2,7 @@
 
 include_once('../Login/header.php');
 
-include '../Config/conn.php';
+include '../config/conn.php';
 
 $id = $_SESSION['rol'];
 $sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 7 and ID_ROL = '$id'");

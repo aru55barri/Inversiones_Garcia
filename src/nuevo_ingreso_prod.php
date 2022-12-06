@@ -1,7 +1,7 @@
 <?php
 include_once('../Login/header.php');
-require_once '../Config/conexion.php';
-include '../Config/conn.php';
+require_once '../config/conexion.php';
+include '../config/conn.php';
 include_once('../controladores/controlador_ingreso_Prod.php');
 $compra = new CompraContralador();
 // $sql = consultas("SELECT * FROM tbl_objetos");

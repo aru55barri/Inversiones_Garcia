@@ -1,6 +1,6 @@
 <?php
 
-include_once('../login/header.php');
+include_once('../Login/header.php');
 
 $ID_VENTA = $_GET['id'];
 
@@ -74,6 +74,6 @@ Controlador::mostrar($ID_VENTA);
     }
 </script>
 <?php
-include_once('../login/Footer.php');
+include_once('../Login/footer.php');
 
 ?>

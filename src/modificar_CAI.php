@@ -116,7 +116,7 @@ if (!empty($_POST)) {
                             
                             <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                    <input class="form-control" value="<?= $row['fecha_vencimiento'] ?>" name="txtfecha_vencimiento" type="datetime" required />
+                                    <input class="form-control" value="<?= $row['fecha_vencimiento'] ?>" name="txtfecha_vencimiento" type="date" required />
 
                                  <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Fecha de vencimiento</label>
                                  <div class="valid-feedback">

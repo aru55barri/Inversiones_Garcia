@@ -1,5 +1,5 @@
 <?php
-include '../Config/conn.php';
+include '../config/conn.php';
 
 session_start();
 

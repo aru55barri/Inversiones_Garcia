@@ -1,7 +1,7 @@
 <?php
 
 include_once '../modelos/modelo_productos.php';
-include '../Config/conn.php';
+include '../config/conn.php';
 
 
 $id = $_SESSION['rol'];
@@ -29,7 +29,7 @@ class ProductoContralador
 
      static function InsertarProducto($descripcion, $precio, $categ, $cant_minima, $cant_maxima, $tipo, $estado)
     {
-        include '../Config/conn.php';
+        include '../config/conn.php';
 
         $modelo = new ModeloProducto();
         $sql = "INSERT INTO tbl_producto (codproducto, id_categoria, id_tipo_producto, descripcion, precio_venta, existencia, cantidad_minima, cantidad_maxima, estado) 

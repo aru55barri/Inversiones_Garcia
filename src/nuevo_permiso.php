@@ -119,7 +119,7 @@ if ($_POST) {
                             <div class="mt-4 mb-0">
                                 <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
                                     <div class="mt-4 mb-0">
-                                        <div class="d-grid"><input type="button" onclick="window.location.href='../vistas/vista_permisos.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
+                                        <div class="d-grid"><input type="button" onclick="window.location.href='../src/permisos.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
                                     </div>
                                 </div>
                             </div>

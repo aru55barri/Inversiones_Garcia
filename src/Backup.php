@@ -21,7 +21,7 @@ if (isset($_POST['btnBackup'])) {
              padding:'1rem'
          }).then((result) => {
              if (result.isConfirmed) {
-                 location.href ='../src/backup.php';
+                 location.href ='../src/Backup.php';
              }
          })    
      </script>";
@@ -257,4 +257,4 @@ if(isset($_SESSION['mensaje']))
     }
   });
 </script>
-<?php include_once "../login/footer.php"; ?>
+<?php include_once "../Login/footer.php"; ?>

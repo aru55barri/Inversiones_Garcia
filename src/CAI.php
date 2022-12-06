@@ -2,7 +2,7 @@
 
 include_once('../Login/header.php'); 
 
-include '../Config/conn.php';
+include '../config/conn.php';
 
 $id = $_SESSION['rol'];
 $sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where id_objeto = 22 and id_rol = '$id'");
@@ -100,7 +100,7 @@ $PDF = $row['pdf'];
            confirmButtonText: '¡Sí, Eliminar!'
        }).then((result)=> {
            if(result.value){
-               window.location.href = "../controladores/controlador_cai.php?eliminar="+id;            }
+               window.location.href = "../controladores/controlador_CAI.php?eliminar="+id;            }
        } )
    }
 </script>

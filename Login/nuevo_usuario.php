@@ -489,5 +489,5 @@ if (!empty($_POST)) {
 </main>
 
 <?php
-include_once('./Footer.php');
+include_once('./footer.php');
 ?>

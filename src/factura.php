@@ -2,7 +2,7 @@
 
 include_once('../Login/header.php'); 
 
-include '../Config/conn.php';
+include '../config/conn.php';
 
 
 $id = $_SESSION['rol'];

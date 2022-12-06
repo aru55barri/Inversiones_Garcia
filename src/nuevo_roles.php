@@ -23,7 +23,7 @@ if (!empty($_POST)) {
              padding:'1rem'
          }).then((result) => {
              if (result.isConfirmed) {
-                 location.href ='../src/Mantenimiento_roles.php';
+                 location.href ='../src/Mantenimiento_Roles.php';
              }
          })    
      </script>";

@@ -8,7 +8,7 @@
 
 
         public function __construct(){
-            require_once '../Config/Conexion.php';         
+            require_once '../config/conexion.php';         
             $this->db = getConexion();
             $this->Modelo = array();
         }

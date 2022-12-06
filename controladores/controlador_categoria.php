@@ -1,7 +1,7 @@
 <?php
 
 include_once '../modelos/modelo_categoria.php';
-include '../Config/conn.php';
+include '../config/conn.php';
 
 
 
