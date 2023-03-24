@@ -59,12 +59,12 @@
 ?>
 
 <?php
-include_once('../Login/header.php');
+//include_once('../Login/header.php');
 include_once '../modelos/modelo_principal.php';
 include '../config/conn.php';
 
 $id = $_SESSION['rol'];
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 2 and ID_ROL = '$id'");
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where id_objeto = 2 and id_rol = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
@@ -72,7 +72,7 @@ $modificar = $row['permiso_modificar'];
 $consultar = $row['permiso_consultar'];
 $eliminar = $row['permiso_eliminacion'];
 
-if (isset($_GET['idusuario']) && isset($_GET['idempleado'])) {
+/*if (isset($_GET['idusuario']) && isset($_GET['idempleado'])) {
     UsuariosContralador::eliminarUsuario($_GET['idusuario'], $_GET['idempleado']);
 }
 
@@ -80,7 +80,7 @@ if (isset($_GET['buscar'])) {
     echo json_encode([
         'usuario' => 'juan'
     ]);
-}
+}*/
 
 class UsuariosContralador
 {

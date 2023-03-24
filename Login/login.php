@@ -53,11 +53,13 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                 var_dump($usuarios[0]['primer_ingreso']);
                 if ($usuarios[0]['primer_ingreso'] == 0) {
                     $_SESSION['user'] = $usuarios[0];
-                    header('Location: ./config_preguntas.php');
+                    //header('Location: ./config_preguntas.php');
+                    echo("<script>location.href = './config_preguntas.php';</script>");
                 } else {
                     //Actualizar conexion
                     actualizarUltimaConexion($_SESSION['id_usuario']);
-                    header('Location: ../dist/home.php');
+                    //header('Location: ../dist/home.php');
+                    echo("<script>location.href = '../dist/home.php';</script>");
                 }
             } else {
                 setcookie('intentos_fallidos', 1, time() + (60 * 60 * 24 * 365));
@@ -99,11 +101,13 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                     if ($usuarios[0]['primer_ingreso'] == 0) {
 
                         $_SESSION['user'] = $usuarios[0];
-                        header('Location: ./config_preguntas.php');
+                        //header('Location: ./config_preguntas.php');
+                        echo("<script>location.href = './config_preguntas.php';</script>");
                     } else {
                         //Actualizar Ultima conexion
                         actualizarUltimaConexion($_SESSION['id_usuario']);
-                        header('Location: ../dist/home.php');
+                        //header('Location: ../dist/home.php');
+                        echo("<script>location.href = '../dist/home.php';</script>");
                     }
                 } else {
                     setcookie('intentos_fallidos', $_COOKIE['intentos_fallidos'] + 1, time() + (60 * 1));

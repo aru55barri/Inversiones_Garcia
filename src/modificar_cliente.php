@@ -1,5 +1,6 @@
 <?php
 
+include_once('../Login/header.php');
 require_once '../controladores/controlador_cliente.php';
 $id = $_GET['id'];
 if (!empty($_GET)) {
@@ -188,5 +189,5 @@ if (!empty($_POST)) {
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </script>
 <?php
-include_once('./footer.php');
+include_once('../Login/footer.php');
 ?>

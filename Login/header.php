@@ -1,5 +1,4 @@
 <?php
-include '../config/conn.php';
 
 session_start();
 
@@ -10,6 +9,7 @@ if (!empty($_SESSION)) {
 else
 {
     header('Location: ../Login/login.php?loggeado=false');
+    //echo("<script>location.href = '../Login/login.php?loggeado=false';</script>");
 }
 
 if(!empty($_GET))
@@ -24,8 +24,9 @@ if(!empty($_GET))
     }
 }
 
-require_once './../controladores/controladorLogin.php';
-include './../config/conn.php';
+require_once '../controladores/controladorLogin.php';
+include '../config/conn.php';
+
 ?>
 
 <!DOCTYPE html>

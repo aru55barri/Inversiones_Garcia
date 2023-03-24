@@ -138,7 +138,7 @@ if (!empty($_POST)) {
                                                                                                     border-width: 4px 4px 4px 4px;
                                                                                                     display: inline-block;
                                                                                                     border-radius: 10px;
-                                                                                                    width: auto;"><a href="http://localhost/Inversiones_Garcia/Login/nueva_contrasena.php?token=' . $token . '" class="es-button" target="_blank" style="font-weight: normal; border-style: solid;
+                                                                                                    width: auto;"><a href="https://inversionesgarcia.000webhostapp.com/Login/nueva_contrasena.php?token=' . $token . '" class="es-button" target="_blank" style="font-weight: normal; border-style: solid;
                                                                                                     border-color: #053238;
                                                                                                     border-width: 10px 25px 10px 30px;
                                                                                                     display: inline-block;

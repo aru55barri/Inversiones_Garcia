@@ -476,7 +476,7 @@ if (isset($_POST['agregar'])) {
     </div>
 
 </div>
-<?php include_once('../Login/Footer.php');
+<?php include_once('../Login/footer.php');
 ?>
 
 

@@ -1,7 +1,8 @@
-<?php include_once "../Login/header.php";
-require "../config/conexion.php";
-?>
+<?php 
 
+require_once '../Login/header.php';
+
+?>
 <main>
         <div class="container-fluid px-4">
             <Center><h1 class="mt-4">Inversiones García  <img src="../dist/assets/img/Logo.jpeg" class="logo" > </h1></Center>

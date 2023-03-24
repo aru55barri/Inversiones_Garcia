@@ -83,7 +83,8 @@ if (!isset($_SESSION['user'])) {
                                 }) 
                            </script>";
                        }else{
-                           header('Location: ./cambio_pass.php');
+                           //header('Location: ./cambio_pass.php');
+                           echo("<script>location.href = './cambio_pass.php';</script>");
                        } 
                 }              
            }

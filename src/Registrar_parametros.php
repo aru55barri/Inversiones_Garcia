@@ -1,6 +1,6 @@
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
 
+include_once('../Login/header.php');
 require_once '../controladores/controlador_parametro.php';
 
 
@@ -36,6 +36,8 @@ if (!empty($_POST)) {
 }
 
 ?>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <br><br><br><br><br><br><br><br><br><br>
 <main>

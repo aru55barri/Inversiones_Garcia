@@ -246,6 +246,6 @@ $PDF = $row['pdf'];
 }
 </script>
 <?php
-include_once('../Login/Footer.php');  
+include_once('../Login/footer.php');  
 
 ?>  

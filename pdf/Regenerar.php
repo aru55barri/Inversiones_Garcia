@@ -36,11 +36,11 @@ $pdf->SetFont('Arial', 'B', 10);
 
 $pdf->Cell(20, 5, utf8_decode("Teléfono: "), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(20, 5, '777777777777', 0, 1, 'L');
+$pdf->Cell(20, 5, '94993448', 0, 1, 'L');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(20, 5, utf8_decode("Dirección: "), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(20, 5, 'Tela, Atlantida', 0, 1, 'L');
+$pdf->Cell(20, 5, 'Adea La Centilla, Calle Principal, Tela, Atlantida', 0, 1, 'L');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(20, 5, "Correo: ", 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
