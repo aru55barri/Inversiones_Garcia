@@ -16,7 +16,7 @@ if ($_POST) {
     $eliminar = $_POST['eliminar'];
     $modificar = $_POST['modificar'];
     $consultar = $_POST['consultar'];
-    $PDF = $_POST['pdf'];
+    $PDF = $_POST['PDF'];
     $rol = $_POST['rol'];
     $objeto = $_POST['objeto'];
     $model->UpdatePermisos($insertar, $eliminar, $modificar, $consultar, $PDF, $rol, $objeto, $id);
@@ -34,7 +34,7 @@ if ($_POST) {
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header" style="background-color: rgb(171, 237, 230);">
-                        <h3 class="text-center font-weight-light my-4">Actualizar permisos</h3>
+                        <h3 class="text-center font-weight-light my-4">Registrar permisos</h3>
                     </div>
 
                     <div class="card-body">
@@ -88,7 +88,7 @@ if ($_POST) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <select name="pdf" class="form-control">
+                                <select name="PDF" class="form-control">
                                     <option value="" selected disabled>--Seleccione una opción--</option>
                                     <option value="1" <?php if ($sql[0][0]['pdf'] == 1) echo 'selected="selected"'; ?>>SI</option>
                                     <option value="0" <?php if ($sql[0][0]['pdf'] == 0) echo 'selected="selected"'; ?>>NO</option>
@@ -122,7 +122,7 @@ if ($_POST) {
 
                             
                             <div class="mt-4 mb-0">
-                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Actualizar" />
+                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
                                     <div class="mt-4 mb-0">
                                         <div class="d-grid"><input type="button" onclick="window.location.href='../src/permisos.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
                                     </div>
@@ -214,5 +214,5 @@ if ($_POST) {
 
 
 <?php
-include_once('../Login/footer.php');
+include_once('../Login/Footer.php');
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 include_once '../modelos/modelo_roles.php';
-include '../config/conn.php';
+include '../Config/conn.php';
 
 function mostrarRoles()
 {
@@ -9,6 +9,8 @@ function mostrarRoles()
     $modeloRol = new rol();
     $resultado = $modeloRol->get_rol();
     return $resultado;
+
+  
 }
 
 function insert_rol($ROL,$DESCRIPCION)

@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/conexion.php';
+require_once '../Config/conexion.php';
 
 class parametros
 {
@@ -47,9 +47,9 @@ class parametros
 
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
-        $IDUSUARIO = $_SESSION['ID_USUARIO'];
+        $IDUSUARIO = $_SESSION['id_usuario'];
         $sql1 = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
-           VALUES(null,'$fecha','REGISTRO','SE CREO UN NUEVO REGISTRO EN PARAMETROS','$IDUSUARIO',27)";
+           VALUES(null,'$fecha','REGISTRO','SE CREO UN NUEVO REGISTRO EN PARAMETROS','$IDUSUARIO',19)";
         $this->db->query($sql1);
        //ALTERAR BITACORA______________________
 
@@ -91,7 +91,7 @@ class parametros
         $IDUSUARIO = $_SESSION['id_usuario'];
 
      $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-     VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE ELIMINO UN PARAMETRO')";
+     VALUES(null,'$fecha','$IDUSUARIO',19,'REGISTRO', 'SE ELIMINO UN PARAMETRO')";
         $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 
@@ -129,7 +129,7 @@ class parametros
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
         $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-        VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN PARAMETROS')";
+        VALUES(null,'$fecha','$IDUSUARIO',19,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN PARAMETROS')";
         $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 

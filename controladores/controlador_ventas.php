@@ -3,13 +3,13 @@
 include_once '../modelos/modelo_principal.php';
 
 
-include '../config/conn.php';
+include '../Config/conn.php';
 if (isset($_GET['cancelar'])) {
     Contralador::UpdateVenta($_GET['cancelar']);
 }
 
 $id = $_SESSION['rol'];   
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 2 and ID_ROL = '$id'");
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 16 and ID_ROL = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
@@ -82,13 +82,13 @@ class Contralador
                     <tr>
                     <td><?=$ii = $ii + 1?></td>
                     <td><?=$registro['Fecha_fac']?></td>
-                    <td><?=$registro['Sub_Total']?></td>
-                    <td><?=$registro['ISV']?></td>
-                    <td><?=$registro['Total']?></td>
+                    <td><?=number_format($registro['Sub_Total'], 2)?></td>
+                    <td><?=number_format($registro['ISV'], 2)?></td>
+                    <td><?=number_format($registro['Total'], 2)?></td>
                     <td><?=$registro['nombre_cliente']?></td>
                     <td><?=$registro['tipo_pago']?></td>
                     <td><?=$registro['usuario']?></td>
-                    <td><?=$registro['estado'] == '' ? 'ACTIVO' : 'CANCELADO'?></th>
+                    <td><?=$registro['estado'] == 'Activo' ? 'ACTIVO' : 'CANCELADO'?></th>
 
                     <th> <a href="../src/vista_detalle_factura.php?id=<?=$registro['id_factura']?>" class='btn btn-round btn-info btn-block'><i class='fa fa-eye' style='color: white'></i></a></th>
                     <th> <a href="../pdf/Regenerar.php?id=<?=$registro['id_factura']?>" class="btn btn-round btn-danger" style="color: white">PDF <i class="fas fa-file-pdf"></i></a></th>
@@ -100,15 +100,23 @@ class Contralador
                     <?php } ?>
                 </tr>
              <?php   }
-                // Inicio vista en bitacora al mostrar empleados Joel Montoya
-                $modeloPrincipal = new ModeloPrincipal();
-                $fecha = date("Y-m-d-H:i:s");
-                $IDUS = $_SESSION['id_usuario'];
-    
-                $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-            VALUES(null,'$fecha','$IDUS',3, 'INGRESO','EL USUARIO INGRESA A TABLA VENTAS')";
-                $modeloPrincipal->insertargeneral($sql);
-                // FIN vista en bitacora al mostrar empleados Joel Montoya
+           
+           $modeloPrincipal = new ModeloPrincipal();
+
+           date_default_timezone_set('America/Mexico_City');
+           $fecha = date("Y-m-d-H:i:s");
+           $IDUS = $_SESSION['id_usuario'];
+
+           include '../Config/conn.php';
+
+           $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+           $row = mysqli_fetch_array($rs);
+           $Usuarioo = $row['usuario'];
+
+           $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+           VALUES(null,'$fecha','$IDUS',2, 'INGRESO','EL USUARIO $Usuarioo INGRESA A TABLA FACTURAS')";
+           $modeloPrincipal->insertargeneral($sql);
+           // FIN vista en bitacora al mostrar empleados Joel Montoya
     
             }
         }

@@ -1,5 +1,4 @@
 <?php
-
 include_once('../Login/header.php');
 require_once '../controladores/controlador_parametro.php';
 

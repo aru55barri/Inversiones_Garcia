@@ -2,6 +2,11 @@
 session_start();
 include_once '../controladores/controladorLogin.php';
 
+
+require "../config/conexion.php";
+
+$sql1 = mysqli_query($conexion, "SELECT * FROM tbl_config_empresa where id = 1");
+$rom = mysqli_fetch_array($sql1);
 $intentos = obtenerIntentosFallidos();
 
 if (!empty($_GET)) {
@@ -38,7 +43,11 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
         } else {
             $usuario = $_POST['usuario'];
             $contrasena = $_POST['clave'];
+            // Utilizar preg_replace para reemplazar la cadena peligrosa
+            $contrasena = preg_replace("/['\"]|or\s*\d+=\d+|--\s*$/i", "", $contrasena);
             $usuarios = iniciarSesion($usuario, $contrasena);
+           
+           
 
             if (validarTodoMayuscula($usuario) == false) {
                 $alert = '<div class="alert alert-danger">
@@ -53,12 +62,10 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                 var_dump($usuarios[0]['primer_ingreso']);
                 if ($usuarios[0]['primer_ingreso'] == 0) {
                     $_SESSION['user'] = $usuarios[0];
-                    //header('Location: ./config_preguntas.php');
                     echo("<script>location.href = './config_preguntas.php';</script>");
                 } else {
                     //Actualizar conexion
                     actualizarUltimaConexion($_SESSION['id_usuario']);
-                    //header('Location: ../dist/home.php');
                     echo("<script>location.href = '../dist/home.php';</script>");
                 }
             } else {
@@ -85,6 +92,8 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
             } else {
                 $usuario = $_POST['usuario'];
                 $contrasena = $_POST['clave'];
+                // Utilizar preg_replace para reemplazar la cadena peligrosa
+                $contrasena = preg_replace("/['\"]|or\s*\d+=\d+|--\s*$/i", "", $contrasena);
                 $usuarios = iniciarSesion($usuario, $contrasena);
 
                 if (validarTodoMayuscula($usuario) == false) {
@@ -102,12 +111,12 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
 
                         $_SESSION['user'] = $usuarios[0];
                         //header('Location: ./config_preguntas.php');
-                        echo("<script>location.href = './config_preguntas.php';</script>");
-                    } else {
+                        echo("<script>location.href = './config_preguntas.php';</script>");                    } else {
                         //Actualizar Ultima conexion
                         actualizarUltimaConexion($_SESSION['id_usuario']);
                         //header('Location: ../dist/home.php');
                         echo("<script>location.href = '../dist/home.php';</script>");
+
                     }
                 } else {
                     setcookie('intentos_fallidos', $_COOKIE['intentos_fallidos'] + 1, time() + (60 * 1));
@@ -140,7 +149,7 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
     </head>
   
     <body class="bg-primary" >
-    <img src="../dist/assets/img/Logo.jpeg" style="width: 200px; height: 200px; padding: 20px; margin-left: 80%;" />
+    <img  src="data:image;base64,<?php echo base64_encode($rom['logo']);  ?>" style="width: 200px; height: 200px; padding: 20px; margin-left: 80%;" />
         <div id="layoutAuthentication"  style="margin-top: -200px;">
             <div id="layoutAuthentication_content">
                 <main>

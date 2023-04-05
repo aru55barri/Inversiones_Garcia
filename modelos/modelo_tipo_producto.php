@@ -25,7 +25,7 @@ class tipo_producto
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tipo_producto";
+        $sql = "SELECT * FROM tbl_tipo_producto";
         $resultado = $this->db->query($sql);
 
         foreach ($resultado as $resp) {
@@ -41,7 +41,7 @@ class tipo_producto
 
         $this->db = getConexion();
         self::setNames();
-        $sql="INSERT INTO tipo_producto (descripcion) VALUES ('$descripcion')";
+        $sql="INSERT INTO tbl_tipo_producto (descripcion) VALUES ('$descripcion')";
         $resultado = $this->db->query($sql);
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
@@ -68,7 +68,7 @@ class tipo_producto
         $this->db = getConexion();
         self::setNames();
 
-        $sql = "UPDATE tipo_producto SET descripcion = '$descripcion' WHERE id = $id";
+        $sql = "UPDATE tbl_tipo_producto SET descripcion = '$descripcion' WHERE id = $id";
         $resultado = $this->db->query($sql);
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
@@ -93,7 +93,7 @@ class tipo_producto
 
         $this->db = getConexion();
         self::setNames();
-        $sql="DELETE FROM tipo_producto WHERE id = $id";
+        $sql="DELETE FROM tbl_tipo_producto WHERE id = $id";
         /*$resultado = $this->db->query($sql);
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
@@ -132,7 +132,7 @@ class tipo_producto
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tipo_producto WHERE id = $id";
+        $sql = "SELECT * FROM tbl_tipo_producto WHERE id = $id";
         $resultado = $this->db->query($sql);
         $fila = $resultado->fetch(PDO::FETCH_ASSOC);
         return $fila;

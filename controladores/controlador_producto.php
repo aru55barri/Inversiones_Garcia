@@ -1,7 +1,7 @@
 <?php
 
 include_once '../modelos/modelo_productos.php';
-include '../config/conn.php';
+include '../Config/conn.php';
 
 
 $id = $_SESSION['rol'];
@@ -13,7 +13,7 @@ $modificar = $row['permiso_modificar'];
 $consultar = $row['permiso_consultar'];
 $eliminar = $row['permiso_eliminacion'];
 
-
+ 
 
 class ProductoContralador
 {
@@ -29,7 +29,7 @@ class ProductoContralador
 
      static function InsertarProducto($descripcion, $precio, $categ, $cant_minima, $cant_maxima, $tipo, $estado)
     {
-        include '../config/conn.php';
+        include '../Config/conn.php';
 
         $modelo = new ModeloProducto();
         $sql = "INSERT INTO tbl_producto (codproducto, id_categoria, id_tipo_producto, descripcion, precio_venta, existencia, cantidad_minima, cantidad_maxima, estado) 
@@ -61,13 +61,9 @@ class ProductoContralador
         global $IDE;
 
         $productos = new ModeloProducto();
-        $matrizproductos = $productos->mostrargeneral("select u.*,r.DESCRIPCION as TIPO_PRODUC, s.descripcion as CATEGORIA from tbl_producto u inner join tipo_producto r on u.id_tipo_producto = r.id inner join tbl_categoria s on u.id_categoria = s.id");
+        $matrizproductos = $productos->mostrargeneral("select u.*,r.DESCRIPCION as TIPO_PRODUC, s.descripcion as CATEGORIA from tbl_producto u inner join tbl_tipo_producto r on u.id_tipo_producto = r.id inner join tbl_categoria s on u.id_categoria = s.id");
         $ii = 0;
 
-
-
-
-        
         if($matrizproductos != null)
         {
             foreach ($matrizproductos as $key => $value) {
@@ -98,13 +94,19 @@ class ProductoContralador
     <?php }
                 // Inicio vista en bitacora al mostrar empleados Joel Montoya
                 $ModeloProducto = new ModeloProducto();
+                date_default_timezone_set('America/Mexico_City');
                 $fecha = date("Y-m-d-H:i:s");
-                $IDUS = $_SESSION['id_usuario'];
+                $IDUSUARIO = $_SESSION['id_usuario'];
+    
+                include '../Config/conn.php';
+    
+                $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUSUARIO");
+                $row = mysqli_fetch_array($rs);
+                $Usuarioo = $row['usuario'];
     
                 $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-                 VALUES(null,'$fecha', '$IDUS', 3, 'INGRESO','EL USUARIO INGRESA A TABLA PRODUCTO')";
+                 VALUES(null,'$fecha', '$IDUSUARIO', 7, 'INGRESO','EL USUARIO $Usuarioo INGRESA A TABLA PRODUCTO')";
                 $ModeloProducto->insertargeneral($sql);
-                // FIN vista en bitacora al mostrar empleados Joel Montoya
             }
         }
     }

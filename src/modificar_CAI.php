@@ -1,7 +1,7 @@
 <?php
+
 include_once('../Login/header.php');
 require_once '../controladores/controlador_CAI.php';
-
 $id = $_GET['id'];
 if (!empty($_GET)) {
 
@@ -117,7 +117,7 @@ if (!empty($_POST)) {
                             
                             <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                    <input class="form-control" value="<?= $row['fecha_vencimiento'] ?>" name="txtfecha_vencimiento" type="date" required />
+                                    <input class="form-control" value="<?= $row['fecha_vencimiento'] ?>" name="txtfecha_vencimiento" type="datetime" required />
 
                                  <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Fecha de vencimiento</label>
                                  <div class="valid-feedback">

@@ -1,4 +1,5 @@
 <?php
+include_once '../modelos/modelo_principal.php';
 
 require_once '../config/conexion.php';
 
@@ -24,7 +25,7 @@ class categoria
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "select u.*,r.descripcion as TIPO_CATEG from tbl_categoria u inner join tipo_categoria r on u.id_tipo_categ = r.id";
+        $sql = "select u.*,r.descripcion as TIPO_CATEG from tbl_categoria u inner join tbl_tipo_categoria r on u.id_tipo_categ = r.id";
         $resultado = $this->db->query($sql);
 
         foreach ($resultado as $resp) {
@@ -160,6 +161,27 @@ class categoria
         $this->db=null;
     }
 
+    public function UpdateEmpresa($id, $tel, $eslogan, $nombre, $correo, $direccion, $rtn, $imagen1){
+        $this->db = getConexion();
+        $sql = "UPDATE tbl_config_empresa SET nombre ='$nombre', eslogan='$eslogan', rtn='$rtn', tel='$tel', correo='$correo', direccion='$direccion', logo = '$imagen1' WHERE id='$id'";
+        $this->db->query($sql);
+        $this->db=null;
 
+        $modeloPrincipal = new ModeloPrincipal();
+
+        date_default_timezone_set('America/Mexico_City');
+        $fecha = date("Y-m-d-H:i:s");
+        $IDUS = $_SESSION['id_usuario'];
+
+        include '../Config/conn.php';
+
+        $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+        $row = mysqli_fetch_array($rs);
+        $Usuarioo = $row['usuario'];
+
+        $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+        VALUES(null,'$fecha','$IDUS',18, 'EDITAR','$Usuarioo EDITÓ CONFIGURACIÓN DE LA EMPRESA')";
+        $modeloPrincipal->insertargeneral($sql);
+    }
 }
 ?>

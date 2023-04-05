@@ -95,7 +95,7 @@ class Pregunta
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tbl_tipo_productos WHERE ID_TIP_PRODUCTO = $ID_TIP_PRODUCTO";
+        $sql = "SELECT * FROM tbl_tipo_producto WHERE ID_TIP_PRODUCTO = $ID_TIP_PRODUCTO";
         $resultado = $this->db->query($sql);
         $fila = $resultado->fetch(PDO::FETCH_ASSOC);
         return $fila;

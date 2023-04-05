@@ -6,6 +6,18 @@ $pdf->AddPage();
 $pdf->SetMargins(10, 10, 10);
 $pdf->SetTitle("Ventas");
 $pdf->SetFont('Arial', 'B', 12);
+
+/////////////////////////////////////////////////////////////////////////////////
+$sql1 = mysqli_query($conexion, "SELECT * FROM tbl_config_empresa where id = 1");
+$rom = mysqli_fetch_array($sql1);
+
+$nombre = $rom['nombre'];
+$tel = $rom['tel'];
+$direccion = $rom['direccion'];
+$correo = $rom['correo'];
+/////////////////////////////////////////////////////////////////////////////////
+
+
 $id = $_GET['id'];
 $idcliente = $_GET['cliente'];
 $CAI = $_GET['CAI'];
@@ -40,21 +52,32 @@ if ($Ractual+1 > $Rfinal) {
 
 $ventas = mysqli_query($conexion, "SELECT d.*, p.codproducto, p.descripcion FROM tbl_detalle_factura d INNER JOIN tbl_producto p ON d.codproducto = p.codproducto WHERE d.id_factura = $id");
 $Apagar = mysqli_query($conexion, "SELECT * from tbl_factura WHERE id_factura = $id");
-$pdf->Cell(195, 5, 'INVERSIONES GARCIA', 0, 1, 'C');
-$pdf->Image("../dist/assets/img/Logo.jpeg", 180, 10, 30, 30, 'jpeg');
+
+$pic = 'data://text/plain;base64,'.base64_encode($rom['logo']);
+
+
+
+    $info = getimagesize($pic);
+    $pdf->Image($pic, 180, 10, 30, 30, 'png');
+
+
+
+
+$pdf->SetFont('Arial', 'B', 14);
+$pdf->Cell(195, 5, utf8_decode($nombre), 0, 1, 'C');
 $pdf->SetFont('Arial', 'B', 10);
 
 $pdf->Cell(20, 5, utf8_decode("Teléfono: "), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(20, 5, '94993448', 0, 1, 'L');
+$pdf->Cell(20, 5, $tel, 0, 1, 'L');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(20, 5, utf8_decode("Dirección: "), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(20, 5, 'Adea La Centilla, Calle Principal, Tela, Atlantida', 0, 1, 'L');
+$pdf->Cell(20, 5, utf8_decode($direccion) , 0, 1, 'L');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(20, 5, "Correo: ", 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(20, 5, 'garciainversiones.ig2022@gmail.com', 0, 1, 'L');
+$pdf->Cell(20, 5, $correo, 0, 1, 'L');
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(195, 5, 'Fecha emision de factura', 0, 1, 'C');

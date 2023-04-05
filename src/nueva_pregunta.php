@@ -1,3 +1,4 @@
+
 <?php
 include_once "../Login/header.php";
 include '../config/conn.php';
@@ -32,7 +33,6 @@ if (!empty($_POST)) {
 }
 
 ?>
-
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br>

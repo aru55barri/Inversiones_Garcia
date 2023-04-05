@@ -21,7 +21,7 @@ if (isset($_POST['btnBackup'])) {
              padding:'1rem'
          }).then((result) => {
              if (result.isConfirmed) {
-                 location.href ='../src/Backup.php';
+                 location.href ='../src/backup.php';
              }
          })    
      </script>";
@@ -33,6 +33,24 @@ if (isset($_POST['btnRestaurar'])) {
   $_SESSION['mensaje'] = 'Se ha restaurada la Base de Datos con Éxito!';
 }
 
+?>
+<?php
+
+         $modeloPrincipal = new ModeloPrincipal();
+
+date_default_timezone_set('America/Mexico_City');
+$fecha = date("Y-m-d-H:i:s");
+$IDUS = $_SESSION['id_usuario'];
+
+include '../Config/conn.php';
+
+$rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+$row = mysqli_fetch_array($rs);
+$Usuarioo = $row['usuario'];
+
+$sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+VALUES(null,'$fecha','$IDUS',33, 'INGRESO','$Usuarioo INGRESÓ A BACKUP')";
+$modeloPrincipal->insertargeneral($sql);
 ?>
 
 <main>
@@ -257,4 +275,4 @@ if(isset($_SESSION['mensaje']))
     }
   });
 </script>
-<?php include_once "../Login/footer.php"; ?>
+<?php include_once "../login/footer.php"; ?>

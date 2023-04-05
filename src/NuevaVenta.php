@@ -1,7 +1,7 @@
 <?php
 include_once('../Login/header.php');
-require_once '../config/conexion.php';
-include '../config/conn.php';
+require_once '../Config/conexion.php';
+include '../Config/conn.php';
 include_once('../controladores/controlador_ventas.php');
 $clientes = new Contralador();
 // $sql = consultas("SELECT * FROM tbl_objetos");
@@ -45,8 +45,8 @@ if (isset($_POST['registrar'])) {
     }
 
     mysqli_query($conn, "INSERT INTO tbl_factura
-    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario, id_Tpago)
-    VALUES(null,now(),'$subtotal', '$impuest', '$totalfinal', '$cliente', '$IDUS', '" . $i['pago'] . "')");
+    (id_factura, Fecha_fac, Sub_Total, ISV, Total,idcliente,id_usuario, id_Tpago, estado)
+    VALUES(null,now(),'$subtotal', '$impuest', '$totalfinal', '$cliente', '$IDUS', '" . $i['pago'] . "', 'Activo')");
 
     $rs = mysqli_query($conn, "SELECT MAX(id_factura) as id FROM tbl_factura");
     $row = mysqli_fetch_array($rs);
@@ -456,10 +456,10 @@ if (isset($_POST['agregar'])) {
                                         <tr>
                                             <th><?php echo $ii = $ii + 1 ?></th>
                                             <th><?php echo $i['productotext'] ?></th>
-                                            <th><?php echo $i['costo'] ?></th>
+                                            <th><?php echo number_format($i['costo'], 2) ?></th>
                                             <th><?php echo $i['cantidad'] ?></th>
-                                            <th><?php echo $i['valorimpuesto'] ?></th>
-                                            <th><?php echo $i['totalfinal'] ?></th>
+                                            <th><?php echo number_format($i['valorimpuesto'], 2) ?></th>
+                                            <th><?php echo number_format($i['totalfinal'], 2) ?></th>
                                             <th><button class="btn btn-danger" onclick="eliminar(<?= $i['id'] ?>)" name="eliminar" type="submit"><i class='fas fa-trash-alt'></i></button></th>
                                         </tr>
                                     <?php       
@@ -533,24 +533,7 @@ if (isset($_POST['agregar'])) {
     };
 
 </script>
-<?php
-   /*$cambio = $_POST['cambio'];
-   $recibido = $_POST['recibido'];
-   $apagar = $_POST['apagar'];*/
-   
-  if (isset($_POST['cobrar'])) {
-    $alert = "";
 
-}  
-        if (isset($_POST['calcular'])) {
-            $alert = "";       
-            
-            $cambio =  $recibido-$apagar;
-
-    }
-
-  
-        ?>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -565,17 +548,17 @@ if (isset($_POST['agregar'])) {
             
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">A pagar:</label>
-            <input type="text" class="form-control"  value="<?php echo number_format($total, 2); ?>" id="apagar"  name= "apagar">
+            <input type="text" class="form-control"  value="<?php echo number_format($total, 2); ?>" id="apagar"  name= "apagar" readonly>
           </div>
         
           <div class="form-group">
             <label for="recipient-name"  class="col-form-label">Recibido:</label>
-            <input type="text" class="form-control" id="recibido" name ="recibido">
+            <input type="text" class="form-control" id="recibido" name ="recibido" oninput = cambioo()>
           </div>
 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Cambio:</label>
-            <input type="text" class="form-control"  value ="<?php echo number_format($cambio, 2); ?>" id="cambio" name ="cambio">
+            <input type="text" class="form-control"  value ="<?php echo number_format($cambio, 2); ?>" id="cambio" name ="cambio" min = 0>
           </div>
        
         </form>
@@ -584,7 +567,6 @@ if (isset($_POST['agregar'])) {
       <div class="modal-footer">
         <button type="button" name = "close" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         
-           <button type="submit" id="calcular" name = "calcular" class="btn btn-secondary" >Calcular</button>
  
         <form action="" method="post">
         <button class="btn btn-success" name="registrar" id="terminar" type="submit" >Terminar venta <i class='far fa-file-alt' style="color: white;"></i></button>
@@ -593,9 +575,12 @@ if (isset($_POST['agregar'])) {
     </div>
   </div>
 </div>
+
 <?php include_once('../Login/footer.php');
 ?>
 <script>
+
+    
     function eliminar(id){
         Swal.fire({
             title: '¿Está seguro?',
@@ -639,6 +624,8 @@ if (isset($_POST['agregar'])) {
 
 
 <script>
+
+
     let stck = 0;
 
     function pierdeFoco(e) {
@@ -683,7 +670,7 @@ if (isset($_POST['agregar'])) {
                     
             })
     }
-
+    
     cantidad.oninput = function() {
         if (parseInt(cantidad.value) > stck) {
             Notiflix.Notify.failure('La cantidad no puede ser mayor a la existencia');
@@ -697,4 +684,14 @@ if (isset($_POST['agregar'])) {
         }
     };
 
-</script>
+
+function cambioo() {
+    if (parseInt(recibido.value) < apagar.value) {
+       //Notiflix.Notify.failure('No puede pagar menos de lo cobrado');
+        cambio.value = '';
+    } else {
+     cambio.value = recibido.value - apagar.value;
+    }
+};
+    </script>
+   

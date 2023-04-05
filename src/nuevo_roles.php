@@ -1,3 +1,4 @@
+
 <?php
 include_once "../Login/header.php";
 include '../config/conn.php';
@@ -22,7 +23,7 @@ if (!empty($_POST)) {
              padding:'1rem'
          }).then((result) => {
              if (result.isConfirmed) {
-                 location.href ='../src/Mantenimiento_Roles.php';
+                 location.href ='../src/Mantenimiento_roles.php';
              }
          })    
      </script>";
@@ -33,7 +34,6 @@ if (!empty($_POST)) {
 }
 
 ?>
-
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br>

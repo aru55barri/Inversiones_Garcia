@@ -53,10 +53,17 @@
                     // Inicio vista en bitacora al mostrar empleados Joel Montoya
                     $modeloPrincipal = new ModeloPrincipal();
                     $fecha = date("Y-m-d-H:i:s");
+
                     $IDUS = $_SESSION['id_usuario'];
         
+                    include '../Config/conn.php';
+    
+                    $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+                    $row = mysqli_fetch_array($rs);
+                    $Usuarioo = $row['usuario'];
+        
                     $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-                    VALUES(null,'$fecha','$IDUS',22, 'INGRESO','EL USUARIO INGRESA A TABLA CAI')";
+                    VALUES(null,'$fecha','$IDUS',22, 'INGRESO','$Usuarioo INGRESÓ A TABLA CAI')";
                     $modeloPrincipal->insertargeneral($sql);
                     // FIN vista en bitacora al mostrar empleados Joel Montoya
         
@@ -66,7 +73,7 @@
 
         static function InsertarCAI($rango_inicial, $rango_final, $rango_actual, $numero_CAI, $fecha_vencimiento, $usuario)
         {
-            include '../config/conn.php';
+            include '../Config/conn.php';
     
             $modelo = new CAI();
             $sql = "INSERT INTO tbl_cai (id, rango_inicial, rango_final, rango_actual, numero_CAI, fecha_vencimiento, id_usuario) 

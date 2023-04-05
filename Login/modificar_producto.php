@@ -1,6 +1,6 @@
 <?php
 include_once('../Login/header.php');
-require_once '../config/conexion.php';
+require_once '../Config/Conexion.php';
 include_once '../modelos/modelo_login.php';
 include_once('../controladores/controlador_producto.php');
 
@@ -157,4 +157,5 @@ if ($_POST) {
 <?php
 
 include_once('../Login/footer.php');
+
 ?>

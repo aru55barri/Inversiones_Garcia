@@ -36,12 +36,19 @@ class Usuario
         foreach ($resultado as $resp) {
             $this->usuario[] = $resp;
             // Inicio insertar en bitacora al iniciar sesion 
-            $fecha = date("Y-m-d-H:i:s");
-            $IDUSUARIOB = "$resp[id_usuario]";
+                date_default_timezone_set('America/Mexico_City');
+                $fecha = date("Y-m-d-H:i:s");
+                $IDUS = "$resp[id_usuario]";
 
-            $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-           VALUES(null,'$fecha','$IDUSUARIOB',1,'INGRESO','EL USUARIO INICIA SESION')";
-            $this->db->query($sql1);
+                include '../Config/conn.php';
+
+                $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+                $row = mysqli_fetch_array($rs);
+                $Usuarioo = $row['usuario'];
+
+                $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+                VALUES(null,'$fecha','$IDUS',1, 'INICIO','$Usuarioo INICIA SESION')";
+                $this->db->query($sql1);
             // FIN insertar en bitacora al iniciar sesion 
         }
 
@@ -520,7 +527,7 @@ class Usuario
     {
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT *  from tipo_categoria";
+        $sql = "SELECT *  from tbl_tipo_categoria";
         $roles = $this->db->query($sql);
         return $roles;
         $this->db = null;

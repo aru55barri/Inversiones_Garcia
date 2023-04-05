@@ -4,13 +4,14 @@ include_once '../modelos/modelo_principal.php';
 include '../config/conn.php';
 
 $id = $_SESSION['rol'];
-$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 20 and ID_ROL = '$id'");
+$sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where ID_OBJETO = 4 and ID_ROL = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
 $modificar = $row['permiso_modificar'];
 $consultar = $row['permiso_consultar'];
 $eliminar = $row['permiso_eliminacion'];
+$PDF = $row['pdf'];
 
 
 if (isset($_GET['eliminar'])) {
@@ -68,16 +69,23 @@ class Contralador
                     <?php } ?>
                 </tr>
 <?php }
-            // Inicio vista en bitacora al mostrar usuarios 
-            $modeloPrincipal = new ModeloPrincipal();
-            $fecha = date("Y-m-d-H:i:s");
-            $IDUS = $_SESSION['id_usuario'];
+             $modeloPrincipal = new ModeloPrincipal();
 
-            $sql = "INSERT INTO tbl_bitacora(id, fecha, accion, descripcion, id_usuario, id_objeto)
-         VALUES(null,'$fecha','INGRESO','EL USUARIO INGRESA A TABLA PERMISOS','$IDUS',2)";
-            $modeloPrincipal->insertargeneral($sql);
-            // FIN vista en bitacora al mostrar usuarios
+             date_default_timezone_set('America/Mexico_City');
+             $fecha = date("Y-m-d-H:i:s");
+             $IDUS = $_SESSION['id_usuario'];
+
+             include '../Config/conn.php';
+
+             $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+             $row = mysqli_fetch_array($rs);
+             $Usuarioo = $row['usuario'];
+
+             $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+             VALUES(null,'$fecha','$IDUS',20, 'INGRESO','$Usuarioo INGRESÓ A TABLA PERMISOS')";
+             $modeloPrincipal->insertargeneral($sql);
         }
+       
     }
 
     static public function mostrarid($id)
@@ -120,8 +128,8 @@ class Contralador
             $modeloPrincipal = new ModeloPrincipal();
             $fecha = date("Y-m-d-H:i:s");
             $IDUS = $_SESSION['id_usuario'];
-            $sql = "INSERT INTO tbl_bitacora(id, fecha, accion, descripcion, id_usuario, id_objeto)
-            VALUES(null,'$fecha','ELIMINAR','EL USUARIO ELIMINA DE LA TABLA PERMISOS','$IDUS',2)";
+            $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+            VALUES(null,'$fecha','$IDUS',20, 'ELIMINAR','EL USUARIO ELIMINA DE LA TABLA PERMISOS')";
             $modeloPrincipal->insertargeneral($sql);
             // FIN eliminar usuario Joel Montoya 
             echo "<script>

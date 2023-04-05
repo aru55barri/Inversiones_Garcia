@@ -9,7 +9,7 @@ $preguntas = obtenerPreguntass();
 
 
 if (!isset($_SESSION['user'])) {
-    header('Location: ../Login/login.php');
+    header('Location: ../login/login.php');
 }
 
 
@@ -83,8 +83,7 @@ if (!isset($_SESSION['user'])) {
                                 }) 
                            </script>";
                        }else{
-                           //header('Location: ./cambio_pass.php');
-                           echo("<script>location.href = './cambio_pass.php';</script>");
+                        echo("<script>location.href = './cambio_pass.php';</script>");
                        } 
                 }              
            }

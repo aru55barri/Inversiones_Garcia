@@ -66,11 +66,20 @@ class UsuariosContralador
             }
             // Inicio vista en bitacora al mostrar usuarios Joel Montoya
             $modeloPrincipal = new ModeloPrincipal();
+            date_default_timezone_set('America/Mexico_City');
             $fecha = date("Y-m-d-H:i:s");
+ 
             $IDUS = $_SESSION['id_usuario'];
+        
+            include '../Config/conn.php';
+
+            $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+            $row = mysqli_fetch_array($rs);
+            $Usuarioo = $row['usuario'];
+
 
             $sql = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
-            VALUES(null,'$fecha','INGRESO','EL USUARIO INGRESA A TABLA USUARIOS','$IDUS',2)";
+            VALUES(null,'$fecha','INGRESO','$Usuarioo INGRESÓ A LA TABLA USUARIOS','$IDUS',16)";
             $modeloPrincipal->insertargeneral($sql);
             // FIN vista en bitacora al mostrar usuarios Joel Montoya
         }

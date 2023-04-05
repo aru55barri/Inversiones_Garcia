@@ -12,6 +12,15 @@ $consultar = $row['permiso_consultar'];
 $eliminar = $row['permiso_eliminacion'];
 $PDF = $row['pdf'];
   
+
+/////////////////////////////////////////////////////////////////////////////////
+$sql1 = mysqli_query($conn, "SELECT * FROM tbl_config_empresa where id = 1");
+$rom = mysqli_fetch_array($sql1);
+
+$nombre = $rom['nombre'];
+$tel = $rom['tel'];
+$direccion = $rom['direccion'];
+/////////////////////////////////////////////////////////////////////////////////
 ?>
 
 <h1 class=" text-center" id="letra"> Clientes </h1>
@@ -218,8 +227,8 @@ $PDF = $row['pdf'];
         },
         {
           extend: 'pdfHtml5',
-          text: '<button class="btn btn-danger" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Exportar a PDF <i class="fas fa-file-pdf"></i></button>',
-          orientation: 'landscape',
+          text: '<button class="btn btn-danger" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">PDF <i class="fas fa-file-pdf"></i></button>',
+          orientation: 'portrait',
           pageSize: 'LETTER',
           customize: function(doc) {
             doc.content.splice(0, 1);
@@ -230,7 +239,7 @@ $PDF = $row['pdf'];
             doc.content.unshift({
               margin: [0, 0, 0, 0],
               alignment: 'center',
-              text: 'Inversiones Garcia',
+              text: '<?= $rom['nombre'] ?>',
               fontSize: 20,
               bold: true,
               color: '#063970',
@@ -238,7 +247,7 @@ $PDF = $row['pdf'];
             },{
               margin: [0, 0, 0, 0],
               alignment: 'center',
-              text: 'Reporte de Usuarios',
+              text: 'Reporte de Clientes',
               fontSize: 20,
               bold: true
             },
@@ -249,12 +258,13 @@ $PDF = $row['pdf'];
               fontSize: 10,
               bold: true
             },
-           /* {
+            {
               margin: [0, -60, 0, 20],
               alignment: 'right',
+              image: 'data:image/jpeg;base64,<?php echo base64_encode($rom['logo']);  ?> ',
               width: 70,
               height: 70,
-            } */
+            }
             );
             doc["footer"] = function (currentPage, pageCount) {
               return {
@@ -280,7 +290,7 @@ $PDF = $row['pdf'];
             };
           },
           exportOptions: {
-            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8,],
+            columns: [0, 1, 2, 3, 4, 5,],
             modifier: {
               page: 'current'
             },

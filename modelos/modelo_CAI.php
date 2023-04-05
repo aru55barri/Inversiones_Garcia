@@ -8,7 +8,7 @@
 
 
         public function __construct(){
-            require_once '../config/conexion.php';         
+            require_once '../Config/Conexion.php';         
             $this->db = getConexion();
             $this->Modelo = array();
         }
@@ -61,9 +61,16 @@
             //ALTERAR BITACORA______________________
             $fecha = date("Y-m-d-H:i:s");
             $IDUSUARIO = $_SESSION['id_usuario'];
+
+
+            include '../Config/conn.php';
+        
+            $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUSUARIO");
+            $row = mysqli_fetch_array($rs);
+            $Usuarioo = $row['usuario'];
     
             $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-               VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE EDITO UN CAI')";
+               VALUES(null,'$fecha','$IDUSUARIO',22,'REGISTRO', '$Usuarioo EDITÓ UN CAI')";
             $this->db->query($sql1);
             //ALTERAR BITACORA______________________
     

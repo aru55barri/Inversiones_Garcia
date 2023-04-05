@@ -25,6 +25,22 @@
         while ($filas = $resultado->fetch(PDO::FETCH_ASSOC)){
             $this->clientes[] = $filas;    
         }
+
+        $modeloPrincipal = new ModeloPrincipal();
+
+        date_default_timezone_set('America/Mexico_City');
+        $fecha = date("Y-m-d-H:i:s");
+        $IDUS = $_SESSION['id_usuario'];
+
+        include '../Config/conn.php';
+
+        $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+        $row = mysqli_fetch_array($rs);
+        $Usuarioo = $row['usuario'];
+
+        $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+        VALUES(null,'$fecha','$IDUS',12, 'INGRESO','$Usuarioo INGRESÓ A TABLA CLIENTES')";
+        $modeloPrincipal->insertargeneral($sql);
         return $this->clientes;
         $this->db=null;
     }
@@ -43,7 +59,7 @@
          $fecha = date("Y-m-d-H:i:s");
       
          $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-            VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN CLIENTES')";
+            VALUES(null,'$fecha','$IDUSUARIO',12,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN CLIENTES')";
          $this->db->query($sql1);
          //ALTERAR BITACORA______________________
  

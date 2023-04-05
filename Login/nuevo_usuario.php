@@ -338,9 +338,7 @@ if (!empty($_POST)) {
                                                 <option value="<?php echo $rowt['id_rol']; ?>"><?php echo $rowt['rol']; ?></option>
                                             <?php } ?>
                                         </select>
-
                                         <label for="txtID"><i class="fa-regular fa-id-badge"></i>&nbsp;Roles</label>
-
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -489,5 +487,5 @@ if (!empty($_POST)) {
 </main>
 
 <?php
-include_once('./footer.php');
+include_once('./Footer.php');
 ?>

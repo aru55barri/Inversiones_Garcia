@@ -24,7 +24,7 @@ class tipocat
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tipo_categoria";
+        $sql = "SELECT * FROM tbl_tipo_categoria";
         $resultado = $this->db->query($sql);
 
         foreach ($resultado as $resp) {
@@ -40,7 +40,7 @@ class tipocat
 
         $this->db = getConexion();
         self::setNames();
-        $sql="INSERT INTO tipo_categoria (descripcion) VALUES ('$PREGUNTA')";
+        $sql="INSERT INTO tbl_tipo_categoria (descripcion) VALUES ('$PREGUNTA')";
         $resultado = $this->db->query($sql);
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
@@ -68,7 +68,7 @@ class tipocat
         $this->db = getConexion();
         self::setNames();
 
-        $sql = "UPDATE tipo_categoria SET descripcion = '$Pregunta'  WHERE id = '$ID_PREGUNTA'";
+        $sql = "UPDATE tbl_tipo_categoria SET descripcion = '$Pregunta'  WHERE id = '$ID_PREGUNTA'";
         $resultado = $this->db->query($sql);
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
@@ -93,7 +93,7 @@ class tipocat
 
         $this->db = getConexion();
         self::setNames();
-        $sql="DELETE FROM tipo_categoria WHERE id = $ID_PREGUNTA";
+        $sql="DELETE FROM tbl_tipo_categoria WHERE id = $ID_PREGUNTA";
         /*$resultado = $this->db->query($sql);
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
@@ -133,7 +133,7 @@ class tipocat
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tipo_categoria WHERE id = '$ID_PREGUNTA'";
+        $sql = "SELECT * FROM tbl_tipo_categoria WHERE id = '$ID_PREGUNTA'";
         $resultado = $this->db->query($sql);
         $fila = $resultado->fetch(PDO::FETCH_ASSOC);
         return $fila;
@@ -145,7 +145,7 @@ class tipocat
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT * FROM tipo_categoria WHERE descripcion = '$pregunta'";
+        $sql = "SELECT * FROM tbl_tipo_categoria WHERE descripcion = '$pregunta'";
         $resultado = $this->db->query($sql);
         $fila = $resultado->fetch(PDO::FETCH_ASSOC);
         return $fila;

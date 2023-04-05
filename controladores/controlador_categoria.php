@@ -1,7 +1,7 @@
 <?php
 
 include_once '../modelos/modelo_categoria.php';
-include '../config/conn.php';
+include '../Config/conn.php';
 
 
 
@@ -68,6 +68,28 @@ function obtenerCategoriaExistente($pregunta)
         }).then((result) => {
             if (result.isConfirmed) {
                 location.href ='../src/categoria.php';
+             }
+        })    
+     </script>";
+    }
+    function InsertarUpdateEmpresa($id, $tel, $eslogan, $nombre, $correo, $direccion, $rtn, $imagen1)
+    {
+        $modeloPregunta = new categoria();
+
+        $modeloPregunta->UpdateEmpresa($id, $tel, $eslogan, $nombre, $correo, $direccion, $rtn, $imagen1);
+        //$_SESSION['edicion'] = 'listo';
+        echo "<script>
+        Swal.fire({
+            icon: 'success',
+            title: 'EXCELENTE!',
+            text: 'CONFIGURACIÓN EDITADA CON EXITO',
+            confirmButtonText: 'Aceptar',
+            position:'center',
+            allowOutsideClick:false,
+            padding:'1rem'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href ='../dist/home.php';
              }
         })    
      </script>";

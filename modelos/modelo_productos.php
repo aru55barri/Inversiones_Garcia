@@ -6,7 +6,7 @@
         private $usuario;
 
         public function __construct(){
-            require_once '../config/conexion.php';         
+            require_once '../Config/Conexion.php';         
             $this->db = getConexion();
             $this->Modelo = array();
         }
@@ -77,7 +77,7 @@
         public function Updateproducto($id, $descripcion, $categ, $tipo, $precio, $cant_minima, $cant_maxima, $estado){
             $this->db = getConexion();
             $sql = "UPDATE tbl_producto
-            SET id_categoria ='$categ', id_tipo_producto ='$tipo', descripcion='$descripcion', precio_venta='$precio', cantidad_minima='$cant_minima', cantidad_maxima='$cant_maxima', estado='$estado' WHERE codproducto='$id'";
+            SET id_categoria ='$categ', id_ ='$tipo', descripcion='$descripcion', precio_venta='$precio', cantidad_minima='$cant_minima', cantidad_maxima='$cant_maxima', estado='$estado' WHERE codproducto='$id'";
              $this->db->query($sql);
              $this->db=null;
         }
@@ -156,7 +156,7 @@
         {
             $this->db = getConexion();
            
-            $sql = "SELECT *  from tipo_producto";
+            $sql = "SELECT *  from tbl_tipo_producto";
             $empleados = $this->db->query($sql);
             return $empleados;
             $this->db = null;

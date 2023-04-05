@@ -24,10 +24,7 @@ class bitacora
 
         $this->db = getConexion();
         self::setNames();
-        $sql = "SELECT b.id as id, b.fecha AS fecha, b.fecha AS fecha, u.id_usuario AS id_usuario, m.id_objeto AS id_objeto,
-        b.accion AS accion, b.descripcion AS descripcion 
-        FROM tbl_bitacora as b inner join tbl_usuario as u on b.id_usuario = u.id_usuario 
-        inner join tbl_modulos as m on b.id_objeto = m.id_objeto;";
+        $sql = "SELECT b.id as id, b.fecha AS fecha, b.fecha AS fecha, u.usuario AS id_usuario, m.Objeto AS id_objeto, b.accion AS accion, b.descripcion AS descripcion FROM tbl_bitacora as b inner join tbl_usuario as u on b.id_usuario = u.id_usuario inner join tbl_modulos as m on b.id_objeto = m.id_objeto;";
         $resultado = $this->db->query($sql);
 
         foreach ($resultado as $resp) {

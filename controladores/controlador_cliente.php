@@ -72,16 +72,15 @@ $modificar = $row['permiso_modificar'];
 $consultar = $row['permiso_consultar'];
 $eliminar = $row['permiso_eliminacion'];
 
-/*if (isset($_GET['idusuario']) && isset($_GET['idempleado'])) {
-    UsuariosContralador::eliminarUsuario($_GET['idusuario'], $_GET['idempleado']);
+/*if (isset($_GET['idusuario']) && isset($_GET['idempleado'])) {    UsuariosContralador::eliminarUsuario($_GET['idusuario'], $_GET['idempleado']);
 }
 
 if (isset($_GET['buscar'])) {
     echo json_encode([
         'usuario' => 'juan'
     ]);
+}
 }*/
-
 class UsuariosContralador
 {
     public $usuarios;
@@ -124,14 +123,9 @@ class UsuariosContralador
                 echo "</tr>";
             }
             // Inicio vista en bitacora al mostrar usuarios Joel Montoya
-            $modeloPrincipal = new ModeloPrincipal();
-            $fecha = date("Y-m-d-H:i:s");
-            $IDUS = $_SESSION['id_usuario'];
 
-            $sql = "INSERT INTO tbl_bitacora(ID, FECHA, ACCION, DESCRIPCION, ID_USUARIO, ID_OBJETO)
-            VALUES(null,'$fecha','INGRESO','EL USUARIO INGRESA A TABLA CLIENTES','$IDUS',2)";
-            $modeloPrincipal->insertargeneral($sql);
-            // FIN vista en bitacora al mostrar usuarios Joel Montoya
+    
+
         }
     }
 

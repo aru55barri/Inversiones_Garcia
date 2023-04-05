@@ -114,9 +114,9 @@ class CompraContralador
                 <tr>
                 <td><?=$ii = $ii + 1?></td>
                   <td><?=$registro['fecha']?></td>
-                    <td><?=$registro['sub_total']?></td>
-                    <td><?=$registro['isv']?></td>
-                    <td><?=$registro['total']?></td>
+                  <td><?=number_format($registro['sub_total'], 2)?></td>
+                    <td><?=number_format($registro['isv'], 2)?></td>
+                    <td><?=number_format($registro['total'], 2)?></td>
                     <td><?=$registro['descripcion']?></td>
                     <td><?=$registro['USUARIO']?></td>
                     <td><?=$registro['estado'] == '' ? 'ACTIVO' : 'CANCELADO'?></th>
@@ -127,15 +127,21 @@ class CompraContralador
                     <?php } ?>
                 </tr>
                 <?php }
-                // Inicio vista en bitacora al mostrar empleados Joel Montoya
-                $modeloPrincipal = new ModeloPrincipal();
-                $fecha = date("Y-m-d-H:i:s");
-                $IDUS = $_SESSION['id_usuario'];
-
-                $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-                VALUES(null,'$fecha','$IDUS',3, 'INGRESO','EL USUARIO INGRESA A TABLA INGRESO PRODUCTOS')";
-                    $modeloPrincipal->insertargeneral($sql);
-                // FIN vista en bitacora al mostrar empleados Joel Montoya
+                 $modeloPrincipal = new ModeloPrincipal();
+                
+                 date_default_timezone_set('America/Mexico_City');
+                 $fecha = date("Y-m-d-H:i:s");
+                 $IDUS = $_SESSION['id_usuario'];
+ 
+                 include '../Config/conn.php';
+     
+                 $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+                 $row = mysqli_fetch_array($rs);
+                 $Usuarioo = $row['usuario'];
+ 
+                 $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+                 VALUES(null,'$fecha','$IDUS',10, 'INGRESO','$Usuarioo INGRESO A LA TABLA INGRESO DE PRODUCTOS')";
+                     $modeloPrincipal->insertargeneral($sql);
     
             }
         }

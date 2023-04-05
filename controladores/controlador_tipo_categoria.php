@@ -1,7 +1,7 @@
 <?php
 
 include_once '../modelos/modelo_tipo_categoria.php';
-include '../config/conn.php';
+include '../Config/conn.php';
 
 function mostrarTipoca()
 {

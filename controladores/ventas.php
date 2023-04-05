@@ -1,5 +1,5 @@
 <?php 
-include '../config/conn.php';
+include '../Config/conn.php';
 if (isset($_GET['id'])) {
      $id = $_GET['id'];
      $sql = "select * from tbl_producto where codproducto = '$id'";

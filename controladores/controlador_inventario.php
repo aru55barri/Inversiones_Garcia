@@ -49,15 +49,22 @@ class InventarioContralador
                     </tr>
                     
              <?php   }
-                // Inicio vista en bitacora al mostrar empleados Joel Montoya
-            $modeloPrincipal = new ModeloInventario();
-            $fecha=date("Y-m-d-H:i:s");
-            $IDUS=$_SESSION['id_usuario'];
-            
+        $modeloPrincipal = new ModeloInventario();
 
-            $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-            VALUES(null,'$fecha','$IDUS',3, 'INGRESO','EL USUARIO INGRESA A TABLA INVENTARIO')";
-                $modeloPrincipal->insertargeneral($sql);
+        date_default_timezone_set('America/Mexico_City');
+        $fecha=date("Y-m-d-H:i:s");
+        
+        $IDUS = $_SESSION['id_usuario'];
+
+        include '../Config/conn.php';
+
+        $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+        $row = mysqli_fetch_array($rs);
+        $Usuarioo = $row['usuario'];
+
+        $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+        VALUES(null,'$fecha','$IDUS',9, 'INGRESO','$Usuarioo INGRESÓ A LA TABLA INVENTARIO')";
+            $modeloPrincipal->insertargeneral($sql);
 
 
             

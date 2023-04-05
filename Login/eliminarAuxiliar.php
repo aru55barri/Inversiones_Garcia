@@ -329,7 +329,7 @@ if(!empty($_GET))
 
             //se ejecuta el eliminar
             echo "<script>
-                window.location.href='../src/Mantenimiento_Roles.php';
+                window.location.href='../src/Mantenimiento_roles.php';
                 </script>";
 
             $_SESSION['eliminarRol'] = 'Si';
@@ -337,7 +337,7 @@ if(!empty($_GET))
         else
         {
             echo "<script>
-                window.location.href='../src/Mantenimiento_Roles.php';
+                window.location.href='../src/Mantenimiento_roles.php';
                 </script>";
 
             $_SESSION['eliminarRol'] = 'No';

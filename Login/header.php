@@ -1,4 +1,7 @@
 <?php
+include_once '../modelos/modelo_principal.php';
+
+include '../config/conn.php';
 
 session_start();
 
@@ -18,8 +21,27 @@ if(!empty($_GET))
     {
         if($_GET['cerrarSesion'] == true)
         {
+            $modeloPrincipal = new ModeloPrincipal();
+
+            date_default_timezone_set('America/Mexico_City');
+            $fecha = date("Y-m-d-H:i:s");
+            $IDUS = $_SESSION['id_usuario'];
+
+            include '../config/conn.php';
+
+
+            $rs = mysqli_query($conn, "SELECT * FROM tbl_usuario where id_usuario = $IDUS");
+            $row = mysqli_fetch_array($rs);
+            $Usuarioo = $row['usuario'];
+
+            $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+            VALUES(null,'$fecha','$IDUS',1, 'CERRAR','$Usuarioo CERRÓ SESIÓN')";
+            $modeloPrincipal->insertargeneral($sql);
+
             session_destroy();
             echo "<script>window.location.href='../Login/login.php';</script>";
+
+          
         }
     }
 }
@@ -27,6 +49,12 @@ if(!empty($_GET))
 require_once '../controladores/controladorLogin.php';
 include '../config/conn.php';
 
+$sql1 = mysqli_query($conn, "SELECT * FROM tbl_config_empresa where id = 1");
+$rom = mysqli_fetch_array($sql1);
+
+$nombre2 = $rom['nombre'];
+$tel = $rom['tel'];
+$direccion = $rom['direccion'];
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +65,7 @@ include '../config/conn.php';
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Inversiones Garcia</title>
+        <title><?= $rom['nombre'] ?></title>
         <link rel="icon" href="../dist/assets/img-2/Logo-IG.ico">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../dist/css/styles.css" rel="stylesheet" />
@@ -58,6 +86,11 @@ include '../config/conn.php';
         <script src="assets/js/popper.min.js"></script><!-- ESTE-->
         <script src="assets/js/bootstrap.min.js"></script><!-- ESTE-->
         <script src="assets/js/main.js"></script><!-- ESTE-->
+        <!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> ESTE PARA LAS GRAFICAS-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>
+
+
+
         
         <!-- The javascript plugin to display page loading on top (modal)--> 
         <script src="assets/js/plugins/pace.min.js"></script>
@@ -79,28 +112,29 @@ include '../config/conn.php';
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" id="titulo_menu" href="../dist/home.php">  Inversiones García  </a>
+            <a class="navbar-brand ps-3" id="titulo_menu" href="../dist/home.php"> <?= $rom['nombre'] ?> </a>
             
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="btnNavbarSearch" />
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= $nombre ?> <i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="../src/Mi_perfil.php">Mi perfil</a></li>
+                     <!--<li><a class="dropdown-item" href="../src/Mi_perfil.php">Mi perfil</a></li>-->
                         <li><a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesion</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
+        
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
