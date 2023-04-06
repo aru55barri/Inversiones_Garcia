@@ -163,6 +163,7 @@
                                         <?php echo isset($alert) ? $alert : ''; ?>           
 
                                         <input type="submit" name="Registro" id="Registro" value="Registrate" class="button">
+
                                     </div>
                                     <div>
                                         <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
@@ -245,24 +246,28 @@
 </script>
 <script>
     var correo = document.getElementsByName('correo')[0];
+    var botonRegistro = document.getElementById('Registro');
+
     correo.addEventListener('blur', function() {
         var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!regex.test(correo.value)) {
-           
             // Efecto de sombra color rojo en el borde
             correo.style.borderColor = "red";
             correo.style.boxShadow = "0 0 10px red";
             correo.classList.add("is-invalid");
             correo.classList.remove("is-valid");
+            botonRegistro.disabled = true; // deshabilitar el botón
         } else {
             // Efecto de sombra color verde en el borde
             correo.style.borderColor = "green";
             correo.style.boxShadow = "0 0 10px green";
             correo.classList.add("is-valid");
             correo.classList.remove("is-invalid");
+            botonRegistro.disabled = false; // habilitar el botón
         }
     });
 </script>
+
 <script>
     var password = document.getElementById('ncontrasena');
     password.addEventListener('keyup', function(e) {

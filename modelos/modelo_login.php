@@ -750,7 +750,7 @@ class Usuario
         $meses = $this->mesesVencimiento();
         $fechaVencimiento = date("Y-m-d", strtotime($fechaHoy . "+" . $meses[0]['VALOR']  . " month"));
         $sql = "INSERT INTO tbl_usuario (USUARIO, NOMBRE, clave, ID_ROL, FECHA_ULTIMA_CONEXION, PRIMER_INGRESO, FECHA_VENCIMIENTO, CORREO, ID_ESTADO, ID_EMPLEADO, PREGUNTAS_CONTESTADAS)
-        VALUES('$username', '$nombre','$password', 1, '0000-00-00', 0, '$fechaVencimiento', '$correo', 5, '$idEmpleado',2)";
+        VALUES('$username', '$nombre','$password', 4, '0000-00-00', 0, '$fechaVencimiento', '$correo', 5, '$idEmpleado',2)";
         $this->db->query($sql);
         
         // Inicio insertar en bitacora al autoregistrarse Joel Montoya
