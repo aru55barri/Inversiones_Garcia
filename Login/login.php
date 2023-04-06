@@ -9,6 +9,11 @@ $sql1 = mysqli_query($conexion, "SELECT * FROM tbl_config_empresa where id = 1")
 $rom = mysqli_fetch_array($sql1);
 $intentos = obtenerIntentosFallidos();
 
+
+    
+
+
+
 if (!empty($_GET)) {
     
     if(isset($_GET['operacion']))
@@ -129,7 +134,11 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
     }
 }
 
+
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -265,6 +274,26 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
             });
         </script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <?php 
+
+if(isset($_GET['registro']))
+{
+    if($_GET['registro'] == 1)
+    {
+        echo '<script> Swal.fire({
+            icon: "success",
+            title: "Felicidades!",
+            text: "Usuario registrado correctamente!",
+            showConfirmButton: true
+        })
+        .then (() => {
+            window.location.href = "../Login/login.php";
+        });
+        </script>';
+    }
+}
+        
+?>
         <?php 
         if(isset($_GET['loggeado']))
         {

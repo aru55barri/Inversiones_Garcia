@@ -1,5 +1,6 @@
 <?php
     require_once "../config/conexion.php";
+    require_once "../config/conn.php";
 
     require_once '../config/conex.php';
     include_once('../controladores/controladorLogin.php');
@@ -25,21 +26,27 @@
             $correo = $_POST['correo'];
             $usuario = $_POST['usuario'];
             $password = $_POST['clave'];
+
+        
+
             $query = mysqli_query($conn, "SELECT * FROM tbl_usuario where correo = '$correo'");
             $result = mysqli_fetch_array($query);
-            if ($result > 0) {
+           if ($result > 0) {
                 $alert = '<div class="alert alert-warning" role="alert">
                             El correo ya existe
                         </div>';
             } else {
-                /*
-                $sql=$conexion->query("insert into tbl_usuario(nombre, correo, usuario, clave, id_rol, fecha_ultima_conexion, preguntas_contestadas, primer_ingreso, fecha_vencimiento, id_estado)
-                values ('$nombre','$correo','$usuario','$clave', 1, CURRENT_TIMESTAMP, '0', '0', CURRENT_TIMESTAMP, 5)");
-                //recordar que se le asignara de rol id=4 ya que es el sin asignar
-                $sql=$conexion->query("insert into tbl_emp(nombre, correo, usuario, clave, id_rol, fecha_ultima_conexion, preguntas_contestadas, primer_ingreso, fecha_vencimiento, id_estado)
-                values ('$nombre','$correo','$usuario','$clave', 1, CURRENT_TIMESTAMP, '0', '0', CURRENT_TIMESTAMP, 5)");
-                */
                 
+                $query1 = mysqli_query($conn, "SELECT * FROM tbl_usuario where usuario = '$usuario'");
+                $result1 = mysqli_fetch_array($query1);
+    
+                if ($result1 > 0) {
+                    $alert = '<div class="alert alert-warning" role="alert">
+                                El usuario ya existe
+                            </div>';
+                        } else {
+
+
                 $insertarUsuario=insertarUsuarioEmpleado($nombre, $apellido, $correo, $usuario, $password);
 
                 if($insertarUsuario > 0){
@@ -47,10 +54,15 @@
                     Error al registrar
                     </div>';
                 } else {
-                    $alert = '<div class="alert alert-primary" role="alert">
-                    Usuario registrado correctamente
-                    </div>';
+                   $_SESSION['registroU'] = 'ok';
+                
+                    echo "<script> 
+                   location.href ='../Login/login.php?registro=1';
+                   </script>";   
                 }
+
+                }
+
             }
         } else {
                
@@ -110,17 +122,36 @@
                                         <div class="input-contenedor">
                                             <i class="fas fa-user icon"></i>
                                             <input type="text" name="nombre" placeholder="Nombre y Apellido">
+                                        <div class="valid-tooltip">
+                                                Campo Valido!
+                                            </div>
+                                        <div class="invalid-tooltip">
+                                                No se permiten numeros ni caracteres especiales en Nombre y Apellido.
+                                            </div>
                                         </div>
-                                        
                                         <div class="input-contenedor">
                                             <i class="fas fa-envelope icon"></i>
                                             <input type="text" name="correo" placeholder="Correo electronico">
+                                            <div class="valid-tooltip">
+                                                Campo Valido!
+                                            </div>
+                                        <div class="invalid-tooltip">
+                                        Por favor ingrese un correo electrónico válido.
+                                            </div>
+                                       
                                         </div>
 
                                         <div class="input-contenedor form-floating d-flex">
                                             <i class="fas fa-key icon" style="margin-top: 20px"></i>
                                             <input type="password" id="ncontrasena" name="clave" placeholder="Contraseña">
                                             <button class="btn btn-primary" type="button" onclick="mostrarPasswordN()"><span class="fa fa-eye"></span></button>
+                                            <div class="valid-tooltip">
+                                                Campo Valido!
+                                            </div>
+                                        <div class="invalid-tooltip">
+                                        La contraseña debe tener al menos una letra mayúscula, una minúscula, un símbolo y un mínimo de 8 caracteres.
+                                            </div>
+                                       
                                         </div>
                                         
                                         <div class="input-contenedor form-floating d-flex">
@@ -191,6 +222,73 @@
             }
         });
     </script>
+<script>
+    var nombre = document.getElementsByName('nombre')[0];
+    nombre.addEventListener('keypress', function(e) {
+        var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (!regex.test(key)) {
+            e.preventDefault();
+            // Efecto de sombra color rojo en el borde
+            nombre.style.borderColor = "red";
+            nombre.style.boxShadow = "0 0 10px red";
+            nombre.classList.add("is-invalid");
+            nombre.classList.remove("is-valid");
+        } else {
+            // Efecto de sombra color verde en el borde
+            nombre.style.borderColor = "green";
+            nombre.style.boxShadow = "0 0 10px green";
+            nombre.classList.add("is-valid");
+            nombre.classList.remove("is-invalid");
+        }
+    });
+</script>
+<script>
+    var correo = document.getElementsByName('correo')[0];
+    correo.addEventListener('blur', function() {
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(correo.value)) {
+           
+            // Efecto de sombra color rojo en el borde
+            correo.style.borderColor = "red";
+            correo.style.boxShadow = "0 0 10px red";
+            correo.classList.add("is-invalid");
+            correo.classList.remove("is-valid");
+        } else {
+            // Efecto de sombra color verde en el borde
+            correo.style.borderColor = "green";
+            correo.style.boxShadow = "0 0 10px green";
+            correo.classList.add("is-valid");
+            correo.classList.remove("is-invalid");
+        }
+    });
+</script>
+<script>
+    var password = document.getElementById('ncontrasena');
+    password.addEventListener('keyup', function(e) {
+        var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,}$/;
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (!regex.test(password.value)) {
+            e.preventDefault();
+            // Efecto de sombra color rojo en el borde
+            password.style.borderColor = "red";
+            password.style.boxShadow = "0 0 10px red";
+            password.classList.add("is-invalid");
+            password.classList.remove("is-valid");
+        } else {
+            // Efecto de sombra color verde en el borde
+            password.style.borderColor = "green";
+            password.style.boxShadow = "0 0 10px green";
+            password.classList.add("is-valid");
+            password.classList.remove("is-invalid");
+        }
+    });
+</script>
+
+
+
+
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </body>

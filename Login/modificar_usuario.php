@@ -11,6 +11,9 @@ $estados = $usuario->obtenerEstados();
 //$empleados = $usuario->obtenerEmpleados();
 $db = getConexion();
 
+
+
+
 if (!empty($_POST)) {
     $id = $_POST['id'];
    // $usuario = $_POST['usuario'];
@@ -111,12 +114,16 @@ if (!empty($_POST)) {
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <select name="estado" class="form-control" required="true">
-                                    <option value="" selected disabled>-- Seleccione un estado --</option>
-                                    <?php while ($rowt = $estados->fetch()) { ?>
-                                        <option value="<?php echo $rowt['id_estado']; ?>" <?= $row[0]['id_estado'] == $rowt['id_estado'] ? 'selected' : '' ?>><?php echo $rowt['nombre_estado']; ?></option>
-                                    <?php } ?>
-                                </select>
+                                    <select name="estado" class="form-control" required="true">
+                <option value="" selected disabled>-- Seleccione un estado --</option>
+                <?php while ($rowt = $estados->fetch()) {
+                    if ($rowt['nombre_estado'] == 'BLOQUEADO' && $row[0]['id_rol'] == 2) {
+                        continue; // Si el estado es "BLOQUEADO" y el rol es "administrador", saltar al siguiente estado
+                    }
+                ?>
+                    <option value="<?php echo $rowt['id_estado']; ?>" <?= $row[0]['id_estado'] == $rowt['id_estado'] ? 'selected' : '' ?>><?php echo $rowt['nombre_estado']; ?></option>
+                <?php } ?>
+            </select>
 
                                 <label for="txtID"><i class="fa-regular fa-id-badge"></i>&nbsp;Estados</label>
                                     </div>
@@ -160,5 +167,8 @@ if (!empty($_POST)) {
 </main>
 
 <?php
+
 include_once('footer.php');
+/*  <option value="<?php echo $rowt['id_estado']; ?>" <?= $row[0]['id_estado'] == $rowt['id_estado'] ? 'selected' : '' ?>><?php echo $rowt['nombre_estado']; ?></option> */
+
 ?>

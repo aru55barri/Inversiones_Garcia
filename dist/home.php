@@ -176,6 +176,7 @@ $ventas = $rod['suma'];
 
 <br>    
 
+<br>
             <br>
 
             <div class="row">

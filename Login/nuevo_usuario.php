@@ -356,16 +356,25 @@ if (!empty($_POST)) {
                                         
                                         <input class="form-control" name="empleado" id="empleado" type="text" placeholder="Nombre Completo Usuario" autocomplete="nope" size="25" required />
                                         <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Nombre Completo Usuario</label>
-                                                                                
-                                    </div>
-                                </div>
+                                        <div class="valid-tooltip">
+                                                Campo Valido!
+                                            </div>
+                                        <div class="invalid-tooltip">
+                                                No se permiten numeros ni caracteres especiales en Nombre Completo Usuario.
+                                            </div>
+                                        </div>                                  
                             </div>
                             <p class="formulario__input-error" id="fechamensaje"></p>
                             <div class="form-floating mb-3 mb-md-0">
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="vencimiento" name="fecha" type="date" required />
                                     <label for="fecha"><i class="fas fa-envelope icon"></i>&nbsp;Fecha de vencimiento</label>
-                                    <span id="fechamensaje"></span>
+                                    <div class="valid-tooltip">
+                                                Campo Valido!
+                                            </div>
+                                        <div class="invalid-tooltip">
+                                        La fecha debe ser mayor o igual a la actual.
+                                            </div>
                                 </div>
                             </div>
                             
@@ -399,6 +408,84 @@ if (!empty($_POST)) {
         <script src="./js/validar.js" type="text/javascript"></script>
         <script src="./js/moment.js"></script>
         <script src="./js/jquery.js" type="text/javascript"></script>
+        <script>
+    var nombre = document.getElementsByName('empleado')[0];
+    nombre.addEventListener('keypress', function(e) {
+        var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (!regex.test(key)) {
+            e.preventDefault();
+            // Efecto de sombra color rojo en el borde
+            nombre.style.borderColor = "red";
+            nombre.style.boxShadow = "0 0 10px red";
+            nombre.classList.add("is-invalid");
+            nombre.classList.remove("is-valid");
+        } else {
+            // Efecto de sombra color verde en el borde
+            nombre.style.borderColor = "green";
+            nombre.style.boxShadow = "0 0 10px green";
+            nombre.classList.add("is-valid");
+            nombre.classList.remove("is-invalid");
+        }
+    });
+</script>
+
+<script>
+    /*  FUNCION PARA QUE LO QUE SE ESCRIBA SEA AUTOMATICAMENTE EN MAYÚSCULAS
+    
+    var nombre = document.getElementsByName('empleado')[0];
+    nombre.addEventListener('input', function(e) {
+        var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+        var key = nombre.value.charAt(nombre.value.length-1);
+        if (!regex.test(key)) {
+            e.preventDefault();
+            // Efecto de sombra color rojo en el borde
+            nombre.style.borderColor = "red";
+            nombre.style.boxShadow = "0 0 10px red";
+            nombre.classList.add("is-invalid");
+            nombre.classList.remove("is-valid");
+        } else {
+            // Convertir a mayúsculas
+            nombre.value = nombre.value.toUpperCase();
+            // Efecto de sombra color verde en el borde
+            nombre.style.borderColor = "green";
+            nombre.style.boxShadow = "0 0 10px green";
+            nombre.classList.add("is-valid");
+            nombre.classList.remove("is-invalid");
+        }
+    });
+    */
+</script>
+
+<script>
+    
+const fechaInput = document.getElementById('vencimiento');
+fechaInput.addEventListener('input', validarFecha);
+
+function validarFecha() {
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0); 
+
+
+  const fechaIngresada = new Date(fechaInput.value);
+
+  
+  if (fechaIngresada < hoy) {
+    fechaInput.style.borderColor = "red";
+    fechaInput.style.boxShadow = "0 0 10px red";
+    fechaInput.classList.add('is-invalid');
+    fechaInput.value = null;
+  } else {
+
+    document.getElementById('fechamensaje').textContent = '';
+    fechaInput.style.borderColor = "green";
+    fechaInput.style.boxShadow = "0 0 10px green";
+    fechaInput.classList.remove('is-invalid');
+  }
+}
+
+</script>
 
         <script>
             (() => {
@@ -487,5 +574,5 @@ if (!empty($_POST)) {
 </main>
 
 <?php
-include_once('./Footer.php');
+include_once('./footer.php');
 ?>
