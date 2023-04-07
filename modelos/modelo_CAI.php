@@ -102,11 +102,13 @@
             $sql = "DELETE FROM tbl_cai WHERE id = '$id'";
             $resultado = $this->db->query($sql);
             //ALTERAR BITACORA______________________
+            date_default_timezone_set('America/Mexico_City');
             $fecha = date("Y-m-d-H:i:s");
             $IDUSUARIO = $_SESSION['id_usuario'];
+        
 
             $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-            VALUES(null,'$fecha','$IDUSUARIO',22,'MANTENIMIENTO', 'SE ELIMINO UN REGISTRO CAI')";
+            VALUES(null,'$fecha','$IDUSUARIO',22,'ELIMINAR', 'SE ELIMINO UN REGISTRO CAI')";
             $this->db->query($sql1);
             //ALTERAR BITACORA______________________
 

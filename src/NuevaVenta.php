@@ -370,13 +370,13 @@ if (isset($_POST['agregar'])) {
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Cantidad</label>
-                                <input type="text" placeholder="" required name="cantidad" id="cantidad" onKeyUp="pierdeFoco(this)" class="form-control">
+                                <input type="number" placeholder="" required name="cantidad" id="cantidad" onKeyUp="pierdeFoco(this)" min="1" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Stock</label>
-                                <input type="text" placeholder="" disabled name="stok" id="stock" class="form-control">
+                                <input type="number" placeholder="" disabled name="stok" id="stock" class="form-control">
                             </div>
                         </div>
 
@@ -558,7 +558,7 @@ if (isset($_POST['agregar'])) {
 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Cambio:</label>
-            <input type="text" class="form-control"  value ="<?php echo number_format($cambio, 2); ?>" id="cambio" name ="cambio" min = 0>
+            <input type="text" class="form-control"  value ="<?php echo number_format($cambio, 2); ?>"  id="cambio" name ="cambio"  min = 0 readonly>
           </div>
        
         </form>
@@ -569,7 +569,7 @@ if (isset($_POST['agregar'])) {
         
  
         <form action="" method="post">
-        <button class="btn btn-success" name="registrar" id="terminar" type="submit" >Terminar venta <i class='far fa-file-alt' style="color: white;"></i></button>
+        <button class="btn btn-success" name="registrar" id="terminar" type="submit">Terminar venta <i class='far fa-file-alt' style="color: white;"></i></button>
         </form>      
         </div>
     </div>
@@ -579,6 +579,36 @@ if (isset($_POST['agregar'])) {
 <?php include_once('../Login/footer.php');
 ?>
 <script>
+
+
+
+var precio = document.getElementById('costo');
+
+precio.addEventListener('input', function() {
+  // Eliminar todo lo que no sea un número o un punto
+  this.value = this.value.replace(/[^0-9\.]/g, '');
+
+  // Asegurarse de que solo hay un punto decimal
+  if (this.value.indexOf('.') !== -1) {
+    if (this.value.indexOf('.') !== this.value.lastIndexOf('.')) {
+      this.value = this.value.slice(0, -1);
+    }
+  }
+});
+var precio = document.getElementById('recibido');
+
+precio.addEventListener('input', function() {
+  // Eliminar todo lo que no sea un número o un punto
+  this.value = this.value.replace(/[^0-9\.]/g, '');
+
+  // Asegurarse de que solo hay un punto decimal
+  if (this.value.indexOf('.') !== -1) {
+    if (this.value.indexOf('.') !== this.value.lastIndexOf('.')) {
+      this.value = this.value.slice(0, -1);
+    }
+  }
+});
+
 
     
     function eliminar(id){
@@ -685,13 +715,16 @@ if (isset($_POST['agregar'])) {
     };
 
 
-function cambioo() {
+    function cambioo() {
     if (parseInt(recibido.value) < apagar.value) {
-       //Notiflix.Notify.failure('No puede pagar menos de lo cobrado');
+        document.getElementById("terminar").disabled = true;
+        //Notiflix.Notify.failure('No puede pagar menos de lo cobrado');
         cambio.value = '';
     } else {
-     cambio.value = recibido.value - apagar.value;
+        cambio.value = recibido.value - apagar.value;
+        document.getElementById("terminar").disabled = false;
     }
 };
+
     </script>
    

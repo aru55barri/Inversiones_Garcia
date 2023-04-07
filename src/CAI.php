@@ -48,18 +48,23 @@ font-size: 80px;
 
      <?php
         if(isset($_SESSION['registro'])){
-            echo "<script>Notiflix.Notify.success('Registrado correctamente');</script>";
-            unset($_SESSION['registro']);
-        }
-
-        if(isset($_SESSION['edicion'])){
-            echo "<script>Notiflix.Notify.warning('Editado correctamente');</script>";
-            unset($_SESSION['edicion']);
-        }
-        if(isset($_SESSION['eliminacion'])){
-            echo "<script>Notiflix.Notify.failure('Eliminado correctamente');</script>";
-          unset($_SESSION['eliminacion']);
+          echo "<script>Notiflix.Notify.success('Registrado correctamente');</script>";
+          unset($_SESSION['registro']);
       }
+
+      if(isset($_SESSION['edicion'])){
+          echo "<script>Notiflix.Notify.warning('Editado correctamente');</script>";
+          unset($_SESSION['edicion']);
+      }
+      if(isset($_SESSION['eliminarCAI'])){
+
+        if ($_SESSION['eliminarCAI'] == 'Si') {
+          echo "<script>Notiflix.Notify.failure('CAI Eliminado correctamente');</script>";
+        } else {
+          echo "<script>Notiflix.Notify.warning('No se pudo eliminar el CAI porque esta asociado a ventas');</script>";
+        }
+        unset($_SESSION['eliminarCAI']);
+    }
     ?>
 
 <div class="row">
@@ -114,7 +119,10 @@ font-size: 80px;
            confirmButtonText: '¡Sí, Eliminar!'
        }).then((result)=> {
            if(result.value){
-               window.location.href = "../controladores/controlador_cai.php?eliminar="+id;            }
+            window.location.href = '../Login/eliminarAuxiliar.php?id=' + id + '&tabla=cai';
+
+              // window.location.href = "../controladores/controlador_cai.php?eliminar="+id;           
+               }
        } )
    }
 </script>

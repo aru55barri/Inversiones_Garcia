@@ -77,7 +77,7 @@
         public function Updateproducto($id, $descripcion, $categ, $tipo, $precio, $cant_minima, $cant_maxima, $estado){
             $this->db = getConexion();
             $sql = "UPDATE tbl_producto
-            SET id_categoria ='$categ', id_ ='$tipo', descripcion='$descripcion', precio_venta='$precio', cantidad_minima='$cant_minima', cantidad_maxima='$cant_maxima', estado='$estado' WHERE codproducto='$id'";
+            SET id_categoria ='$categ', id_tipo_producto ='$tipo', descripcion='$descripcion', precio_venta='$precio', cantidad_minima='$cant_minima', cantidad_maxima='$cant_maxima', estado='$estado' WHERE codproducto='$id'";
              $this->db->query($sql);
              $this->db=null;
         }

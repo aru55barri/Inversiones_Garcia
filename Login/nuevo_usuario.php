@@ -360,7 +360,7 @@ if (!empty($_POST)) {
                                         <div class="valid-feedback">
                                                 Campo Valido!
                                             </div>
-                                        <div class="invalid-feedback">
+                                           <div class="invalid-feedback">
                                                 No se permiten numeros ni caracteres especiales en Nombre Completo Usuario.
                                             </div>
                                         </div>                                  
@@ -456,9 +456,9 @@ if (!empty($_POST)) {
 </script>
 <script>
     
-    /*  FUNCION PARA QUE LO QUE SE ESCRIBA SEA AUTOMATICAMENTE EN MAYÚSCULAS
+     //FUNCION PARA QUE LO QUE SE ESCRIBA SEA AUTOMATICAMENTE EN MAYÚSCULAS
     
-    var nombre = document.getElementsByName('empleado')[0];
+    /*var nombre = document.getElementsByName('empleado')[0];
     nombre.addEventListener('input', function(e) {
         var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
         var key = nombre.value.charAt(nombre.value.length-1);
@@ -478,8 +478,8 @@ if (!empty($_POST)) {
             nombre.classList.add("is-valid");
             nombre.classList.remove("is-invalid");
         }
-    });
-    */
+    });*/
+
 </script>
 
 <script>

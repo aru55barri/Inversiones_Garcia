@@ -23,6 +23,7 @@ include_once '../controladores/controlador_preguntas.php';
 include_once '../controladores/controlador_tipo_producto.php';
 include_once '../controladores/controlador_tipo_categoria.php';
 include_once '../controladores/controlador_categoria.php';
+include_once '../controladores/controlador_CAI.php';
 if(!empty($_GET))
     {
         $id = $_GET['id'];
@@ -53,36 +54,33 @@ if(!empty($_GET))
 
 
 
-
-    /*if(!empty($_GET))
+    if(!empty($_GET))
     {
         $id = $_GET['id'];
         $tabla  = $_GET['tabla'];
 
-        if($tabla == 'clientes')
+        if($tabla == 'cai')
         {
-            //Se ejecuta eliminar
-            $resultado= ClienteContralador::eliminarCliente($id);
+            //Se ejecuta eliminar eliminarCAI
+            $resultado= CAIContralador::eliminarCAI($id);
 
             if($resultado == true)
             {
                 echo "<script>
-                window.location.href= '../vistas/vista_clientes.php';
+                window.location.href= '../src/CAI.php';
                 </script>";
-                $_SESSION['eliminarCliente'] = 'Si';
-                
+                $_SESSION['eliminarCAI'] = 'Si';
             }
-            else
-            {
+            else{
                 echo "<script>
-                window.location.href= '../vistas/vista_clientes.php';
+                window.location.href= '../src/CAI.php';
                 </script>";
-                $_SESSION['eliminarCliente'] = 'No';
+                $_SESSION['eliminarCAI'] = 'No';
             }
             
         }
 
-    }*/
+    }
 
    
 //***************************************************/

@@ -97,11 +97,12 @@
         $sql = "UPDATE tbl_cliente SET DNI = '$DNI', nombre = '$nombre', telefono= '$telefono', RTN = '$rtn' , direccion = '$direccion' WHERE idcliente ='$id'";
         $resultado = $this->db->query($sql);
         //ALTERAR BITACORA______________________
+        date_default_timezone_set('America/Mexico_City');
         $fecha = date("Y-m-d-H:i:s");
         $IDUSUARIO = $_SESSION['id_usuario'];
 
         $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-           VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE EDITO UN CLIENTE')";
+        VALUES(null,'$fecha','$IDUSUARIO',12,'EDITO', 'SE EDITO UN CLIENTE')";
         $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 
@@ -122,11 +123,12 @@
         $sql = "DELETE FROM tbl_cliente WHERE idcliente = '$id'";
         $resultado = $this->db->query($sql);
         //ALTERAR BITACORA______________________
+        date_default_timezone_set('America/Mexico_City');
         $fecha = date("Y-m-d-H:i:s");
         $IDUSUARIO = $_SESSION['id_usuario'];
 
-     $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-     VALUES(null,'$fecha','$IDUSUARIO',33,'REGISTRO', 'SE ELIMINO UN CLIENTE')";
+        $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
+        VALUES(null,'$fecha','$IDUSUARIO',12,'ELIMINAR', 'SE ELIMINO UN CLIENTE')";
         $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 

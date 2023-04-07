@@ -60,7 +60,7 @@
 
 <?php
 //include_once('../Login/header.php');
-include_once '../modelos/modelo_principal.php';
+/*include_once '../modelos/modelo_principal.php';
 include '../config/conn.php';
 
 $id = $_SESSION['rol'];
@@ -70,7 +70,7 @@ $row = mysqli_fetch_array($sql);
 $insertar = $row['permiso_insercion'];
 $modificar = $row['permiso_modificar'];
 $consultar = $row['permiso_consultar'];
-$eliminar = $row['permiso_eliminacion'];
+$eliminar = $row['permiso_eliminacion'];*/
 
 /*if (isset($_GET['idusuario']) && isset($_GET['idempleado'])) {    UsuariosContralador::eliminarUsuario($_GET['idusuario'], $_GET['idempleado']);
 }

@@ -75,30 +75,30 @@ $direccion = $rom['direccion'];
       $resultado = mysqli_query($conn, $consulta);
       $MCAI = mysqli_fetch_assoc($resultado);
 
-$Rinicial = $MCAI ['rango_inicial'];  
-$Rfinal = $MCAI ['rango_final'];  
-$Ractual = $MCAI ['rango_actual'];  
-$NumCAI = $MCAI ['numero_CAI'];  
-$fecha = $MCAI ['fecha_vencimiento'];  
+      $Rinicial = $MCAI ['rango_inicial'];  
+      $Rfinal = $MCAI ['rango_final'];  
+      $Ractual = $MCAI ['rango_actual'];  
+      $NumCAI = $MCAI ['numero_CAI'];  
+      $fecha = $MCAI ['fecha_vencimiento'];  
 
 
-if ($Ractual+1 >= $Rinicial+1 && $Ractual+1 <= $Rfinal) {
-    $sql1 = "UPDATE tbl_cai SET rango_actual = '$Ractual'+1 WHERE id = '$CAI' ";
-    mysqli_query($conn, $sql1);
-
+      if ($Ractual+1 >= $Rinicial+1 && $Ractual+1 <= $Rfinal) {
+        $siguienteNumero = str_pad($Ractual+1, 16, '0', STR_PAD_LEFT);
+        $sql1 = "UPDATE tbl_cai SET rango_actual = '$siguienteNumero' WHERE id = '$CAI'";
+        mysqli_query($conn, $sql1);
+    
         if ($fecha = 0) {
-  echo "<script>Notiflix.Notify.failure('Error la fecha no es valida');</script>";
-}
-    try {
-        if ($Ractual+1 >= $Rfinal) {
-          echo "<script>Notiflix.Notify.failure('Favor verificar la configuracion CAI. No se encuentran numeros vigentes');</script>";
+            echo "<script>Notiflix.Notify.failure('Error la fecha no es valida');</script>";
         }
-    } catch (Exception $e) {
-        return false;
+        try {
+            if ($Ractual+1 >= $Rfinal) {
+                echo "<script>Notiflix.Notify.failure('Favor verificar la configuracion CAI. No se encuentran numeros vigentes');</script>";
+            }
+        } catch (Exception $e) {
+            return false;
+        }
     }
-
-}
-
+    
       echo "<script> imprimir($id, $cliente, $CAI);</script>";
       unset($_SESSION['registro']);
     }

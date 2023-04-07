@@ -18,6 +18,7 @@ $db = getConexion();
 if ($_POST) {
     $id = $_POST['id'];
     $descripcion = $_POST['descripcion'];
+    
     $categ = $_POST['combo_categoria'];
     $tipo = $_POST['combo_tipo'];
    // $existencia = $_POST['existencia'];
@@ -48,7 +49,7 @@ if ($_POST) {
                             <input name="id" hidden type="text" value="<?= $producto[0]['codproducto']  ?>">
 
                             <div class="form-floating">
-                                <input class="form-control" name="descripcion" value="<?= $producto[0]['descripcion'] ?>" id="inputLastName" type="text" placeholder="Enter your last name" autocomplete="nope" required />
+                                <input class="form-control" name="descripcion" id="descripcion" value="<?= $producto[0]['descripcion'] ?>"  type="text" onkeypress="return sololetrasMa(event)" onpaste="return false" placeholder="Enter your last name" autocomplete="nope" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
                                 <label for="inputLastName"><i class="fa-solid fa-user-group"></i>&nbsp;DESCRIPCION PRODUCTO</label>
                                 <div class="valid-feedback">
                                     Campo Válido.
@@ -59,7 +60,7 @@ if ($_POST) {
                             </div>
                             <br>
                             <div class="form-floating mb-3">
-                                <input class="form-control" value="<?= $producto[0]['precio_venta'] ?>" name="precio" id="inputEmail" type="text" placeholder="name@example.com" required />
+                                <input class="form-control" value="<?= $producto[0]['precio_venta'] ?>" name="precio" id="precio" type="text" onkeypress="return solonumeros(event)" onpaste="return false" required  />
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;PRECIO</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -103,7 +104,7 @@ if ($_POST) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" value="<?= $producto[0]['existencia'] ?>" disabled name="existencia" id="inputEmail" type="imagen" placeholder="name@example.com" />
+                                <input class="form-control" value="<?= $producto[0]['existencia'] ?>" disabled name="existencia" id="inputEmail" type="imagen" placeholder="name@example.com"/>
 
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;<IMG>EXISTENCIA</IMG></label>
                                 <div class="valid-feedback">
@@ -115,7 +116,7 @@ if ($_POST) {
                             </div>
                
                             <div class="form-floating mb-3">
-                                <input class="form-control" value="<?= $producto[0]['cantidad_minima'] ?>" name="cant_minima" id="inputEmail" type="imagen" placeholder="name@example.com" />
+                                <input class="form-control" value="<?= $producto[0]['cantidad_minima'] ?>" name="cant_minima" id="cant_minima"type="number" onKeyUp="pierdeFoco(this)" onpaste="return false" min = 0 required  />
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;<IMG>CANTIDAD MINIMA</IMG></label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -125,7 +126,7 @@ if ($_POST) {
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" value="<?= $producto[0]['cantidad_maxima'] ?>" name="cant_maxima" id="inputEmail" type="imagen" placeholder="name@example.com" />
+                                <input class="form-control" value="<?= $producto[0]['cantidad_maxima'] ?>" name="cant_maxima" id="cant_maxima" type="number" onKeyUp="pierdeFoco(this)" onpaste="return false" min = 0 required  />
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;<IMG>CANTIDAD MAXIMA</IMG></label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -153,7 +154,119 @@ if ($_POST) {
     </div>
 </main>
 
+<script>
+   var nombre = document.getElementById('descripcion');
+nombre.addEventListener('keypress', function(e) {
+if (e.keyCode > 90 ) {
+e.preventDefault();
+//efecto de sombra color rojo en el borde
+nombre.style.borderColor = "red";
+nombre.style.boxShadow = "0 0 10px red";
+nombre.classList.add("is-invalid");
+nombre.classList.remove("is-valid");
+} else {
+//efecto de sombra color verde en el borde
+nombre.style.borderColor = "green";
+nombre.style.boxShadow = "0 0 10px green";
+nombre.classList.add("is-valid");
+nombre.classList.remove("is-invalid");
+}
+});
 
+var nombre = document.getElementsByName('descripcion')[0];
+    nombre.addEventListener('keypress', function(e) {
+        var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (!regex.test(key)) {
+            e.preventDefault();
+            // Efecto de sombra color rojo en el borde
+            nombre.style.borderColor = "red";
+            nombre.style.boxShadow = "0 0 10px red";
+            nombre.classList.add("is-invalid");
+            nombre.classList.remove("is-valid");
+        } else {
+            // Efecto de sombra color verde en el borde
+            nombre.style.borderColor = "green";
+            nombre.style.boxShadow = "0 0 10px green";
+            nombre.classList.add("is-valid");
+            nombre.classList.remove("is-invalid");
+        }
+    });
+
+
+var precio = document.getElementById('precio');
+
+precio.addEventListener('input', function() {
+  // Eliminar todo lo que no sea un número o un punto
+  this.value = this.value.replace(/[^0-9\.]/g, '');
+
+  // Asegurarse de que solo hay un punto decimal
+  if (this.value.indexOf('.') !== -1) {
+    if (this.value.indexOf('.') !== this.value.lastIndexOf('.')) {
+      this.value = this.value.slice(0, -1);
+    }
+  }
+});
+
+
+
+ function pierdeFoco(e) {
+        var valor = e.value.replace(/^0*/, '');
+        e.value = valor;
+    }
+
+            (() => {
+                'use strict'
+
+                const forms = document.querySelectorAll('.needs-validation')
+
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                /**AGREGADO POR DENIA */
+                //validar DNI
+             
+
+                document.getElementById("txtID").addEventListener("change", validarDNI);
+
+                function validarDNI() {
+                    const formData = new FormData(document.getElementById('form-register'));
+                    formData.append('_action', 'validarDNI');
+                    fetch('../controladores/controladorLogin.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            console.log(result.error);
+                            if (result.error != '') {
+                                document.querySelector('#button').disabled = true;
+                                $("#2mensaje").text("Identidad ya a sido Registrada Anteriormente").css("color", "red");
+                            } else {
+                                //  eliminar el ensaje de error del DOM
+                                $("#2mensaje").text("").css("color", "red");
+                                document.querySelector('#button').disabled = false;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Ha ocurrido un error');
+                        });
+                }
+
+                //validar Fecha
+                document.getElementById("naci").addEventListener("change", validarFecha);
+
+            })()
+        </script>
 <?php
 
 include_once('../Login/footer.php');

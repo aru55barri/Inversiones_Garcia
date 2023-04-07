@@ -40,17 +40,19 @@ if ($_POST) {
 
                         <form class="needs-validation" id="form-register" method="POST">
 
-                            <div class="form-floating">
-                                <input class="form-control" name="rango_inicial" id="rango_inicial" type="text" placeholder="Enter your last name" autocomplete="nope" required />
-                                <label for="rango_inicial"><i class="fa-solid fa-user-group"></i>&nbsp;RANGO INICIAL</label>
-                                <div class="valid-feedback">
-                                    Campo Válido.
-                                </div>
-                                <span id="mensaje"></span>
-                            </div>
+                        <!-- Agrega este HTML en tu formulario -->
+                        <div class="form-floating">
+                        <input class="form-control" name="rango_inicial" id="rango_inicial" type="text" placeholder="Enter your last name" autocomplete="nope" required />
+                        <label for="rango_inicial"><i class="fa-solid fa-user-group"></i>&nbsp;RANGO INICIAL</label>
+                        <div class="valid-feedback">
+                            Campo Válido.
+                        </div>
+                        <span id="mensaje"></span>
+                        </div>
+
                             <br>
                             <div class="form-floating">
-                                <input class="form-control" name="rango_final" id="rango_final" type="text" placeholder="Enter your last name" autocomplete="nope" required />
+                                <input class="form-control" name="rango_final" id="rango_final" type="text" placeholder="Enter your last name"   autocomplete="nope" required  />
                                 <label for="rango_final"><i class="fa-solid fa-user-group"></i>&nbsp;RANGO FINAL</label>
                                 <div class="valid-feedback">
                                     Campo Válido.
@@ -93,7 +95,7 @@ if ($_POST) {
                             
 
                             <div class="mt-4 mb-0">
-                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
+                                <div class="d-grid"><input type="submit" id="submit-btn" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
                                     <div class="mt-4 mb-0">
                                         <div class="d-grid"><input type="button" onclick="window.location.href='../src/CAI.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
                                         </div>
@@ -108,7 +110,97 @@ if ($_POST) {
         <script src="./js/moment.js"></script>
         <script src="./js/jquery.js" type="text/javascript"></script>
 
+                        <!-- Incluye el archivo jQuery y Inputmask.js -->
+                        
+                        <script>
+
+
+                    const fechaInput = document.getElementById('fecha_vencimiento');
+                    fechaInput.addEventListener('input', validarFecha);
+
+                    function validarFecha() {
+
+                    const hoy = new Date();
+                    hoy.setHours(0, 0, 0, 0); 
+
+
+                    const fechaIngresada = new Date(fechaInput.value);
+
+                    
+                    if (fechaIngresada < hoy) {
+                        fechaInput.style.borderColor = "red";
+                        fechaInput.style.boxShadow = "0 0 10px red";
+                        fechaInput.classList.add('is-invalid');
+                        $("#fechamensaje").text("La fecha no puede ser menor a la actual.").css("color", "red");
+
+                        fechaInput.value = null;
+                    } else {
+
+                    
+                        document.getElementById('fechamensaje').textContent = '';
+                        fechaInput.style.borderColor = "green";
+                        fechaInput.style.boxShadow = "0 0 10px green";
+                        fechaInput.classList.remove('is-invalid');
+                        $("#fechamensaje").text("Campo Válido.").css("color", "green");
+                    }
+                    }
+                        // Seleccionar el elemento del input del rango_inicial
+                        var rangoInicialInput = document.getElementById("rango_inicial");
+                        var rangoFinalInput = document.getElementById("rango_final");
+
+
+                        // Crear la máscara personalizada
+                        var rangoInicialMask = IMask(rangoInicialInput, {
+                            mask: '000-000-00-00000000'
+                            
+                           });
+
+                           var rangoFinalMask = IMask(rangoFinalInput, {
+                            mask: '000-000-00-00000000'
+                            
+                           });
+
+                        // Seleccionar el elemento del input
+                        var numeroCAIInput = document.getElementById("numero_CAI");
+
+                        numeroCAIInput.addEventListener("input", function() {
+                                // Eliminar caracteres que no sean letras mayúsculas o números
+                        var valor = numeroCAIInput.value.replace(/[^A-Z0-9]/g, "");
+                        numeroCAIInput.value = valor;
+                    });
+                                                // Seleccionar el elemento del input
+                        var numeroCAIInput = document.getElementById("numero_CAI");
+
+                        // Crear la máscara personalizada utilizando imask.js
+                        var numeroCAIMask = IMask(numeroCAIInput, {
+                            mask: 'SSSSSS-SSSSSS-SSSSSS-SSSSSS-SSSSSS-SS',
+                            blocks: {
+                                S: {
+                                    mask: /^[A-Z0-9]$/
+                                },
+                                N: {
+                                    mask: /^[A-Z0-9]{2}$/
+                                }
+                            }
+                        });
+                        
+                     // Función para que cuando se envie el formulario no se vayan con los guiones 
+                        document.getElementById("submit-btn").addEventListener("click", function() {
+                        var numeroCAIInput = document.getElementById("rango_inicial");
+                        numeroCAIInput.value = numeroCAIInput.value.replace(/-/g, "");
+                        var FINALCAIInput = document.getElementById("rango_final");
+                        FINALCAIInput.value = FINALCAIInput.value.replace(/-/g, "");
+});
+
+
+                        </script>
+
+
         <script>
+
+           
+
+
             (() => {
                 'use strict'
 

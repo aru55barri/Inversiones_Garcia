@@ -116,22 +116,21 @@ if (!empty($_POST)) {
                             </div>
                             
                             <div class="col-md-6">
-                                    <div class="form-floating mb-3 mb-md-0">
-                                    <input class="form-control" value="<?= $row['fecha_vencimiento'] ?>" name="txtfecha_vencimiento" type="datetime" required />
+                            <div class="form-floating mb-3 mb-md-0">
+                                <?php
+                                $fecha_vencimiento = date('Y-m-d', strtotime($row['fecha_vencimiento']));
+                                ?>
+                                <input class="form-control" value="<?= $fecha_vencimiento ?>" id="txtfecha_vencimiento" name="txtfecha_vencimiento" type="date" required />
 
-                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Fecha de vencimiento</label>
-                                 <div class="valid-feedback">
-                                 Campo Válido!
-                                 </div>
-                                 <div class="invalid-feedback">
-                                  Por favor complete el campo.
-                                 </div>
-                                 </div>
+                                <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Fecha de vencimiento</label>
+                                <span id="fechamensaje"></span>
+
                             </div>
+                        </div>
 
                             
                             <div class="mt-4 mb-0">
-                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(46, 182, 210, 0.8)" value="Actualizar" />
+                                <div class="d-grid"><input type="submit" id="submit-btn" class="btn btn-info" style="background-color:rgba(46, 182, 210, 0.8)" value="Actualizar" />
                             
                              
                                 </div>
@@ -153,11 +152,89 @@ if (!empty($_POST)) {
 
 <!--VALIDACIONES EN TIEMPO REAL-->
     <script>
-        var nombre = document.getElementById('txtnombre');
-        var dni = document.getElementById('txtdni');
-        var telefono = document.getElementById('txttelefono');
-        var rtn = document.getElementById('txtrtn');
-        var direccion = document.getElementById('txtdireccion');
+
+const fechaInput = document.getElementById('txtfecha_vencimiento');
+fechaInput.addEventListener('input', validarFecha);
+
+function validarFecha() {
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0); 
+
+
+  const fechaIngresada = new Date(fechaInput.value);
+
+  
+  if (fechaIngresada < hoy) {
+    fechaInput.style.borderColor = "red";
+    fechaInput.style.boxShadow = "0 0 10px red";
+    fechaInput.classList.add('is-invalid');
+    $("#fechamensaje").text("La fecha no puede ser menor a la actual.").css("color", "red");
+
+    fechaInput.value = null;
+  } else {
+
+ 
+    document.getElementById('fechamensaje').textContent = '';
+    fechaInput.style.borderColor = "green";
+    fechaInput.style.boxShadow = "0 0 10px green";
+    fechaInput.classList.remove('is-invalid');
+    $("#fechamensaje").text("Campo Válido.").css("color", "green");
+  }
+}
+                        // Seleccionar el elemento del input del rango_inicial
+                        var rangoInicialInput = document.getElementById("txtrango_inicial");
+                        var rangoFinalInput = document.getElementById("txtrango_final");
+                        var rangoActualInput = document.getElementById("txtrango_actual");
+
+                        // Crear la máscara personalizada
+                        var rangoActualInput = IMask(rangoActualInput, {
+                            mask: '000-000-00-00000000'
+                            
+                           });
+                        var rangoInicialMask = IMask(rangoInicialInput, {
+                            mask: '000-000-00-00000000'
+                            
+                           });
+
+                           var rangoFinalMask = IMask(rangoFinalInput, {
+                            mask: '000-000-00-00000000'
+                            
+                           });
+
+                        // Seleccionar el elemento del input
+                        var numeroCAIInput = document.getElementById("txtnumero_CAI");
+
+                        numeroCAIInput.addEventListener("input", function() {
+                                // Eliminar caracteres que no sean letras mayúsculas o números
+                        var valor = numeroCAIInput.value.replace(/[^A-Z0-9]/g, "");
+                        numeroCAIInput.value = valor;
+                    });
+                                                // Seleccionar el elemento del input
+                        var numeroCAIInput = document.getElementById("txtnumero_CAI");
+
+                        // Crear la máscara personalizada utilizando imask.js
+                        var numeroCAIMask = IMask(numeroCAIInput, {
+                            mask: 'SSSSSS-SSSSSS-SSSSSS-SSSSSS-SSSSSS-SS',
+                            blocks: {
+                                S: {
+                                    mask: /^[A-Z0-9]$/
+                                },
+                                N: {
+                                    mask: /^[A-Z0-9]{2}$/
+                                }
+                            }
+                        });
+
+                      // Función para que cuando se envie el formulario no se vayan con los guiones 
+                      document.getElementById("submit-btn").addEventListener("click", function() {
+                        var numeroCAIInput = document.getElementById("txtrango_inicial");
+                        numeroCAIInput.value = numeroCAIInput.value.replace(/-/g, "");
+                        var FINALCAIInput = document.getElementById("txtrango_final");
+                        FINALCAIInput.value = FINALCAIInput.value.replace(/-/g, "");
+                        var ACTUALCAIInput = document.getElementById("txtrango_actual");
+                        ACTUALCAIInput.value = ACTUALCAIInput.value.replace(/-/g, "");
+                    });
 
         nombre.addEventListener('keypress', function(e) {
             if (e.keyCode > 90 ) {

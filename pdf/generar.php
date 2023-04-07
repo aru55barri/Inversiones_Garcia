@@ -46,7 +46,7 @@ mysqli_query($conexion, "UPDATE tbl_factura SET Num_CAI = '$NumCAI', Num_Factura
 if ($Ractual+1 > $Rfinal) {
     $Ractual = 00000000000;
 
-    mysqli_query($conn, "UPDATE tbl_factura SET Num_CAI = '$NumCAI', Num_Factura = '$Ractual' WHERE id_factura = '$id'");
+    mysqli_query($conexion, "UPDATE tbl_factura SET Num_CAI = '$NumCAI', Num_Factura = '$Ractual' WHERE id_factura = '$id'");
 
   }
 

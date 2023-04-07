@@ -4,14 +4,14 @@ include_once '../modelos/modelo_productos.php';
 include '../Config/conn.php';
 
 
-$id = $_SESSION['rol'];
+/*$id = $_SESSION['rol'];
 $sql = mysqli_query($conn, "SELECT * FROM tbl_permisos where id_objeto = 7 and id_rol = '$id'");
 $row = mysqli_fetch_array($sql);
 
 $insertar = $row['permiso_insercion'];
 $modificar = $row['permiso_modificar'];
 $consultar = $row['permiso_consultar'];
-$eliminar = $row['permiso_eliminacion'];
+$eliminar = $row['permiso_eliminacion'];*/
 
  
 

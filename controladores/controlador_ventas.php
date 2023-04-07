@@ -70,7 +70,7 @@ class Contralador
         global $modificar;
 
         $ventas = new ModeloPrincipal();
-        $matriz = $ventas->mostrargeneral("select tc.*,tp.nombre as nombre_cliente, tk.descripcion as tipo_pago, aa.nombre as usuario from tbl_factura tc inner join tbl_cliente tp ON tc.idcliente = tp.idcliente inner join tbl_tipo_pago tk on tc.id_Tpago = tk.id_Tpago inner join tbl_usuario aa on tc.id_usuario = aa.id_usuario");
+        $matriz = $ventas->mostrargeneral("select tc.*,tp.nombre as nombre_cliente, tk.descripcion as tipo_pago, aa.nombre as usuario from tbl_factura tc inner join tbl_cliente tp ON tc.idcliente = tp.idcliente inner join tbl_tipo_pago tk on tc.id_Tpago = tk.id_Tpago inner join tbl_usuario aa on tc.id_usuario = aa.id_usuario ORDER BY tc.Fecha_fac DESC");
         $ii = 0;
         if($matriz != null)
         {

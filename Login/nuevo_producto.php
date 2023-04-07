@@ -52,12 +52,14 @@ if ($_POST) {
                                 <div class="valid-feedback">
                                     Campo Válido.
                                 </div>
-                                <span id="mensaje"></span>
+                                <div class="invalid-feedback">
+                                No se permiten numeros ni caracteres especiales. SOLO MAYUSCULAS
+                             </div>
                             </div>
                             <br>
 
                             <div class="form-floating">
-                                <input class="form-control" name="precio" id="texprecio" type="text" onkeypress="return solonumeros(event)" onpaste="return false" required  />
+                                <input class="form-control" name="precio" id="precio" type="text" onkeypress="return solonumeros(event)" onpaste="return false" required  />
                                 <label for="texprecio"><i class="fa-solid fa-user-group"></i>&nbsp;PRECIO VENTA</label>
                                 <div class="valid-feedback">
                                     Campo Válido.
@@ -101,7 +103,7 @@ if ($_POST) {
                             <br>-->
 
                             <div class="form-floating">
-                                <input class="form-control" name="cant_minima" id="texprecio" type="text" onkeypress="return solonumeros(event)" onpaste="return false" required  />
+                                <input class="form-control" name="cant_minima" id="texprecio" type="number" onKeyUp="pierdeFoco(this)" onpaste="return false" min = 0 required  />
                                 <label for="texprecio"><i class="fa-solid fa-user-group"></i>&nbsp;CANTIDAD MINIMA</label>
                                 <div class="valid-feedback">
                                     Campo Válido.
@@ -111,7 +113,7 @@ if ($_POST) {
                             <br>
 
                             <div class="form-floating">
-                                <input class="form-control" name="cant_maxima" id="texprecio" type="text" onkeypress="return solonumeros(event)" onpaste="return false" required  />
+                                <input class="form-control" name="cant_maxima" id="texprecio" type="number" onKeyUp="pierdeFoco(this)" onpaste="return false" min = 0 required  />
                                 <label for="texprecio"><i class="fa-solid fa-user-group"></i>&nbsp;CANTIDAD MAXIMA</label>
                                 <div class="valid-feedback">
                                     Campo Válido.
@@ -138,6 +140,49 @@ if ($_POST) {
         <script src="./js/jquery.js" type="text/javascript"></script>
 
         <script>
+
+var nombre = document.getElementsByName('descripcion')[0];
+    nombre.addEventListener('keypress', function(e) {
+        var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (!regex.test(key)) {
+            e.preventDefault();
+            // Efecto de sombra color rojo en el borde
+            nombre.style.borderColor = "red";
+            nombre.style.boxShadow = "0 0 10px red";
+            nombre.classList.add("is-invalid");
+            nombre.classList.remove("is-valid");
+        } else {
+            // Efecto de sombra color verde en el borde
+            nombre.style.borderColor = "green";
+            nombre.style.boxShadow = "0 0 10px green";
+            nombre.classList.add("is-valid");
+            nombre.classList.remove("is-invalid");
+        }
+    });
+
+
+var precio = document.getElementById('precio');
+
+precio.addEventListener('input', function() {
+  // Eliminar todo lo que no sea un número o un punto
+  this.value = this.value.replace(/[^0-9\.]/g, '');
+
+  // Asegurarse de que solo hay un punto decimal
+  if (this.value.indexOf('.') !== -1) {
+    if (this.value.indexOf('.') !== this.value.lastIndexOf('.')) {
+      this.value = this.value.slice(0, -1);
+    }
+  }
+});
+
+
+
+ function pierdeFoco(e) {
+        var valor = e.value.replace(/^0*/, '');
+        e.value = valor;
+    }
+
             (() => {
                 'use strict'
 

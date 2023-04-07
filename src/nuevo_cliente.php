@@ -93,7 +93,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtrtn" id="txtrtn" autocomplete="nope" placeholder="Ingrese el nombre del proveedor"  maxlength="50" />
+                                <input class="form-control" type="number" name="txtrtn" id="txtrtn" autocomplete="nope" placeholder="Ingrese el nombre del proveedor"  maxlength="50" />
                                 <label for="inputEmail"><i class=""></i>&nbsp;RTN</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
