@@ -87,11 +87,11 @@ if (!empty($_POST)) {
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="inputAnswer" name="answer" type="Answer" placeholder="Ans" maxlength="30" autocomplete="nope" required pattern="{3,20}" />
                                             <label for="inputAnswer">Respuesta</label>
-                                            <div class="valid-feedback">
-                                                Campo Válido!
+                                            <div class="valid-tooltip">
+                                                Campo Valido!
                                             </div>
-                                            <div class="invalid-feedback">
-                                                Por favor complete este campo!
+                                            <div class="invalid-tooltip">
+                                                Complete este campo.
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
@@ -134,7 +134,28 @@ if (!empty($_POST)) {
 
 <!--VALIDACIONES EN TIEMPO REAL-->
 <script>
-        var respuesta = document.getElementById('inputAnswer');
+    var nombre = document.getElementsByName('answer')[0];
+    nombre.addEventListener('keypress', function(e) {
+        var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (!regex.test(key)) {
+            e.preventDefault();
+            // Efecto de sombra color rojo en el borde
+            nombre.style.borderColor = "red";
+            nombre.style.boxShadow = "0 0 10px red";
+            nombre.classList.add("is-invalid");
+            nombre.classList.remove("is-valid");
+        } else {
+            // Efecto de sombra color verde en el borde
+            nombre.style.borderColor = "green";
+            nombre.style.boxShadow = "0 0 10px green";
+            nombre.classList.add("is-valid");
+            nombre.classList.remove("is-invalid");
+        }
+    });
+</script>
+<script>
+       /* var respuesta = document.getElementById('inputAnswer');
 
         respuesta.addEventListener('keypress', function(e) {
             if (e.keyCode ==32 ) {
@@ -151,7 +172,7 @@ if (!empty($_POST)) {
                 respuesta.classList.add("is-valid");
                 respuesta.classList.remove("is-invalid");
             }
-        });
+        });*/
     </script>
 
 </html>

@@ -110,7 +110,7 @@
                                     
                                         <div class="input-contenedor">
                                             <i class="fas fa-user icon"></i>
-                                            <input name="usuario" id="usuario" name="usuario" type="text" placeholder="Usuario" autocomplete="nope" required/>
+                                            <input name="usuario" id="usuario" name="usuario" type="text" placeholder="Usuario" maxlength="20" autocomplete="nope" required/>
                                             <div class="valid-tooltip">
                                                 Campo Valido!
                                             </div>
@@ -121,7 +121,7 @@
 
                                         <div class="input-contenedor">
                                             <i class="fas fa-user icon"></i>
-                                            <input type="text" name="nombre" placeholder="Nombre y Apellido">
+                                            <input type="text" name="nombre" maxlength="100" placeholder="Nombre y Apellido">
                                         <div class="valid-tooltip">
                                                 Campo Valido!
                                             </div>
@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="input-contenedor">
                                             <i class="fas fa-envelope icon"></i>
-                                            <input type="text" name="correo" placeholder="Correo electronico">
+                                            <input type="text" name="correo" maxlength="45" placeholder="Correo electronico">
                                             <div class="valid-tooltip">
                                                 Campo Valido!
                                             </div>
@@ -143,7 +143,7 @@
 
                                         <div class="input-contenedor form-floating d-flex">
                                             <i class="fas fa-key icon" style="margin-top: 20px"></i>
-                                            <input type="password" id="ncontrasena" name="clave" placeholder="Contraseña">
+                                            <input type="password" id="ncontrasena" name="clave" maxlength="50" placeholder="Contraseña">
                                             <button class="btn btn-primary" type="button" onclick="mostrarPasswordN()"><span class="fa fa-eye"></span></button>
                                             <div class="valid-tooltip">
                                                 Campo Valido!
@@ -156,7 +156,7 @@
                                         
                                         <div class="input-contenedor form-floating d-flex">
                                             <i class="fas fa-key icon" style="margin-top: 20px"></i>
-                                            <input type="password" id="cncontrasena" name="clave2" placeholder="Confirmar contraseña">
+                                            <input type="password" id="cncontrasena" name="clave2" maxlength="50" placeholder="Confirmar contraseña">
                                             <button class="btn btn-primary" type="button" onclick="mostrarPasswordC()"><span class="fa fa-eye"></span></button>
                                         </div>
 

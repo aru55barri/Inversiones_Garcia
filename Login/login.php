@@ -273,6 +273,15 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                 }
             });
         </script>
+        <script>
+    var clave = document.getElementById('clave');
+    clave.addEventListener('keypress', function(e) {
+        if (e.keyCode === 32) {
+            e.preventDefault();
+        }
+    });
+</script>
+
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <?php 
 

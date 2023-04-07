@@ -95,6 +95,9 @@ if (!empty($_POST) && empty($_POST['username'])) {
                                             <div class="valid-tooltip">
                                                 Campo Válido!
                                             </div>
+                                            <div class="invalid-tooltip">
+                                        La contraseña debe tener al menos una letra mayúscula, una minúscula, un símbolo y un mínimo de 8 caracteres.
+                                            </div>
                                         </div>
                                         <br>
                                         <div class="form-floating d-flex  align-items-center justify-content-between mt-4 mb-0">
@@ -205,28 +208,35 @@ if (!empty($_POST) && empty($_POST['username'])) {
         }
     }
 </script>
+<script>
 
+</script>
 <script>
     //--------------VALIDACIONES EN TIEMPO REAL----------
-    var contra = document.getElementById('txtContra');
+  
     var confirContra = document.getElementById('txtConfirmarContra');
     var expresionRegular = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{7,16}$/;
     var errormensaje = document.getElementById('errorcontra');
-    contra.addEventListener('keypress', function(e) {
-        if (e.keyCode == 32) {
+    var password = document.getElementById('txtContra');
+    password.addEventListener('keyup', function(e) {
+        var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,}$/;
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (!regex.test(password.value)) {
             e.preventDefault();
-            contra.style.borderColor = "red";
-            contra.style.boxShadow = "0 0 10px red";
-            contra.classList.add("is-invalid");
-            contra.classList.remove("is-valid");
-        } /*else {
-            contra.style.borderColor = "green";
-            contra.style.boxShadow = "0 0 10px green";
-            contra.classList.add("is-valid");
-            contra.classList.remove("is-invalid");
-        }*/
-
-        if (!expresionRegular.test(contra.value)) {
+            // Efecto de sombra color rojo en el borde
+            password.style.borderColor = "red";
+            password.style.boxShadow = "0 0 10px red";
+            password.classList.add("is-invalid");
+            password.classList.remove("is-valid");
+        } else {
+            // Efecto de sombra color verde en el borde
+            password.style.borderColor = "green";
+            password.style.boxShadow = "0 0 10px green";
+            password.classList.add("is-valid");
+            password.classList.remove("is-invalid");
+        }
+    });
+        /*if (!expresionRegular.test(contra.value)) {
             contra.style.borderColor = "red";
             contra.style.boxShadow = "0 0 10px red";
             errormensaje.textContent = "Por favor complete el campo,La contraseña debe tener entre 8 a 25 caracteres y al menos una letra mayuscula, una minuscula, un numero y un caracter especial y no puede contener espacios en blanco.";
@@ -240,7 +250,7 @@ if (!empty($_POST) && empty($_POST['username'])) {
             contra.classList.remove("is-invalid");
         }
 
-    });
+    });*/
 
     
 
@@ -253,13 +263,13 @@ if (!empty($_POST) && empty($_POST['username'])) {
             confirContra.style.boxShadow = "0 0 10px red";
             confirContra.classList.add("is-invalid");
             confirContra.classList.remove("is-valid");
-        } /*else {
+        } else {
             //efecto de sombra color verde en el borde
             confirContracontra.style.borderColor = "green";
             confirContra.style.boxShadow = "0 0 10px green";
             confirContra.classList.add("is-valid");
             confirContra.classList.remove("is-invalid");
-        }*/
+        }
     });
 </script>
 

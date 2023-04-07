@@ -309,25 +309,26 @@ if (!empty($_POST)) {
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" name="txtusuario" id="txtUsuario" type="text" onpaste="return false" onkeypress="return sololetrasUsu(event)" placeholder="Enter your first name" autocomplete="nope" size="25" required />
+                                        <input class="form-control" name="txtusuario" id="txtUsuario" type="text" onpaste="return false" onkeypress="return sololetrasUsu(event)" placeholder="Enter your first name" maxlength="20" autocomplete="nope" size="25" required />
                                         <label for="inputEmail"><i class="fas fa-user icon"></i>&nbsp;Usuario</label>
                                         <div class="valid-feedback">
                                             Campo Válido!
                                         </div>
-                                        <span id="usuariomensaje"></span>
+                                        <span id="mensaje"></span>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="form-floating mb-3">
-                                <input class="form-control" name="txtemail" id="inputEmail" type="email" placeholder="name@example.com" required pattern="[a-zA-Z0-9!#$%&'_+-]([\.]?[a-zA-Z0-9!#$%&'_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" />
+                              <div class="form-floating mb-3">
+                                <input class="form-control" name="txtemail" id="inputEmail" maxlength="45" type="email" placeholder="name@example.com" required pattern="[a-zA-Z0-9!#$%&'_+-]([\.]?[a-zA-Z0-9!#$%&'_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" />
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Correo electrónico</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
                                 </div>
                                 <span id="correomensaje"></span>
                             </div>
+
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -354,12 +355,12 @@ if (!empty($_POST)) {
                                         <label for="txtID"><i class="fa-regular fa-id-badge"></i>&nbsp;Empleado</label>
                                          -->
                                         
-                                        <input class="form-control" name="empleado" id="empleado" type="text" placeholder="Nombre Completo Usuario" autocomplete="nope" size="25" required />
+                                        <input class="form-control" name="empleado" id="empleado" type="text" placeholder="Nombre Completo Usuario" maxlength="100" autocomplete="nope" size="25" required />
                                         <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Nombre Completo Usuario</label>
-                                        <div class="valid-tooltip">
+                                        <div class="valid-feedback">
                                                 Campo Valido!
                                             </div>
-                                        <div class="invalid-tooltip">
+                                        <div class="invalid-feedback">
                                                 No se permiten numeros ni caracteres especiales en Nombre Completo Usuario.
                                             </div>
                                         </div>                                  
@@ -369,10 +370,10 @@ if (!empty($_POST)) {
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="vencimiento" name="fecha" type="date" required />
                                     <label for="fecha"><i class="fas fa-envelope icon"></i>&nbsp;Fecha de vencimiento</label>
-                                    <div class="valid-tooltip">
+                                    <div class="valid-feedback">
                                                 Campo Valido!
                                             </div>
-                                        <div class="invalid-tooltip">
+                                        <div class="invalid-feedback">
                                         La fecha debe ser mayor o igual a la actual.
                                             </div>
                                 </div>
@@ -390,7 +391,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="mt-4 mb-0">
-                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
+                                <div class="d-grid"><input type="submit" id="Registrar" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
 
                                 </div>
                                 <div class="mt-4 mb-0">
@@ -430,7 +431,31 @@ if (!empty($_POST)) {
     });
 </script>
 
+ <script>
+    /*var correo = document.getElementsByName('txtemail')[0];
+    var botonRegistro = document.getElementById('Registrar');
+
+    correo.addEventListener('blur', function() {
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(correo.value)) {
+            // Efecto de sombra color rojo en el borde
+            correo.style.borderColor = "red";
+            correo.style.boxShadow = "0 0 10px red";
+            correo.classList.add("is-invalid");
+            correo.classList.remove("is-valid");
+            botonRegistro.disabled = true; // deshabilitar el botón
+        } else {
+            // Efecto de sombra color verde en el borde
+            correo.style.borderColor = "green";
+            correo.style.boxShadow = "0 0 10px green";
+            correo.classList.add("is-valid");
+            correo.classList.remove("is-invalid");
+            botonRegistro.disabled = false; // habilitar el botón
+        }
+    });*/
+</script>
 <script>
+    
     /*  FUNCION PARA QUE LO QUE SE ESCRIBA SEA AUTOMATICAMENTE EN MAYÚSCULAS
     
     var nombre = document.getElementsByName('empleado')[0];
@@ -504,69 +529,91 @@ function validarFecha() {
                     }, false)
                 })
                 //validar usuario no se repita AGREGADO DENIA
-                document.getElementById("txtUsuario").addEventListener("change", validarUsuario);
+    var correo = document.getElementById('inputEmail');
+    var usuario = document.getElementById('txtUsuario');
+    var botonRegistro = document.getElementById('Registrar');
 
-                function validarUsuario() {
-                    const formData = new FormData(document.getElementById('form-register'));
-                    var correo = document.getElementById('txtUsuario');
-                    formData.append('_action', 'validarusuario');
-                    fetch('../controladores/controladorLogin.php', {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(result => {
-                            console.log(result.error);
-                            if (result.error != '') {
-                                document.querySelector('#button').disabled = true;
-                                $("#mensaje").text("Usuario no Disponible").css("color", "red");
-                                correo.style.borderColor = "red";
-                                correo.style.boxShadow = "0 0 10px red";
-                            } else {
-                                document.querySelector('#button').disabled = false;
-                                $("#mensaje").text("").css("color", "red");
-                                correo.style.borderColor = "green";
-                                correo.style.boxShadow = "0 0 10px green";
-                                //  eliminar el ensaje de error del DOM
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Ha ocurrido un error');
-                        });
-                }
-                // validar correo
-                document.getElementById("inputEmail").addEventListener("change", validarCORREO);
+    correo.addEventListener('blur', validarCorreo);
+    usuario.addEventListener('change', validarUsuario);
 
-                function validarCORREO() {
-                    const formData = new FormData(document.getElementById('form-register'));
-                    var correo = document.getElementById('inputEmail');
-                    formData.append('_action', 'validarCORREO');
-                    fetch('../controladores/controladorLogin.php', {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(result => {
-                            console.log(result.error);
-                            if (result.error != '') {
-                                document.querySelector('#button').disabled = true;
-                                $("#correomensaje").text("El Correo ya ha sido Registrado Anteriormente").css("color", "red");
-                                correo.style.borderColor = "red";
-                                correo.style.boxShadow = "0 0 10px red";
-                            } else {
-                                document.querySelector('#button').disabled = false;
-                                $("#correomensaje").text("").css("color", "red");
-                                correo.style.borderColor = "green";
-                                correo.style.boxShadow = "0 0 10px green";
-                                //  eliminar el ensaje de error del DOM
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Ha ocurrido un error');
-                        });
+    function validarCorreo() {
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const formData = new FormData(document.getElementById('form-register'));
+        formData.append('_action', 'validarCORREO');
+        if (!regex.test(correo.value)) {
+            // Efecto de sombra color rojo en el borde
+            correo.style.borderColor = "red";
+            correo.style.boxShadow = "0 0 10px red";
+            correo.classList.add("is-invalid");
+            correo.classList.remove("is-valid");
+            $("#correomensaje").text("Por favor ingrese un correo electrónico válido.").css("color", "red");
+            botonRegistro.disabled = true; // deshabilitar el botón
+        } else {
+            fetch('../controladores/controladorLogin.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.error);
+                    if (result.error != '') {
+                        document.querySelector('#button').disabled = true;
+                        $("#correomensaje").text("El Correo ya ha sido Registrado Anteriormente").css("color", "red");
+                        correo.style.borderColor = "red";
+                        correo.style.boxShadow = "0 0 10px red";
+                        botonRegistro.disabled = true; // deshabilitar el botón
+                    } else {
+                        correo.style.borderColor = "green";
+                        correo.style.boxShadow = "0 0 10px green";
+                        correo.classList.add("is-valid");
+                        correo.classList.remove("is-invalid");
+                        if (usuario.classList.contains("is-valid")) {
+                            botonRegistro.disabled = false; // habilitar el botón
+                        }
+                        $("#correomensaje").text("").css("color", "red");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Ha ocurrido un error');
+                });
+        }
+    }
+
+    function validarUsuario() {
+        const formData = new FormData(document.getElementById('form-register'));
+        formData.append('_action', 'validarusuario');
+        fetch('../controladores/controladorLogin.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result.error);
+                if (result.error != '') {
+                    document.querySelector('#button').disabled = true;
+                    $("#mensaje").text("Usuario no Disponible").css("color", "red");
+                    usuario.style.borderColor = "red";
+                    usuario.style.boxShadow = "0 0 10px red";
+                    botonRegistro.disabled = true; // deshabilitar el botón
+                } else {
+                    usuario.style.borderColor = "green";
+                    usuario.style.boxShadow = "0 0 10px green";
+                    usuario.classList.add("is-valid");
+                    usuario.classList.remove("is-invalid");
+                    if (correo.classList.contains("is-valid")) {
+                        botonRegistro.disabled = false; // habilitar el botón
+                    }
+                    $("#mensaje").text("").css("color", "red");
                 }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ha ocurrido un error');
+            });
+    }
+
+
 
             })()
         </script>
