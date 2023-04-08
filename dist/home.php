@@ -6,7 +6,7 @@ require "../config/conexion.php";
 $query1 = "SELECT c.nombre, SUM(f.Total) AS total_gastado 
 FROM tbl_factura AS f 
 INNER JOIN tbl_cliente AS c ON f.idCliente = c.idcliente 
-WHERE f.estado = 'Activo' 
+WHERE f.estado = 'Activo' AND c.nombre <> 'CONSUMIDOR FINAL'
 GROUP BY c.nombre 
 ORDER BY total_gastado DESC 
 LIMIT 10;";
@@ -165,19 +165,18 @@ $ventas = $rod['suma'];
                 </div>
 
       
-                <div class="row">
   <div class="col-md-6 text-start">
     <canvas id="myChart" width="60%" height="35"></canvas>
   </div>
   <div class="col-md-6 text-end">
-    <canvas id="myChart1" width="60%" height="35"></canvas>
+    <canvas id="myChart1" width="53%" height="35"></canvas>
   </div>
 </div>
 
 <br>    
-
 <br>
-            <br>
+            <div class="col-xl-3 col-md-6">
+            </div>
 
             <div class="row">
                 <div class="col-xl-6">
@@ -208,10 +207,10 @@ $ventas = $rod['suma'];
                     </div>
                 </div>
             </div>
-
+        </div>
             
 
-    </div>
+    
 
     <script>
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -293,7 +292,7 @@ var config = {
     plugins: {
       title: {
         display: true,
-        text: 'Los 10 clientes que mas nos prefieren',
+        text: 'Los 10 clientes mas frecuentes',
         font: {
           size: 18
         }
@@ -304,6 +303,11 @@ var config = {
         ticks: {
           beginAtZero: true
         }
+      }],
+      xAxes: [{
+        ticks: {
+          fontSize: 10
+        }
       }]
     }
   }
@@ -311,6 +315,9 @@ var config = {
 
 // Crear la gráfica
 var myChart1 = new Chart(ctx, config);
+
+
+
 </script>
 </main>
 <?php include_once "../Login/footer.php"; ?>
