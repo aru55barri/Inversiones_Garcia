@@ -86,95 +86,98 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
     <link href="../dist/css/login.css" rel="stylesheet" /> 
     <title>Registro</title>
-    <link rel="icon" href="../dist/assets/img-2/Logo-IG.ico">
+    <link rel="icon" href="../dist/assets/img-2/Logo-IG.ico">    
     <script src="./js/validar.js" type="text/javascript"></script>
 </head>  
 <body>
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            <main>
-                <div class="container" style="margin-top: 10px;">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-5">
-                            <form class="formulario" action="Registro.php" method="post" id="form-register" class="needs-validation" novalidate>
+    <main>
+        <section>
+            <div class="container" style="margin-top: 10px;">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <form class="formulario" action="Registro.php" method="post" id="form-register" class="needs-validation" novalidate>
+                            
+                            <h1>Regístrate</h1>
+                            <style>
+                            h1{
+                                font-family: Vladimir Script;
+                                font-size: 70px;
+                                }
+                            </style>
+
+                                <div class="contenedor">
                                 
-                                <h1>Regístrate</h1>
-                                <style>
-                                h1{
-                                    font-family: Vladimir Script;
-                                    font-size: 70px;
-                                    }
-                                </style>
+                                    <div class="input-contenedor">
+                                        <i class="fas fa-user-circle icon"></i>
+                                        <input name="usuario" id="usuario" type="text" placeholder="Usuario" maxlength="20" autocomplete="nope" required pattern="[A-Z]{1,}" title="Ingrese su nombre de usuario en letras mayúsculas sin espacios">
+                                        <div class="valid-feedback">
+                                            Campo Valido!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Solo Debe Ingresar Letras Mayusculas en Usuario.
+                                        </div>
+                                    </div>
 
-                                    <div class="contenedor">
+                                    <div class="input-contenedor">
+                                        <i class="fas fa-user icon"></i>
+                                        <input name="nombre" id="nombre" maxlength="50" type="text" placeholder="Nombre y Apellido" required pattern="[A-Z]{1,}">
+                                        <div class="valid-feedback">
+                                            Campo Valido!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            No se permiten numeros ni caracteres especiales en Nombre y Apellido.
+                                        </div>
+                                    </div>
                                     
-                                        <div class="input-contenedor">
-                                            <i class="fas fa-user icon"></i>
-                                            <input name="usuario" id="usuario" name="usuario" type="text" placeholder="Usuario" maxlength="20" autocomplete="nope" required/>
-                                            <div class="valid-tooltip">
-                                                Campo Valido!
-                                            </div>
-                                            <div class="invalid-tooltip">
-                                                Solo Debe Ingresar Letras Mayusculas en Usuario.
-                                            </div>
+                                    <div class="input-contenedor">
+                                        <i class="fas fa-envelope icon"></i>
+                                        <input type="text" name="correo" maxlength="45" placeholder="Correo electronico" required>
+                                        <div class="valid-feedback">
+                                            Campo Valido!
                                         </div>
-
-                                        <div class="input-contenedor">
-                                            <i class="fas fa-user icon"></i>
-                                            <input type="text" name="nombre" maxlength="100" placeholder="Nombre y Apellido">
-                                        <div class="valid-tooltip">
-                                                Campo Valido!
-                                            </div>
-                                        <div class="invalid-tooltip">
-                                                No se permiten numeros ni caracteres especiales en Nombre y Apellido.
-                                            </div>
-                                        </div>
-                                        <div class="input-contenedor">
-                                            <i class="fas fa-envelope icon"></i>
-                                            <input type="text" name="correo" maxlength="45" placeholder="Correo electronico">
-                                            <div class="valid-tooltip">
-                                                Campo Valido!
-                                            </div>
-                                        <div class="invalid-tooltip">
+                                        <div class="invalid-feedback">
                                         Por favor ingrese un correo electrónico válido.
-                                            </div>
-                                       
                                         </div>
-
-                                        <div class="input-contenedor form-floating d-flex">
-                                            <i class="fas fa-key icon" style="margin-top: 20px"></i>
-                                            <input type="password" id="ncontrasena" name="clave" maxlength="50" placeholder="Contraseña">
-                                            <button class="btn btn-primary" type="button" onclick="mostrarPasswordN()"><span class="fa fa-eye"></span></button>
-                                            <div class="valid-tooltip">
-                                                Campo Valido!
-                                            </div>
-                                        <div class="invalid-tooltip">
-                                        La contraseña debe tener al menos una letra mayúscula, una minúscula, un símbolo y un mínimo de 8 caracteres.
-                                            </div>
-                                       
-                                        </div>
-                                        
-                                        <div class="input-contenedor form-floating d-flex">
-                                            <i class="fas fa-key icon" style="margin-top: 20px"></i>
-                                            <input type="password" id="cncontrasena" name="clave2" maxlength="50" placeholder="Confirmar contraseña">
-                                            <button class="btn btn-primary" type="button" onclick="mostrarPasswordC()"><span class="fa fa-eye"></span></button>
-                                        </div>
-
-                                        <?php echo isset($alert) ? $alert : ''; ?>           
-
-                                        <input type="submit" name="Registro" id="Registro" value="Registrate" class="button">
-
+                                    
                                     </div>
-                                    <div>
-                                        <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
-                                        <p>¿Ya tienes una cuenta?<a class="link" href="../index.php">Iniciar Sesion</a></p>
+
+                                    <div class="input-contenedor form-floating d-flex">
+                                        <i class="fas fa-key icon" style="margin-top: 20px"></i>
+                                        <input type="password" id="ncontrasena" name="clave" maxlength="20" placeholder="Contraseña" style="width: 395px" title="La contraseña debe tener al menos una letra mayúscula, una minúscula, un símbolo y un mínimo de 8 caracteres." required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" />
+                                        <button class="btn btn-primary" type="button" onclick="mostrarPasswordN()"><span class="fa fa-eye"></span></button>
+                                        <div class="valid-feedback">
+                                            Campo Valido!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            La contraseña debe tener al menos una letra mayúscula, una minúscula, un símbolo y un mínimo de 8 caracteres.
+                                        </div>
+                                    
                                     </div>
-                            </form>
-                        </div>
+                                    
+                                    
+                                    <div class="input-contenedor form-floating d-flex">
+                                        <i class="fas fa-key icon" style="margin-top: 20px"></i>
+                                        <input type="password" id="cncontrasena" name="clave2" maxlength="50" placeholder="Confirmar contraseña" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" />
+                                        <button class="btn btn-primary" type="button" onclick="mostrarPasswordC()"><span class="fa fa-eye"></span></button>
+                                    </div>
+
+                                    <?php echo isset($alert) ? $alert : ''; ?>           
+
+                                    <button type="submit" name="Registro" id="Registro" value="Registrate" class="button">Registrar</a>
+
+                                </div>
+                                <div>
+                                    <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
+                                    <p>¿Ya tienes una cuenta?<a class="link" href="../index.php">Iniciar Sesion</a></p>
+                                </div>
+                        </form>
                     </div>
                 </div>
-            </main>       
-    </div> <br>
+            </div>
+        </section>
+                
+    </main>       
+    <br>
     <footer class="footer-copyright">
         <div  class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
@@ -188,11 +191,11 @@
 <script src="js/scripts.js"></script>
 <script src="./js/lock.js"></script>
 
+
 <!--VALIDACIONES EN TIEMPO REAL-->
     <script>
         var usuario = document.getElementById('usuario');
-        var contra = document.getElementById('inputPassword');
-
+        
         usuario.addEventListener('keypress', function(e) {
             if (e.keyCode < 65 || e.keyCode > 90 || e.keyCode == 165) {
                 e.preventDefault();
@@ -210,63 +213,57 @@
             }
         });
 
-        contra.addEventListener('keypress', function(e) {
-            if (e.keyCode == 32) {
+        
+    </script>
+    <script>
+        var nombre = document.getElementsByName('nombre')[0];
+        nombre.addEventListener('keypress', function(e) {
+            var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+            var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (!regex.test(key)) {
                 e.preventDefault();
-                //efecto de sombra color rojo en el borde
-                contra.style.borderColor = "red";
-                contra.style.boxShadow = "0 0 10px red";
+                // Efecto de sombra color rojo en el borde
+                nombre.style.borderColor = "red";
+                nombre.style.boxShadow = "0 0 10px red";
+                nombre.classList.add("is-invalid");
+                nombre.classList.remove("is-valid");
             } else {
-                //efecto de sombra color verde en el borde
-                contra.style.borderColor = "green";
-                contra.style.boxShadow = "0 0 10px green";
+                // Efecto de sombra color verde en el borde
+                nombre.style.borderColor = "green";
+                nombre.style.boxShadow = "0 0 10px green";
+                nombre.classList.add("is-valid");
+                nombre.classList.remove("is-invalid");
             }
         });
     </script>
-<script>
-    var nombre = document.getElementsByName('nombre')[0];
-    nombre.addEventListener('keypress', function(e) {
-        var regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
-        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (!regex.test(key)) {
-            e.preventDefault();
-            // Efecto de sombra color rojo en el borde
-            nombre.style.borderColor = "red";
-            nombre.style.boxShadow = "0 0 10px red";
-            nombre.classList.add("is-invalid");
-            nombre.classList.remove("is-valid");
-        } else {
-            // Efecto de sombra color verde en el borde
-            nombre.style.borderColor = "green";
-            nombre.style.boxShadow = "0 0 10px green";
-            nombre.classList.add("is-valid");
-            nombre.classList.remove("is-invalid");
-        }
-    });
-</script>
-<script>
-    var correo = document.getElementsByName('correo')[0];
-    var botonRegistro = document.getElementById('Registro');
 
-    correo.addEventListener('blur', function() {
-        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!regex.test(correo.value)) {
-            // Efecto de sombra color rojo en el borde
-            correo.style.borderColor = "red";
-            correo.style.boxShadow = "0 0 10px red";
-            correo.classList.add("is-invalid");
-            correo.classList.remove("is-valid");
-            botonRegistro.disabled = true; // deshabilitar el botón
-        } else {
-            // Efecto de sombra color verde en el borde
-            correo.style.borderColor = "green";
-            correo.style.boxShadow = "0 0 10px green";
-            correo.classList.add("is-valid");
-            correo.classList.remove("is-invalid");
-            botonRegistro.disabled = false; // habilitar el botón
-        }
-    });
-</script>
+    <script>
+        var correo = document.getElementsByName('correo')[0];
+        var botonRegistro = document.getElementById('Registro');
+
+        correo.addEventListener('blur', function() {
+            var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regex.test(correo.value)) {
+                // Efecto de sombra color rojo en el borde
+                correo.style.borderColor = "red";
+                correo.style.boxShadow = "0 0 10px red";
+                correo.classList.add("is-invalid");
+                correo.classList.remove("is-valid");
+
+                botonRegistro.disabled = true; // deshabilitar el botón
+                
+            } else {
+                // Efecto de sombra color verde en el borde
+                correo.style.borderColor = "green";
+                correo.style.boxShadow = "0 0 10px green";
+                correo.classList.add("is-valid");
+                correo.classList.remove("is-invalid");
+
+                botonRegistro.disabled = false; // habilitar el botón
+                
+            }
+        });
+    </script>
 
 <script>
     var password = document.getElementById('ncontrasena');
@@ -289,9 +286,6 @@
         }
     });
 </script>
-
-
-
 
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

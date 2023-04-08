@@ -183,12 +183,12 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                                                         <!--Codigo comienzo-->
                                                         <div class="input-contenedor d-flex">                      
                                                             <i class="fas fa-user icon" style="margin-top: 15px"></i>   
-                                                            <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Usuario" autocomplete="nope" maxlength="25" required pattern="[A-Z]{3,25}" />
+                                                            <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Usuario" autocomplete="nope" maxlength="25" style="width: 325px" required pattern="[A-Z]{3,25}" />
                                                             
-                                                            <div class="valid-tooltip">
+                                                            <div class="valid-feedback">
                                                                 Campo Valido!
                                                             </div>
-                                                            <div class="invalid-tooltip">
+                                                            <div class="invalid-feedback">
                                                                 Solo Debe Ingresar Letras Mayusculas en Usuario.
                                                             </div>
                                                         </div>
@@ -198,6 +198,12 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                                                             <input type="password" id="clave" name="clave" placeholder="Contraseña" style="width: 395px">
                                                             
                                                             <button class="btn btn-primary" type="button" onclick="mostrarPassword()"><span class="fa fa-eye"></span></button>
+                                                            <div class="valid-feedback">
+                                                                Campo Valido!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                La contraseña debe tener al menos una letra mayúscula, una minúscula, un símbolo y un mínimo de 8 caracteres.
+                                                            </div>
                                                         </div>
                                                         
                                                         <div class="alert alert-danger text-center d-none" id="alerta" role="alert">
@@ -274,13 +280,35 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
             });
         </script>
         <script>
-    var clave = document.getElementById('clave');
-    clave.addEventListener('keypress', function(e) {
-        if (e.keyCode === 32) {
-            e.preventDefault();
-        }
-    });
-</script>
+            var clave = document.getElementById('clave');
+            clave.addEventListener('keypress', function(e) {
+                if (e.keyCode === 32) {
+                    e.preventDefault();
+                }
+            });
+        </script>
+
+        <script>
+            var password = document.getElementById('clave');
+            password.addEventListener('keyup', function(e) {
+                var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,}$/;
+                var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+                if (!regex.test(password.value)) {
+                    e.preventDefault();
+                    // Efecto de sombra color rojo en el borde
+                    password.style.borderColor = "red";
+                    password.style.boxShadow = "0 0 10px red";
+                    password.classList.add("is-invalid");
+                    password.classList.remove("is-valid");
+                } else {
+                    // Efecto de sombra color verde en el borde
+                    password.style.borderColor = "green";
+                    password.style.boxShadow = "0 0 10px green";
+                    password.classList.add("is-valid");
+                    password.classList.remove("is-invalid");
+                }
+            });
+        </script>
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <?php 
