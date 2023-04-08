@@ -23,7 +23,9 @@
             global $modificar;
 
             $CAI = new ModeloPrincipal();
-            $matriz = $CAI->mostrargeneral("select * from tbl_cai;");
+            $matriz = $CAI->mostrargeneral("SELECT tbl_cai.*, tbl_usuario.usuario
+            FROM tbl_cai
+            JOIN tbl_usuario ON tbl_cai.id_usuario = tbl_usuario.id_usuario");
             $ii = 0;
             if($matriz != null)
             {
@@ -39,7 +41,7 @@
                         <td><?=$registro['rango_actual']?></td>
                         <td><?=$registro['numero_CAI']?></td>
                         <td><?=$registro['fecha_vencimiento']?></td>
-                        <td><?=$registro['id_usuario']?></td>
+                        <td><?=$registro['usuario']?></td>
                         <?php
                             if ($modificar == 1) { ?>
                                 <th><a href="../src/modificar_CAI.php?id=<?= $registro['id'] ?>" class='btn btn-round btn-info'><i class='fas fa-pen-square'style='color: white'></i></a></th>

@@ -87,7 +87,10 @@ $direccion = $rom['direccion'];
         <script src="assets/js/bootstrap.min.js"></script><!-- ESTE-->
         <script src="assets/js/main.js"></script><!-- ESTE-->
         <!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> ESTE PARA LAS GRAFICAS-->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+
+
 
 
 
