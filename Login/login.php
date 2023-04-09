@@ -198,10 +198,10 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                                                             <input type="password" id="clave" name="clave" placeholder="Contraseña" style="width: 395px">
                                                             
                                                             <button class="btn btn-primary" type="button" onclick="mostrarPassword()"><span class="fa fa-eye"></span></button>
-                                                            <div class="valid-feedback">
+                                                            <div class="valid-tooltip">
                                                                 Campo Valido!
                                                             </div>
-                                                            <div class="invalid-feedback">
+                                                            <div class="invalid-tooltip">
                                                                 La contraseña debe tener al menos una letra mayúscula, una minúscula, un símbolo y un mínimo de 8 caracteres.
                                                             </div>
                                                         </div>
