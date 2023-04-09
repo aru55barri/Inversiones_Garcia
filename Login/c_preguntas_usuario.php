@@ -27,6 +27,8 @@ if (!empty($_POST)) {
     }
 }
 
+
+
 ?>
 
 
@@ -62,6 +64,22 @@ if (!empty($_POST)) {
                                             font-size: 50px;
                                         }
                                     </style>
+                                </div>
+                                <div>
+                                <?php
+                                    // Obtener el valor de num_preguntas para el usuario actual desde la base de datos
+                                    
+                                    $query = "SELECT valor FROM tbl_parametros WHERE parametro='num_preguntas'";
+                                    $result = $conn->query($query);
+                                    $num_preguntas = $result->fetch_assoc()['valor'];
+
+                                    // Obtener el número de pregunta actual a partir del parámetro "pregunta" en la URL
+                                    $num_pregunta_actual = isset($_GET['pregunta']) ? $_GET['pregunta'] : 1;
+
+                                    // Mostrar el número de pregunta actual y el número total de preguntas a contestar en la página HTML
+                                    
+                                    ?>
+                                    <p><?php echo "Pregunta $num_pregunta_actual de $num_preguntas"; ?></p>                                   
                                 </div>
                                 <div class="card-body">
                                     <form class="needs-validation" method="post" novalidate>
