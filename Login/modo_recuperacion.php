@@ -22,7 +22,7 @@ if (!empty($_POST)) {
             <strong>Error!</strong> Solo debe ingresar letras MAYUSCULAS en el nombre de Usuario.
             </div>';
         } elseif (validarUsuarioExistente($usuario) == false) {
-            echo '<div class="alert alert-danger">
+            $alert = '<div class="alert alert-danger">
             <strong>Error!</strong> El usuario no existe.
             </div>';
         } elseif ($metodo == 1) {
@@ -94,6 +94,9 @@ if (!empty($_POST)) {
                                         </div>
 
                                         <br>
+
+                                        <?php echo isset($alert) ? $alert : ''; ?> 
+
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                             <a class="button2" href="../index.php">Cancelar</a>
                                             <input type="submit" class="button2" value="Continuar">

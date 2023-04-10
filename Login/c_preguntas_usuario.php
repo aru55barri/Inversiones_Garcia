@@ -20,8 +20,8 @@ if (!empty($_POST)) {
         if (sizeof($usuarios) > 0) {
             header('Location: ./nueva_contrasena_p.php?user=' . $usuario);
         } else {
-            echo '<div class="alert alert-danger">
-                <strong>Error!</strong> Usuario NO verificado Intente de Nuevo.
+            $alert = '<div class="alert alert-danger">
+                <strong>Error!</strong> Pregunta o respuesta NO verificada a este usuario. Intente de Nuevo.
               </div>';
         }
     }
@@ -66,8 +66,9 @@ if (!empty($_POST)) {
                                     </style>
                                 </div>
                                 <div>
+                                
                                 <?php
-                                    // Obtener el valor de num_preguntas para el usuario actual desde la base de datos
+                                    /* Obtener el valor de num_preguntas para el usuario actual desde la base de datos
                                     
                                     $query = "SELECT valor FROM tbl_parametros WHERE parametro='num_preguntas'";
                                     $result = $conn->query($query);
@@ -77,9 +78,10 @@ if (!empty($_POST)) {
                                     $num_pregunta_actual = isset($_GET['pregunta']) ? $_GET['pregunta'] : 1;
 
                                     // Mostrar el número de pregunta actual y el número total de preguntas a contestar en la página HTML
-                                    
+                                    */
                                     ?>
-                                    <p><?php echo "Pregunta $num_pregunta_actual de $num_preguntas"; ?></p>                                   
+                                    
+                                    <p> Conteste una pregunta de seguridad. </p>                                   
                                 </div>
                                 <div class="card-body">
                                     <form class="needs-validation" method="post" novalidate>
@@ -112,6 +114,9 @@ if (!empty($_POST)) {
                                                 Complete este campo.
                                             </div>
                                         </div>
+
+                                        <?php echo isset($alert) ? $alert : ''; ?> 
+
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                             <a class="button2" href="./login.php">Cancelar</a>
                                             <input type="submit" class="button2" value="Continuar">

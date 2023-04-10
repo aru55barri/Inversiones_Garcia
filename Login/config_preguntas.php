@@ -108,6 +108,28 @@ if (!isset($_SESSION['user'])) {
                                         }
                                     </style>
                                 </div>
+                                <div>
+                                <?php
+                                    // Obtener el valor de num_preguntas para el usuario actual desde la base de datos
+
+                                    $query = "SELECT valor FROM tbl_parametros WHERE parametro='num_preguntas'";
+                                    $result = $conn->query($query);
+                                    $num_preguntas = $result->fetch_assoc()['valor'];
+
+                                    // Obtener el número de pregunta actual a partir del parámetro "pregunta" en la URL
+                                    $num_pregunta_actual = isset($_GET['pregunta']) ? $_GET['pregunta'] : 1;
+
+                                    // Procesar la respuesta del usuario y actualizar el número de pregunta actual si corresponde
+                                    if (isset($_POST['respuesta'])) {
+                                    // ... procesar la respuesta del usuario ...
+                                    $num_pregunta_actual++; // Agregar 1 al valor actual de $num_pregunta_actual
+                                    }
+
+                                    // Mostrar el número de pregunta actual y el número total de preguntas a contestar en la página HTML
+                                    ?>
+                                    <div>
+                                    <p><?php echo "Pregunta $num_pregunta_actual de $num_preguntas"; ?></p>
+                                </div>
                                 <div class="card-body">
                                     <form method="POST" class="needs-validation" novalidate>
 
