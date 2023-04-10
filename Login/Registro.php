@@ -65,7 +65,7 @@
 
             }
         } else {
-               
+            
             $alert = '<div class="alert alert-danger" role="alert">
                 las contraseñas no coinciden
                 </div>';
@@ -109,7 +109,7 @@
                                 
                                     <div class="input-contenedor">
                                         <i class="fas fa-user-circle icon"></i>
-                                        <input name="usuario" id="usuario" type="text" placeholder="Usuario" maxlength="20" autocomplete="nope" required pattern="[A-Z]{1,}" title="Ingrese su nombre de usuario en letras mayúsculas sin espacios">
+                                        <input name="usuario" id="usuario" type="text" placeholder="Usuario" maxlength="20" autocomplete="nope" value="<?php echo isset($_POST['usuario']) ? $_POST['usuario'] : ''; ?>" required pattern="[A-Z]{1,}" title="Ingrese su nombre de usuario en letras mayúsculas sin espacios">
                                         <div class="valid-feedback">
                                             Campo Valido!
                                         </div>
@@ -120,7 +120,7 @@
 
                                     <div class="input-contenedor">
                                         <i class="fas fa-user icon"></i>
-                                        <input name="nombre" id="nombre" maxlength="50" type="text" placeholder="Nombre y Apellido" required pattern="[A-Z]{1,}">
+                                        <input name="nombre" id="nombre" maxlength="50" type="text" placeholder="Nombre y Apellido" value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : ''; ?>" required pattern="[A-Z]{1,}">
                                         <div class="valid-feedback">
                                             Campo Valido!
                                         </div>
@@ -131,7 +131,7 @@
                                     
                                     <div class="input-contenedor">
                                         <i class="fas fa-envelope icon"></i>
-                                        <input type="text" name="correo" maxlength="45" placeholder="Correo electronico" required>
+                                        <input type="text" name="correo" maxlength="45" placeholder="Correo electronico" value="<?php echo isset($_POST['correo']) ? $_POST['correo'] : ''; ?>" required>
                                         <div class="valid-feedback">
                                             Campo Valido!
                                         </div>
