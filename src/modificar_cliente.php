@@ -58,7 +58,7 @@ if (!empty($_POST)) {
                                 <input name="id" hidden type="text" value="<?= $row['idcliente']  ?>">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" value="<?= $row['DNI'] ?>"  name="txtdni" id="txtdni" type="number" placeholder="Enter your first name" autocomplete="nope" size="25" required />
+                                        <input class="form-control" value="<?= $row['DNI'] ?>"  name="txtdni" id="txtdni" type="number" placeholder="Enter your first name" autocomplete="nope" size="25" oninput="if(this.value.length > 13) this.value = this.value.slice(0, 13);" required />
                                         <label for="inputFirstName"><i class=""></i>&nbsp;DNI</label>
                                         <div class="valid-feedback">
                                             Campo Válido!
@@ -97,7 +97,7 @@ if (!empty($_POST)) {
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" value="<?= $row['RTN'] ?>"  name="txtrtn" id="txtrtn" type="number" placeholder="Enter your first name" autocomplete="nope" size="15" />
+                                        <input class="form-control" value="<?= $row['RTN'] ?>"  name="txtrtn" id="txtrtn" type="number" placeholder="Enter your first name" autocomplete="nope" oninput="if(this.value.length > 14) this.value = this.value.slice(0, 14);" size="15" />
                                         <label for="inputFirstName"><i class="fas fa-user icon"></i>&nbsp;RTN</label>
                                         <div class="valid-feedback">
                                             Campo Válido!

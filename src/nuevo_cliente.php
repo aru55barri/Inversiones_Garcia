@@ -69,7 +69,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtdni" id="txtdni" type="number" onkeypress="return solonumeros(event)" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" required maxlength="8" />
+                                <input class="form-control" name="txtdni" id="txtdni" type="number" onkeypress="return solonumeros(event)" oninput="if(this.value.length > 13) this.value = this.value.slice(0, 13);" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" required maxlength="8" />
                                 <label for="inputEmail"><i class="fa-solid fa-mobile-screen"></i>&nbsp;DNI</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -93,7 +93,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" type="number" name="txtrtn" id="txtrtn" autocomplete="nope" placeholder="Ingrese el nombre del proveedor"  maxlength="50" />
+                                <input class="form-control" type="number" name="txtrtn" id="txtrtn" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" oninput="if(this.value.length > 14) this.value = this.value.slice(0, 14);" maxlength="50" />
                                 <label for="inputEmail"><i class=""></i>&nbsp;RTN</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

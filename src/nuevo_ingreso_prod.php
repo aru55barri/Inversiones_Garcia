@@ -340,13 +340,21 @@ if (isset($_POST['agregar'])) {
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Costo unitario</label>
-                                <input type="text" placeholder="" name="costo" id="costo" class="form-control">
+                                <input type="text" placeholder="" name="costo" id="costo" class="form-control" onkeypress="return solonumeros(event)" pattern="[0-9]+" title="Ingrese solo números" onpaste="return false"  required>
+                                <div class="valid-feedback">
+                                    Campo Válido.
+                                </div>
+                                <span id="2mensaje" style="color: red;"></span>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Cantidad</label>
-                                <input type="text" placeholder="" required name="cantidad" id="cantidad" onKeyUp="pierdeFoco(this)" class="form-control">
+                                <input type="text" placeholder="" name="cantidad" id="cantidad" class="form-control" onkeypress="return solonumeros(event)" pattern="[0-9]+" title="Ingrese solo números" onpaste="return false" required>
+                                <div class="valid-feedback">
+                                    Campo Válido.
+                                </div>
+                                <span id="3mensaje" style="color: red;"></span>
                             </div>
                         </div>
 
@@ -478,6 +486,23 @@ if (isset($_POST['agregar'])) {
 </div>
 <?php include_once('../Login/Footer.php');
 ?>
+
+<script>
+    function solonumeros(e) {
+        var key = window.event ? e.keyCode : e.which;
+        if (key < 48 || key > 57) {
+            e.preventDefault();
+            document.getElementById("2mensaje").innerHTML = "Ingrese solo números";
+            document.getElementById("3mensaje").innerHTML = "Ingrese solo números";
+            return false;
+        } else {
+            document.getElementById("2mesanje").innerHTML = "";
+            document.getElementById("3mensaje").innerHTML = "";
+            return true;
+        }
+    }
+
+</script>
 
 
 <script>
