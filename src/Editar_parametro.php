@@ -76,7 +76,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" type="date" readonly name="txtfechacreacion" id="dtpfechacreacion" value="<?php if (!empty($_GET)) { echo $DatosParametros['fecha_creacion']; } ?>" placeholder="Fecha inicio" readonly required />
+                                <input class="form-control" type="timestamp" readonly name="txtfechacreacion" id="dtpfechacreacion" value="<?php if (!empty($_GET)) { echo $DatosParametros['fecha_creacion']; } ?>" placeholder="Fecha inicio" readonly required />
                                 <label for="inputfechacreacion">Fecha Creacion</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
