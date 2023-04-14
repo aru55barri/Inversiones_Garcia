@@ -18,6 +18,7 @@ class ajustes
 
     public function generarRespaldoBD2()
     {
+        
         $this->db = getConexion();
         self::setNames();
         $tablasRespaldar = [];
@@ -25,7 +26,7 @@ class ajustes
         foreach($tablas as $tabla){
             $tablasRespaldar[] = $tabla[0];
         }
-
+        date_default_timezone_set('America/Mexico_City');
         $nombreRespaldo = "BackupInversionesGarcia__" . date("Y-m-d__H-i-s") .".sql";
         $contenido = "";
         $contenido .= "-- Respaldo de la base de datos Inversiones Garcia\n";
@@ -55,7 +56,12 @@ class ajustes
                 $contenido .= "INSERT INTO `$tabla` VALUES(";
                 for($i = 0; $i < count($registro)/2; $i++)
                 {
-                    $contenido .= "'" . $registro[$i] . "',";
+                    if ($tabla == 'tbl_config_empresa' && $consulta->getColumnMeta($i)['name'] == 'logo') {
+                        $hexValue = bin2hex($registro[$i]);
+                        $contenido .= "0x$hexValue,";
+                    } else {
+                        $contenido .= "'" . $registro[$i] . "',";
+                    }
                 }
                 $contenido = substr($contenido, 0, -1);
                 $contenido .= ");\n";
@@ -75,9 +81,6 @@ class ajustes
 
         rename($ubicacionActual . $nombreRespaldo, $nuevaUbicacion . $nombreRespaldo);
     }
-
-
-
 
     public function generarRespaldoBD()
     {
@@ -112,11 +115,36 @@ class ajustes
         $contenido = file_get_contents("../config/Respaldos/" . $nombreRespaldo);
         $contenido = explode(";", $contenido);
         foreach ($contenido as $consulta) {
+            // Reemplazar "tbl_config_empresa" con el nombre de la tabla que contiene la imagen
+            if (strpos($consulta, "tbl_config_empresa") !== false && strpos($consulta, "INSERT INTO") !== false) {
+                // Obtener los valores de la consulta de inserción
+                preg_match("/\((.*)\)/", $consulta, $valores);
+                $valores = $valores[1];
+    
+                // Reemplazar el valor de la columna de la imagen con un marcador
+                // para poder insertar el valor binario después
+                $valores = preg_replace("/'([^\']+)'/", "'###IMAGEN###'", $valores);
+    
+                // Insertar los valores en la tabla
+                $consulta = str_replace("###IMAGEN###", $this->obtenerImagenHexadecimal(), $consulta);
+            }
             $this->db->query($consulta);
         }
-
     }
-
+    
+    private function obtenerImagenHexadecimal()
+    {
+        // Obtener la imagen de la base de datos en formato binario
+        $stmt = $this->db->prepare("SELECT logo FROM tbl_config_empresa");
+        $stmt->execute();
+        $imagenBinaria = $stmt->fetch(PDO::FETCH_COLUMN);
+    
+        // Convertir la imagen a su equivalente en hexadecimal
+        $imagenHexadecimal = bin2hex($imagenBinaria);
+    
+        return "0x" . $imagenHexadecimal;
+    }
+    
     public function obtenerNombresArchivosRespaldo()
     {
         $this->db = getConexion();
