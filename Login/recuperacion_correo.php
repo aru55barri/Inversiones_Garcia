@@ -49,8 +49,8 @@ if (!empty($_POST)) {
                 //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'garciainversiones.ig2022@gmail.com';
-                $mail->Password = 'blfpmkfghwyllucw';
+                $mail->Username = 'garciainversiones.ig2023@gmail.com';
+                $mail->Password = 'btjgkekzcqvntomb';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
                 $mail->SMTPOptions = array(
@@ -61,9 +61,9 @@ if (!empty($_POST)) {
                     )
                 );
 
-                $mail->setFrom('garciainversiones.ig2022@gmail.com');
+                $mail->setFrom('garciainversiones.ig2023@gmail.com');
                 $mail->addAddress($correoVerificado);
-                $mail->addCC('garciainversiones.ig2022@gmail.com');
+                $mail->addCC('garciainversiones.ig2023@gmail.com');
                 $mail->ContentType = 'text/html';
                 $mail->CharSet = 'UTF-8';
                 $mail->isHTML(true);
@@ -138,7 +138,7 @@ if (!empty($_POST)) {
                                                                                                     border-width: 4px 4px 4px 4px;
                                                                                                     display: inline-block;
                                                                                                     border-radius: 10px;
-                                                                                                    width: auto;"><a href="https://inversionesgarcia.000webhostapp.com/Login/nueva_contrasena.php?token=' . $token . '" class="es-button" target="_blank" style="font-weight: normal; border-style: solid;
+                                                                                                    width: auto;"><a href="http://localhost/Inversiones_Garcia/Login/nueva_contrasena.php?token=' . $token . '" class="es-button" target="_blank" style="font-weight: normal; border-style: solid;
                                                                                                     border-color: #053238;
                                                                                                     border-width: 10px 25px 10px 30px;
                                                                                                     display: inline-block;
