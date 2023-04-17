@@ -31,7 +31,7 @@
 
             $query = mysqli_query($conn, "SELECT * FROM tbl_usuario where correo = '$correo'");
             $result = mysqli_fetch_array($query);
-           if ($result > 0) {
+            if ($result > 0) {
                 $alert = '<div class="alert alert-warning" role="alert">
                             El correo ya existe
                         </div>';
@@ -44,22 +44,22 @@
                     $alert = '<div class="alert alert-warning" role="alert">
                                 El usuario ya existe
                             </div>';
-                        } else {
-
-
-                $insertarUsuario=insertarUsuarioEmpleado($nombre, $apellido, $correo, $usuario, $password);
-
-                if($insertarUsuario > 0){
-                    $alert = '<div class="alert alert-danger" role="alert">
-                    Error al registrar
-                    </div>';
                 } else {
-                   $_SESSION['registroU'] = 'ok';
-                
-                    echo "<script> 
-                   location.href ='../Login/login.php?registro=1';
-                   </script>";   
-                }
+
+
+                    $insertarUsuario=insertarUsuarioEmpleado($nombre, $apellido, $correo, $usuario, $password);
+
+                    if($insertarUsuario > 0){
+                        $alert = '<div class="alert alert-danger" role="alert">
+                        Error al registrar
+                        </div>';
+                    } else {
+                    $_SESSION['registroU'] = 'ok';
+                    
+                        echo "<script> 
+                    location.href ='../Login/login.php?registro=1';
+                    </script>";   
+                    }
 
                 }
 
