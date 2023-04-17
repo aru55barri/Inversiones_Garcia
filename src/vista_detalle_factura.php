@@ -15,7 +15,7 @@ $ID_VENTA = $_GET['id'];
 
         <div class="title_right">
             <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
-                <button onclick="window.location.href='factura.php';" class="btn btn-round btn-success"></i> Regresar</button>
+                <button onclick="window.location.href='factura.php';" class="btn btn-primary"></i> Regresar</button>
                 <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
             </div>
         </div>

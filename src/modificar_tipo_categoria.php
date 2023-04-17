@@ -28,9 +28,8 @@ if (!empty($_POST)) {
 
 ?>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
 <main>
-    <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
+    <div class="container" style="margin-top: -200px; margin-bottom: 120px;">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -38,12 +37,7 @@ if (!empty($_POST)) {
                         <h3 class="text-center font-weight-light my-4">Editar Tipo Categoria #<?php echo $DatosPregunta['id'] ?></h3>
                     </div>
                     <div class="card-body">
-
-
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
-
-
-
                             <div class="form-floating mb-3 mb-md-3">
                                 <input class="form-control " name="txtIDpregunta" id="inputIDpregunta" type="text" value="<?php if (!empty($_GET)) {
                                                                                                                                 echo base64_decode($_GET['id']);

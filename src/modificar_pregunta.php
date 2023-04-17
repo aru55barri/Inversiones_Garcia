@@ -28,9 +28,9 @@ if (!empty($_POST)) {
 
 ?>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 <main>
-    <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
+    <div class="container" style="margin-top: -200px; margin-bottom: 140px;">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">

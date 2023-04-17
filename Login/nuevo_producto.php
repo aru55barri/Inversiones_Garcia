@@ -103,7 +103,7 @@ if ($_POST) {
                             <br>-->
 
                             <div class="form-floating">
-                                <input class="form-control" name="cant_minima" id="texprecio" type="number" onKeyUp="pierdeFoco(this)" onpaste="return false" min = 0 required  />
+                                <input class="form-control" name="cant_minima" id="texprecio" type="number" onKeyUp="pierdeFoco(this)" onpaste="return false" min = 0 required   />
                                 <label for="texprecio"><i class="fa-solid fa-user-group"></i>&nbsp;CANTIDAD MINIMA</label>
                                 <div class="valid-feedback">
                                     Campo Válido.

@@ -33,7 +33,7 @@ $direccion = $rom['direccion'];
         <h1 class=" text-center" id="letra"> Productos </h1>
 <style>
   h1{
-  font-family: Tempus Sans ITC;
+  font-family: Vladimir Script;
   font-size: 80px;
   }
 </style>
@@ -42,7 +42,7 @@ $direccion = $rom['direccion'];
         <div class="title_right">
             <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
                 <?php if ($insertar == 1) { ?>
-                    <button onclick="window.location.href='../Login/nuevo_producto.php';" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo Producto</button>
+                    <button onclick="window.location.href='../Login/nuevo_producto.php';" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Nuevo Producto</button>
                 <?php } ?>
                 <!--<a target="black" href="../reportes/reporte_productos.php" class="btn btn-round btn-info"><i class="fa-solid fa-file-pdf"></i>PDF</a>-->
                 <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
@@ -75,7 +75,7 @@ $direccion = $rom['direccion'];
                 <table class="table table-striped table-bordered" id="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>CATEGORIA</th>
                             <th>TIPO PRODUCTO</th>
                             <th>NOMBRE</th>
@@ -249,10 +249,7 @@ $direccion = $rom['direccion'];
             },
           }
         },
-        {
-          extend: 'print',
-          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } 
+        
       ],
       "lengthMenu": [
         [10, 25, 50, -1],

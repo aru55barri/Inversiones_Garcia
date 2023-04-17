@@ -296,10 +296,6 @@ $direccion = $rom['direccion'];
             },
           }
         },
-        {
-          extend: 'print',
-          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } 
       ],
       "lengthMenu": [
         [10, 25, 50, -1],

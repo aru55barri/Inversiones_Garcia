@@ -28,7 +28,7 @@ $direccion = $rom['direccion'];
     <h1 class=" text-center" id="letra"> Inventario </h1>
 <style>
 h1{
-font-family: Tempus Sans ITC;
+font-family: Vladimir Script;
 font-size: 80px;
 }
 </style>
@@ -64,7 +64,7 @@ font-size: 80px;
                 <table class="table table-striped table-bordered" id="table">
                     <thead class="thead-dark">
                         <tr>
-                        <th>ID</th>
+                        <th>#</th>
                                 <th>CANTIDAD EXISTENCIA</th>  
                                 <!-- <th>PRODUCCION</th> -->
                                 <th>PRODUCTO</th>
@@ -245,10 +245,7 @@ font-size: 80px;
             },
           }
         }, 
-        {
-          extend: 'print',
-          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } 
+
       ],
       "lengthMenu": [
         [10, 25, 50, -1],

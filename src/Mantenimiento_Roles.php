@@ -32,7 +32,7 @@ $direccion = $rom['direccion'];
     <h1 class=" text-center" id="letra"> Roles </h1>
 <style>
 h1{
-font-family: Tempus Sans ITC;
+font-family: Vladimir Script;
 font-size: 80px;
 }
 </style>
@@ -42,7 +42,7 @@ font-size: 80px;
             <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
             <?php
             if ($insertar == 1) { ?>
-                <button onclick="window.location.href='../src/nuevo_roles.php'" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo Rol</button>
+                <button onclick="window.location.href='../src/nuevo_roles.php'" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Nuevo Rol</button>
                 <?php } ?>
                 <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
             </div>
@@ -78,7 +78,7 @@ font-size: 80px;
                     <thead class="thead-dark">
                         <tr>
 
-                            <th>ID</th>
+                            <th>#</th>
                             <th>ROL</th>
                             <th>DESCRIPCION</th>
                             <?php if ($modificar == 1) { ?>
@@ -301,10 +301,7 @@ font-size: 80px;
             },
           }
         },
-        {
-          extend: 'print',
-          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } 
+
       ],
       "lengthMenu": [
         [10, 25, 50, -1],

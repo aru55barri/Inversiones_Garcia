@@ -38,7 +38,7 @@ $direccion = $rom['direccion'];
             <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
             <?php
             if ($insertar == 1) { ?>
-                <button onclick="window.location.href='../src/Registrar_parametros.php'" class="btn  btn-round btn-success"><i class="fa-solid fa-circle-plus"></i> Nuevo Parámetro</button>
+                <button onclick="window.location.href='../src/Registrar_parametros.php'" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Nuevo Parámetro</button>
                 <?php } ?>
                 <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
             </div>
@@ -284,10 +284,7 @@ $direccion = $rom['direccion'];
             },
           }
         }, 
-        {
-          extend: 'print',
-          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } 
+
       ],
       "lengthMenu": [
         [50, 25, 50, -1],

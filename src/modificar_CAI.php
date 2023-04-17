@@ -44,7 +44,6 @@ if (!empty($_POST)) {
 }
 
 ?>
-<br><br><br><br><br><br><br>
 <main>
     <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
         <div class="row justify-content-center">

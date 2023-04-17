@@ -78,9 +78,7 @@ $direccion = $rom['direccion'];
                 <table class="table table-striped table-bordered" id="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
-                           
- 
+                            <th>#</th>
                             <th>USUARIO</th>
                              <!-- <th>NOMBRE</th>  -->
                             <th>ID_ROL</th>
@@ -96,7 +94,6 @@ $direccion = $rom['direccion'];
                             <?php if ($eliminar == 1) { ?>
                             <th>ELIMINAR</th>
                             <?php } ?>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -255,10 +252,7 @@ $direccion = $rom['direccion'];
             },
           }
         },
-        {
-          extend: 'print',
-          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } 
+
       ],
       "lengthMenu": [
         [10, 25, 50, -1],

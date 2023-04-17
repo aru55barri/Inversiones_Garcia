@@ -13,7 +13,7 @@ $id = $_GET['id'];
 
         <div class="title_right">
             <div class="col-md-3 col-sm-3 form-group row pull-right top_search">
-                <button onclick="window.location.href='inventario.php';" class="btn  btn-round btn-success"></i> Regresar</button>
+                <button onclick="window.location.href='inventario.php';" class="btn btn-primary"></i> Regresar</button>
                 <!-- <button class="btn  btn-round btn-info"><i class="fa-solid fa-file-pdf"></i> PDF</button> -->
             </div>
         </div>
@@ -27,7 +27,7 @@ $id = $_GET['id'];
                 <table class="table table-striped table-bordered" id="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>TIPO MOVIMIENTO</th>
                             <th>CANTIDAD</th>
                             <th>PRODUCTO</th>
@@ -167,10 +167,9 @@ $id = $_GET['id'];
               page: 'current'
             }
           }
-        },{
-          extend: 'print',
-          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } 
+        },
+          
+         
       ],
       "lengthMenu": [
         [10, 25, 50, -1],

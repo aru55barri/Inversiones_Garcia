@@ -65,8 +65,6 @@ $direccion = $rom['direccion'];
                 <table class="table table-striped table-bordered" id="table">
                 <thead class="thead-dark">
                         <tr>
-
-                            <th>RESPUESTA</th>
                             <th>PREGUNTA</th>
                             <th>USUARIO</th>
 
@@ -79,12 +77,8 @@ $direccion = $rom['direccion'];
 
                         foreach ($resultado as $Pregunta) {
                             echo "<tr>";
-                            echo "<td>" . $Pregunta['RESPUESTA'] . "</td>";
                             echo "<td>" . $Pregunta['PREGUNTA'] . "</td>";
                             echo "<td>" . $Pregunta['USUARIO'] . "</td>";
-                            //echo "<td><a href=http://localhost/servicio&color/Pagina/Paginas/Editar_parametro.php?id=" . base64_encode($Pregunta['ID_PARAMETRO']) . " <i class='btn btn-round btn-info'><i class='fa-solid fa-pen-to-square'></i></a></td>";
-                           // echo "<th><button onclick=eliminar(" . $Pregunta['ID_PARAMETRO'] . ")' class='btn btn-round btn-danger' type='submit'><i class='fas fa-trash-alt'></i></button></th>";
-                           // echo "<td><button class ='btn btn-round btn-danger' onclick='eliminar(" . $Pregunta['ID_PARAMETRO'] . ")'><i class='fas fa-trash-alt'></i></button></td>";
                             echo "</tr>";
                         }
 
@@ -267,10 +261,7 @@ $direccion = $rom['direccion'];
             },
           }
         },
-        {
-          extend: 'print',
-          text: '<button class="btn btn-info" style="margin-top: -11px; margin-bottom: -8px; margin-left: -15px; margin-right: -15px; border-radius: 0px;">Imprimir <i class="fas fa-print"></i></button>',
-        } 
+
       ],
       "lengthMenu": [
         [10, 25, 50, -1],

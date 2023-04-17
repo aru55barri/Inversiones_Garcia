@@ -436,7 +436,7 @@ if (isset($_POST['agregar'])) {
 
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>ID</th>
+                                        <th>#</th>
                                         <th>Producto</th>
                                         <th>Precio</th>
                                         <th>Cantidad</th>
