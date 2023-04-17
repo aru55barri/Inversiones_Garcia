@@ -17,6 +17,8 @@ if ($_POST) {
     $existing_record = mysqli_fetch_assoc($result);
 
     if ($existing_record) {
+        $roles = $permisos->obtenerRoles();
+        $objeto = $permisos->obtenerObjetos();
         // Ya existe un permiso para ese rol y objeto
         echo '<div class="alert alert-danger">
             <strong>Error!</strong> Ya existe un permiso para ese rol y objeto.
