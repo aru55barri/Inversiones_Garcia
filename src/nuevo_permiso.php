@@ -8,13 +8,21 @@ $roles = $permisos->obtenerRoles();
 $objeto = $permisos->obtenerObjetos();
 
 
-if (!empty($_POST["registro"])) {
-    echo '';
-    if (empty($_POST["insertar"]) || empty($_POST["eliminar"]) || empty($_POST["modificar"]) || empty($_POST["consultar"]) || empty($_POST["PDF"]) || empty($_POST["rol"]) || empty($_POST["objeto"])){
-        echo '<div class="alert alert-danger" role="alert">
-        uno de los campos esta vacío
-        </div>';
+if ($_POST) {
+    $rol = $_POST['rol'];
+    $objeto = $_POST['objeto'];
+
+    $query = "SELECT * FROM tbl_permisos WHERE id_rol = $rol AND id_objeto = $objeto";
+    $result = mysqli_query($conn, $query);
+    $existing_record = mysqli_fetch_assoc($result);
+
+    if ($existing_record) {
+        // Ya existe un permiso para ese rol y objeto
+        echo '<div class="alert alert-danger">
+            <strong>Error!</strong> Ya existe un permiso para ese rol y objeto.
+            </div>';
     } else {
+        // No existe un permiso para ese rol y objeto, insertar el nuevo permiso
         $insertar = $row['permiso_insercion'];
         $modificar = $row['permiso_modificar'];
         $consultar = $row['permiso_consultar'];
@@ -22,26 +30,8 @@ if (!empty($_POST["registro"])) {
         $PDF = $row['pdf'];
         $rol = $_POST['rol'];
         $objeto = $_POST['objeto'];
-
-        $query = mysqli_query($conn,  "SELECT * FROM tbl_permisos WHERE id_rol = $rol AND id_objeto = $objeto");
-        $result = mysqli_fetch_array($query);
-        if ($result > 0) {
-            // Ya existe un permiso para ese rol y objeto
-            echo '<div class="alert alert-danger">
-                <strong>Error!</strong> Ya existe un permiso para ese rol y objeto.
-                </div>';
-        } else {
-            // No existe un permiso para ese rol y objeto, insertar el nuevo permiso
-            
-            $permisos->Insertar($insertar, $eliminar, $modificar, $consultar, $PDF, $rol, $objeto);
-            if($permisos > 0){
-                echo'<div class="alert alert-danger" role="alert">
-                Error al registrar
-                </div>';
-            }
-        }
+        $permisos->Insertar($insertar, $eliminar, $modificar, $consultar, $PDF, $rol, $objeto);
     }
-
 }
 
 
@@ -49,7 +39,7 @@ if (!empty($_POST["registro"])) {
 
 
 
-<br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 <main>
     <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
         <div class="row justify-content-center">
@@ -145,7 +135,7 @@ if (!empty($_POST["registro"])) {
                             
                             
                             <div class="mt-4 mb-0">
-                                <div class="d-grid"><input type="submit" name="registro" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
+                                <div class="d-grid"><input type="submit" id="button" class="btn btn-info" style="background-color:rgba(0, 177, 33, 0.91);" value="Registrar" />
                                     <div class="mt-4 mb-0">
                                         <div class="d-grid"><input type="button" onclick="window.location.href='../src/permisos.php'" id="button" class="btn btn-danger btn-lock" style="background-color:rgba(180, 0, 0, 0.91);" value="Cancelar" />
                                     </div>
