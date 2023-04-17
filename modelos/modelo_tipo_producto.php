@@ -48,7 +48,7 @@ class tipo_producto
         $IDUSUARIO = $_SESSION['id_usuario'];
         
         $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-        VALUES(null,'$fecha','$IDUSUARIO',28,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN TIPO PRODUCTO')";
+        VALUES(null,'$fecha','$IDUSUARIO',23,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN TIPO PRODUCTO')";
      $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 
@@ -75,7 +75,7 @@ class tipo_producto
         $IDUSUARIO = $_SESSION['id_usuario'];
 
         $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-        VALUES(null,'$fecha','$IDUSUARIO',28,'EDITAR', 'SE EDITO UN NUEVO REGISTRO EN TIPO PRODUCTO')";
+        VALUES(null,'$fecha','$IDUSUARIO',23,'EDITAR', 'SE EDITO UN NUEVO REGISTRO EN TIPO PRODUCTO')";
      $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 
@@ -118,7 +118,7 @@ class tipo_producto
         $fecha = date("Y-m-d-H:i:s");
         $IDUSUARIO = $_SESSION['id_usuario'];
         $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-        VALUES(null,'$fecha','$IDUSUARIO',28,'ELIMINAR', 'SE ELIMINO UN NUEVO REGISTRO EN TIPO PRODUCTO')";
+        VALUES(null,'$fecha','$IDUSUARIO',23,'ELIMINAR', 'SE ELIMINO UN NUEVO REGISTRO EN TIPO PRODUCTO')";
      $this->db->query($sql1);
         //ALTERAR BITACORA______________________
             return true;

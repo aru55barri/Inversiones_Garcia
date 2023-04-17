@@ -72,7 +72,7 @@ class rol
         $fecha = date("Y-m-d-H:i:s");
         $IDUSUARIO = $_SESSION['id_usuario'];
         $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-        VALUES(null,'$fecha','$IDUSUARIO',17,'EDITAR', 'SE EDITO UN NUEVO REGISTRO EN PREGUNTAS')";
+        VALUES(null,'$fecha','$IDUSUARIO',17,'EDITAR', 'SE EDITO UN NUEVO REGISTRO EN ROLES')";
      $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 

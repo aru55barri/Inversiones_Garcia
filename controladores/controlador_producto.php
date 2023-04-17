@@ -39,6 +39,12 @@ class ProductoContralador
         $rs = mysqli_query($conn, "SELECT MAX(codproducto) as id FROM tbl_producto");
         $raw = mysqli_fetch_array($rs);
         $id = $raw['id'];
+        //INSERT BITACORA
+        $fecha = date("Y-m-d-H:i:s");
+        $IDUSUARIO = $_SESSION['id_usuario'];
+        $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+        VALUES(null,'$fecha','$IDUSUARIO',7,'INSERTO','EL USUARIO INSERTO UN PRODUCTO EN LA TABLA PRODUCTOS ')";
+        $modelo->insertargeneral($sql1);
 
         $sql1 = "INSERT INTO tbl_inventario (id, cod_producto, cantidad) 
         VALUES (null,'$id', 0 )";

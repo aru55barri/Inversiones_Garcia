@@ -123,7 +123,11 @@
             foreach ($stm as $re) {
                 $this->usuario[] = $re;
             }
-    
+            $fecha = date("Y-m-d-H:i:s");
+            $IDUSUARIO = $_SESSION['id_usuario'];
+            $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+            VALUES(null,'$fecha','$IDUSUARIO',7,'EDITAR','SE EDITO UN PRODUCTO EN LA TABLA PRODUCTOS ')";
+            $this->db->query($sql1);
             return $this->usuario;
             $this->db = null;
         }

@@ -101,9 +101,9 @@ class UsuariosContralador
             $modeloPrincipal = new ModeloPrincipal();
             $fecha = date("Y-m-d-H:i:s");
             $IDUS = $_SESSION['id_usuario'];
-
+            //ELIMINAR USUARIO BITACORA
             $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
-            VALUES(null,'$fecha','$IDUS', 4, 'ELIMINAR','USUARIO ELIMINADO DE LA TABLA USUARIOS')";
+            VALUES(null,'$fecha','$IDUS', 16, 'ELIMINAR','USUARIO ELIMINADO DE LA TABLA USUARIOS')";
             $modeloPrincipal->insertargeneral($sql);
 
             

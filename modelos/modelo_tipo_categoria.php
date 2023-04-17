@@ -42,11 +42,11 @@ class tipocat
         self::setNames();
         $sql="INSERT INTO tbl_tipo_categoria (descripcion) VALUES ('$PREGUNTA')";
         $resultado = $this->db->query($sql);
-        //ALTERAR BITACORA______________________
+        //ALTERAR BITACORA TIPO CATEGORIA______________________
         $fecha = date("Y-m-d-H:i:s");
         $IDUSUARIO = $_SESSION['id_usuario'];
 
-       $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
+        $sql1 = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
         VALUES(null,'$fecha','$IDUSUARIO',28,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN TIPO CATEGORIA')";
      $this->db->query($sql1);
         //ALTERAR BITACORA______________________

@@ -91,7 +91,7 @@ class parametros
         $IDUSUARIO = $_SESSION['id_usuario'];
 
      $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-     VALUES(null,'$fecha','$IDUSUARIO',19,'REGISTRO', 'SE ELIMINO UN PARAMETRO')";
+     VALUES(null,'$fecha','$IDUSUARIO',19,'ELIMINAR', 'SE ELIMINO UN PARAMETRO')";
         $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 
@@ -129,7 +129,7 @@ class parametros
         //ALTERAR BITACORA______________________
         $fecha = date("Y-m-d-H:i:s");
         $sql1 = "INSERT INTO tbl_bitacora(id, FECHA, id_usuario, id_objeto, accion, descripcion)
-        VALUES(null,'$fecha','$IDUSUARIO',19,'REGISTRO', 'SE CREO UN NUEVO REGISTRO EN PARAMETROS')";
+        VALUES(null,'$fecha','$IDUSUARIO',19,'EDITAR', 'SE EDITO REGISTRO EN PARAMETROS')";
         $this->db->query($sql1);
         //ALTERAR BITACORA______________________
 
