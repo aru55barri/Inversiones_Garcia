@@ -54,6 +54,8 @@
                 <?php   }
                     // Inicio vista en bitacora al mostrar empleados Joel Montoya
                     $modeloPrincipal = new ModeloPrincipal();
+
+                    date_default_timezone_set('America/Mexico_City');
                     $fecha = date("Y-m-d-H:i:s");
 
                     $IDUS = $_SESSION['id_usuario'];
@@ -67,6 +69,7 @@
                     $sql = "INSERT INTO tbl_bitacora(id, fecha, id_usuario, id_objeto, accion, descripcion)
                     VALUES(null,'$fecha','$IDUS',22, 'INGRESO','$Usuarioo INGRESÓ A TABLA CAI')";
                     $modeloPrincipal->insertargeneral($sql);
+
                     // FIN vista en bitacora al mostrar empleados Joel Montoya
         
                 }
@@ -82,6 +85,8 @@
             VALUES (null,'$rango_inicial', '$rango_final', '$rango_actual', '$numero_CAI','$fecha_vencimiento', '$usuario')";
             $modelo->insertargeneral($sql);
 
+
+
             $_SESSION['registro'] = 'ok';
             echo "<script> 
             location.href ='../src/CAI.php';
@@ -93,6 +98,8 @@
             $modeloCAI = new CAI();
             $resultado = $modeloCAI->eliminarCAI($id);
             return $resultado;
+
+
         }
 
         
@@ -110,6 +117,7 @@
         $modeloCAI = new CAI();
         $resultado = $modeloCAI->EditarCAI($id, $rango_inicial,$rango_final,$rango_actual,$numero_CAI,$fecha_vencimiento);
         return $resultado;
+
     }
 
 

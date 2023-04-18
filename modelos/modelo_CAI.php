@@ -59,6 +59,7 @@
             $sql = "UPDATE tbl_cai SET rango_inicial = '$rango_inicial', rango_final = '$rango_final', rango_actual= '$rango_actual', numero_CAI = '$numero_CAI' , fecha_vencimiento = '$fecha_vencimiento' WHERE id ='$id'";
             $resultado = $this->db->query($sql);
             //ALTERAR BITACORA______________________
+            date_default_timezone_set('America/Mexico_City');
             $fecha = date("Y-m-d-H:i:s");
             $IDUSUARIO = $_SESSION['id_usuario'];
 
