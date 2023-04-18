@@ -9,6 +9,7 @@ if (!empty($_GET)) {
 }
 
 if (!empty($_POST)) {
+    
     $id_rol = $_POST['txtIDrol'];
     $rol = $_POST['txtrol'];
     $descRol = $_POST['txtDescRol'];
@@ -29,7 +30,7 @@ if (!empty($_POST)) {
 
 ?>
 
-<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 <main>
     <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
         <div class="row justify-content-center">
@@ -42,15 +43,7 @@ if (!empty($_POST)) {
 
 
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
-
-                            <div class="form-floating mb-3 mb-md-3">
-                                <input class="form-control " name="txtIDrol" id="inputIDrol" type="text" value="<?php if (!empty($_GET)) {
-                                                                                                                    echo base64_decode($_GET['id']);
-                                                                                                                } ?>" readonly required />
-                                <label for="inputIDrol"><i class="fas fa-user icon"></i>&nbsp;ID Rol </label>
-                            </div>
-
-
+                        <input name="txtIDrol" id="inputIDrol" hidden type="text" value="<?php if (!empty($_GET)) { echo base64_decode($_GET['id']); } ?>"/>
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="txtrol" id="inputrol" onblur="validarRol(this)" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosRol['rol']; } ?>" required />
                                 <label for="inputrol"><i class="fas fa-user icon"></i>&nbsp;Rol</label>
@@ -59,7 +52,7 @@ if (!empty($_POST)) {
                                 </div>
                                 <div id="mensaje"></div>
                             </div>
-
+                           
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="txtDescRol" id="inputDescRol" type="text" onpaste="return false" onkeypress="return sololetrasDesc(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosRol['descripcion']; } ?>" required />
                                 <label for="inputDescRol"><i class="fas fa-user icon"></i>&nbsp;Descripción</label>
@@ -277,3 +270,6 @@ if (!empty($_POST)) {
         <!--_______________________________________________________________________________________________________-->
     </div>
 </main>
+<?php
+include_once('../Login/footer.php');
+?>

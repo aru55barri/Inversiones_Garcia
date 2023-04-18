@@ -54,7 +54,7 @@ if ($_POST) {
                     <div class="card-body">
                         <form class="needs-validation" id="form-register" method="POST">
                             <div class="form-floating mb-3">
-                                <select name="insertar" class="form-control">
+                                <select name="insertar" required="true" class="form-control">
                                     <option value="" selected disabled>--Seleccione una opción--</option>
                                     <option value="1">SI</option>
                                     <option value="0">NO</option>
@@ -66,7 +66,7 @@ if ($_POST) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <select name="eliminar" class="form-control">
+                                <select name="eliminar" required="true" class="form-control">
                                     <option value="" selected disabled>--Seleccione una opción--</option>
                                     <option value="1">SI</option>
                                     <option value="0">NO</option>
@@ -78,7 +78,7 @@ if ($_POST) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <select name="modificar" class="form-control">
+                                <select name="modificar" required="true" class="form-control">
                                     <option value="" selected disabled>--Seleccione una opción--</option>
                                     <option value="1">SI</option>
                                     <option value="0">NO</option>
@@ -90,7 +90,7 @@ if ($_POST) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <select name="consultar" class="form-control">
+                                <select name="consultar" required="true" class="form-control">
                                     <option value="" selected disabled>--Seleccione una opción--</option>
                                     <option value="1">SI</option>
                                     <option value="0">NO</option>
@@ -102,7 +102,7 @@ if ($_POST) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <select name="PDF" class="form-control">
+                                <select name="PDF" required="true" class="form-control">
                                     <option value="" selected disabled>--Seleccione una opción--</option>
                                     <option value="1">SI</option>
                                     <option value="0">NO</option>
@@ -230,5 +230,5 @@ if ($_POST) {
 
 
 <?php
-include_once('../Login/Footer.php');
+include_once('../Login/footer.php');
 ?>

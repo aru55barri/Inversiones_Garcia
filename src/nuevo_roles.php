@@ -36,7 +36,7 @@ if (!empty($_POST)) {
 ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 <main>
     <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
         <div class="row justify-content-center">
@@ -85,6 +85,8 @@ if (!empty($_POST)) {
         </div>
         <!-- VALIDACIONES DE SOLO INGRESO DE LETRAS MAYUSCULAS-->
         <script>
+
+            
             var bandera = false;
             
             function validarRol(NombreRol) {
@@ -179,14 +181,16 @@ if (!empty($_POST)) {
                     return false;
                 } else {
                     $("#Descmensaje").text("Campo valido!").css("color", "green");
+                    document.querySelector('#button').disabled = false;
                     if (bandera == true) {
-                        document.querySelector('#button').disabled = false;
+                       
                     }
                     descripcion.style.borderColor = "green";
                     descripcion.style.boxShadow = "0 0 10px green";
 
                 }
             }
+            
         </script>
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -286,3 +290,6 @@ if (!empty($_POST)) {
         <!--_______________________________________________________________________________________________________-->
     </div>
 </main>
+<?php
+include_once('../Login/footer.php');
+?>
