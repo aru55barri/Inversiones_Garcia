@@ -25,11 +25,11 @@ if ($_POST) {
             </div>';
     } else {
         // No existe un permiso para ese rol y objeto, insertar el nuevo permiso
-        $insertar = $row['permiso_insercion'];
-        $modificar = $row['permiso_modificar'];
-        $consultar = $row['permiso_consultar'];
-        $eliminar = $row['permiso_eliminacion'];
-        $PDF = $row['pdf'];
+        $insertar = $_POST['insertar'];
+        $eliminar = $_POST['eliminar'];
+        $modificar = $_POST['modificar'];
+        $consultar = $_POST['consultar'];
+        $PDF = $_POST['PDF'];
         $rol = $_POST['rol'];
         $objeto = $_POST['objeto'];
         $permisos->Insertar($insertar, $eliminar, $modificar, $consultar, $PDF, $rol, $objeto);
