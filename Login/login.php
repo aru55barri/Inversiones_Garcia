@@ -189,7 +189,7 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
                                                                 Campo Valido!
                                                             </div>
                                                             <div class="invalid-feedback">
-                                                                Solo Debe Ingresar Letras Mayusculas en Usuario.
+                                                                Solo Debe Ingresar Letras Mayusculas.
                                                             </div>
                                                         </div>
                                             
@@ -288,28 +288,7 @@ if (!isset($_COOKIE['intentos_fallidos'])) {
             });
         </script>
 
-        <script>
-            var password = document.getElementById('clave');
-            password.addEventListener('keyup', function(e) {
-                var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,}$/;
-                var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-                if (!regex.test(password.value)) {
-                    e.preventDefault();
-                    // Efecto de sombra color rojo en el borde
-                    password.style.borderColor = "red";
-                    password.style.boxShadow = "0 0 10px red";
-                    password.classList.add("is-invalid");
-                    password.classList.remove("is-valid");
-                } else {
-                    // Efecto de sombra color verde en el borde
-                    password.style.borderColor = "green";
-                    password.style.boxShadow = "0 0 10px green";
-                    password.classList.add("is-valid");
-                    password.classList.remove("is-invalid");
-                }
-            });
-        </script>
-
+       
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <?php 
 
