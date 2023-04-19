@@ -51,7 +51,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtDesctipoproducto" id="inputDesctipoproducto" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosTipoProducto['descripcion']; } ?>" required />
+                            <input class="form-control" name="txtDesctipoproducto" id="inputDesctipoproducto" type="text" maxlength="50" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosTipoProducto['descripcion']; } ?>" required />
                                 <label for="inputDesctipoproducto"><i class="fas fa-user icon"></i>&nbsp;Descripcion Tipo Producto</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

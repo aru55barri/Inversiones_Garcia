@@ -53,7 +53,7 @@ if (!empty($_POST)) {
 
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtpregunta" onblur="validarPregunta(this)" id="inputpregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" maxlength="60" value="<?php if (!empty($_GET)) {echo $DatosPregunta['pregunta'];} ?>" required />
+                            <input class="form-control" name="txtpregunta" onblur="validarPregunta(this)" id="inputpregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" maxlength="60" value="<?php if (!empty($_GET)) {echo $DatosPregunta['pregunta'];} ?>" required />
                                 <label for="inputpregunta"><i class="fas fa-user icon"></i>&nbsp;Pregunta</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

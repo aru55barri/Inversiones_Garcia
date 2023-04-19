@@ -364,7 +364,7 @@ if (isset($_POST['agregar'])) {
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Precio de venta</label>
-                                <input type="text" placeholder="" name="costo" id="costo" class="form-control">
+                                <input type="text" placeholder="" name="costo" id="costo" class="form-control" maxlength="10">
                             </div>
                         </div>
                         <div class="col-lg-3">

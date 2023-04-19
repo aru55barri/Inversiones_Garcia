@@ -340,7 +340,7 @@ if (isset($_POST['agregar'])) {
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Costo unitario</label>
-                                <input type="text" placeholder="" name="costo" id="costo" class="form-control" onkeypress="return solonumeros(event)" pattern="[0-9]+" title="Ingrese solo números" onpaste="return false"  required>
+                                <input type="text" placeholder="" name="costo" id="costo" class="form-control" maxlength="11" onkeypress="return solonumeros(event)" pattern="[0-9]+" title="Ingrese solo números" onpaste="return false"  required>
                                 <div class="valid-feedback">
                                     Campo Válido.
                                 </div>
@@ -350,7 +350,7 @@ if (isset($_POST['agregar'])) {
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="dni">Cantidad</label>
-                                <input type="text" placeholder="" name="cantidad" id="cantidad" class="form-control" onkeypress="return solonumeros(event)" pattern="[0-9]+" title="Ingrese solo números" onpaste="return false" required>
+                                <input type="text" placeholder="" name="cantidad" id="cantidad" class="form-control" maxlength="11" onkeypress="return solonumeros(event)" pattern="[0-9]+" title="Ingrese solo números" onpaste="return false" required>
                                 <div class="valid-feedback">
                                     Campo Válido.
                                 </div>

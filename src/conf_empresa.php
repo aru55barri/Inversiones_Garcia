@@ -113,7 +113,7 @@ if (!empty($_POST)) {
                                  
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" value="<?= $nombre ?>" required name="Nombre" id="inputFirstName" type="text" />
+                                    <input class="form-control" value="<?= $nombre ?>" required name="Nombre" id="inputFirstName" type="text" maxlength="50" />
                                         <label for="inputFirstName"><i class="fas fa-user icon"></i>&nbsp;Nombre de la empresa</label>
                                         <div class="valid-feedback">
                                             Campo Válido!
@@ -126,7 +126,7 @@ if (!empty($_POST)) {
                             </div>
                            
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="correo" id="inputEmail" type="email" value="<?= $correo ?>" placeholder="name@example.com" required pattern="[a-zA-Z0-9!#$%&'_+-]([\.]?[a-zA-Z0-9!#$%&'_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" />
+                            <input class="form-control" name="correo" id="inputEmail" type="email" maxlength="40" value="<?= $correo ?>" placeholder="name@example.com" required pattern="[a-zA-Z0-9!#$%&'_+-]([\.]?[a-zA-Z0-9!#$%&'_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" />
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Correo electrónico</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -138,7 +138,7 @@ if (!empty($_POST)) {
 
                             
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="eslogan" id="text" type="text" value="<?= $eslogan ?>" placeholder="name@example.com" required  />
+                            <input class="form-control" name="eslogan" id="text" type="text" maxlength="100" value="<?= $eslogan ?>" placeholder="name@example.com" required  />
                                 <label for="text"><i class=" "></i>&nbsp;Eslogan</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -167,7 +167,7 @@ if (!empty($_POST)) {
                                 <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" value="<?= $rtn ?>" name="rtn" id="inputFirstName" type="text"  />
+                                    <input class="form-control" value="<?= $rtn ?>" name="rtn" id="inputFirstName" type="text" maxlength="16"  />
                                         <label for="inputFirstName"><i class=""></i>&nbsp;RTN</label>
                                         <div class="valid-feedback">
                                             Campo Válido!
@@ -181,7 +181,7 @@ if (!empty($_POST)) {
                              
 
                                 <div class="form-floating mb-3">
-                                <input class="form-control" name="direccion" required id="text" type="text" value="<?= $direccion ?>"  />
+                                <input class="form-control" name="direccion" required id="text" type="text" maxlength="100" value="<?= $direccion ?>"  />
                                 <label for="text"><i class=""></i>&nbsp;Dirección</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

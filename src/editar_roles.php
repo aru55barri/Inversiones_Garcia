@@ -45,7 +45,7 @@ if (!empty($_POST)) {
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
                         <input name="txtIDrol" id="inputIDrol" hidden type="text" value="<?php if (!empty($_GET)) { echo base64_decode($_GET['id']); } ?>"/>
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtrol" id="inputrol" onblur="validarRol(this)" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosRol['rol']; } ?>" required />
+                            <input class="form-control" name="txtrol" id="inputrol" onblur="validarRol(this)" type="text" maxlength="30" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosRol['rol']; } ?>" required />
                                 <label for="inputrol"><i class="fas fa-user icon"></i>&nbsp;Rol</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -54,7 +54,7 @@ if (!empty($_POST)) {
                             </div>
                            
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtDescRol" id="inputDescRol" type="text" onpaste="return false" onkeypress="return sololetrasDesc(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosRol['descripcion']; } ?>" required />
+                            <input class="form-control" name="txtDescRol" id="inputDescRol" type="text" maxlength="50" onpaste="return false" onkeypress="return sololetrasDesc(event)" autocomplete="nope" value="<?php if (!empty($_GET)) { echo $DatosRol['descripcion']; } ?>" required />
                                 <label for="inputDescRol"><i class="fas fa-user icon"></i>&nbsp;Descripción</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

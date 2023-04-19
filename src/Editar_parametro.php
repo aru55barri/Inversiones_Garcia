@@ -67,7 +67,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtvalor" id="inputvalor" type="text" onpaste="return false" onkeypress="return sololetrasynumerosValor(event)" autocomplete="nope" value="<?php if (!empty($_GET)) {echo $DatosParametros['valor'];} ?>" required />
+                            <input class="form-control" name="txtvalor" id="inputvalor" type="text" maxlength="10" onpaste="return false" onkeypress="return sololetrasynumerosValor(event)" autocomplete="nope" value="<?php if (!empty($_GET)) {echo $DatosParametros['valor'];} ?>" required />
                                 <label for="inputvalor"><i class="fas fa-user icon"></i>&nbsp;Valor</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

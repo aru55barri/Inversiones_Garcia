@@ -47,7 +47,7 @@ if (!empty($_POST)) {
 
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtpregunta" onblur="validarPregunta(this)" id="inputpregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" maxlength="60" value="<?php if (!empty($_GET)) {echo $DatosPregunta['descripcion'];} ?>" required />
+                            <input class="form-control" name="txtpregunta" onblur="validarPregunta(this)" id="inputpregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" maxlength="20" value="<?php if (!empty($_GET)) {echo $DatosPregunta['descripcion'];} ?>" required />
                                 <label for="inputpregunta"><i class="fas fa-user icon"></i>&nbsp;Tipo Categoria</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

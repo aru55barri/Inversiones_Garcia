@@ -56,7 +56,7 @@ if (!empty($_POST)) {
                             </div>
                            
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="correo" id="inputEmail" type="email" value="<?= $row[0]['correo'] ?>" placeholder="name@example.com" required pattern="[a-zA-Z0-9!#$%&'_+-]([\.]?[a-zA-Z0-9!#$%&'_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" />
+                            <input class="form-control" name="correo" id="inputEmail" type="email" maxlength="50" value="<?= $row[0]['correo'] ?>" placeholder="name@example.com" required pattern="[a-zA-Z0-9!#$%&'_+-]([\.]?[a-zA-Z0-9!#$%&'_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?" />
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Correo electrónico</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

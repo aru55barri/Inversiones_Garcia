@@ -57,7 +57,7 @@ if (!empty($_POST)) {
                         <form id="form-register" class="needs-validation" method="POST" >
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtnombre" id="txtnombre"  type="text" required/>
+                            <input class="form-control" name="txtnombre" id="txtnombre"  type="text" maxlength="50" required/>
                                 <label for="inputEmail"><i class="fas fa-user icon"></i>&nbsp;Nombre Cliente</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -93,7 +93,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" type="number" name="txtrtn" id="txtrtn" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" oninput="if(this.value.length > 14) this.value = this.value.slice(0, 14);" maxlength="50" />
+                            <input class="form-control" type="number" name="txtrtn" id="txtrtn" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" oninput="if(this.value.length > 14) this.value = this.value.slice(0, 14);" maxlength="50" />
                                 <label for="inputEmail"><i class=""></i>&nbsp;RTN</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -106,7 +106,7 @@ if (!empty($_POST)) {
 
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtdireccion" id="txtdireccion" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" required maxlength="200" />
+                                <input class="form-control" name="txtdireccion" id="txtdireccion" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" required maxlength="100" />
                                 <label for="inputEmail"><i class="fa-brands fa-facebook"></i>&nbsp;Direccion</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

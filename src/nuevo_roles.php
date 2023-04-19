@@ -51,7 +51,7 @@ if (!empty($_POST)) {
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtrol" id="inputrol" onblur="validarRol(this)" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Rol" required />
+                            <input class="form-control" name="txtrol" id="inputrol" onblur="validarRol(this)" type="text" maxlength="30" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Rol" required />
                                 <label for="inputrol">Rol</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -60,7 +60,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtDescripcionrol" id="inputDescripcionrol" type="text" onpaste="return false" onkeypress="return sololetrasDesc(event)" autocomplete="nope" placeholder="Descripcion rol" required />
+                            <input class="form-control" name="txtDescripcionrol" id="inputDescripcionrol" type="text" maxlength="50" onpaste="return false" onkeypress="return sololetrasDesc(event)" autocomplete="nope" placeholder="Descripcion rol" required />
                                 <label for="inputDescripcionrol">Descripcion</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

@@ -46,9 +46,9 @@ if (!empty($_POST)) {
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 <main>
-    <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
+    <div class="container" style="margin-top: -200px; margin-bottom: 200px;">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -61,7 +61,7 @@ if (!empty($_POST)) {
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
                        
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtcategoria" onblur=" validarPregunta(this)" id="inputPregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Categoria" required />
+                            <input class="form-control" name="txtcategoria" onblur=" validarPregunta(this)" id="inputPregunta" type="text" maxlength="20" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Categoria" required />
                                 <label for="inputDescripcionPago">Categoria</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

@@ -30,7 +30,7 @@ if (!empty($_POST)) {
 
 ?>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 <main>
     <div class="container" style="margin-top: -200px; margin-bottom: 20px;">
         <div class="row justify-content-center">
@@ -46,7 +46,7 @@ if (!empty($_POST)) {
 
 
                             <div class="form-floating mb-3">
-                            <input class="form-control" value="<?= $Row[0]['descripcion'] ?>" name="txtpregunta" id="inputFirstName" type="text" placeholder="Enter your first name" autocomplete="nope" size="25" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
+                            <input class="form-control" value="<?= $Row[0]['descripcion'] ?>" name="txtpregunta" id="inputFirstName" type="text" maxlength="30" placeholder="Enter your first name" autocomplete="nope" size="25" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
                                 <label for="inputpregunta"><i class="fas fa-user icon"></i>&nbsp;Pregunta</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

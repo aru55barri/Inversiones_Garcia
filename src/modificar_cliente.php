@@ -52,7 +52,6 @@ if (!empty($_POST)) {
                         <h3 class="text-center font-weight-light my-4">Editar Cliente #<?= $row['idcliente']  ?></h3>
                     </div>
                     <div class="card-body">
-
                     <form class="needs-validation" method="POST">
                             <div class="row mb-3">
                                 <input name="id" hidden type="text" value="<?= $row['idcliente']  ?>">
@@ -71,7 +70,7 @@ if (!empty($_POST)) {
                             </div>
                            
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtnombre" id="txtnombre" type="text" value="<?= $row['nombre'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="50" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required/>
+                            <input class="form-control" name="txtnombre" id="txtnombre" type="text" maxlength="50" value="<?= $row['nombre'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="50" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required/>
                                 <label for="inputFirstName"><i class=""></i>&nbsp;Nombre</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -107,10 +106,8 @@ if (!empty($_POST)) {
                                         </div>
                                     </div>
                                 </div>
-
-                            
                                 <div class="form-floating mb-3">
-                                <input class="form-control" name="txtdireccion" id="txtdireccion" type="text" value="<?= $row['direccion'] ?>" placeholder="name@Enter your first name" autocomplete="nope" size="150" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required/>
+                                <input class="form-control" name="txtdireccion" id="txtdireccion" autocomplete="nope" placeholder="Ingrese el nombre del proveedor" required maxlength="100" />
                                 <label for="inputFirstName"><i class=""></i>&nbsp;Dirección</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

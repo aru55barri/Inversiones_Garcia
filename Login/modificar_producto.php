@@ -49,7 +49,7 @@ if ($_POST) {
                             <input name="id" hidden type="text" value="<?= $producto[0]['codproducto']  ?>">
 
                             <div class="form-floating">
-                                <input class="form-control" name="descripcion" id="descripcion" value="<?= $producto[0]['descripcion'] ?>"  type="text" onkeypress="return sololetrasMa(event)" onpaste="return false" placeholder="Enter your last name" autocomplete="nope" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
+                            <input class="form-control" name="descripcion" id="descripcion" value="<?= $producto[0]['descripcion'] ?>"  type="text" maxlength="50" onkeypress="return sololetrasMa(event)" onpaste="return false" placeholder="Enter your last name" autocomplete="nope" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,25}" />
                                 <label for="inputLastName"><i class="fa-solid fa-user-group"></i>&nbsp;DESCRIPCION PRODUCTO</label>
                                 <div class="valid-feedback">
                                     Campo Válido.
@@ -60,7 +60,7 @@ if ($_POST) {
                             </div>
                             <br>
                             <div class="form-floating mb-3">
-                                <input class="form-control" value="<?= $producto[0]['precio_venta'] ?>" name="precio" id="precio" type="text" onkeypress="return solonumeros(event)" onpaste="return false" required  />
+                            <input class="form-control" value="<?= $producto[0]['precio_venta'] ?>" name="precio" id="precio" type="text" maxlength="11" onkeypress="return solonumeros(event)" onpaste="return false" required  />
                                 <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;PRECIO</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

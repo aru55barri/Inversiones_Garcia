@@ -52,7 +52,7 @@ if (!empty($_POST)) {
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtparametro" onblur=" validarParametro(this)" id="inputparametro" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Parametro" required />
+                            <input class="form-control" name="txtparametro" onblur=" validarParametro(this)" id="inputparametro" type="text" maxlength="50" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Parametro" required />
                                 <label for="Inputparametro">Parametro</label>
                                 <div class="valid-feedback">
                                     Campo Válido!
@@ -61,7 +61,7 @@ if (!empty($_POST)) {
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtvalor" id="inputvalor" type="text" onpaste="return false" onkeypress="return sololetrasynumerosValor(event)" autocomplete="nope" placeholder="Valor" required />
+                            <input class="form-control" name="txtvalor" id="inputvalor" type="text" maxlength="10" onpaste="return false" onkeypress="return sololetrasynumerosValor(event)" autocomplete="nope" placeholder="Valor" required />
                                 <label for="inputvalor">Valor</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

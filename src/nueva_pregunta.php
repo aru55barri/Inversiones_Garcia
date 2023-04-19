@@ -50,7 +50,7 @@ if (!empty($_POST)) {
                         <form id="form-register" class="needs-validation" method="POST" novalidate>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="txtPregunta" onblur=" validarPregunta(this)" id="inputPregunta" type="text" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Pregunta" required />
+                            <input class="form-control" name="txtPregunta" onblur=" validarPregunta(this)" id="inputPregunta" type="text" maxlength="60" onpaste="return false" onkeypress="return sololetrasMa(event)" autocomplete="nope" placeholder="Pregunta" required />
                                 <label for="inputDescripcionPago">Pregunta</label>
                                 <div class="valid-feedback">
                                     Campo Válido!

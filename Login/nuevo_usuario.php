@@ -309,7 +309,7 @@ if (!empty($_POST)) {
 
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" name="txtusuario" id="txtUsuario" type="text" onpaste="return false" onkeypress="return sololetrasUsu(event)" placeholder="Enter your first name" maxlength="20" autocomplete="nope" size="25" required />
+                                    <input class="form-control" name="txtusuario" id="txtUsuario" type="text" onpaste="return false" onkeypress="return sololetrasUsu(event)" placeholder="Enter your first name" maxlength="20" autocomplete="nope" size="25" required />
                                         <label for="inputEmail"><i class="fas fa-user icon"></i>&nbsp;Usuario</label>
                                         <div class="valid-feedback">
                                             Campo Válido!
@@ -355,7 +355,7 @@ if (!empty($_POST)) {
                                         <label for="txtID"><i class="fa-regular fa-id-badge"></i>&nbsp;Empleado</label>
                                          -->
                                         
-                                        <input class="form-control" name="empleado" id="empleado" type="text" placeholder="Nombre Completo Usuario" maxlength="100" autocomplete="nope" size="25" required />
+                                         <input class="form-control" name="empleado" id="empleado" type="text" placeholder="Nombre Completo Usuario" maxlength="20" autocomplete="nope" size="25" required />
                                         <label for="inputEmail"><i class="fas fa-envelope icon"></i>&nbsp;Nombre Completo Usuario</label>
                                         <div class="valid-feedback">
                                                 Campo Valido!
